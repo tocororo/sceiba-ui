@@ -1,0 +1,1 @@
+Publications in scientific journals are an important indicator used to measure the development of science and technology in countries.

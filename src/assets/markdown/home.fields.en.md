@@ -1,0 +1,1 @@
+Document sections and subscriptions to topics of interest, previous searches and much more in the personalization of user interaction with Sceiba.

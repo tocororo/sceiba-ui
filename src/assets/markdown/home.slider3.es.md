@@ -1,0 +1,1 @@
+Espacio de colaboración e interrelaciones entre instituciones, investigadores, profesores, editores, bibliotecarios y otros profesionales de Cuba y el resto del mundo.

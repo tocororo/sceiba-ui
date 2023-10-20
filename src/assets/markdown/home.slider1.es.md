@@ -1,0 +1,1 @@
+Las publicaciones en revistas científicas constituyen un importante indicador empleado para medir el desarrollo de la ciencia y la tecnología en los países.
