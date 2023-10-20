@@ -338,3 +338,23 @@ body { margin: 0; }
 .mat-menu-panel{
     max-width: 330px !important;
 }
+
+
+.menu-full{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.font-bold{
+  font-weight: bold;
+}
+.center-elements {
+  width: auto;
+}
+@media screen and (max-width: 490px) {
+  .center-elements {
+      width: 100%;
+  }
+}

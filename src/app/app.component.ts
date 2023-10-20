@@ -129,9 +129,9 @@ export class AppComponent {
     }
   }
 
-  public get isHome() {
-    return this.router.url == '/';
-  }
+  // public get isHome() {
+  //   return this.router.url == '/';
+  // }
 
   // private configure() {
   //   this.oauthService.configure(authConfig);
