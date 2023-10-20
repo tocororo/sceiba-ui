@@ -1,0 +1,152 @@
+<div
+  *ngIf="!evaluationData"
+  style="
+    width: 100%;
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <toco-progress [loading]="!evaluationData"></toco-progress>
+</div>
+
+<div class="container" *ngIf="evaluationData">
+  <div class="header">
+    <div
+      style="
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+      "
+    >
+      <div class="header-item">
+        <h1>
+          <a target="_blank" href="{{ evaluationData.data.journalData.url }}">{{
+            evaluationData.data.journalData.name
+          }}</a>
+        </h1>
+      </div>
+      <div>
+        <a
+          matTooltip="Mis evaluaciones"
+          [routerLink]="['/evaluations']"
+          style="color: black"
+        >
+          <mat-icon>keyboard_backspace</mat-icon>
+        </a>
+      </div>
+    </div>
+    <div class="header-item">
+      <h3>Descripción:</h3>
+      <span>{{ evaluationData.data.description }}</span>
+    </div>
+    <div class="header-item">
+      <h3>Tipo:</h3>
+      <span>{{ evaluationData.data.journalData.type }}</span>
+    </div>
+    <div class="header-item">
+      <h3>ISSN:</h3>
+      <span>{{ evaluationData.data.journalData.issn }}</span>
+    </div>
+  </div>
+
+  <div class="sect-eval">
+    <h2>{{ evaluationData.data.resultAndRecoms.generalEvaluationName }}</h2>
+    <div style="color: black; background-color: #ebebeb">
+      {{ evaluationData.data.resultAndRecoms.generalEvaluationValue }}
+    </div>
+  </div>
+
+  <section
+    style="margin-bottom: 30px"
+    *ngFor="let section of evaluationData.data.sections"
+  >
+    <mat-card style="padding: 20px">
+      <mat-card-header>
+        <mat-card-title>
+          <div
+            class="sect-eval"
+            style="margin-bottom: 15px; justify-content: space-around"
+          >
+            <p>{{ section.title }}</p>
+            <div
+              [ngClass]="{
+                'bg-primary': section.evaluation === 'ALTO',
+                'bg-warn': section.evaluation === 'MEDIO',
+                'bg-accent': section.evaluation === 'BAJO'
+              }"
+            >
+              {{ section.evaluation }}
+            </div>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul
+          *ngFor="
+            let category of section.categories;
+            index as i;
+          "
+        >
+        <!-- trackBy: trackByFn -->
+          <li>
+            <mat-accordion class="example-headers-align">
+              <mat-expansion-panel
+                [expanded]="step === i"
+                (opened)="setStep(i)"
+                hideToggle
+                #panel
+              >
+                <mat-expansion-panel-header class="mat-elevation-z2 mat-expansion-toggle-indicator-before">
+                  <mat-panel-title>
+                    <div class="sect-eval">
+                      <span style="display: inline-flex; align-items: center;">
+                        <mat-icon style="margin-right: 10px;">{{panel.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+                        <span>{{ category.title }}</span>
+                      </span>
+                      <div
+                        [ngClass]="{
+                          'bg-primary': category.evaluation === 'ALTO',
+                          'bg-warn': category.evaluation === 'MEDIO',
+                          'bg-accent': category.evaluation === 'BAJO'
+                        }"
+                      >
+                        {{ category.evaluation }}
+                      </div>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <!-- Questions and answers -->
+                <app-category-table
+                  [categoryInfo]="category.questionsOrRecoms"
+                ></app-category-table>
+
+                <!-- Recomendations -->
+                <mat-card class="recom-card" *ngIf="category.recomendations">
+                  <mat-card-header>
+                    <mat-card-title> <h3>Recomendaciones</h3></mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <mat-list>
+                      <mat-list-item
+                        *ngFor="let item of category.recomendations"
+                      >
+                        <mat-icon mat-list-icon
+                          >arrow_drop_down_circle</mat-icon
+                        >
+                        <p mat-line>{{ item.value }}</p>
+                      </mat-list-item>
+                    </mat-list>
+                  </mat-card-content>
+                </mat-card>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>

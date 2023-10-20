@@ -1,0 +1,13 @@
+
+<mat-form-field [ngStyle]="{'width': '100%', 'min-width': 'content.minWidth'}" appearance="{{content.appearance}}">
+    <mat-label>{{content.label}}</mat-label>
+    <input matInput placeholder="{{placeholder}}" [required]="content.required" aria-label="Buscar" [matAutocomplete]="auto" [formControl]="content.formControl">
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+        <mat-option *ngFor="let org of filteredOrg.hits" [value]="org.metadata">
+            <span title="{{org.metadata.name}}">{{org.metadata.name}}</span>
+        </mat-option>
+
+    </mat-autocomplete>
+</mat-form-field>

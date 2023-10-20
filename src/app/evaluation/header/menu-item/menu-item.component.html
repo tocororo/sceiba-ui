@@ -1,0 +1,61 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+
+  <ng-container *ngIf="isMenuApps; else simpleMenu">
+    <div  fxLayout="row wrap" fxLayoutAlign="space-around flex-end">
+      <ng-container  *ngFor="let item of subMenuElements">
+        <a
+          [href]="item.href"
+          [target]="item.target"
+          class="apps mat-caption"
+          matTooltip="{{ item.nameTranslate | translate }}"
+        >
+          <img
+            [src]="item.img.src"
+            [alt]="item.nameTranslate | translate"
+            style="width: 55px; height: 55px"
+          />
+          <span>{{ item.nameTranslate | translate }}</span>
+        </a>
+        <mat-divider *ngIf="item.divider" class="w-90 my-10"></mat-divider>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #simpleMenu>
+    <ng-container *ngFor="let child of subMenuElements">
+      <!-- Handle branch node menu items -->
+        <span *ngIf="child.childrenMenu && child.childrenMenu.length > 0">
+          <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu" [disabled]="child.disabled">
+            <mat-icon *ngIf="child.icon || child.svgIcon" [svgIcon]="child.svgIcon">{{child.icon}}</mat-icon>
+            <span>{{ child.nameTranslate | translate }}</span>
+          </button>
+          <app-menu-item #menu [subMenuElements]="child.childrenMenu"></app-menu-item>
+        </span>
+
+
+        <!-- Handle leaf node menu items -->
+        <span *ngIf="!child.childrenMenu || child.childrenMenu.length === 0">
+          <ng-container *ngIf="child.click; else useLink">
+            <button mat-menu-item  (click)="child.click()" [disabled]="child.disabled">
+              <mat-icon *ngIf="child.icon || child.svgIcon" [svgIcon]="child.svgIcon">{{child.icon}}</mat-icon>
+              <span>{{ child.nameTranslate | translate }}</span>
+            </button>
+          </ng-container>
+          <ng-template #useLink>
+            <ng-container *ngIf="child.useRouterLink; else useHrefMenu">
+              <button mat-menu-item [routerLink]="child.href" [disabled]="child.disabled">
+                <mat-icon *ngIf="child.icon || child.svgIcon" [svgIcon]="child.svgIcon">{{child.icon}}</mat-icon>
+                <span>{{ child.nameTranslate | translate }}</span>
+              </button>
+            </ng-container>
+            <ng-template #useHrefMenu>
+              <a mat-menu-item [target]="child.target" [href]="child.href" [disabled]="child.disabled">
+                <mat-icon *ngIf="child.icon || child.svgIcon" [svgIcon]="child.svgIcon" >{{child.icon}}</mat-icon>
+                <span>{{child.nameTranslate | translate}}</span>
+              </a>
+            </ng-template>
+          </ng-template>
+        </span>
+    </ng-container>
+  </ng-template>
+</mat-menu>

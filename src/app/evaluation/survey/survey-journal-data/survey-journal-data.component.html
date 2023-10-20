@@ -1,0 +1,31 @@
+
+<div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    [formGroup]="journalDataFormGroup"
+    style="margin-top: 0.4em;"
+>
+
+    <!-- Start Name -->
+    <input-text class="margin-input-control" [content]="nameContent"></input-text>
+    <!-- End Name -->
+
+</div>
+
+<div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    [formGroup]="journalDataFormGroup"
+>
+
+    <!-- Start Url -->
+    <input-url class="margin-input-control" [content]="urlContent"></input-url>
+    <!-- End Url -->
+
+    <!-- Start ISSN -->
+    <input-issn class="margin-input-control" [content]="issnContent"></input-issn>
+    <!-- End ISSN -->
+
+</div>

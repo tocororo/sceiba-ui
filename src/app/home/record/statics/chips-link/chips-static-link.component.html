@@ -1,0 +1,8 @@
+<fieldset class="static-table-fieldset {{ className }}">
+  <legend class="static-table-fieldset-legend">{{ desc }}</legend>
+
+  <mat-chip-listbox *ngIf="value.length" [attr.aria-label]="desc">
+    <mat-chip-option *ngFor="let item of value" [routerLink]="[routerlink]" [queryParams]="queryParams(item)" matTooltip="Click para buscar {{item}}">{{ item }}</mat-chip-option>
+  </mat-chip-listbox>
+
+</fieldset>

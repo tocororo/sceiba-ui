@@ -1,0 +1,28 @@
+
+.color-result-name
+{
+    color: #fff;
+}
+
+.color-result-value
+{
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.expansion-header-name
+{
+    width: 70%;
+    align-items: center;
+    /* Gets the color through the `color-primary` class. */
+}
+
+.expansion-header-value
+{
+    align-items: center;
+    color: rgba(0, 0, 0, 1);
+}
+
+:host ::ng-deep .mat-expansion-indicator::after
+{
+    color: #5f9bd2;  /* color-primary */
+}

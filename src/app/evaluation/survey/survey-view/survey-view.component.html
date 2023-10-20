@@ -1,0 +1,58 @@
+
+<h1>
+    TODO: Hacer la implementación...
+</h1>
+
+<mat-card *ngIf="evaluation">
+
+    <!-- <mat-card-content>
+
+        <static-text [desc]="'Nombre'" [value]="evaluation.name"></static-text>
+
+        <mat-card class="mb-2">
+            <mat-card-content>
+                <p>
+                    <mat-label>Institución Principal</mat-label>
+                </p>
+
+                <static-text [desc]="'Nombre'" [value]="evaluation.mainInst.name"></static-text>
+
+                <mat-card class="mb-2">
+                    <mat-card-content>
+                        <p>
+                            <mat-label>Identidicadores</mat-label>
+                        </p>
+
+                        <div *ngFor="let identifier of evaluation.mainInst.identifiers"
+                            class="w-100 my-outline-without-hover" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                        >
+                            <static-text [width]="'45%'" [appearance]="'legacy'" [desc]="'Id'" [value]="identifier.idtype"></static-text>
+
+                            <static-text [width]="'45%'" [appearance]="'legacy'" [desc]="'Valor'" [value]="identifier.value"></static-text>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+
+        <static-text [desc]="'Url'" [value]="evaluation.url"></static-text>
+        <static-text [desc]="'Url-OAI'" [value]="evaluation.url_oai"></static-text>
+
+    </mat-card-content> -->
+
+    <mat-card-actions align="end" class="mrb-0">
+        <button mat-stroked-button *ngIf="hasPermission" color="primary" (click)="edit()"
+            [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            Ir a editar
+        </button>
+        <button mat-stroked-button color="primary" (click)="goBack()"
+            [matTooltip]="'Muestra la vista anterior'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            Ir atrás
+        </button>
+    </mat-card-actions>
+
+</mat-card>
