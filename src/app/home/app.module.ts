@@ -1,4 +1,5 @@
 
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -44,6 +45,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SceibaMenuAppsComponent
   ],
   imports: [
+    CommonModule,
     // BrowserModule,
     // BrowserAnimationsModule,
     HttpClientModule,

@@ -1,44 +1,21 @@
-<mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
-  <mat-toolbar-row
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between center"
-    style="height: auto !important; min-height: 80px"
-  >
+<mat-toolbar style="position: relative; z-index: 2">
+  <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center"
+    style="height: auto !important; min-height: 80px">
     <div style="display: flex; align-items: center">
       <div class="triangle">
-        <span
-          matTooltipClass="tooltip-beta-red"
-          matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
-        >
+        <span matTooltipClass="tooltip-beta-red" matTooltip="{{ 'BETA_TOOLTIP' | translate }}">
           <strong>{{ 'BETA' | translate }}</strong>
         </span>
       </div>
-      <a
-        mat-button
-        [routerLink]="['/']"
-        style="white-space: normal; display: flex; align-items: center"
-      >
-        <img
-          src="/assets/icons/logo.sceiba.letras.svg"
-          [alt]="'SCEIBA' | translate"
-          style="height: 50px; margin-right: 6px"
-        />
+      <a mat-button [routerLink]="['/']" style="white-space: normal; display: flex; align-items: center">
+        <img src="/assets/icons/logo.sceiba.letras.svg" [alt]="'SCEIBA' | translate"
+          style="height: 50px; margin-right: 6px" />
       </a>
     </div>
 
-    <div
-      class="center-elements"
-      appearance=""
-      aria-label="'MENU_INICIO' | translate"
-      fxLayout="row wrap"
-      fxLayoutAlign="center"
-      fxLayoutGap="15px"
-    >
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menuLanguages"
-        matTooltip="{{ 'IDIOMA' | translate }}"
-      >
+    <div class="center-elements" appearance="" aria-label="'MENU_INICIO' | translate" fxLayout="row wrap"
+      fxLayoutAlign="center" fxLayoutGap="15px">
+      <button mat-icon-button [matMenuTriggerFor]="menuLanguages" matTooltip="{{ 'IDIOMA' | translate }}">
         <mat-icon class="mat-18">translate</mat-icon>
       </button>
 
@@ -50,19 +27,11 @@
         <mat-icon>share</mat-icon>
       </button> -->
 
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menuApps"
-        matTooltip="{{ 'APLICACIONES' | translate }}"
-      >
+      <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="{{ 'APLICACIONES' | translate }}">
         <mat-icon>apps</mat-icon>
       </button>
 
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menuHelp"
-        matTooltip="{{ 'AYUDA' | translate }}"
-      >
+      <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="{{ 'AYUDA' | translate }}">
         <mat-icon class="mat-18">help</mat-icon>
       </button>
 
@@ -74,20 +43,12 @@
         <mat-icon class="mat-18">account_circle</mat-icon>
       </button> -->
 
-      <button *ngIf="name"
-        mat-icon-button
-        [matMenuTriggerFor]="menuUser"
-        matTooltip="{{ name }}"
-      >
+      <button *ngIf="name" mat-icon-button [matMenuTriggerFor]="menuUser" matTooltip="{{ name }}">
         <mat-icon class="mat-18">person_pin</mat-icon>
       </button>
 
-      <toco-authentication *ngIf="!user"
-        [oauthInfo]="oauthInfo"
-        [isButtonLogin]="true"
-        [isButtonLoginIcon]="true"
-        [isButtonLoginText]="'AUTENTICARSE' | translate"
-      >
+      <toco-authentication *ngIf="!user" [oauthInfo]="oauthInfo" [isButtonLogin]="true" [isButtonLoginIcon]="true"
+        [isButtonLoginText]="'AUTENTICARSE' | translate">
       </toco-authentication>
       <!-- <button *ngIf="!name"
         mat-icon-button
@@ -98,16 +59,7 @@
       </button> -->
 
     </div>
-    <div class="menu-full">
-      <span style="width: 5%;"></span>
-      <a mat-button class="font-bold" routerLink="/">{{ "HOME" | translate }}</a>
-      <a mat-button class="font-bold" href="https://cuba-organizaciones.sceiba.org" target="_blank">{{ "ORGANIZACION" | translate }}</a>
-      <a mat-button class="font-bold" href="https://cuba-personas.sceiba.org" target="_blank">{{ "PERSONAS" | translate }}</a>
-      <a mat-button class="font-bold" href="https://cuba-catalogo.sceiba.org" target="_blank">{{ "SCEIBA_CATALOGO" | translate }}</a>
-      <a mat-button class="font-bold" href="https://cuba-revistasmes.sceiba.org" target="_blank">{{ "DIRECTORIO_MES" | translate }}</a>
-      <a mat-button class="font-bold" href="https://evaluaciones.sceiba.org" target="_blank">{{ "EVALUACION_APP" | translate }}</a>
-      <a mat-button class="font-bold" href="https://vocabularios.sceiba.cu/es" target="_blank">{{ "SCEIBA_VOCABULARIOS" | translate }}</a>
-    </div>
+
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -163,13 +115,9 @@
       <mat-icon>assignment_ind</mat-icon>
       {{ 'REGISTRARSE' | translate }}
   </a> -->
-  <toco-authentication *ngIf="!user"
-        [oauthInfo]="oauthInfo"
-        [isButtonLogin]="true"
-        [isButtonLoginIcon]="true"
-        [isButtonLoginText]="'AUTENTICARSE' | translate"
-      >
-      </toco-authentication>
+  <toco-authentication *ngIf="!user" [oauthInfo]="oauthInfo" [isButtonLogin]="true" [isButtonLoginIcon]="true"
+    [isButtonLoginText]="'AUTENTICARSE' | translate">
+  </toco-authentication>
 </mat-menu>
 
 <mat-menu #menuUser="matMenu">
@@ -210,45 +158,27 @@
 </mat-menu>
 
 <mat-menu #menuApps="matMenu">
-  <sceiba-menu-apps></sceiba-menu-apps>
+  <sceiba-ui-menu-apps></sceiba-ui-menu-apps>
 </mat-menu>
 
-<div
-  *ngIf="!isHome"
-  style="
-    height: 200px;
-    width: 100%;
-    background: linear-gradient(to right, #007e3e, #373131);
-  "
-></div>
+<div class="bg-primary-color" style="
+        height: 100px;
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(to right, #007e3e, #373131);
+      "></div>
 
-<div *ngIf="!isHome; else outHome"
-  fxLayout="row"
-  fxLayoutAlign="center center"
-  style="border-radius: 40px 40px 0 0"
->
-  <div
-    [ngStyle.xs]="{ width: '95%' }"
-    style="
-      margin-top: -100px;
-      width: 90%;
-      background-color: white;
-      border-radius: 40px 40px 0 0;
-      box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
-    "
-  >
+<div fxLayout="row" fxLayoutAlign="center center" style="border-radius: 40px 40px 0 0">
+  <div [ngStyle.xs]="{ width: '95%' }" style="
+          margin-top: -170px;
+          width: 95%;
+          background-color: white;
+          border-radius: 0px 0px 0 0;
+          box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+        ">
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<ng-template #outHome>
-  <router-outlet ></router-outlet>
-</ng-template>
-
-<!--<div [ngStyle]="{'margin-top': '2em'}"> -->
-<app-footer
-  [sites]="footerSites"
-  [information]="footerInformation"
->
-</app-footer>
+<sceiba-ui-app-footer [sites]="footerSites" [information]="footerInformation">
+</sceiba-ui-app-footer>
 <!-- </div> -->

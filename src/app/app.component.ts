@@ -62,9 +62,8 @@ export class AppComponent {
     protected http: HttpClient,
     private _transServ: TranslateService,
     private oauthStorage: OAuthStorage,
-    private authenticateService: OauthAuthenticationService
-  ) //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
-  /*@Inject(RecaptchaLoaderService) private _recaptchaDynamicLanguageLoaderServ: RecaptchaDynamicLanguageLoaderService*/ {
+    private authenticateService: OauthAuthenticationService //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
+  ) /*@Inject(RecaptchaLoaderService) private _recaptchaDynamicLanguageLoaderServ: RecaptchaDynamicLanguageLoaderService*/ {
     // this.configure()
     let env: any = this.environment;
     this.oauthInfo = env.oauthInfo;
@@ -81,9 +80,11 @@ export class AppComponent {
     this.sceibaHost = this.environment.sceibaHost;
     //this._recaptchaDynamicLanguageLoaderServ.updateLanguage(LanguageAbbrs.es);
 
-    let request = JSON.parse(this.oauthStorage.getItem('user') ?? '');
-    if (request) {
-      this.user = request;
+    if (this.oauthStorage.getItem('user')) {
+      let request = JSON.parse(this.oauthStorage.getItem('user') ?? '');
+      if (request) {
+        this.user = request;
+      }
     }
 
     this.authenticateSuscription =
@@ -152,9 +153,12 @@ export class AppComponent {
   }
 
   public get name() {
-    let user = JSON.parse(this.oauthStorage.getItem('user') ?? "");
-    if (!user) return null;
-    return user['email'];
+    if (this.oauthStorage.getItem('user')) {
+      let user = JSON.parse(this.oauthStorage.getItem('user') ?? '');
+      if (!user) return null;
+      return user['email'];
+    }
+    return null;
   }
 
   getUserInfo(): Observable<Response<any>> {

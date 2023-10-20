@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { environment } from 'src/environments/environment';
 
+import { CommonModule } from '@angular/common';
 import { allowedURLS } from 'src/environments/environment.development';
 import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchService, SourceServiceNoAuth, storageFactory } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +33,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SceibaMenuAppsComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

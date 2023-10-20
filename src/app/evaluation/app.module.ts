@@ -31,6 +31,7 @@ import { PageNotFoundEvaluationComponent } from "./page-not-found-evaluation/pag
 // 	AngularMaterialModule,OrganizationServiceNoAuth, SearchModule,
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
+import { CommonModule } from "@angular/common";
 import { CategoryTableComponent } from "./evaluation-view/category-table/category-table.component";
 import { EvaluationViewComponent } from "./evaluation-view/evaluation-view.component";
 import { MyEvaluationComponent } from "./my-evaluation/my-evaluation.component";
@@ -59,6 +60,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CategoryTableComponent,
   ],
   imports: [
+    CommonModule,
     // BrowserModule,
     // BrowserAnimationsModule,
     HttpClientModule,
