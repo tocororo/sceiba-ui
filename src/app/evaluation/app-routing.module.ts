@@ -1,7 +1,7 @@
 import { EvaluationViewComponent } from "./evaluation-view/evaluation-view.component";
 
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
 import { MyEvaluationComponent } from "./my-evaluation/my-evaluation.component";
@@ -38,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

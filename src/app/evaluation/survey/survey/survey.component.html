@@ -13,7 +13,7 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="evaluationFormGroup" (submit)="goToSurvey()">
+    <form [formGroup]="evaluationFormGroup" (submit)="goToSurvey(stepper)">
       <mat-horizontal-stepper
         [linear]="'true'"
         #stepper
@@ -38,7 +38,7 @@
               type="button"
               [matTooltip]="'IR_A_ENCUESTA' | translate"
               [disabled]="evalJournalDataFormGroup.invalid"
-              (click)="goToSurvey()"
+              (click)="goToSurvey(stepper)"
             >
               {{ "SIGUIENTE" | translate }}
               <mat-icon>navigate_next</mat-icon>
@@ -62,7 +62,7 @@
                 color="primary"
                 type="button"
                 [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
-                (click)="goToJournalData()"
+                (click)="goToJournalData(stepper)"
               >
                 {{ "ANTERIOR" | translate }}
                 <mat-icon>navigate_before</mat-icon>
@@ -73,7 +73,7 @@
                 color="primary"
                 type="button"
                 [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
-                (click)="goToResultAndRecoms()"
+                (click)="goToResultAndRecoms(stepper)"
                 [disabled]="evalSurveyFormGroup.invalid"
               >
                 {{ "SIGUIENTE" | translate }}
@@ -103,7 +103,7 @@
               color="primary"
               type="button"
               [matTooltip]="'IR_A_ENCUESTA' | translate"
-              (click)="goToSurveyBack()"
+              (click)="goToSurveyBack(stepper)"
             >
               {{ "ANTERIOR" | translate }}
               <mat-icon>navigate_before</mat-icon>

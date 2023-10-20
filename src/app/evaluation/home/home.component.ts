@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { EvaluationService } from "../evaluationService.service";
 
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import {
   ActionText, MessageHandler, MetadataService, StatusCode
 } from "toco-lib";

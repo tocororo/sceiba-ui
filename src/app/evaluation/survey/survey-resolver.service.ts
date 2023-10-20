@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,7 +17,7 @@ import { SurveyService } from './survey.service';
 @Injectable({
 	providedIn: 'root',
 })
-export class SurveyResolverService implements Resolve<Hit<Evaluation>>
+export class SurveyResolverService 
 {
 	public constructor(private _transServ: TranslateService, private _surveyService: SurveyService)
 	{ }

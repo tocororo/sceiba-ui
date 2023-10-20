@@ -23,7 +23,9 @@
     "ADMINISTRACION": "Administración",
     "SALIR": "Salir",
     "YO": "Yo",
-    "PUB_CIENT_CUBANAS": "Portal de Publicaciones Científicas Cubanas",
+    "AUT_REV_CIENT_CUBANAS": "Sceiba Evaluaciones",
+    "AUT_REV_CIENT_CUBANAS_SUB": "Una herramienta para el monitoreo y evaluación de la actividad científica",
+    "EMPEZAR": "Empezar",
     "PROD_SERV": "Productos y Servicios",
     "SCEIBA": "Sceiba",
     "HOME": "Inicio",
@@ -90,5 +92,77 @@
 
     "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "¡Lo sentimos, la página que usted solicitó no pudo ser encontrada!",
     "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Vamos a llevarlo a la página Principal",
-    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Sceiba"
+    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluación",
+
+    "EVALUA": "Evalúa",
+    "REVISTAS": "Revistas",
+    "EDITORIALES": "Editoriales",
+    "PUBLICACIONES": "Publicaciones",
+    "INSTITUCIONES": "Instituciones",
+    "OTRAS_HERRAMIENTAS": "Otras Herramientas",
+    "LECTURAS_RECOMENDADAS": "Lecturas Recomendadas",
+    "MIS_EVALUACIONES": "Mis Evaluaciones",
+    "LISTA_EVALUACIONES": "Lista de Evaluaciones",
+
+    "TITULO_VISTA_DETALLES": "Detalles de la Evaluación",
+    "TITULO_VISTA_ADICIONAR": "Evalua Tu Revista",
+    "DATOS_REVISTA": "Datos de la Revista",
+    "ENCUESTA": "Encuesta",
+    "RESULTADO_Y_RECOMENDACIONES": "Resultado y Recomendaciones",
+    "ANTERIOR": "Anterior",
+    "SIGUIENTE": "Siguiente",
+    "IR_A_DATOS_REVISTA": "Ir a datos de la revista",
+    "IR_A_ENCUESTA": "Ir a encuesta",
+    "IR_A_RESULTADO_Y_RECOMENDACIONES": "Ir a resultado y recomendaciones",
+    "GUARDAR": "Guardar",
+    "GUARDAR_TOOLTIP": "Opciones para guardar una evaluación",
+    "GUARDAR_Y_HACER_UNA_NUEVA": "Guardar y hacer una nueva",
+    "GUARDAR_Y_COMPARAR": "Guardar y comparar",
+    "GUARDAR_Y_COMPARTIR": "Guardar y compartir",
+    "GUARDAR_Y_SALIR": "Guardar y salir",
+    "EVAL_REV_GUARDADA": "¡La evaluación de la revista fue guardada correctamente!",
+    "OPERACION_EXITOSA": "Operación exitosa",
+    "NOMBRE": "Nombre",
+    "ESCR_NOMBRE_REVISTA": "Escriba el nombre de la revista",
+    "URL_GENERICA": "https://www.revista.com/",
+
+    "DONDE_BUSCARLA": "Dónde buscarla: ",
+    "NO_HAY_RECOMENDACIONES": "(No hay ninguna recomendación)",
+
+    "TOCO_NG_ERROR_MSG_REQUERIDO": "El valor no puede estar vacío.",
+    "TOCO_NG_HINT_TEXTO_POR_DEFECTO": "Escribe un valor válido.",
+
+    "TOCO_NG_VERDADERO": "Verdadero",
+    "TOCO_NG_FALSO": "Falso",
+
+    "TOCO_NG_ISSN": "Número Internacional Normalizado de Publicaciones Seriadas",
+    "TOCO_NG_P_ISSN": "ISSN Impreso",
+    "TOCO_NG_E_ISSN": "ISSN Electrónico",
+    "TOCO_NG_ISSN_L": "ISSN Vinculando",
+
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "ISSN inválido.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "La longitud no es válida, y todas las posiciones tienen dígitos (la última también puede tener x o X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "Todas las posiciones deben tener dígitos (la última también puede tener x o X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "Hay algún dígito incorrecto.",
+
+    "TOCO_NG_ERROR_MSG_NUM_INVAL": "El número está incorrecto.",
+    "TOCO_NG_ERROR_MSG_NUM_MINIMO": "El número mínimo que puede contener es: ",
+    "TOCO_NG_ERROR_MSG_NUM_MAXIMO": "El número máximo que puede contener es: ",
+
+    "TOCO_NG_HINT_TEXTO_SELECC_POR_DEFECTO": "Seleccione un valor.",
+
+    "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "El texto está incorrecto.",
+
+    "TOCO_NG_ERROR_MSG_URL_INVAL": "La url está incorrecta.",
+
+    "FOOTER_TEXT": "Sceiba tiene como objetivo establecer un sistema abierto centralizado que facilite el seguimiento y evaluación de las publicaciones científicas a nivel nacional",
+    "FOOTER_TEXT_ENLACE": "Enlaces",
+    "SIGUENOS": "Síguenos",
+    "FOOTER_TEXT_INFORMACION": "Enlaces de Interés",
+    "FOOTER_TEXT_DEVELOP": "desarrollado con",
+    "FOOTER_TEXT_AND": "y",
+    "SCEIBA_EVALUACIONES": "Sceiba Evaluaciones",
+    "VIEW": "Ver",
+    "CLONE": "Clonar",
+    "EDIT": "Editar"
 }

@@ -100,8 +100,7 @@
     <span>{{ "SMOODLE" | translate }}</span>
   </a>
   <a
-    href="{{env.evaluations}}"
-    target="_blank"
+    [routerLink]="[env.evaluations]"
     class="apps mat-caption"
     matTooltip="{{ 'EVALUACION' | translate }}"
   >

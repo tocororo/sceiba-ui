@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";

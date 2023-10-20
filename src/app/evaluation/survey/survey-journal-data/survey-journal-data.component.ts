@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { ActionText, ChildControlsPath, InputContent, InputIssnComponent,
 	InputTextComponent, InputUrlComponent, TextInputAppearance } from 'toco-lib';
@@ -50,7 +50,7 @@ export class SurveyJournalDataComponent implements OnInit
 	 * Returns the journal general data `FormGroup`. 
 	 */
 	@Input()
-	public journalDataFormGroup: FormGroup;
+	public journalDataFormGroup: UntypedFormGroup;
 	public nameContent: InputContent;
 	public urlContent: InputContent;
 	public issnContent: InputContent;

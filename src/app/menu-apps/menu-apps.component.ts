@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Environment } from 'toco-lib';
 
 @Component({
-    selector: 'sceiba-menu-apps',
+    selector: 'sceiba-ui-menu-apps',
     templateUrl: './menu-apps.component.html',
     styleUrls: ['./menu-apps.component.scss']
 })

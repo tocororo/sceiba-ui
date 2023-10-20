@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { ActionText } from 'toco-lib';
 
@@ -37,7 +37,7 @@ export class SurveyQuestionsComponent implements OnInit
 	/**
 	 * Returns the `FormGroup` for the array of sections associated with the survey.
 	 */
-	public surveyFormGroup: FormGroup;
+	public surveyFormGroup: UntypedFormGroup;
 
 	public constructor()
 	{

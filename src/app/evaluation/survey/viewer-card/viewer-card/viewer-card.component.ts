@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent,
@@ -26,7 +26,7 @@ export class ViewerCardComponent implements OnInit
 	 * Returns the `FormGroup` parent.
 	 */
 	@Input()
-	public parentFormGroup: FormGroup;
+	public parentFormGroup: UntypedFormGroup;
 	/**
 	 * Returns the `SurveySection`.
 	 * It is used to create controls.

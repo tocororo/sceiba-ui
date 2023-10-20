@@ -38,7 +38,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    RouterModule.forChild(routes )
   ],
   exports: [RouterModule]
 })

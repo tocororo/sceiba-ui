@@ -12,7 +12,9 @@ import {
   User,
 } from "toco-lib";
 import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry, MatSidenav, MatSnackBar } from "@angular/material";
+import { MatIconRegistry } from "@angular/material/icon";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { EvaluationService } from "./evaluationService.service";
 
 @Component({
@@ -41,7 +43,7 @@ export class AppComponent {
 
   private authenticateSuscription: Subscription = null;
 
-  @ViewChild("sidenav", { static: false }) sidenav: MatSidenav;
+  @ViewChild("sidenav") sidenav: MatSidenav;
   sideNavOpen: boolean = false;
   public readonly actionText: typeof ActionText;
   hasTaskInProgress = false;
@@ -63,6 +65,57 @@ export class AppComponent {
     this.oauthInfo = env.oauthInfo;
     this.actionText = ActionText;
     // this._matomoInjector.init('https://crai-stats.upr.edu.cu/', 6);
+
+
+    this.iconRegistry.addSvgIcon(
+      "facebook",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/facebook.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "twitter",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/twitter.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "github",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/github.svg"
+      )
+    );
+
+    this.iconRegistry.addSvgIcon(
+      "journals",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/journals.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "publishing",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/publishing.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "publication",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/publication.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "organizaciones",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/organizaciones.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "persons",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/persons.svg"
+      )
+    );
   }
 
   public ngOnInit(): void {
@@ -117,56 +170,6 @@ export class AppComponent {
       url: "/help/contact",
       useRouterLink: true,
     });
-
-    this.iconRegistry.addSvgIcon(
-      "facebook",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/facebook.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "twitter",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/twitter.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "github",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/github.svg"
-      )
-    );
-
-    this.iconRegistry.addSvgIcon(
-      "journals",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/journals.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "publishing",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/publishing.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "publication",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/publication.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "organizaciones",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/organizaciones.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "persons",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/persons.svg"
-      )
-    );
   }
 
   ngOnDestroy(): void {

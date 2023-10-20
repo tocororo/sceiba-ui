@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { EvaluationService } from "../evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
-import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 
 @Component({

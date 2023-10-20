@@ -1,11 +1,8 @@
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import {
-  MatDialog,
-  MatHorizontalStepper,
-  MatSnackBar
-} from "@angular/material";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatStepper } from "@angular/material/stepper";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
@@ -50,14 +47,13 @@ export class SurveyComponent implements OnInit {
    */
   public hasTaskInProgress: boolean;
 
-  public evaluationFormGroup: FormGroup;
-  public evalJournalDataFormGroup: FormGroup;
-  public evalSurveyFormGroup: FormGroup;
+  public evaluationFormGroup: UntypedFormGroup;
+  public evalJournalDataFormGroup: UntypedFormGroup;
+  public evalSurveyFormGroup: UntypedFormGroup;
 
   public fullEvaluation: Evaluations = undefined;
 
   @ViewChild("stepper", { static: true })
-  private _matHorizontalStepper: MatHorizontalStepper;
 
   /**
    * It is like a readonly field, and it is only used to initialize the form; for that reason,
@@ -69,10 +65,9 @@ export class SurveyComponent implements OnInit {
 
   public constructor(
     private _activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _transServ: TranslateService,
     private _surveyService: SurveyService,
-    private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
@@ -252,25 +247,25 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  public goToSurvey(): void {
+  public goToSurvey(stepper: MatStepper): void {
     /* Selects and focuses the next step in list. */
-    this._matHorizontalStepper.next();
+    stepper.next();
   }
 
-  public goToSurveyBack(): void {
+  public goToSurveyBack(stepper: MatStepper): void {
     /* Selects and focuses the previous step in list. */
-    this._matHorizontalStepper.previous();
+    stepper.previous();
   }
 
-  public goToJournalData(): void {
+  public goToJournalData(stepper: MatStepper): void {
     this._evaluationData.sections = undefined;
     /* Selects and focuses the previous step in list. */
-    this._matHorizontalStepper.previous();
+    stepper.previous();
   }
 
-  public goToResultAndRecoms(): void {
+  public goToResultAndRecoms(stepper: MatStepper): void {
     /* Selects and focuses the next step in list. */
-    this._matHorizontalStepper.next();
+    stepper.next();
   }
 
   public save(): void {

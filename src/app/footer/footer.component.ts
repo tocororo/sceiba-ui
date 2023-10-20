@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-footer',
+    selector: 'sceiba-ui-app-footer',
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss']
 })

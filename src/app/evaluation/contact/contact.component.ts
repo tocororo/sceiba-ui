@@ -1,7 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthBackend, MessageHandler, StatusCode } from 'toco-lib'
 
@@ -23,16 +23,16 @@ export class ContactComponent implements OnInit {
   @Input()
   public width: string = '100%';
 
-  public formGroup: FormGroup;
+  public formGroup: UntypedFormGroup;
 
-  constructor(private contactService: ContactService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar) { }
+  constructor(private contactService: ContactService, private _formBuilder: UntypedFormBuilder, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.contactService.backend = AuthBackend.sceiba;
     this.formGroup = this._formBuilder.group({
-      email: new FormControl(null, Validators.email),
-      topic: new FormControl(null),
-      body: new FormControl(null, Validators.required)
+      email: new UntypedFormControl(null, Validators.email),
+      topic: new UntypedFormControl(null),
+      body: new UntypedFormControl(null, Validators.required)
     });
   }
 
