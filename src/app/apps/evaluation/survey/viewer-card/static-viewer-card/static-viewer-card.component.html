@@ -1,0 +1,47 @@
+
+<mat-card>
+    <mat-card-header
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="center center"
+
+        mat-card-image
+        class="mch-bg-primary-color"
+    >
+        <mat-card-title class="color-result-name" style="margin: 0.2em auto;">{{ surveySection.title }}</mat-card-title>
+        <mat-card-title class="color-result-value" style="margin: 0.2em auto;">{{ surveySection.titleEvaluationValue }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-accordion [multi]="'true'">
+
+            <mat-expansion-panel *ngFor="let category of surveySection.categories">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="color-primary expansion-header-name">{{ category.title }}</mat-panel-title>
+                    <mat-panel-description class="expansion-header-value">{{ category.titleEvaluationValue }}</mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <ng-container *ngIf="((category.questionsOrRecoms) && (category.questionsOrRecoms.length)); then thenTemplate_Recoms; else elseTemplate_WithoutRecoms"></ng-container>
+
+                <ng-template #thenTemplate_Recoms>
+                    <ng-container *ngFor="let recom of category.questionsOrRecoms; last as last">
+                        <mat-divider [inset]="true"></mat-divider>
+                        <div
+                            fxLayout="row"
+                            fxLayout.xs="column"
+                            fxLayoutAlign="space-between center"
+                        >
+                            <p *ngIf="!last" style="width: 100%; margin: 1em auto;">{{ recom.value }}</p>
+                            <p *ngIf="last" style="width: 100%; margin: 1em auto auto;">{{ recom.value }}</p>
+                        </div>
+                    </ng-container>
+                </ng-template>
+
+                <ng-template #elseTemplate_WithoutRecoms>
+                    <p style="width: 100%; margin: auto; color: #b0b0b0;">{{ 'NO_HAY_RECOMENDACIONES' | translate }}</p>
+                </ng-template>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,16 @@
+<mat-form-field [ngStyle]="{'width': '100%'}" appearance="outline">
+    <mat-label>Usuario a quién se le otorgarán los permisos</mat-label>
+    <input matInput placeholder="Correo Electrónico del Usuario"
+    matTooltip="Escriba al menos las tres letras iniciales"
+    aria-label="Buscar usuario" [matAutocomplete]="auto"
+        [formControl]="userCtrl">
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+        <mat-option *ngFor="let user of filteredUser" [value]="user">
+            <span title="{{user.email}}">{{user.email}}</span>
+        </mat-option>
+
+    </mat-autocomplete>
+    <mat-hint></mat-hint>
+</mat-form-field>

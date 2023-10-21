@@ -1,0 +1,73 @@
+
+<mat-card *ngIf="source">
+  <mat-card-header>
+    <catalog-source-view-version-info-field
+        [label]="'Título'"
+        [value]="source.data.title"
+      ></catalog-source-view-version-info-field>
+
+    <mat-card-title> </mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <catalog-source-view-version-info-field *ngIf="source.data.source_type"
+        [label]="'Tipo'"
+        [value]="tipos[source.data.source_type].label"
+      ></catalog-source-view-version-info-field>
+    </p>
+    <p>
+      <catalog-source-view-version-info-field
+        [label]="'URL'"
+        [value]="getIdentifier(IdentifierSchemas.url)"
+      ></catalog-source-view-version-info-field>
+    </p>
+
+    <p>
+      <catalog-source-view-version-info-field
+        [label]="'OAIURL'"
+        [value]="getIdentifier(IdentifierSchemas.oaiurl)"
+      ></catalog-source-view-version-info-field>
+    </p>
+
+    <p>
+      <catalog-source-view-version-info-field *ngIf="source.data.source_system"
+        [label]="'Sistema'"
+        [value]="sistemas[source.data.source_system].label"
+      ></catalog-source-view-version-info-field>
+    </p>
+
+
+    <mat-label style="font-weight: bold"> Descripción:</mat-label>
+    <mat-label *ngIf="!source.data.description" class="text-muted text-through"
+      >Vacío</mat-label
+    >
+    <div
+      *ngIf="source.data.description"
+      class="e2e-inner-html-bound text-align-justify"
+      [innerHTML]="source.data.description"
+    ></div>
+
+
+
+
+
+    <mat-card style="margin: 1em; background-color: whitesmoke">
+      <mat-card-header>
+        <mat-card-title>Organizaciones:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <catalog-source-edit-organizations
+          [sourceData]="source.data"
+          [editable]="false"
+          [ngStyle]="{ margin: '1em' }"
+        >
+        </catalog-source-edit-organizations>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-card-content>
+
+  <mat-divider [inset]="true"></mat-divider>
+</mat-card>
+

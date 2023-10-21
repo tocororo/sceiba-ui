@@ -1,0 +1,16 @@
+<div fxLayout="column nowrap" fxLayoutAlign="center center">
+  <ngx-charts-gauge
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="dataChild"
+    [legend]="legend"
+    [legendPosition]="legendPosition"
+    (select)="onSelect($event)"
+    >
+  </ngx-charts-gauge>
+
+  <mat-chip-listbox [selectable]="'false'" class="control-without-interactivity">
+    <mat-chip-option [selectable]="'false'" [disableRipple]="'true'">{{xAxisLabel}}</mat-chip-option>
+  </mat-chip-listbox>
+
+</div>

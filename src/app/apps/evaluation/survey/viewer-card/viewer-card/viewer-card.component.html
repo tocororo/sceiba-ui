@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-header
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    mat-card-image
+    class="mch-bg-primary-color"
+  >
+    <mat-card-title style="margin: 0.5em auto">{{
+      surveySection.title
+    }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-accordion [formGroup]="parentFormGroup" [multi]="'true'">
+      <mat-expansion-panel
+        *ngFor="let category of surveySection.categories; index as i"
+        [expanded]="step === i"
+        (opened)="setStep(i)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="color-primary">{{
+            category.title
+          }}</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng-container
+          *ngFor="let question of category.questionsOrRecoms; first as first"
+        >
+          <mat-divider *ngIf="first" [inset]="true"></mat-divider>
+          <mat-divider
+            *ngIf="!first"
+            [inset]="true"
+            style="margin-top: 1em"
+          ></mat-divider>
+          <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutAlign="space-between center"
+          >
+            <p style="width: 100%; margin-right: 0.5em">{{ question.desc }}</p>
+            <div style="width: 100%; display: contents">
+              <mat-icon
+                [matTooltip]="whereToLookForIt + question.hint"
+                [matTooltipPosition]="'right'"
+                color="primary"
+                >find_in_page</mat-icon
+              >
+              <ng-container [ngSwitch]="question.type">
+                <input-bool
+                  *ngSwitchCase="categoryQuestionType.bool"
+                  [content]="question._inputContent"
+                ></input-bool>
+
+                <input-number
+                  *ngSwitchCase="categoryQuestionType.integer"
+                  [content]="question._inputContent"
+                ></input-number>
+
+                <input-select
+                  *ngSwitchCase="categoryQuestionType.select"
+                  [content]="question._inputContent"
+                ></input-select>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

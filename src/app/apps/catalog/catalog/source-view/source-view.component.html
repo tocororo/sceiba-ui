@@ -1,0 +1,66 @@
+<toco-progress [loading]="loading"> </toco-progress>
+
+<!-- <div *ngIf="source" fxLayout="row" fxLayoutGap="1em">
+</div> -->
+
+<!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center" [ngStyle]="{'width': '100%'}">
+    <h2>
+      {{ pageTitle }}
+    </h2>
+    <button
+      *ngIf="showEditHeader"
+      mat-stroked-button
+      color="warn"
+      (click)="cancelStepper()"
+    >
+      Cancelar
+    </button>
+</div> -->
+
+<mat-card *ngIf="error">
+  <mat-card-header>
+    <mat-card-title>ERROR</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+
+<ng-container *ngIf="!loading && !error && editingVersion">
+  <mat-toolbar
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between center"
+    [ngStyle]="{ width: '100%', 'height': 'auto', 'padding': '16px', 'min-height': '56px'}"
+  >
+
+    <span [ngStyle]="{'white-space': 'normal'}">
+      {{source_type_label()}}: {{ editingVersion.data.name }}
+    </span>
+
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+      <button mat-stroked-button color="primary" (click)="desapprove()" *ngIf="can_publish() && is_approved()">
+        Despublicar
+      </button>
+      <button mat-stroked-button color="primary" (click)="publishEditingVersion()" *ngIf="can_publish()">
+        Publicar la revisión actual
+      </button>
+      <!-- <button mat-stroked-button color="warn" (click)="editVersion()">
+        Editar
+      </button> -->
+
+      <button mat-stroked-button color="warn" (click)="saveEditingVersion()">
+        Guardar la revisión actual
+      </button>
+    </div>
+  </mat-toolbar>
+  <ng-container *ngIf="editingVersion && versions">
+  <catalog-journal-view
+    #view
+    [editingSource]="editingVersion"
+    [versions]="versions"
+    [topMainOrganization]="topMainOrganization"
+  >
+  </catalog-journal-view>
+  </ng-container>
+
+
+</ng-container>

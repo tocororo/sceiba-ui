@@ -1,0 +1,12 @@
+<div
+  class="text"
+  markdown
+  [src]="'assets/markdown/home.' + transServ.currentLang + '.md'"
+  style="margin: 2em"
+></div>
+<div
+  class="text"
+  style="margin: 2em"
+>
+  <button mat-raised-button color="primary" [routerLink]="['/sources']">{{ 'EXPLORE_CATALOG' | translate }}</button>
+</div>

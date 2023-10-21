@@ -1,0 +1,35 @@
+<mat-card aria-label="Asignando permisos a un usuario sobre un término">
+  <mat-card-header>
+    <mat-card-title>{{ term.description }}</mat-card-title>
+    <mat-card-subtitle>{{ term.uuid }}</mat-card-subtitle>
+    <mat-card-subtitle>Permisos gestión sobre las fuentes clasificadas por este término</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let item of managers">
+        {{ item.email }}
+        <button
+          mat-icon-button
+          aria-label="Eliminar"
+          matTooltip="Eliminar"
+          (click)="denyManager(item)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <catalog-user-search (selectedUser)="selectedUser($event)"></catalog-user-search>
+    <mat-chip *ngIf="user">{{ user.email }}</mat-chip>
+
+    <button
+      *ngIf="user"
+      mat-raised-button
+      color="warn"
+      (click)="grantManager()"
+    >
+      Conceder Permiso
+    </button>
+  </mat-card-actions>
+</mat-card>

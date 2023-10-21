@@ -1,0 +1,37 @@
+<ng-container *ngIf="sourceData">
+
+
+  <p>
+    <catalog-source-view-version-info-field *ngIf="sourceData.title"
+      [label]="'Nombre'"
+      [value]="sourceData.name"
+    ></catalog-source-view-version-info-field>
+  </p>
+
+  <p>
+  <catalog-source-view-version-info-field *ngIf="sourceData.source_type"
+    [label]="'Tipo'"
+    [value]="tipos[sourceData.source_type].label"
+  ></catalog-source-view-version-info-field>
+</p>
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'URL'"
+    [value]="getIdentifier(IdentifierSchemas.url)"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'OAIURL'"
+    [value]="getIdentifier(IdentifierSchemas.oaiurl)"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field *ngIf="sourceData.source_system"
+    [label]="'Sistema'"
+    [value]="sistemas[sourceData.source_system].label"
+  ></catalog-source-view-version-info-field>
+</p>
+</ng-container>

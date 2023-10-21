@@ -1,0 +1,86 @@
+<toco-progress
+  [loading]="!stats && !error"
+  [position]="'absolute'"
+></toco-progress>
+<ng-container *ngIf="error">
+  <h1>ERROR</h1>
+</ng-container>
+
+<ng-container *ngIf="stats">
+  <section
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="2em"
+    style="padding: 1em"
+  >
+    <!-- <mat-card class="w-card" [ngStyle]="{'margin': '2em', 'min-height': '160px' }">
+      <mat-card-title-group>
+        <mat-card-title>{{ "SCEIBA_CATALOGO" | translate }}</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <div
+          class="text"
+          markdown
+          [src]="'assets/markdown/home.md'"
+          style="margin: 2em"
+        ></div>
+      </mat-card-content>
+    </mat-card> -->
+
+    <mat-card class="w-card" [ngStyle]="{'margin': '2em', 'min-height': '160px' }">
+      <mat-card-title-group>
+        <mat-card-title>Últimos Ingresos</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        <mat-nav-list dense>
+          <a
+            mat-list-item
+            *ngFor="let source of stats.last_sources"
+          >
+            {{ source.name }}
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10%"
+      style="padding-top: 4em"
+    >
+      <ngx-charts-pie-grid
+        *ngIf="loadCharts"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="homeCharts.types"
+        style="margin-left: 2.5em"
+      >
+      </ngx-charts-pie-grid>
+      <ngx-charts-bar-horizontal
+        *ngIf="loadCharts"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="homeCharts.indexes"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
+        style="margin-left: 2.5em"
+      >
+      </ngx-charts-bar-horizontal>
+      <ngx-charts-pie-chart
+        *ngIf="loadCharts"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="homeCharts.subjects"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [legendPosition]="legendPosition"
+        style="margin-left: 2.5em"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+  </section>
+</ng-container>

@@ -1,0 +1,86 @@
+.container {
+  padding: 20px 40px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.header-item {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.header-item a {
+  // font-size: 24px;
+  color: #007e3e;
+  text-decoration: none;
+  position: relative;
+}
+
+.header-item a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: #007e3e;
+  visibility: hidden;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: 0.25s linear;
+}
+.header-item a:hover:before,
+.header-item a:focus:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.header-item h1,
+.header-item h2,
+.header-item h3 {
+  margin: 0;
+  margin-right: 8px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.sect-eval {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sect-eval div {
+  font-size: 14px;
+  border: 1 solid transparent;
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: white;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.recom-card {
+  margin-top: 20px;
+}
+
+:host ::ng-deep {
+  .mat-card-header-text {
+    width: 100%;
+  }
+}

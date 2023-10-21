@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 55px;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 30px;
+
+  .title, .data-elements {
+    font-size: 18px;
+  }
+
+  .title {
+    opacity: 0.6;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .wrapper {
+    padding: 30px 20px;
+  }
+}

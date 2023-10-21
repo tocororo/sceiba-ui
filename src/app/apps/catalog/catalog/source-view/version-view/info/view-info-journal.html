@@ -1,0 +1,163 @@
+<ng-container *ngIf="journalData">
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Título'"
+    [value]="journalData.title"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Subtítulo'"
+    [value]="journalData.subtitle"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Nombre Abreviado'"
+    [value]="journalData.shortname"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field *ngIf="journalData.source_type"
+    [label]="'Tipo'"
+    [value]="tipos[journalData.source_type].label"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<mat-label style="font-weight: bold">ISSN: </mat-label>
+<div style="margin-left: 0.8em">
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Impreso'"
+      [value]="getIdentifier(IdentifierSchemas.issn_p)"
+    ></catalog-source-view-version-info-field>
+  </p>
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Electrónico'"
+      [value]="getIdentifier(IdentifierSchemas.issn_e)"
+    ></catalog-source-view-version-info-field>
+  </p>
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'De enlace'"
+      [value]="getIdentifier(IdentifierSchemas.issn_l)"
+    ></catalog-source-view-version-info-field>
+  </p>
+</div>
+
+<mat-label style="font-weight: bold">RNPS: </mat-label>
+<div style="margin-left: 0.8em">
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Impreso'"
+      [value]="getIdentifier(IdentifierSchemas.prnps)"
+    ></catalog-source-view-version-info-field>
+  </p>
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Electrónico'"
+      [value]="getIdentifier(IdentifierSchemas.ernps)"
+    ></catalog-source-view-version-info-field>
+  </p>
+</div>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'URL'"
+    [value]="getIdentifier(IdentifierSchemas.url)"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'OAIURL'"
+    [value]="getIdentifier(IdentifierSchemas.oaiurl)"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field *ngIf="journalData.source_system"
+    [label]="'Sistema'"
+    [value]="sistemas[journalData.source_system].label"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Email'"
+    [value]="journalData.email"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Seriadas Cubanas'"
+    [value]="journalData.seriadas_cubanas"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Propósito'"
+    [value]="journalData.purpose"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Año de Inicio'"
+    [value]="journalData.start_year | date"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Año de Fin'"
+    [value]="journalData.end_year | date"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<p>
+  <catalog-source-view-version-info-field
+    [label]="'Frecuencia de Publicación'"
+    [value]="journalData.frequency"
+  ></catalog-source-view-version-info-field>
+</p>
+
+<mat-label style="font-weight: bold"> Descripción:</mat-label>
+<mat-label *ngIf="!journalData.description" class="text-muted text-through"
+  >Vacío</mat-label
+>
+<div
+  *ngIf="journalData.description"
+  class="e2e-inner-html-bound text-align-justify"
+  [innerHTML]="journalData.description"
+></div>
+
+<mat-label style="font-weight: bold">Redes Sociales:</mat-label>
+<div style="margin-left: 0.8em">
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Facebook'"
+      [value]="journalData.socialNetworks.facebook"
+    ></catalog-source-view-version-info-field>
+  </p>
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Twitter'"
+      [value]="journalData.socialNetworks.twitter"
+    ></catalog-source-view-version-info-field>
+  </p>
+  <p>
+    <catalog-source-view-version-info-field
+      [label]="'Linkedin'"
+      [value]="journalData.socialNetworks.linkedin"
+    ></catalog-source-view-version-info-field>
+  </p>
+</div>
+</ng-container>

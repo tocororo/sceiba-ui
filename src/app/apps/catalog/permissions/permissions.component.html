@@ -1,0 +1,56 @@
+<div class="mat-elevation-z8 width-90 margin1em">
+  <toco-progress [loading]="loading" [position]="'absolute'"></toco-progress>
+
+  <mat-toolbar>
+    <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <h1>Mis Registros</h1>
+
+      <!-- <button
+        mat-icon-button
+        aria-label="Reset"
+        *ngIf="!isStartProcess"
+        matTooltip="Comenzar de nuevo"
+        (click)="resetEdit()"
+      >
+        <mat-icon>cached</mat-icon>
+      </button> -->
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <!-- *ngIf="asEditor && asEditor.length > 0" -->
+
+
+<mat-tab-group>
+  <mat-tab label="Editor" *ngIf="asEditor && asEditor.length > 0">
+    <div class="mat-elevation-z8">
+      <catalog-mysources-editor [asEditor]="asEditor"></catalog-mysources-editor>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Gestor" *ngIf="asManager && asManager.length > 0">
+    <div class="mat-elevation-z8">
+      <catalog-mysources-manager [asManager]="asManager"></catalog-mysources-manager>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Términos" *ngIf="isAdmin">
+    <div class="mat-elevation-z8">
+      <catalog-mysources-terms-admin></catalog-mysources-terms-admin>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Términos" *ngIf="!isAdmin && terms && terms.length > 0">
+    <div class="mat-elevation-z8">
+      <catalog-mysources-terms [terms]="terms"></catalog-mysources-terms>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Organizaciones" *ngIf="organizations && organizations.length > 0">
+    <div class="mat-elevation-z8">
+      <catalog-mysources-organizations [organizations]="organizations"></catalog-mysources-organizations>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
+
+</div>

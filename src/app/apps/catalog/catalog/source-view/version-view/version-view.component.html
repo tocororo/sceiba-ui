@@ -1,0 +1,150 @@
+<div
+  *ngIf="editingSource != undefined"
+  fxLayout="row wrap"
+  style="margin: 1em"
+>
+<!-- navigate buttons -->
+  <mat-toolbar
+  style="  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;"
+  >
+    <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">
+      <!-- <mat-slide-toggle
+        (change)="editVersion = !editVersion"
+        color="primary"
+        matTooltip="Vista Edicion"
+    >
+    </mat-slide-toggle>
+
+      <mat-slide-toggle
+        *ngIf="!editVersion"
+        (change)="showVersions = !showVersions"
+        color="accent"
+        matTooltip="Ver Revisiones"
+      >
+      </mat-slide-toggle> -->
+
+      <span [ngStyle]="{'white-space': 'normal'}">
+        Editor de Revisiones
+      </span>
+      <mat-divider [vertical]="true"></mat-divider>
+
+      <button
+        *ngIf="!editVersion"
+        mat-icon-button
+        aria-label="Editar la Revisión actual"
+        matTooltip="Editar la Revisión actual"
+        (click)="editVersion = !editVersion"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button
+        *ngIf="editVersion"
+        mat-icon-button
+        aria-label="Vista Revisiones"
+        matTooltip="Vista Revisiones"
+        (click)="editVersion = !editVersion"
+      >
+        <mat-icon>visibility</mat-icon>
+      </button>
+
+      <button
+        *ngIf="!editVersion && !showVersions"
+        mat-icon-button
+        aria-label="Ver Revisiones"
+        matTooltip="Ver Revisiones"
+        (click)="showVersions = !showVersions"
+      >
+        <mat-icon>history</mat-icon>
+      </button>
+
+      <button
+        *ngIf="!editVersion && showVersions"
+        mat-icon-button
+        aria-label="Ocultar Revisiones"
+        matTooltip="Ocultar Revisiones"
+        (click)="showVersions = !showVersions"
+      >
+        <mat-icon>history</mat-icon>
+      </button>
+
+      <div *ngIf="!editVersion && showVersions">
+        <button
+          mat-icon-button
+          aria-label="Previous version"
+          [disabled]="isDisabledNavigatePrevious"
+          matTooltip="Revisión Anterior"
+          (click)="previousVersion()"
+        >
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          aria-label="Next version"
+          [disabled]="isDisabledNavigateNext"
+          matTooltip="Revisión Siguiente"
+          (click)="nextVersion()"
+        >
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-container *ngIf="versions != undefined">
+
+    <catalog-source-edit-journal
+      *ngIf="editVersion"
+      [journalVersion]="editingSource"
+      (journalEditDone)="sourceEditDone($event)"
+      [showEditHeader]="false"
+      [showFinalStep]="false"
+      [topMainOrganization]="topMainOrganization"
+    >
+    </catalog-source-edit-journal>
+
+    <catalog-source-view-version-info
+      *ngIf="!editVersion && !showVersions"
+      [sourceVersion]="editingSource"
+      fxFlex="1 2 calc(15em + 20px)"
+      style="margin: 0.5em"
+    >
+    </catalog-source-view-version-info>
+
+    <ng-container *ngIf="!editVersion && showVersions">
+      <catalog-source-view-version-info
+        #journalViewInfo
+        [sourceVersion]="editingSource"
+        fxFlex="1 2 calc(15em + 20px)"
+        style="margin: 0.5em"
+      >
+      </catalog-source-view-version-info>
+
+      <catalog-journal-view-version
+        #versionsPanel
+        [editingJournal]="editingSource"
+        [currentJournal]="selectedSource"
+        (editingSourceChange)="
+          journalViewInfo.editingSourceChange(editingSource)
+        "
+        fxFlex="1 2 calc(15em + 20px)"
+        style="margin: 0.5em"
+      ></catalog-journal-view-version>
+    </ng-container>
+  </ng-container>
+
+  <mat-card *ngIf="versions == undefined" style="margin: 1em">
+    <mat-card-content>
+      <h1>Este componente necesita las revisiones de la revista.</h1>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card *ngIf="editingSource == undefined" style="margin: 1em">
+  <mat-card-content>
+    <h1>No se encontró la información solicitada</h1>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,126 @@
+<!-- Journal Information -->
+
+<toco-progress [loading]="loading"> </toco-progress>
+
+<mat-card *ngIf="sourceVersion && sourceData">
+  <mat-card-header *ngIf="showVersionLabel">
+    <!-- <img mat-card-avatar *ngIf="journal.data.logo; else logotemplate" [style.background-size]="'cover'" src="journal.data.logo">
+        <ng-template #logotemplate>
+            <img mat-card-avatar [src]="defaultLogo" alt="">
+        </ng-template> -->
+    <mat-card-title> </mat-card-title>
+
+    <mat-card-subtitle> Revisión actual </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-divider  *ngIf="showVersionLabel" [inset]="true" style="margin-bottom: 1em"></mat-divider>
+
+  <mat-card-content>
+
+    <ng-container
+      [ngSwitch]="sourceVersion.data.source_type"
+    >
+      <catalog-source-view-version-info-journal
+      *ngSwitchCase="sourceTypes.JOURNAL.value"
+        [journalData]= "sourceData"
+      >
+    </catalog-source-view-version-info-journal>
+
+    <catalog-source-view-version-info-default
+      #view
+      *ngSwitchDefault
+      [sourceData]= "sourceData"
+    >
+    </catalog-source-view-version-info-default>
+
+    </ng-container>
+
+    <!-- show terms -->
+
+    <mat-divider
+      [inset]="true"
+      style="margin-bottom: 1em; margin-top: 1em"
+    ></mat-divider>
+
+    <!-- <catalog-journal-view-version-term
+      title="Grupo:"
+      [terms]="groupTerms"
+      [vocab_id]="vocabularies.INDEXES_CLASIFICATION"
+    ></catalog-journal-view-version-term>
+
+    <catalog-journal-view-version-term
+      title="Provincia:"
+      [terms]="provinceTerms"
+      [vocab_id]="vocabularies.CUBAN_PROVINCES"
+    ></catalog-journal-view-version-term> -->
+
+    <catalog-journal-view-version-term
+      title="Licencia:"
+      [terms]="licenceTerms"
+      [vocab_id]="vocabularies.LICENCES"
+    ></catalog-journal-view-version-term>
+
+    <catalog-journal-view-version-term
+      title="Materias:"
+      [terms]="subjectTerms"
+      [vocab_id]="vocabularies.SUBJECTS"
+    ></catalog-journal-view-version-term>
+
+    <mat-card style="margin: 1em; background-color: whitesmoke">
+      <mat-card-header>
+        <mat-card-title>Organizaciones:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <catalog-source-edit-organizations
+          [sourceData]="sourceData"
+          [editable]="false"
+          [ngStyle]="{ margin: '1em' }"
+        >
+        </catalog-source-edit-organizations>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card style="margin: 1em; background-color: whitesmoke">
+      <mat-card-header>
+        <mat-card-title> Indizaciones:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <catalog-source-edit-indexes
+          [sourceData]="sourceData"
+          [editable]="false"
+          [ngStyle]="{ margin: '1em' }"
+        >
+        </catalog-source-edit-indexes>
+        <!-- <mat-accordion>
+          <ng-container *ngFor="let termSource of dataBaseTerms">
+            <mat-expansion-panel
+              *ngIf="termSource.term.vocabulary == vocabularies.INDEXES"
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ termSource.term.description }}
+                </mat-panel-title>
+                <mat-panel-description> </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p *ngIf="termSource.data">
+                <strong>URL: </strong> {{ termSource.data.url }}
+              </p>
+              <p *ngIf="termSource.data && termSource.data['initial_cover']">
+                <strong>Cobertura inicio: </strong>
+                {{ termSource.data["initial_cover"] }}
+              </p>
+              <p *ngIf="termSource.data && termSource.data['end_cover']">
+                <strong>Cobertura hasta: </strong>
+                {{ termSource.data["end_cover"] }}
+              </p>
+            </mat-expansion-panel>
+          </ng-container>
+        </mat-accordion> -->
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+
+  <mat-divider [inset]="true"></mat-divider>
+</mat-card>

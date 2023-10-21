@@ -1,0 +1,71 @@
+
+<toco-progress [loading]="hasTaskInProgress"></toco-progress>
+
+<mat-toolbar color="accent"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    style="height: 80px;"
+>
+    <span>Detalles del Repositorio Institucional</span>
+    <button mat-mini-fab *ngIf="hasPermission" class="mat-18 ml-05" color="primary" (click)="edit()"
+        [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
+        [matTooltipClass]="'tooltip-red'"
+    >
+        <mat-icon>mode_edit</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-card *ngIf="repository">
+
+    <mat-card-content>
+
+        <static-text [desc]="'Nombre'" [value]="repository.name"></static-text>
+
+        <mat-card class="mb-2">
+            <mat-card-content>
+                <p>
+                    <mat-label>Institución Principal</mat-label>
+                </p>
+
+                <static-text [desc]="'Nombre'" [value]="repository.mainInst.name"></static-text>
+
+                <mat-card class="mb-2">
+                    <mat-card-content>
+                        <p>
+                            <mat-label>Identidicadores</mat-label>
+                        </p>
+
+                        <div *ngFor="let identifier of repository.mainInst.identifiers"
+                            class="w-100 my-outline-without-hover" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                        >
+                            <static-text [width]="'45%'" [appearance]="'legacy'" [desc]="'Id'" [value]="identifier.idtype"></static-text>
+
+                            <static-text [width]="'45%'" [appearance]="'legacy'" [desc]="'Valor'" [value]="identifier.value"></static-text>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+        </mat-card>
+
+        <static-text [desc]="'Url'" [value]="repository.url"></static-text>
+        <static-text [desc]="'Url-OAI'" [value]="repository.url_oai"></static-text>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end" class="mrb-0">
+        <button mat-stroked-button *ngIf="hasPermission" color="primary" (click)="edit()"
+            [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            Ir a editar
+        </button>
+        <button mat-stroked-button color="primary" (click)="goBack()"
+            [matTooltip]="'Muestra la vista anterior'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            Ir atrás
+        </button>
+    </mat-card-actions>
+
+</mat-card>

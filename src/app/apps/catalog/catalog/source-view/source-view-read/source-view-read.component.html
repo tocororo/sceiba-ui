@@ -1,0 +1,110 @@
+<toco-progress [loading]="saving"> </toco-progress>
+
+<!-- <div *ngIf="source" fxLayout="row" fxLayoutGap="1em">
+</div> -->
+
+<!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center" [ngStyle]="{'width': '100%'}">
+    <h2>
+      {{ pageTitle }}
+    </h2>
+    <button
+      *ngIf="showEditHeader"
+      mat-stroked-button
+      color="warn"
+      (click)="cancelStepper()"
+    >
+      Cancelar
+    </button>
+</div> -->
+
+<ng-container *ngIf="source" [ngSwitch]="source.data.source_type">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
+    <span class="mat-h2">{{ source.data.name | translate }}</span>
+    <div fxLayoutAlign="end center" fxLayout="row"></div>
+  </div>
+  <ng-container *ngIf="source">
+    <catalog-source-view-version-info
+      #view
+      *ngSwitchCase="sourceType.JOURNAL.value"
+      [sourceVersion]="source"
+      [showVersionLabel]="false"
+    >
+    </catalog-source-view-version-info>
+
+    <mat-card *ngSwitchDefault>
+      <mat-card-content>
+        <p>
+          <catalog-source-view-version-info-field
+            [label]="'Título'"
+            [value]="source.data.name"
+          ></catalog-source-view-version-info-field>
+        </p>
+        <p>
+          <catalog-source-view-version-info-field
+            *ngIf="source.data.source_type"
+            [label]="'Tipo'"
+            [value]="sourceType[source.data.source_type].label"
+          ></catalog-source-view-version-info-field>
+        </p>
+
+        <mat-label style="font-weight: bold">ISSN: </mat-label>
+        <div style="margin-left: 0.8em">
+          <p>
+            <catalog-source-view-version-info-field
+              [label]="'Impreso'"
+              [value]="getIdentifier(IdentifierSchemas.issn_p)"
+            ></catalog-source-view-version-info-field>
+          </p>
+          <p>
+            <catalog-source-view-version-info-field
+              [label]="'Electrónico'"
+              [value]="getIdentifier(IdentifierSchemas.issn_e)"
+            ></catalog-source-view-version-info-field>
+          </p>
+          <p>
+            <catalog-source-view-version-info-field
+              [label]="'De enlace'"
+              [value]="getIdentifier(IdentifierSchemas.issn_l)"
+            ></catalog-source-view-version-info-field>
+          </p>
+        </div>
+        <mat-label style="font-weight: bold">RNPS: </mat-label>
+        <div style="margin-left: 0.8em">
+          <p>
+            <catalog-source-view-version-info-field
+              [label]="'Impreso'"
+              [value]="getIdentifier(IdentifierSchemas.prnps)"
+            ></catalog-source-view-version-info-field>
+          </p>
+          <p>
+            <catalog-source-view-version-info-field
+              [label]="'Electrónico'"
+              [value]="getIdentifier(IdentifierSchemas.ernps)"
+            ></catalog-source-view-version-info-field>
+          </p>
+        </div>
+
+        <p>
+          <catalog-source-view-version-info-field
+            [label]="'URL'"
+            [value]="getIdentifier(IdentifierSchemas.url)"
+          ></catalog-source-view-version-info-field>
+        </p>
+
+        <mat-card style="margin: 1em; background-color: whitesmoke">
+          <mat-card-header>
+            <mat-card-title>Organizaciones:</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <catalog-source-edit-organizations
+              [sourceData]="source.data"
+              [editable]="false"
+              [ngStyle]="{ margin: '1em' }"
+            >
+            </catalog-source-edit-organizations>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,57 @@
+<mat-progress-bar
+  *ngIf="loading"
+  mode="indeterminate"
+></mat-progress-bar>
+
+<mat-accordion *ngIf="!loading">
+  <mat-expansion-panel
+    *ngFor="let clasification of selectedDatabases; let classIndex = index"
+  >
+    <mat-expansion-panel-header>
+      {{ clasification.dbclass.description }} ({{clasification.dblist.length}})
+    </mat-expansion-panel-header>
+    <mat-action-row *ngIf="editable">
+      <button
+          mat-icon-button
+          aria-label="Adicionar"
+          matTooltip="Adicionar"
+          (click)="addIndexAction(classIndex)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+    </mat-action-row>
+    <mat-card *ngFor="let db of clasification.dblist; let dbIndex = index">
+      <mat-card-header>
+        <mat-card-title><mat-label>{{ db.description }}</mat-label></mat-card-title>
+        <mat-card-subtitle>
+          <mat-label style="font-weight: bold;">URL: </mat-label>
+          {{ db.data["url"] }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <mat-label style="font-weight: bold;">Cobertura: </mat-label>
+          <mat-label>
+            {{ db.data["initial_cover"] }} - {{ db.data["end_cover"] }}
+          </mat-label>
+      </mat-card-content>
+      <mat-card-actions *ngIf="editable">
+        <button
+          mat-icon-button
+          aria-label="Editar"
+          matTooltip="Editar"
+          (click)="editIndexAction(classIndex, db)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          aria-label="Eliminar"
+          matTooltip="Eliminar"
+          (click)="deleteIndexAction(classIndex, db)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,11 @@
+<div fxLayout="column nowrap" fxLayoutAlign="center center">
+    <ngx-charts-pie-grid
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="dataChild"
+        (select)="onSelect($event)">
+    </ngx-charts-pie-grid>
+    <mat-chip-set>
+        <mat-chip >{{_yAxisLabel}}</mat-chip>
+    </mat-chip-set>
+</div>

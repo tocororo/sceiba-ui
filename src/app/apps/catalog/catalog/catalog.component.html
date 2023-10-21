@@ -1,0 +1,46 @@
+<!-- <div infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollUpDistance]="0.5" [infiniteScrollThrottle]="10" (scrolled)="onScrollDown()"
+  (scrolledUp)="onScrollUp()"> -->
+
+<!-- <toco-page-header [info]="['Catálogo de Revistas Científicas Cubanas']">
+    </toco-page-header> -->
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
+	<span class="mat-h2">{{ 'CATALOG_TITLE' | translate }}</span>
+	<button
+        mat-icon-button
+        (click)="drawer.toggle()"
+        matTooltip="Filtros avanzados"
+      >
+        <mat-icon>filter_list</mat-icon>
+      </button>
+</div>
+
+
+<toco-progress [loading]="!initfilters" [position]="'absolute'"></toco-progress>
+
+<div *ngIf="initfilters"> <!-- fxLayout="{{ currentlayout.layout }}" fxLayout.xs="column nowrap" fxLayoutAlign="{{ currentlayout.aling }}" -->
+	<mat-drawer-container autosize style="background-color: white;">
+		<mat-drawer #drawer mode="side" opened position="start">
+			<catalog-search-filters fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="start center"
+				fxLayoutAlign.xs="center center" fxLayoutGap="1em" [params]="filtersParams"
+				(paramsChange)="filtersChange($event)" [topMainOrganization]="topMainOrganization">
+			</catalog-search-filters>
+			<!-- fxFlex="{{ currentlayout.width }}" -->
+		</mat-drawer>
+		<div class="mx-1">
+			<toco-progress [loading]="isLoading()" [position]="'absolute'"></toco-progress>
+
+			<search-list [hitList]="dataSource"></search-list>
+
+			<mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+				[pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)">
+			</mat-paginator>
+		</div>
+	</mat-drawer-container>
+</div>
+
+<!--
+          </mat-drawer-content>
+
+        </mat-drawer-container> -->
+
+<!-- </div> -->

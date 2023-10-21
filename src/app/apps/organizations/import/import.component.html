@@ -1,0 +1,98 @@
+<div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    style="height: 80px; padding: 0 16px;"
+  >
+
+    <span class="mat-h2">Importar ficheros de GRID y la ONEI</span>
+
+  </div>
+
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>Title</mat-card-title>
+          <mat-card-subtitle>Subtitle</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between center">
+
+            <!-- Start GRID -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de GRID'"
+                [accept]="'.json'"
+                [control]="importFormGroup.controls.grid">
+                <!-- (file)="handleFileInput($event, 'GRID')" -->
+            </app-input-file>
+
+            <!-- Start C_orga -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con organismos superiores (C_orga)'"
+                [accept]="'.xlsx'"
+                [control]="importFormGroup.controls.C_orga">
+                <!-- (file)="handleFileInput($event, 'C_orga')" -->
+            </app-input-file>
+
+            <!-- Start C_Uniones -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con organismos (C_Uniones)'"
+                [accept]="'.xlsx'"
+                [control]="importFormGroup.controls.C_Uniones">
+                <!-- (file)="handleFileInput($event, 'C_Uniones')" -->
+            </app-input-file>
+        
+            <!-- Start RE0420 -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con Organismos (RE0420)'"
+                [accept]="'.xlsx'"
+                [control]="importFormGroup.controls.RE0420">
+                <!-- (file)="handleFileInput($event, 'RE0420')" -->
+            </app-input-file>
+        
+            <!-- Start CNOA0420 -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con Organismos (CNOA0420)'"
+                [accept]="'.xlsx'"
+                [control]="importFormGroup.controls.CNOA0420">
+                <!-- (file)="handleFileInput($event, 'CNOA0420')" -->
+            </app-input-file>
+
+            <!-- Start ME0420 -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con Organismos (ME0420)'"
+                [accept]="'.xlsx'"
+                [control]="importFormGroup.controls.ME0420">
+                <!-- (file)="handleFileInput($event, 'ME0420')" -->
+            </app-input-file>
+
+            <!-- Start dpa -->
+            <app-input-file
+                class="input-width"
+                [label]="'Fichero de la ONEI con Organismos (dpa.json)'"
+                [accept]="'.json'"
+                [control]="importFormGroup.controls.dpa">
+                <!-- (file)="handleFileInput($event, 'dpa')" -->
+            </app-input-file>
+
+        <!-- <mat-label>Fichero de GRID</mat-label>
+        <input 
+            type="file" 
+            enctype="multipart/form-data" 
+            accept=".json" 
+            placeholder="Click para seleccionar un fichero" 
+            (change)="handleFileInput($event.target.files, 'GRID')"> -->
+
+      </mat-card-content>
+      <mat-card-actions align="start">
+          <button mat-stroked-button (click)="import()" color="primary">Importar</button>
+          <!-- <button mat-stroked-button (click)="eject" color="warn">Ejecutar</button> -->
+      </mat-card-actions>
+  </mat-card>
