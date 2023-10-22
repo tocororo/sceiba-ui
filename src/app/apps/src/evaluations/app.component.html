@@ -1,0 +1,86 @@
+<toco-header
+  [showMenuLang]="'true'"
+  [icon]="'/assets/icons/apps/evaluations.svg'"
+  [iconLabel]="'SCEIBA_EVALUACIONES'"
+  [iconAlt]="'SCEIBA_EVALUACIONES'"
+  (toogleSideNav)="toogle()"
+></toco-header>
+
+<toco-progress [position]=1 [loading]="hasTaskInProgress"></toco-progress>
+
+<mat-sidenav-container
+  class="example-container"
+  (backdropClick)="close()"
+>
+  <mat-sidenav
+    disableClose
+    #sidenav
+    (keydown.escape)="close()"
+    mode="side"
+    [opened]="sideNavOpen"
+    class="sidenav"
+  >
+  <button mat-button (click)="goToHome()">{{ "HOME" | translate }}</button>
+  <p style="padding-left: 16px;">{{"EVALUA" | translate}}</p>
+    <ul>
+      <li>
+          <button mat-button (click)="createEvaluation()">{{ "REVISTAS" | translate }}</button>
+      </li>
+      <li>
+          <button mat-button disabled="true">{{ "EDITORIALES" | translate }}</button>
+      </li>
+      <li>
+          <button mat-button disabled="true">{{ "PUBLICACIONES" | translate }}</button>
+      </li>
+      <li>
+          <button mat-button disabled="true">{{ "ORGANIZACIONES" | translate }}</button>
+      </li>
+      <li>
+          <button mat-button disabled="true">{{ "PERSONAS" | translate }}</button>
+      </li>
+    </ul>
+    <button mat-button disabled="true">{{ "OTRAS_HERRAMIENTAS" | translate }}</button>
+    <button mat-button disabled="true">{{ "LECTURAS_RECOMENDADAS" | translate }}</button>
+    <button mat-button (click)="goToMyEvaluations()" >{{ "MIS_EVALUACIONES" | translate }}</button>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+    <div
+      class="bg-primary-color"
+      style="
+        height: 100px;
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(to right, #007e3e, #373131);
+      "
+    ></div>
+
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      style="border-radius: 40px 40px 0 0"
+    >
+      <div
+        [ngStyle.xs]="{ width: '95%' }"
+        style="
+          margin-top: -100px;
+          width: 90%;
+          background-color: white;
+          border-radius: 40px 40px 0 0;
+          box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+        "
+      >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!-- <ng-template #outHome>
+  <router-outlet></router-outlet>
+</ng-template> -->
+
+    <!--<div [ngStyle]="{'margin-top': '2em'}"> -->
+    <app-footer [sites]="footerSites" [information]="footerInformation">
+    </app-footer>
+    <!-- </div> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>
