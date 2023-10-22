@@ -5,12 +5,32 @@ const routes: Routes = [
   {
     path: "eval",
     loadChildren: () =>
-      import("./evaluation/app.module").then((mod) => mod.AppModule),
+      import("./apps/modules/evaluations/evaluations.module").then((mod) => mod.EvaluationsAppModule),
+  },
+  {
+    path: "orgs",
+    loadChildren: () =>
+      import("./apps/modules/organizations/organizations.module").then((mod) => mod.OrganizationsAppModule),
+  },
+  {
+    path: "persons",
+    loadChildren: () =>
+      import("./apps/modules/persons/persons.module").then((mod) => mod.PersonsAppModule),
+  },
+  {
+    path: "revistasmes",
+    loadChildren: () =>
+      import("./apps/modules/revistasmes/revistasmes.module").then((mod) => mod.RevistasMesAppModule),
+  },
+  {
+    path: "sources",
+    loadChildren: () =>
+      import("./apps/modules/sources/sources.module").then((mod) => mod.SolurcesAppModule),
   },
   {
     path: "",
     loadChildren: () =>
-      import("./home/app.module").then((mod) => mod.AppModule),
+      import("./apps/modules/records/records.module").then((mod) => mod.RecordsAppModule),
   },
 
 ];

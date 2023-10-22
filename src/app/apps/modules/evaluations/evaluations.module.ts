@@ -97,4 +97,4 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   ],
   bootstrap: [EvaluationsComponent],
 })
-export class EvaluationsModule {}
+export class EvaluationsAppModule {}

@@ -126,4 +126,4 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ],
     bootstrap: [PersonsComponent]
 })
-export class PersonsModule {}
+export class PersonsAppModule {}

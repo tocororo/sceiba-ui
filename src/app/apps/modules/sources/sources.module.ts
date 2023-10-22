@@ -89,4 +89,4 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   ],
   bootstrap: [SourcesComponent]
 })
-export class SolurcesModule { }
+export class SolurcesAppModule { }

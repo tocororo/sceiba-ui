@@ -213,4 +213,4 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
   bootstrap: [OrganizationsComponent],
 })
-export class OrgModule {}
+export class OrganizationsAppModule {}

@@ -94,4 +94,4 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   ],
   bootstrap: [RecordsComponent]
 })
-export class RecordsModule { }
+export class RecordsAppModule { }
