@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable, of, Subject } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { SearchResponse } from 'toco-lib';
-import { Permission } from './permission.service';
 import { PeopleService } from './people.service';
+import { Permission } from './permission.service';
 import { Person } from './person.entity';
 
 
@@ -20,8 +20,8 @@ export interface IError {
 export class ShowErrorService {
 
     /**
-     * A Subject that behaves as the bridge between the two components. 
-     * It emits an IError if there is an HTTP request error. 
+     * A Subject that behaves as the bridge between the two components.
+     * It emits an IError if there is an HTTP request error.
      */
 
   public errorSubject = new Subject<IError>();
@@ -33,7 +33,7 @@ export class ShowErrorService {
   }
 
   clearErrors() {
-      this.errorSubject.next();
+      this.errorSubject.next(null);
   }
 
   getErrors(): Observable<IError> {
@@ -45,7 +45,7 @@ export class ShowErrorService {
 @Injectable({
 	providedIn: 'root',
 })
-export class PeopleActiveResolverService 
+export class PeopleActiveResolverService
 {
 	public constructor(
     private router: Router,
@@ -72,7 +72,7 @@ export class PeopleActiveResolverService
             if (hit["ERROR"]){
               console.log("Error desde el backend, ", hit["ERROR"]);
               this.errorService.sendErrors({
-				  "title": "Error desde el servidor", 
+				  "title": "Error desde el servidor",
 				  "status":"402",
 				  "message": hit["ERROR"]
 				});

@@ -10,58 +10,65 @@ import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.compon
 import { SourceResolver } from '../../src/sources/_services/source-resolver';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
+import { RevistasMesComponent } from './revistasmes.component';
 
 
 const routes: Routes = [
   {
-    path: 'sources',
-    loadChildren: () => import('../../src/sources/catalog/catalog.module').then(m => m.CatalogModule),
-    // canActivate: [OauthAuthenticationService]
-  },
-  {
-    path: 'permissions',
-    loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
-    canActivate: [OauthAuthenticationService]
-  },
-  {
-    path: 'faq',
-    component: StaticPagesComponent,
-    data: { src: 'assets/markdown/faq', title: 'FAQ' },
-  },
-  {
-    path: 'about',
-    component: StaticPagesComponent,
-    data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
-  },
-  {
-    path: 'help',
-    component: StaticPagesComponent,
-    data: { src: 'assets/markdown/help', title: 'Ayuda' },
-  },
-  {
-    path: 'contact',
-    component: StaticPagesComponent,
-    data: { src: 'assets/markdown/contact', title: 'Contacto' },
-  },
-  {
-    path: 'userprofile',
-    component: UserProfileComponent,
-    canActivate: [OauthAuthenticationService],
-  },
-  {
-    path: 'notifications',
-    component: NotificationListComponent,
-    canActivate: [OauthAuthenticationService],
-  },
-  {
-    path: '',
-    component: HomeRevistasmesComponent,
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
-  },
+    path: "",
+    component: RevistasMesComponent,
+    children: [
+      {
+        path: 'sources',
+        loadChildren: () => import('../../src/sources/catalog/catalog.module').then(m => m.CatalogModule),
+        // canActivate: [OauthAuthenticationService]
+      },
+      {
+        path: 'permissions',
+        loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
+        canActivate: [OauthAuthenticationService]
+      },
+      {
+        path: 'faq',
+        component: StaticPagesComponent,
+        data: { src: 'assets/markdown/faq', title: 'FAQ' },
+      },
+      {
+        path: 'about',
+        component: StaticPagesComponent,
+        data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
+      },
+      {
+        path: 'help',
+        component: StaticPagesComponent,
+        data: { src: 'assets/markdown/help', title: 'Ayuda' },
+      },
+      {
+        path: 'contact',
+        component: StaticPagesComponent,
+        data: { src: 'assets/markdown/contact', title: 'Contacto' },
+      },
+      {
+        path: 'userprofile',
+        component: UserProfileComponent,
+        canActivate: [OauthAuthenticationService],
+      },
+      {
+        path: 'notifications',
+        component: NotificationListComponent,
+        canActivate: [OauthAuthenticationService],
+      },
+      {
+        path: '',
+        component: HomeRevistasmesComponent,
+      },
+      {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
+      },
+    ]
+  }
 ];
 
 @NgModule({

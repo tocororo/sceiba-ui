@@ -1,18 +1,23 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OauthAuthenticationService } from 'toco-lib';
 import { UserService } from '../../src/organizations/_services/org.service';
-import { OrganizationActiveResolverService, OrganizationDetailResolverService } from '../../src/organizations/_services/organization-detail-resolver.service.ts';
-import { AdminPermissionService, CuratorPermissionService } from '../../src/organizations/_services/permission.service';
+import {
+  OrganizationActiveResolverService,
+  OrganizationDetailResolverService,
+} from '../../src/organizations/_services/organization-detail-resolver.service.ts';
+import {
+  AdminPermissionService,
+  CuratorPermissionService,
+} from '../../src/organizations/_services/permission.service';
 import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
 import { HomeComponent } from '../../src/organizations/home/home.component';
 import { ImportComponent } from '../../src/organizations/import/import.component';
-import { NotificationsComponent } from "../../src/organizations/notifications/notifications.component";
+import { NotificationsComponent } from '../../src/organizations/notifications/notifications.component';
 import { OrgEditComponent } from '../../src/organizations/org-edit/org-edit.component';
-import { OrgReviewerComponent } from "../../src/organizations/org-reviewer/org-reviewer.component";
+import { OrgReviewerComponent } from '../../src/organizations/org-reviewer/org-reviewer.component';
 import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
-import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
+import { RequestChangesListComponent } from '../../src/organizations/request-changes-list/request-changes-list.component';
 import { SearchComponent } from '../../src/organizations/search/search.component';
 import { StaticPagesComponent } from '../../src/organizations/static-pages/static-pages.component';
 import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
@@ -26,166 +31,178 @@ import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organiz
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
 import { Error404Component } from '../../src/organizations/error404/error404.component';
-
-
+import { OrganizationsComponent } from './organizations.component';
 
 const routes: Routes = [
-	{
-		path:':uuid/view',
-		component: OrgViewerComponent,
-		resolve: {
-			'org': OrganizationActiveResolverService
-		}
-  },
-	{
-		path:':uuid/edit',
-		component: OrgEditComponent,
-		resolve: {
-			'org': OrganizationDetailResolverService
-		},
-		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
-  },
   {
-    path: ':uuid/request-changes',
-    component: OrgEditComponent,
-    resolve: {
-      'org': OrganizationDetailResolverService
-    },
-  },
-	{
-		path:':uuid/review-changes',
-		component: OrgReviewerComponent,
-		resolve: {
-			'org': OrganizationDetailResolverService
-		},
-		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
-  },
-	{
-		path:'requests-list',
-		component: RequestChangesListComponent,
-		// resolve: {
-		// 	'org': OrganizationDetailResolverService
-		// },
-		// canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
-  },
-    // {
-    //     path: 'add',
-    //     component: OrgAddComponent
-	// },
-	{
-		path: 'search',
-		component: SearchComponent
-	},
-	{
-		path: 'disambiguate',
-		component: DisambiguateComponent,
-		canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
-	},
-	{
-		path: 'import',
-		component: ImportComponent,
-		canActivate: [OauthAuthenticationService, AdminPermissionService]
-	},
-  {
-		path: 'error',
-		component: ErrorPageComponent,
-	},
-	{
-		path:'',
-		component: HomeComponent,
-	},
-    {
+    path: '',
+    component: OrganizationsComponent,
+    children: [
+      {
+        path: ':uuid/view',
+        component: OrgViewerComponent,
+        resolve: {
+          org: OrganizationActiveResolverService,
+        },
+      },
+      {
+        path: ':uuid/edit',
+        component: OrgEditComponent,
+        resolve: {
+          org: OrganizationDetailResolverService,
+        },
+        // canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+      },
+      {
+        path: ':uuid/request-changes',
+        component: OrgEditComponent,
+        resolve: {
+          org: OrganizationDetailResolverService,
+        },
+      },
+      {
+        path: ':uuid/review-changes',
+        component: OrgReviewerComponent,
+        resolve: {
+          org: OrganizationDetailResolverService,
+        },
+        // canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+      },
+      {
+        path: 'requests-list',
+        component: RequestChangesListComponent,
+        // resolve: {
+        // 	'org': OrganizationDetailResolverService
+        // },
+        // canActivate: [OauthAuthenticationService, CuratorPermissionService, AdminPermissionService]
+      },
+      // {
+      //     path: 'add',
+      //     component: OrgAddComponent
+      // },
+      {
+        path: 'search',
+        component: SearchComponent,
+      },
+      {
+        path: 'disambiguate',
+        component: DisambiguateComponent,
+        canActivate: [
+          OauthAuthenticationService,
+          CuratorPermissionService,
+          AdminPermissionService,
+        ],
+      },
+      {
+        path: 'import',
+        component: ImportComponent,
+        canActivate: [OauthAuthenticationService, AdminPermissionService],
+      },
+      {
+        path: 'error',
+        component: ErrorPageComponent,
+      },
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
         path: 'faq',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/faq.', title: 'FAQ'}
-	},
-	{
+        data: { src: '/assets/markdown/faq.', title: 'FAQ' },
+      },
+      {
         path: 'terms',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/terms.', title: 'Términos de uso'}
-	},
-	{
+        data: { src: '/assets/markdown/terms.', title: 'Términos de uso' },
+      },
+      {
         path: 'privacy',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/privacy.', title: 'Políticas de privacidad'}
-    },
-    {
+        data: {
+          src: '/assets/markdown/privacy.',
+          title: 'Políticas de privacidad',
+        },
+      },
+      {
         path: 'about',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/about.', title: 'Sobre Nosotros'}
-    },
-    {
+        data: { src: '/assets/markdown/about.', title: 'Sobre Nosotros' },
+      },
+      {
         path: 'help',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/help.', title: 'Ayuda'}
-    },
-    {
+        data: { src: '/assets/markdown/help.', title: 'Ayuda' },
+      },
+      {
         path: 'contact',
         component: StaticPagesComponent,
-        data: {src: '/assets/markdown/contact.', title: 'Contacto'}
-	},
-	{
+        data: { src: '/assets/markdown/contact.', title: 'Contacto' },
+      },
+      {
         path: 'inclussion',
         component: StaticPagesComponent,
-        data: {src: 'assets/markdown/inclussion.', title: '¿Nueva Organización?'}
-	},
-	/*
-	Perfiles
-	*/
-	{
-		path:'wiki-organizations',
-		component: WikiOrganizationsComponent,
-	},
-	{
-		path:'wiki-organizations/organization',
-		component: WikiOrgEmployesProfileComponent,
-	},
-	{
-		path:'wiki-organizations/author',
-		component: WikiAuthorProfileComponent,
-	},
-	{
-		path:'wiki-organizations/authors',
-		component: WikiAuthorsProfileComponent,
-	},
-	{
-		path:'wiki-organizations/work',
-		component: WikiWorkProfileComponent,
-	},
-	{
-		path:'wiki-organizations/venue',
-		component: WikiVenueProfileComponent,
-	},
-	{
-		path:'wiki-organizations/topic',
-		component: WikiTopicProfileComponent,
-	},
-	{
-		path:'wiki-organizations/topics',
-		component: WikiTopicsProfileComponent,
-	},
-	/*
-	end of Perfiles
-	*/
-  {
-    path:'notifications',
-    component: NotificationsComponent,
+        data: {
+          src: 'assets/markdown/inclussion.',
+          title: '¿Nueva Organización?',
+        },
+      },
+      /*
+      Perfiles
+      */
+      {
+        path: 'wiki-organizations',
+        component: WikiOrganizationsComponent,
+      },
+      {
+        path: 'wiki-organizations/organization',
+        component: WikiOrgEmployesProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/author',
+        component: WikiAuthorProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/authors',
+        component: WikiAuthorsProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/work',
+        component: WikiWorkProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/venue',
+        component: WikiVenueProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/topic',
+        component: WikiTopicProfileComponent,
+      },
+      {
+        path: 'wiki-organizations/topics',
+        component: WikiTopicsProfileComponent,
+      },
+      /*
+      end of Perfiles
+      */
+      {
+        path: 'notifications',
+        component: NotificationsComponent,
+      },
+      {
+        path: '**',
+        //redirectTo: '',
+        pathMatch: 'full',
+        //TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí.
+        component: Error404Component,
+      },
+    ],
   },
-	{
-		path: '**',
-		//redirectTo: '',
-		pathMatch: 'full',
-		//TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí.
-		component: Error404Component
-	},
-
-
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
-	providers: [UserService, CuratorPermissionService, AdminPermissionService]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+  providers: [UserService, CuratorPermissionService, AdminPermissionService],
 })
-export class OrganizationsRoutingModule
-{ }
+export class OrganizationsRoutingModule {}
