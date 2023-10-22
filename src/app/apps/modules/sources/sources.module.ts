@@ -5,8 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -17,16 +15,18 @@ import {
   OrganizationsModule, SearchService, SourceService, SourceServiceNoAuth,
   TaxonomyService, TocoFormsModule, UserProfileService
 } from 'toco-lib';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SceibaFooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
-import { SharedModule } from './shared/shared.module';
-import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+
+import { CommonModule } from '@angular/common';
+import { environment } from 'src/environments/environment';
+import { SceibaFooterComponent } from '../../src/sources/footer/footer.component';
+import { HomeComponent } from '../../src/sources/home/home.component';
+import { SceibaMenuAppsComponent } from '../../src/sources/menu-apps/menu-apps.component';
+import { SharedModule } from '../../src/sources/shared/shared.module';
+import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
+import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
+import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
+import { SoucesRoutingModule } from './sources-routing.module';
+import { SourcesComponent } from './sources.component';
 
 
 
@@ -38,7 +38,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
 @NgModule({
   declarations: [
-    AppComponent,
+    SourcesComponent,
     HomeComponent,
     SceibaFooterComponent,
     StaticPagesComponent,
@@ -51,11 +51,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SceibaMenuAppsComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     SharedModule,
     NgxChartsModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,
           useFactory: (createTranslateLoader),
@@ -64,7 +63,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     }),
     ReactiveFormsModule,
     // BrowserModule,
-    AppRoutingModule,
+    SoucesRoutingModule,
     NotificationModule,
     TocoFormsModule,
     OrganizationsModule,
@@ -88,6 +87,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
     { provide: Environment, useValue: environment }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [SourcesComponent]
 })
-export class CatalogAppModule { }
+export class SolurcesModule { }

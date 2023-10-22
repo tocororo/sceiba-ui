@@ -6,21 +6,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
-import { SourceResolver } from '../../../catalog/src/app/source-resolver';
-import { StaticPagesComponent } from '../../../catalog/src/app/static-pages/static-pages.component';
-import { UserProfileComponent } from '../../../catalog/src/app/user-profile/user-profile.component';
-import { HomeRevistasmesComponent } from './home/home.component';
+import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
+import { SourceResolver } from '../../src/sources/source-resolver';
+import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
+import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 
 
 const routes: Routes = [
   {
     path: 'sources',
-    loadChildren: () => import('../../../catalog/src/app/catalog/catalog.module').then(m => m.CatalogModule),
+    loadChildren: () => import('../../src/sources/catalog/catalog.module').then(m => m.CatalogModule),
     // canActivate: [OauthAuthenticationService]
   },
   {
     path: 'permissions',
-    loadChildren: () => import('../../../catalog/src/app/permissions/permissions.module').then(m => m.PermissionsModule),
+    loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
     canActivate: [OauthAuthenticationService]
   },
   {
@@ -65,8 +65,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [SourceResolver],
 })
-export class AppRoutingModule {}
+export class RevistasMesRoutingModule {}

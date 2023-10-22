@@ -2,28 +2,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
-import { HomeComponent } from './home/home.component';
-import { SourceResolver } from './source-resolver';
-import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HomeComponent } from '../../src/sources/home/home.component';
+import { SourceResolver } from '../../src/sources/source-resolver';
+import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
+import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
+import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 
 
 
 const routes: Routes = [
   {
     path: 'sources',
-    loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule),
+    loadChildren: () => import('../../src/sources/catalog/catalog.module').then(m => m.CatalogModule),
     // canActivate: [OauthAuthenticationService]
   },
   {
     path: 'permissions',
-    loadChildren: () => import('./permissions/permissions.module').then(m => m.PermissionsModule),
+    loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
     canActivate: [OauthAuthenticationService]
   },
   {
     path: 'harvester',
-    loadChildren: () => import('./harvester/harvester.module').then(m => m.HarvesterModule) ,
+    loadChildren: () => import('../../src/sources/harvester/harvester.module').then(m => m.HarvesterModule) ,
     canActivate: [OauthAuthenticationService]
   },{
     path: 'faq',
@@ -78,9 +78,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [SourceResolver],
 })
-export class AppRoutingModule
+export class SoucesRoutingModule
 { }

@@ -22,11 +22,11 @@ import {
 } from "toco-lib";
 
 @Component({
-  selector: "revistasmes-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: "seiba-ui-revistasmes-root",
+  templateUrl: "./revistasmes.component.html",
+  styleUrls: ["./revistasmes.component.scss"],
 })
-export class AppComponent {
+export class RevistasMesComponent {
   /**
    * Returns the available language texts.
    */

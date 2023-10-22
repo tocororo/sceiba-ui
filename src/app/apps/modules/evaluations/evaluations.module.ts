@@ -2,8 +2,6 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
@@ -19,24 +17,25 @@ import {
   StaticsModule,
   TocoFormsModule,
 } from "toco-lib";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { ContactComponent } from "./contact/contact.component";
-import { FooterComponent } from "./footer/footer.component";
-import { HeaderComponent } from "./header/header.component";
-import { MenuItemComponent } from "./header/menu-item/menu-item.component";
-import { MenuComponent } from "./header/menu/menu.component";
-import { HomeComponent } from "./home/home.component";
-import { SceibaMenuAppsComponent } from "./menu-apps/menu-apps.component";
-import { PageNotFoundEvaluationComponent } from "./page-not-found-evaluation/page-not-found-evaluation.component";
+import { ContactComponent } from "../../src/evaluations/contact/contact.component";
+import { FooterComponent } from "../../src/evaluations/footer/footer.component";
+import { HeaderComponent } from "../../src/evaluations/header/header.component";
+import { MenuItemComponent } from "../../src/evaluations/header/menu-item/menu-item.component";
+import { MenuComponent } from "../../src/evaluations/header/menu/menu.component";
+import { HomeComponent } from "../../src/evaluations/home/home.component";
+import { SceibaMenuAppsComponent } from "../../src/evaluations/menu-apps/menu-apps.component";
+import { PageNotFoundEvaluationComponent } from "../../src/evaluations/page-not-found-evaluation/page-not-found-evaluation.component";
+import { EvaluationsRoutingModule } from "./evaluations-routing.module";
+import { EvaluationsComponent } from "./evaluations.component";
 // import {
 // 	AngularMaterialModule,OrganizationServiceNoAuth, SearchModule,
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
-import { CategoryTableComponent } from "./evaluation-view/category-table/category-table.component";
-import { EvaluationViewComponent } from "./evaluation-view/evaluation-view.component";
-import { MyEvaluationComponent } from "./my-evaluation/my-evaluation.component";
-import { SharedModule } from "./shared/shared.module";
+import { CommonModule } from "@angular/common";
+import { CategoryTableComponent } from "../../src/evaluations/evaluation-view/category-table/category-table.component";
+import { EvaluationViewComponent } from "../../src/evaluations/evaluation-view/evaluation-view.component";
+import { MyEvaluationComponent } from "../../src/evaluations/my-evaluation/my-evaluation.component";
+import { SharedModule } from "../../src/evaluations/shared/shared.module";
 export function storageFactory(): OAuthStorage {
   return sessionStorage;
 }
@@ -47,7 +46,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    EvaluationsComponent,
     HomeComponent,
     PageNotFoundEvaluationComponent,
     FooterComponent,
@@ -61,10 +60,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CategoryTableComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
@@ -84,7 +82,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TocoFormsModule,
     AuthenticationModule,
 
-    AppRoutingModule,
+    EvaluationsRoutingModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: allowedURLS,
@@ -97,6 +95,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     { provide: Environment, useValue: environment },
     { provide: OAuthStorage, useFactory: storageFactory },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [EvaluationsComponent],
 })
-export class AppModule {}
+export class EvaluationsModule {}

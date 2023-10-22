@@ -2,30 +2,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OauthAuthenticationService } from 'toco-lib';
-import { DisambiguateComponent } from './disambiguate/disambiguate.component';
-import { HomeComponent } from './home/home.component';
-import { ImportComponent } from './import/import.component';
-import { OrgEditComponent } from './org-edit/org-edit.component';
-import { OrgViewerComponent } from './org-viewer/org-viewer.component';
-import { UserService } from './org.service';
-import { OrganizationDetailResolverService, OrganizationActiveResolverService } from './organization-detail-resolver.service.ts';
-import { AdminPermissionService, CuratorPermissionService } from './permission.service';
-import { SearchComponent } from './search/search.component';
-import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { WikiAuthorProfileComponent } from './wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
-import { WikiAuthorsProfileComponent } from './wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
-import { WikiOrgEmployesProfileComponent } from './wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
-import { WikiTopicProfileComponent } from './wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
-import { WikiTopicsProfileComponent } from './wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
-import { WikiVenueProfileComponent } from './wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
-import { WikiWorkProfileComponent } from './wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
-import { WikiOrganizationsComponent } from './wiki-organizations/wiki-organizations.component';
-import {OrgReviewerComponent} from "./org-reviewer/org-reviewer.component";
-import {RequestChangesListComponent} from "./request-changes-list/request-changes-list.component";
-import {NotificationsComponent} from "./notifications/notifications.component";
+import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
+import { HomeComponent } from '../../src/organizations/home/home.component';
+import { ImportComponent } from '../../src/organizations/import/import.component';
+import { NotificationsComponent } from "../../src/organizations/notifications/notifications.component";
+import { OrgEditComponent } from '../../src/organizations/org-edit/org-edit.component';
+import { OrgReviewerComponent } from "../../src/organizations/org-reviewer/org-reviewer.component";
+import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
+import { UserService } from '../../src/organizations/org.service';
+import { OrganizationActiveResolverService, OrganizationDetailResolverService } from '../../src/organizations/organization-detail-resolver.service.ts';
+import { AdminPermissionService, CuratorPermissionService } from '../../src/organizations/permission.service';
+import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
+import { SearchComponent } from '../../src/organizations/search/search.component';
+import { StaticPagesComponent } from '../../src/organizations/static-pages/static-pages.component';
+import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
+import { WikiAuthorsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
+import { WikiOrgEmployesProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
+import { WikiTopicProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
+import { WikiTopicsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
+import { WikiVenueProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
+import { WikiWorkProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
+import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organizations/wiki-organizations.component';
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
-import { Error404Component } from './error404/error404.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
+import { Error404Component } from '../../src/organizations/error404/error404.component';
 
 
 
@@ -183,9 +183,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes, {})],
+	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule],
 	providers: [UserService, CuratorPermissionService, AdminPermissionService]
 })
-export class OrgRoutingModule
+export class OrganizationsRoutingModule
 { }

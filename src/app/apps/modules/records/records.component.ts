@@ -5,17 +5,17 @@ import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import {
-  convertLangFromNumberToString,
-  Environment, OauthAuthenticationService, OauthInfo, Response, User
+  Environment, OauthAuthenticationService, OauthInfo, Response, User,
+  convertLangFromNumberToString
 } from 'toco-lib';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'sceiba-ui-records-root',
+  templateUrl: './records.component.html',
+  styleUrls: ['./records.component.scss']
 })
-export class AppComponent
+export class RecordsComponent
 {
   /**
    * Returns the available language texts.

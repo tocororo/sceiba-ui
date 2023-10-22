@@ -17,11 +17,11 @@ import {
 } from "toco-lib";
 
 @Component({
-  selector: "catalog-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: "sceiba-ui-sources-root",
+  templateUrl: "./sources.component.html",
+  styleUrls: ["./sources.component.scss"],
 })
-export class AppComponent {
+export class SourcesComponent {
   /**
    * Returns the available language texts.
    */

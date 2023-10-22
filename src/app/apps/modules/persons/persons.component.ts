@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
-import {Router, RoutesRecognized} from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, RoutesRecognized } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { convertLangFromNumberToString, Environment } from 'toco-lib';
@@ -12,12 +12,12 @@ export enum Layouts {
 }
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	selector: 'sceiba-ui-persons-root',
+	templateUrl: './persons.component.html',
+	styleUrls: ['./persons.component.scss']
 })
 
-export class AppComponent
+export class PersonsComponent
 {
 	/**
 	  * Returns the available language texts.

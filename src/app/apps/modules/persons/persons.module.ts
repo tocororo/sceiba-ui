@@ -2,8 +2,6 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { MarkdownModule } from "ngx-markdown";
@@ -26,29 +24,30 @@ import {
 
 import { allowedURLS, environment } from "src/environments/environment";
 
+import { CommonModule } from "@angular/common";
 import { NgxDropzoneModule } from "node_modules/ngx-dropzone";
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { ContactComponent } from "./contact/contact.component";
-import { FooterComponent } from "./footer/footer.component";
-import { HeaderComponent } from "./header/header.component";
-import { MenuItemComponent } from "./header/menu-item/menu-item.component";
-import { MenuComponent } from "./header/menu/menu.component";
-import { HomeComponent } from "./home/home.component";
-import { CsvTableComponent } from './import-people/csv-table/csv-table.component';
-import { ImportPeopleComponent } from "./import-people/import-people.component";
-import { JsonTableComponent } from './import-people/json-table/json-table.component';
-import { OrgDialogComponent } from "./import-people/org-dialog/org-dialog.component";
-import { MainlayoutComponent } from "./layout/mainlayout/mainlayout.component";
-import { PeopleLayoutComponent } from "./layout/people-layout/people-layout.component";
-import { OrgService } from "./org.service";
-import { PageNotFoundPeopleComponent } from "./page-not-found-people/page-not-found-people.component";
-import { GeneralTabComponent } from "./people-view/general-tab/general-tab.component";
-import { PeopleViewComponent } from "./people-view/people-view.component";
-import { SearchListComponent } from "./search-list/search-list.component";
-import { SearchComponent } from "./search/search.component";
-import { SelectOrgComponent } from "./select-org/select-org.component";
-import { SharedModule } from "./shared/shared.module";
+import { ContactComponent } from "../../src/persons/contact/contact.component";
+import { FooterComponent } from "../../src/persons/footer/footer.component";
+import { HeaderComponent } from "../../src/persons/header/header.component";
+import { MenuItemComponent } from "../../src/persons/header/menu-item/menu-item.component";
+import { MenuComponent } from "../../src/persons/header/menu/menu.component";
+import { HomeComponent } from "../../src/persons/home/home.component";
+import { CsvTableComponent } from '../../src/persons/import-people/csv-table/csv-table.component';
+import { ImportPeopleComponent } from "../../src/persons/import-people/import-people.component";
+import { JsonTableComponent } from '../../src/persons/import-people/json-table/json-table.component';
+import { OrgDialogComponent } from "../../src/persons/import-people/org-dialog/org-dialog.component";
+import { MainlayoutComponent } from "../../src/persons/layout/mainlayout/mainlayout.component";
+import { PeopleLayoutComponent } from "../../src/persons/layout/people-layout/people-layout.component";
+import { OrgService } from "../../src/persons/org.service";
+import { PageNotFoundPeopleComponent } from "../../src/persons/page-not-found-people/page-not-found-people.component";
+import { GeneralTabComponent } from "../../src/persons/people-view/general-tab/general-tab.component";
+import { PeopleViewComponent } from "../../src/persons/people-view/people-view.component";
+import { SearchListComponent } from "../../src/persons/search-list/search-list.component";
+import { SearchComponent } from "../../src/persons/search/search.component";
+import { SelectOrgComponent } from "../../src/persons/select-org/select-org.component";
+import { SharedModule } from "../../src/persons/shared/shared.module";
+import { PersonsRoutingModule } from "./persons-routing.module";
+import { PersonsComponent } from "./persons.component";
 
 export function storageFactory(): OAuthStorage {
   return localStorage;
@@ -61,7 +60,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 @NgModule({
     exports: [MainlayoutComponent, PeopleLayoutComponent],
     declarations: [
-        AppComponent,
+        PersonsComponent,
         HomeComponent,
         PageNotFoundPeopleComponent,
         FooterComponent,
@@ -82,13 +81,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         CsvTableComponent,
     ],
     imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
+        CommonModule,
         HttpClientModule,
         MatTableModule,
         MatPaginatorModule,
         NgxDropzoneModule,
-        TranslateModule.forRoot({
+        TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
                 useFactory: createTranslateLoader,
@@ -110,7 +108,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         SearchModule,
         AuthenticationModule,
         OrganizationsModule,
-        AppRoutingModule,
+        PersonsRoutingModule,
         OAuthModule.forRoot({
             resourceServer: {
                 allowedUrls: allowedURLS,
@@ -126,6 +124,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         { provide: Environment, useValue: environment },
         { provide: OAuthStorage, useFactory: storageFactory },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [PersonsComponent]
 })
-export class AppModule {}
+export class PersonsModule {}

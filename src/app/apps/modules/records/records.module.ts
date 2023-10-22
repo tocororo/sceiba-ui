@@ -1,28 +1,27 @@
 
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule /*, RecaptchaLoaderService*/ } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
+import { allowedURLS, environment } from 'src/environments/environment';
 import {
   AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
   SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 } from 'toco-lib';
-import { allowedURLS, environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ContactComponent } from './contact/contact.component';
-import { SceibaFooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
-import { PageNotFoundSceibaComponent } from './page-not-found-sceiba/page-not-found-sceiba.component';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '../../src/persons/shared/shared.module';
+import { ContactComponent } from '../../src/records/contact/contact.component';
+import { SceibaFooterComponent } from '../../src/records/footer/footer.component';
+import { HomeComponent } from '../../src/records/home/home.component';
+import { SceibaMenuAppsComponent } from '../../src/records/menu-apps/menu-apps.component';
+import { PageNotFoundSceibaComponent } from '../../src/records/page-not-found-sceiba/page-not-found-sceiba.component';
+import { RecordsRoutingModule } from './records-routing.module';
+import { RecordsComponent } from './records.component';
 
 
 
@@ -37,7 +36,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
 @NgModule({
   declarations: [
-    AppComponent,
+    RecordsComponent,
     PageNotFoundSceibaComponent,
     HomeComponent,
 
@@ -46,10 +45,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SceibaMenuAppsComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,
           useFactory: (createTranslateLoader),
@@ -69,7 +67,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SearchModule,
     AuthenticationModule,
 
-    AppRoutingModule,
+    RecordsRoutingModule,
     MarkdownModule.forRoot({
       loader: HttpClient
     }),
@@ -94,6 +92,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     // },
     //RecaptchaDynamicLanguageLoaderService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [RecordsComponent]
 })
-export class AppModule { }
+export class RecordsModule { }

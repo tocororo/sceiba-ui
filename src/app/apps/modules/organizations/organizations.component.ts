@@ -11,15 +11,15 @@ import {
   OauthInfo,
   User
 } from "toco-lib";
-import { UserService } from "./org.service";
-import { Permission } from "./permission.service";
+import { UserService } from "../../src/organizations/org.service";
+import { Permission } from "../../src/organizations/permission.service";
 
 @Component({
-  selector: "toco-org-root",
-  templateUrl: "./org.component.html",
-  styleUrls: ["./org.component.scss"],
+  selector: "sceiba-ui-organizations-root",
+  templateUrl: "./organizations.component.html",
+  styleUrls: ["./organizations.component.scss"],
 })
-export class OrgRootComponent {
+export class OrganizationsComponent {
   /**
    * Returns the available language texts.
    */

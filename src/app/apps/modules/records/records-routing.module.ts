@@ -1,30 +1,30 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { PageNotFoundSceibaComponent } from './page-not-found-sceiba/page-not-found-sceiba.component';
+import { HomeComponent } from '../../src/records/home/home.component';
+import { PageNotFoundSceibaComponent } from '../../src/records/page-not-found-sceiba/page-not-found-sceiba.component';
 
 
 const routes: Routes = [
   {
 		path: ':uuid/view',
-		loadChildren: () => import('./record/record.module').then(mod => mod.RecordModule),
+		loadChildren: () => import('../../src/records/record/record.module').then(mod => mod.RecordModule),
 		// data: {
 		// 	preload: true  /* In orden to use a custom preloading strategy (`SelectiveModulesPreload`). */
 		// }
   },
   {
     path: 'search',
-    loadChildren: () => import('./search/search.module').then(mod => mod.SearchPageModule),
+    loadChildren: () => import('../../src/records/search/search.module').then(mod => mod.SearchPageModule),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(mod => mod.ProfileModule),
+    loadChildren: () => import('../../src/records/profile/profile.module').then(mod => mod.ProfileModule),
     canActivate: []
   },
   {
     path: 'help',
-    loadChildren: () => import('./help/help.module').then(mod => mod.HelpModule),
+    loadChildren: () => import('../../src/records/help/help.module').then(mod => mod.HelpModule),
   },
   {
     path: '',
@@ -38,8 +38,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class RecordsRoutingModule { }

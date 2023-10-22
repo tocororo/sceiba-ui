@@ -1,17 +1,17 @@
-import { EvaluationViewComponent } from "./evaluation-view/evaluation-view.component";
+import { EvaluationViewComponent } from "../../src/evaluations/evaluation-view/evaluation-view.component";
 
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
-import { HomeComponent } from "./home/home.component";
-import { MyEvaluationComponent } from "./my-evaluation/my-evaluation.component";
-import { PageNotFoundEvaluationComponent } from "./page-not-found-evaluation/page-not-found-evaluation.component";
+import { HomeComponent } from "../../src/evaluations/home/home.component";
+import { MyEvaluationComponent } from "../../src/evaluations/my-evaluation/my-evaluation.component";
+import { PageNotFoundEvaluationComponent } from "../../src/evaluations/page-not-found-evaluation/page-not-found-evaluation.component";
 
 const routes: Routes = [
   {
     path: "survey/:uuid",
     loadChildren: () =>
-      import("./survey/survey.module").then((mod) => mod.SurveyModule),
+      import("../../src/evaluations/survey/survey.module").then((mod) => mod.SurveyModule),
   },
 
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: "help",
     loadChildren: () =>
-      import("./help/help.module").then((mod) => mod.HelpModule),
+      import("../../src/evaluations/help/help.module").then((mod) => mod.HelpModule),
   },
   {
     path: "evaluations",
@@ -38,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {})],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class EvaluationsRoutingModule {}
