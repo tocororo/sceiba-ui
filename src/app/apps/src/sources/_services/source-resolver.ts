@@ -4,10 +4,10 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/ro
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Source, SourceService, SourceServiceNoAuth } from 'toco-lib';
+import { SourceService, SourceServiceNoAuth } from 'toco-lib';
 
 @Injectable()
-export class SourceResolver 
+export class SourceResolver
 {
     constructor(
       private service: SourceService,

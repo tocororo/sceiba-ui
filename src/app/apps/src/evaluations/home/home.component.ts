@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { EvaluationService } from "../evaluationService.service";
+import { EvaluationService } from "../_services/evaluationService.service";
 
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {

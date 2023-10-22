@@ -15,7 +15,7 @@ import {
   Response,
   User,
 } from "toco-lib";
-import { EvaluationService } from "../../src/evaluations/evaluationService.service";
+import { EvaluationService } from "../../src/evaluations/_services/evaluationService.service";
 
 @Component({
   selector: "sceiba-ui-evaluations-root",

@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Permission } from 'src/app/permission.service';
+import { Permission } from '../_services/permission.service';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HitList, Organization } from 'toco-lib';
 

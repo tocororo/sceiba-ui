@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Environment } from 'toco-lib';
-import { Evaluations } from './survey/evaluation.entity';
+import { Evaluations } from '../survey/evaluation.entity';
 
 @Injectable({
   providedIn: 'root'

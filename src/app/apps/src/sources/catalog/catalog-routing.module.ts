@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SourceResolver } from '../source-resolver';
+import { SourceResolver } from '../_services/source-resolver';
 import { CatalogComponent } from './catalog.component';
 import { SourceViewGuard } from './permission.service';
 import { SourceEditComponent } from './source-edit/source-edit.component';

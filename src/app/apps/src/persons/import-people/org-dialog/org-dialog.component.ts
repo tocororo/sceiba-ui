@@ -3,19 +3,16 @@ import {
   Component,
   HostListener,
   Input,
-  OnInit,
-  ViewChild,
+  ViewChild
 } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import {
-  ActivatedRoute,
   NavigationExtras,
-  Params,
-  Router,
+  Params
 } from "@angular/router";
-import { OrgService } from "src/app/org.service";
+import { OrgService } from "../../_services/org.service";
 
 import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
 

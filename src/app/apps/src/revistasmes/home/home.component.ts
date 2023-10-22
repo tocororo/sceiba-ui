@@ -8,8 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 
-import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes, StatusCode } from 'toco-lib';
-import { DialogCatalogJournalInfoDialog } from '../../../../catalog/src/app/catalog/catalog.component';
+import { Environment, Hit, Journal, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes } from 'toco-lib';
 
 @Component({
     selector: 'revistasmes-home',
@@ -136,35 +135,36 @@ export class HomeRevistasmesComponent implements OnInit {
         }
       )
     }
-    viewJournal(uuid: string): void {
-        this.sourceServiceNoAuth.getSourceByUUID(uuid).subscribe(
-          response => {
-            console.log(response);
-            if (response.metadata) {
-              let journalVersion = new JournalVersion();
-              journalVersion.data.deepcopy(response.metadata);
-              journalVersion.source_uuid = response.id;
-              const dialogRef = this.dialog.open(DialogCatalogJournalInfoDialog, {
-                data: {
-                  journalVersion: journalVersion,
-                  journalUUID: uuid
-                }
-              });
+    // TODO: replace viewJournal for route, no modal dialog
+    // viewJournal(uuid: string): void {
+    //     this.sourceServiceNoAuth.getSourceByUUID(uuid).subscribe(
+    //       response => {
+    //         console.log(response);
+    //         if (response.metadata) {
+    //           let journalVersion = new JournalVersion();
+    //           journalVersion.data.deepcopy(response.metadata);
+    //           journalVersion.source_uuid = response.id;
+    //           const dialogRef = this.dialog.open(DialogCatalogJournalInfoDialog, {
+    //             data: {
+    //               journalVersion: journalVersion,
+    //               journalUUID: uuid
+    //             }
+    //           });
 
-              dialogRef.afterClosed();
-            } else {
-              const m = new MessageHandler(this._snackBar);
-              m.showMessage(
-                StatusCode.serverError,
-                "No fue posible encontrar la Revista"
-              );
-            }
-          },
-          error => {
-            console.log("error");
-            error = true;
-          },
-          () => {}
-        );
-      }
+    //           dialogRef.afterClosed();
+    //         } else {
+    //           const m = new MessageHandler(this._snackBar);
+    //           m.showMessage(
+    //             StatusCode.serverError,
+    //             "No fue posible encontrar la Revista"
+    //           );
+    //         }
+    //       },
+    //       error => {
+    //         console.log("error");
+    //         error = true;
+    //       },
+    //       () => {}
+    //     );
+    //   }
 }

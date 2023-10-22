@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Layouts } from "../../src/persons/app.component";
+
 import { HomeComponent } from '../../src/persons/home/home.component';
 import { ImportPeopleComponent } from '../../src/persons/import-people/import-people.component';
 import { MainlayoutComponent } from '../../src/persons/layout/mainlayout/mainlayout.component';
@@ -10,6 +10,7 @@ import { PeopleLayoutComponent } from '../../src/persons/layout/people-layout/pe
 import { PeopleViewComponent } from "../../src/persons/people-view/people-view.component";
 import { PeopleActiveResolverService } from '../../src/persons/people/people-resolver';
 import { SearchComponent } from '../../src/persons/search/search.component';
+import { Layouts } from './persons.component';
 
 const routes: Routes = [
 	// {

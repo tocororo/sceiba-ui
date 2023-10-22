@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
-import { SourceResolver } from '../../src/sources/source-resolver';
+import { SourceResolver } from '../../src/sources/_services/source-resolver';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 

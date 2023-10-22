@@ -21,6 +21,7 @@ import {
   StaticsModule,
   TocoFormsModule
 } from "toco-lib";
+import { OrgService } from "../../src/organizations/_services/org.service";
 import { AggregationsComponent } from "../../src/organizations/aggregations/aggregations.component";
 import { BarVerticalComponent } from "../../src/organizations/charts/bar-vertical/bar-vertical.component";
 import { ChartsComponent } from "../../src/organizations/charts/charts.component";
@@ -65,7 +66,6 @@ import {
   OrgReviewerComponent,
 } from "../../src/organizations/org-reviewer/org-reviewer.component";
 import { OrgViewerComponent } from "../../src/organizations/org-viewer/org-viewer.component";
-import { OrgService } from "../../src/organizations/org.service";
 import { OrgsMapComponent } from "../../src/organizations/orgs-map/orgs-map.component";
 import {
   PdfDialogComponent,

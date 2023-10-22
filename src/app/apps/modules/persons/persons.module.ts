@@ -26,6 +26,7 @@ import { allowedURLS, environment } from "src/environments/environment";
 
 import { CommonModule } from "@angular/common";
 import { NgxDropzoneModule } from "node_modules/ngx-dropzone";
+import { OrgService } from "../../src/persons/_services/org.service";
 import { ContactComponent } from "../../src/persons/contact/contact.component";
 import { FooterComponent } from "../../src/persons/footer/footer.component";
 import { HeaderComponent } from "../../src/persons/header/header.component";
@@ -38,7 +39,6 @@ import { JsonTableComponent } from '../../src/persons/import-people/json-table/j
 import { OrgDialogComponent } from "../../src/persons/import-people/org-dialog/org-dialog.component";
 import { MainlayoutComponent } from "../../src/persons/layout/mainlayout/mainlayout.component";
 import { PeopleLayoutComponent } from "../../src/persons/layout/people-layout/people-layout.component";
-import { OrgService } from "../../src/persons/org.service";
 import { PageNotFoundPeopleComponent } from "../../src/persons/page-not-found-people/page-not-found-people.component";
 import { GeneralTabComponent } from "../../src/persons/people-view/general-tab/general-tab.component";
 import { PeopleViewComponent } from "../../src/persons/people-view/people-view.component";

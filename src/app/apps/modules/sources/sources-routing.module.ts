@@ -2,8 +2,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
+import { SourceResolver } from '../../src/sources/_services/source-resolver';
 import { HomeComponent } from '../../src/sources/home/home.component';
-import { SourceResolver } from '../../src/sources/source-resolver';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';

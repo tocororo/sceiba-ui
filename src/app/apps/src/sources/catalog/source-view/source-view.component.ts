@@ -4,7 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
 import { Environment, HandlerComponent, Hit, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, Response, ResponseStatus, SourceClasification, SourceOrganization, SourceService, SourceStatus, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
-import { Utils } from "../../utils";
+import { Utils } from "../../_services/utils";
 
 
 @Component({

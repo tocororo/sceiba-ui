@@ -1,6 +1,6 @@
-import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { EvaluationService } from "../evaluationService.service";
+import { ActivatedRoute } from "@angular/router";
+import { EvaluationService } from "../_services/evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
 @Component({

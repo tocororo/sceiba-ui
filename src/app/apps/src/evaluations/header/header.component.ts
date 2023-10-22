@@ -7,16 +7,16 @@ import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
 import { Observable, Subscription } from "rxjs";
 import {
   ActionText,
-  convertLangFromNumberToString,
   Environment,
   MessageHandler,
   OauthAuthenticationService,
   OauthInfo,
   Response,
   StatusCode,
-  User
+  User,
+  convertLangFromNumberToString
 } from "toco-lib";
-import { EvaluationService } from "../evaluationService.service";
+import { EvaluationService } from "../_services/evaluationService.service";
 import { menuHelp } from "./constants";
 
 @Component({

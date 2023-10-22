@@ -2,6 +2,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OauthAuthenticationService } from 'toco-lib';
+import { UserService } from '../../src/organizations/_services/org.service';
+import { OrganizationActiveResolverService, OrganizationDetailResolverService } from '../../src/organizations/_services/organization-detail-resolver.service.ts';
+import { AdminPermissionService, CuratorPermissionService } from '../../src/organizations/_services/permission.service';
 import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
 import { HomeComponent } from '../../src/organizations/home/home.component';
 import { ImportComponent } from '../../src/organizations/import/import.component';
@@ -9,9 +12,6 @@ import { NotificationsComponent } from "../../src/organizations/notifications/no
 import { OrgEditComponent } from '../../src/organizations/org-edit/org-edit.component';
 import { OrgReviewerComponent } from "../../src/organizations/org-reviewer/org-reviewer.component";
 import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
-import { UserService } from '../../src/organizations/org.service';
-import { OrganizationActiveResolverService, OrganizationDetailResolverService } from '../../src/organizations/organization-detail-resolver.service.ts';
-import { AdminPermissionService, CuratorPermissionService } from '../../src/organizations/permission.service';
 import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
 import { SearchComponent } from '../../src/organizations/search/search.component';
 import { StaticPagesComponent } from '../../src/organizations/static-pages/static-pages.component';

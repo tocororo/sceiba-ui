@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 
-import { EvaluationService } from "../evaluationService.service";
+import { EvaluationService } from "../_services/evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
 import { MatPaginator } from "@angular/material/paginator";

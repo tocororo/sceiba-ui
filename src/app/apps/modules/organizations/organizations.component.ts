@@ -11,8 +11,8 @@ import {
   OauthInfo,
   User
 } from "toco-lib";
-import { UserService } from "../../src/organizations/org.service";
-import { Permission } from "../../src/organizations/permission.service";
+import { UserService } from "../../src/organizations/_services/org.service";
+import { Permission } from "../../src/organizations/_services/permission.service";
 
 @Component({
   selector: "sceiba-ui-organizations-root",
