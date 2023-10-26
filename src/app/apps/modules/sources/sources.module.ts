@@ -17,11 +17,13 @@ import {
 } from 'toco-lib';
 
 import { CommonModule } from '@angular/common';
-import { environment } from 'src/environments/environment';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { SharedModule } from "src/app/shared/shared.module";
+import { allowedURLS, environment } from 'src/environments/environment';
 import { SceibaFooterComponent } from '../../src/sources/footer/footer.component';
 import { HomeComponent } from '../../src/sources/home/home.component';
 import { SceibaMenuAppsComponent } from '../../src/sources/menu-apps/menu-apps.component';
-import { SharedModule } from '../../src/sources/shared/shared.module';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
@@ -53,6 +55,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   imports: [
     CommonModule,
     SharedModule,
+    SceibaUiCoreModule,
     NgxChartsModule,
     TranslateModule.forChild({
       loader: {
@@ -73,7 +76,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     FlexLayoutModule,
     MarkdownModule.forRoot({
       loader: HttpClient
-    })
+    }),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: allowedURLS,
+        sendAccessToken: true,
+      },
+    }),
   ],
   providers: [
     SearchService,

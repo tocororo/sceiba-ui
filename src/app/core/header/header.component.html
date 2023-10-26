@@ -1,0 +1,99 @@
+<mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
+  <mat-toolbar-row
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    fxLayoutAlign.xs="space-between stretch"
+    style="height: auto !important; min-height: 80px"
+  >
+    <div style="width: 330px; display: flex; align-items: center">
+      <div *ngIf="isBeta" class="triangle">
+        <span
+          matTooltipClass="tooltip-beta-red"
+          matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
+        >
+          <strong>{{ "BETA" | translate }}</strong>
+        </span>
+      </div>
+      <a
+        *ngIf="!icon"
+        mat-button
+        [routerLink]="['/']"
+        style="white-space: normal; display: flex; align-items: center"
+      >
+        <img
+          src="/assets/icons/logo.sceiba.letras.svg"
+          [alt]="'SCEIBA' | translate"
+          style="height: 40px; margin-right: 6px"
+        />
+      </a>
+
+      <a
+        *ngIf="icon"
+        mat-button
+        [routerLink]="['/']"
+        style="white-space: normal; display: flex; align-items: center"
+      >
+        <img
+          src="{{ icon }}"
+          [alt]="iconAlt | translate"
+          style="height: 40px; margin-right: 6px"
+        />
+        <span class="mat-h3">{{ iconLabel | translate }}</span>
+      </a>
+    </div>
+    <div
+      class="center-elements"
+      appearance="legacy"
+      aria-label="'MENU_INICIO' | translate"
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+      fxLayoutGap="15px"
+    >
+      <button
+        *ngIf="showMenuLang"
+        mat-icon-button
+        [matMenuTriggerFor]="menuLanguages"
+        matTooltip="{{ 'IDIOMA' | translate }}"
+      >
+        <mat-icon class="mat-18">translate</mat-icon>
+      </button>
+
+      <sceiba-ui-menu [menuItems]="_menuMainIcons"></sceiba-ui-menu>
+
+      <toco-authentication
+        *ngIf="!user"
+        [oauthInfo]="oauthInfo"
+        [isButtonLogin]="true"
+        [isButtonLoginIcon]="true"
+        [isButtonLoginText]="'AUTENTICARSE' | translate"
+      >
+      </toco-authentication>
+    </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row
+    *ngIf="secondaryMenuElements && secondaryMenuElements.length > 0"
+    style="height: fit-content; justify-content: space-around"
+  >
+    <sceiba-ui-menu-secondary
+      [secondaryMenuElements]="secondaryMenuElements"
+    ></sceiba-ui-menu-secondary>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #menuLanguages="matMenu">
+  <a
+    *ngFor="let lang of languageTexts; let i = index"
+    mat-menu-item
+    (click)="setLanguage(i)"
+  >
+    <mat-icon *ngIf="i == currentLang; else elseTemplate_radio_button_unchecked"
+      >radio_button_checked</mat-icon
+    >
+    {{ lang }}
+  </a>
+
+  <ng-template #elseTemplate_radio_button_unchecked>
+    <mat-icon>radio_button_unchecked</mat-icon>
+  </ng-template>
+</mat-menu>

@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.scss']
 })
-export class SceibaFooterComponent implements OnInit {
+export class SceibaUiFooterComponent implements OnInit {
 
     @Input()
   public sites: Array<{ name: string; url: string; useRouterLink: boolean; }> = [];

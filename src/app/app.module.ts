@@ -12,39 +12,40 @@ import { environment } from 'src/environments/environment';
 
 import { CommonModule } from '@angular/common';
 import { allowedURLS } from 'src/environments/environment.development';
-import { AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchService, SourceServiceNoAuth, storageFactory } from 'toco-lib';
+import {
+  AuthenticationModule,
+  CoreModule,
+  Environment,
+  OrganizationServiceNoAuth,
+  SearchService,
+  SourceServiceNoAuth,
+  storageFactory,
+} from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SceibaFooterComponent } from './footer/footer.component';
-import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
+import { SceibaUiCoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
-
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    SceibaFooterComponent,
-    SceibaMenuAppsComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
+    SceibaUiCoreModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     ReactiveFormsModule,
 
@@ -60,11 +61,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     // }),
     OAuthModule.forRoot({
       resourceServer: {
-          allowedUrls: allowedURLS,
-          sendAccessToken: true
-      }
+        allowedUrls: allowedURLS,
+        sendAccessToken: true,
+      },
     }),
-
   ],
   providers: [
     SearchService,
@@ -78,6 +78,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     // },
     //RecaptchaDynamicLanguageLoaderService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

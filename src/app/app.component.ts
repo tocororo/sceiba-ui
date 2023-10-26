@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import {
   Environment,
   OauthAuthenticationService,
   OauthInfo,
-  Response,
-  User,
-  convertLangFromNumberToString,
+  User
 } from 'toco-lib';
 
 @Component({
@@ -19,6 +19,7 @@ import {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  public title = "Sceiba";
   /**
    * Returns the available language texts.
    */
@@ -60,6 +61,8 @@ export class AppComponent {
     private router: Router,
     private oauthService: OAuthService,
     protected http: HttpClient,
+    public iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
     private _transServ: TranslateService,
     private oauthStorage: OAuthStorage,
     private authenticateService: OauthAuthenticationService //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
@@ -71,30 +74,19 @@ export class AppComponent {
   }
 
   public ngOnInit(): void {
-    this.languageTexts = ['Español', 'English'];
-    this.languageAbbrs = ['es', 'en'];
-    this.currentLang = 0; /* The default language is Spanish; that is, the zero index. */
-    this._transServ.setDefaultLang('es');
-    this._transServ.use('es');
-    this._transServ.addLangs(this.languageAbbrs);
-    this.sceibaHost = this.environment.sceibaHost;
-    //this._recaptchaDynamicLanguageLoaderServ.updateLanguage(LanguageAbbrs.es);
+    let request = JSON.parse(this.oauthStorage.getItem('user'));
 
-    if (this.oauthStorage.getItem('user')) {
-      let request = JSON.parse(this.oauthStorage.getItem('user') ?? '');
-      if (request) {
-        this.user = request;
-      }
+    if (request) {
+      this.user = request.data.userprofile.user;
+      this.configRoles();
     }
 
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe(
         (request) => {
-          if (request != null) {
-            this.user = request;
-            // if (this.oauthStorage.getItem('access_token')) {
-            //   this.user = this.oauthStorage.getItem('email');
-            // }
+          if (request) {
+            this.user = request.data.userprofile.user;
+            this.configRoles();
           } else {
             this.logoff();
           }
@@ -104,46 +96,75 @@ export class AppComponent {
         },
         () => {}
       );
+
+      this.setupIcons();
   }
 
+  private setupIcons(){
+
+    this.iconRegistry.addSvgIcon(
+      "facebook",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/facebook.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "twitter",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/twitter.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "github",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/images/svg/github.svg"
+      )
+    );
+
+    this.iconRegistry.addSvgIcon(
+      "journals",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/journals.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "publishing",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/publishing.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "publication",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/publication.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "organizaciones",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/organizaciones.svg"
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      "persons",
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        "/assets/icons/apps/persons.svg"
+      )
+    );
+  }
+
+  private configRoles() {
+    let roles = "";
+    for (const rol in this.user.roles) {
+      const element = this.user.roles[rol];
+      roles += "," + element.name;
+    }
+    this.oauthStorage.setItem("roles", roles);
+  }
   ngOnDestroy(): void {
     if (this.authenticateSuscription) {
       this.authenticateSuscription.unsubscribe();
     }
-  }
-
-  /**
-   * Sets the current language.
-   * @param index Zero-based index that indicates the current language.
-   */
-  public setLanguage(index: number): void {
-    if (index != this.currentLang) {
-      // console.log('setLanguage method is called with language: ', index);
-
-      let currentLangAsString: string = convertLangFromNumberToString(
-        (this.currentLang = index)
-      );
-
-      /* Informs the new current language. */
-      this._transServ.use(currentLangAsString);
-      // this._recaptchaDynamicLanguageLoaderServ.updateLanguage(currentLangAsString);
-    }
-  }
-
-  // public get isHome() {
-  //   return this.router.url == '/';
-  // }
-
-  // private configure() {
-  //   this.oauthService.configure(authConfig);
-  //   this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-  //   this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  // }
-
-  public login() {
-    console.log('hi');
-
-    this.oauthService.initImplicitFlow();
   }
 
   public logoff() {
@@ -152,60 +173,4 @@ export class AppComponent {
     this.user = null;
   }
 
-  public get name() {
-    if (this.oauthStorage.getItem('user')) {
-      let user = JSON.parse(this.oauthStorage.getItem('user') ?? '');
-      if (!user) return null;
-      return user['email'];
-    }
-    return null;
-  }
-
-  getUserInfo(): Observable<Response<any>> {
-    // let token = this.oauthStorage.getItem('access_token');
-    // let headers = new HttpHeaders()
-    // headers.set('Authorization', 'Bearer ' + token);
-    // headers = headers.set('Content-Type', 'application/json');
-    // headers = headers.set('Access-Control-Allow-Origin', '*');
-    // const options = {
-    //   headers: headers
-    // };
-    return this.http.get<Response<any>>(this.environment.sceibaApi + 'me');
-  }
-
-  public me() {
-    this.getUserInfo().subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-
-      error: (e) => {},
-
-      complete: () => {},
-    });
-  }
-
-  // /**
-  //  * hasPermission return true if the user have permission
-  //  */
-  // public get hasPermission(): boolean {
-  //   let permission = new Permission();
-
-  //   if (permission.hasPermissions("curator") || permission.hasPermissions("admin")){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // /**
-  //  * hasPermission return true if the user have permission
-  //  */
-  // public get hasPermissionAdmin(): boolean {
-  //   let permission = new Permission();
-
-  //   if (permission.hasPermissions("admin")){
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }

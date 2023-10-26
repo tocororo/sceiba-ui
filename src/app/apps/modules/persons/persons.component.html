@@ -1,30 +1,37 @@
-<toco-header  [showMenuLang]="'true'" [icon]="'/assets/icons/apps/persons.svg'" [iconLabel]="'SCEIBA_PERSONAS'" [iconAlt]="'PERSONAS'"></toco-header>
-<!-- <mat-menu #menuNetwork="matMenu">
-  <a mat-menu-item href="https://www.facebook.com/sceiba/" target="_blank">
-      Facebook
-  </a>
-  <a mat-menu-item href="https://twitter.com/SceibaCu" target="_blank">
-      Twitter
-  </a>
-  <a mat-menu-item href="https://github.com/tocororo" target="_blank">
-      GitHub
-  </a>
-</mat-menu> -->
+<sceiba-ui-header
+  [showMenuLang]="'true'"
+  [icon]="'/assets/icons/apps/persons.svg'"
+  [iconLabel]="'SCEIBA_PERSONAS'"
+  [iconAlt]="'PERSONAS'"
+  [extraMenuAuthenticatedUser]="extraUser"
+></sceiba-ui-header>
 
 
+<div
+  class="bg-primary-color"
+  style="
+    height: 100px;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to right, #007e3e, #373131);
+  "
+></div>
 
-<!-- <ng-container [ngSwitch]="layout">
-  <app-mainlayout *ngSwitchCase="Layouts.Main"></app-mainlayout>
-  <app-people-layout *ngSwitchCase="Layouts.People"></app-people-layout>
-</ng-container> -->
-
-
-<router-outlet></router-outlet>
-
-<!--<div [ngStyle]="{'margin-top': '2em'}"> -->
-<app-footer
-  [sites]="footerSites"
-  [information]="footerInformation"
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  style="border-radius: 40px 40px 0 0"
 >
-</app-footer>
-<!-- </div> -->
+  <div
+    [ngStyle.xs]="{ width: '95%' }"
+    style="
+      margin-top: -170px;
+      width: 95%;
+      background-color: white;
+      border-radius: 0px 0px 0 0;
+      box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+    "
+  >
+    <router-outlet></router-outlet>
+  </div>
+</div>

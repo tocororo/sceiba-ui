@@ -18,12 +18,7 @@ import {
   TocoFormsModule,
 } from "toco-lib";
 import { ContactComponent } from "../../src/evaluations/contact/contact.component";
-import { FooterComponent } from "../../src/evaluations/footer/footer.component";
-import { HeaderComponent } from "../../src/evaluations/header/header.component";
-import { MenuItemComponent } from "../../src/evaluations/header/menu-item/menu-item.component";
-import { MenuComponent } from "../../src/evaluations/header/menu/menu.component";
 import { HomeComponent } from "../../src/evaluations/home/home.component";
-import { SceibaMenuAppsComponent } from "../../src/evaluations/menu-apps/menu-apps.component";
 import { PageNotFoundEvaluationComponent } from "../../src/evaluations/page-not-found-evaluation/page-not-found-evaluation.component";
 import { EvaluationsRoutingModule } from "./evaluations-routing.module";
 import { EvaluationsComponent } from "./evaluations.component";
@@ -32,10 +27,15 @@ import { EvaluationsComponent } from "./evaluations.component";
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
 import { CommonModule } from "@angular/common";
+import { SceibaUiCoreModule } from "src/app/core/core.module";
+import { SharedModule } from "src/app/shared/shared.module";
 import { CategoryTableComponent } from "../../src/evaluations/evaluation-view/category-table/category-table.component";
 import { EvaluationViewComponent } from "../../src/evaluations/evaluation-view/evaluation-view.component";
+import { FooterComponent } from "../../src/evaluations/footer/footer.component";
+import { HeaderComponent } from "../../src/evaluations/header/header.component";
+import { MenuItemComponent } from "../../src/evaluations/header/menu-item/menu-item.component";
+import { MenuComponent } from "../../src/evaluations/header/menu/menu.component";
 import { MyEvaluationComponent } from "../../src/evaluations/my-evaluation/my-evaluation.component";
-import { SharedModule } from "../../src/evaluations/shared/shared.module";
 export function storageFactory(): OAuthStorage {
   return sessionStorage;
 }
@@ -55,7 +55,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MenuComponent,
     MenuItemComponent,
     MyEvaluationComponent,
-    SceibaMenuAppsComponent,
     EvaluationViewComponent,
     CategoryTableComponent,
   ],
@@ -77,6 +76,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
 
     SharedModule,
+    SceibaUiCoreModule,
     CoreModule,
     StaticsModule,
     TocoFormsModule,

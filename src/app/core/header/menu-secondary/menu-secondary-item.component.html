@@ -1,0 +1,49 @@
+<ng-container *ngIf="!item.disabled; else disabledItem">
+  <ng-container *ngIf="item.useRouterLink; else itemHref">
+    <ng-container *ngIf="item.click; else noClickRouter">
+      <button
+        mat-button
+        [routerLink]="item.href"
+        [target]="item.target"
+        (click)="item.click()"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.nameTranslate | translate }}</span>
+      </button>
+    </ng-container>
+
+    <ng-template #noClickRouter>
+      <button mat-button [routerLink]="item.href" [target]="item.target">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.nameTranslate | translate }}</span>
+      </button>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #itemHref>
+    <ng-container *ngIf="item.click; else noClickHref">
+      <button
+        [href]="item.href"
+        [target]="item.target"
+        mat-button
+        (click)="item.click()"
+      >
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{ item.nameTranslate | translate }}</span>
+      </button>
+    </ng-container>
+    <ng-template #noClickHref>
+      <button [href]="item.href" [target]="item.target" mat-button>
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.nameTranslate | translate }}</span>
+      </button>
+    </ng-template>
+  </ng-template>
+</ng-container>
+
+<ng-template #disabledItem>
+  <button mat-button disabled>
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span>{{ item.nameTranslate | translate }}</span>
+  </button>
+</ng-template>

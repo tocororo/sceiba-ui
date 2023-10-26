@@ -7,9 +7,11 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { OAuthStorage } from "angular-oauth2-oidc";
+import { OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
 import { MarkdownModule } from "ngx-markdown";
-import { environment } from "src/environments/environment";
+import { SceibaUiCoreModule } from "src/app/core/core.module";
+import { SharedModule } from "src/app/shared/shared.module";
+import { allowedURLS, environment } from "src/environments/environment";
 import {
   AuthenticationModule,
   CoreModule,
@@ -74,7 +76,6 @@ import {
 import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "../../src/organizations/search-list/search-list.component";
 import { SearchComponent } from "../../src/organizations/search/search.component";
-import { SharedModule } from "../../src/organizations/shared/shared.module";
 import { StaticPagesComponent } from "../../src/organizations/static-pages/static-pages.component";
 import { ExpansionPanelLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";
 import { TableLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/table-layout/table-layout.component";
@@ -168,6 +169,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NgxChartsModule,
     CommonModule,
     SharedModule,
+    SceibaUiCoreModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -183,6 +185,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     FormsModule,
     FlexLayoutModule,
     OrganizationsRoutingModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: allowedURLS,
+        sendAccessToken: true,
+      },
+    }),
     SearchModule,
     MarkdownModule.forRoot({
       loader: HttpClient,

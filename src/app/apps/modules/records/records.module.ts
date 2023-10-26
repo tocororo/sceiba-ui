@@ -9,12 +9,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule /*, RecaptchaLoaderService*/ } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
+import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { SharedModule } from "src/app/shared/shared.module";
 import { allowedURLS, environment } from 'src/environments/environment';
 import {
   AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
   SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 } from 'toco-lib';
-import { SharedModule } from '../../src/persons/shared/shared.module';
 import { ContactComponent } from '../../src/records/contact/contact.component';
 import { SceibaFooterComponent } from '../../src/records/footer/footer.component';
 import { HomeComponent } from '../../src/records/home/home.component';
@@ -61,6 +62,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
     CoreModule,
     SharedModule,
+    SceibaUiCoreModule,
 
     StaticsModule,
     TocoFormsModule,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SceibaFooterComponent } from './footer.component';
+import { SceibaUiFooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
-  let component: SceibaFooterComponent;
-  let fixture: ComponentFixture<SceibaFooterComponent>;
+  let component: SceibaUiFooterComponent;
+  let fixture: ComponentFixture<SceibaUiFooterComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SceibaFooterComponent ]
+      declarations: [ SceibaUiFooterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SceibaFooterComponent);
+    fixture = TestBed.createComponent(SceibaUiFooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

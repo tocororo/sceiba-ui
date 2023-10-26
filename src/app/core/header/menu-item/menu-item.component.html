@@ -1,0 +1,69 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+  <ng-container *ngIf="isMenuApps; else simpleMenu">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around flex-end">
+      <ng-container *ngFor="let item of subMenuElements">
+        <ng-container *ngIf="item.useRouterLink; else useHrefMenu">
+          <a
+            [routerLink]="item.href"
+            [target]="item.target"
+            class="apps mat-caption"
+            matTooltip="{{ item.nameTranslate | translate }}"
+          >
+            <img
+              [src]="item.img.src"
+              [alt]="item.nameTranslate | translate"
+              style="width: 55px; height: 55px"
+            />
+            <span>{{ item.nameTranslate | translate }}</span>
+          </a>
+        </ng-container>
+        <ng-template #useHrefMenu>
+          <a
+            [href]="item.href"
+            [target]="item.target"
+            class="apps mat-caption"
+            matTooltip="{{ item.nameTranslate | translate }}"
+          >
+            <img
+              [src]="item.img.src"
+              [alt]="item.nameTranslate | translate"
+              style="width: 55px; height: 55px"
+            />
+            <span>{{ item.nameTranslate | translate }}</span>
+          </a>
+        </ng-template>
+        <mat-divider *ngIf="item.divider" class="w-90 my-10"></mat-divider>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #simpleMenu>
+    <ng-container *ngFor="let child of subMenuElements">
+      <!-- Handle branch node menu items -->
+      <span *ngIf="child.childrenMenu && child.childrenMenu.length > 0">
+        <button
+          mat-menu-item
+          color="primary"
+          [matMenuTriggerFor]="menu.childMenu"
+        >
+          <mat-icon>{{ child.icon }}</mat-icon>
+          <span>{{ child.nameTranslate | translate }}</span>
+        </button>
+        <sceiba-ui-menu-item
+          #menu
+          [subMenuElements]="child.childrenMenu"
+        ></sceiba-ui-menu-item>
+      </span>
+
+      <!-- Handle leaf node menu items -->
+      <ng-container
+        *ngIf="!child.childrenMenu || child.childrenMenu.length === 0"
+      >
+        <sceiba-ui-menu-item-element
+          [item]="child"
+        >
+        </sceiba-ui-menu-item-element>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+</mat-menu>

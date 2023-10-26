@@ -6,13 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
+import { SharedModule } from "src/app/shared/shared.module";
 import { AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { CatalogModule } from '../../src/sources/catalog/catalog.module';
 import { PermissionsModule } from '../../src/sources/permissions/permissions.module';
-import { SharedModule } from '../../src/sources/shared/shared.module';
 
 import { CommonModule } from '@angular/common';
-import { environment } from 'src/environments/environment';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { allowedURLS, environment } from 'src/environments/environment';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
 import { RevistasMesRoutingModule } from './revistasmes-routing.module';
 import { RevistasMesComponent } from './revistasmes.component';
@@ -33,6 +35,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     imports: [
         CommonModule,
         SharedModule,
+        SceibaUiCoreModule,
         TranslateModule.forChild({
             loader: {
                 provide: TranslateLoader,
@@ -54,6 +57,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         }),
         CatalogModule,
         PermissionsModule,
+        OAuthModule.forRoot({
+          resourceServer: {
+            allowedUrls: allowedURLS,
+            sendAccessToken: true,
+          },
+        }),
     ],
     providers: [
         SourceService,
