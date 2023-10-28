@@ -97,8 +97,8 @@
     "H1_HOLA": "Hola,",
     "BUTTON_SALIR": "Salir"
   },
-  "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "¡Lo sentimos, la página que usted solicitó no pudo ser encontrada!",
-  "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Vamos a llevarlo a la página Principal",
+  "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "Página no encontrada",
+  "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Regresar a la Página Principal",
   "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluación",
 
   "EVALUA": "Evalúa",

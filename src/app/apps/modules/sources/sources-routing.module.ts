@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { SourceResolver } from '../../src/sources/_services/source-resolver';
 import { HomeComponent } from '../../src/sources/home/home.component';
@@ -69,9 +70,8 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full'
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
       },
       // {
       //   path: 'inst-repo',

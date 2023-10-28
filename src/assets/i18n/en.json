@@ -95,8 +95,8 @@
     "BUTTON_SEARCH": "Search"
   },
 
-  "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "Sorry, the page you requested could not be found!",
-  "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Let us take you Home",
+  "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "Page not found!",
+  "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Back to Homepage",
   "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluation",
 
   "EVALUA": "Evaluate",

@@ -29,8 +29,8 @@ import { WikiVenueProfileComponent } from '../../src/organizations/wiki-organiza
 import { WikiWorkProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organizations/wiki-organizations.component';
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
-import { Error404Component } from '../../src/organizations/error404/error404.component';
 import { OrganizationsComponent } from './organizations.component';
 
 const routes: Routes = [
@@ -190,11 +190,8 @@ const routes: Routes = [
         component: NotificationsComponent,
       },
       {
-        path: '**',
-        //redirectTo: '',
-        pathMatch: 'full',
-        //TODO: Hacer un componente 'PageNotFoundComponent' para mostrarlo aquí.
-        component: Error404Component,
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
       },
     ],
   },

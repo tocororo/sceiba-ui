@@ -5,6 +5,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
 import { SourceResolver } from '../../src/sources/_services/source-resolver';
@@ -64,9 +65,8 @@ const routes: Routes = [
         component: HomeRevistasmesComponent,
       },
       {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full'
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
       },
     ]
   }

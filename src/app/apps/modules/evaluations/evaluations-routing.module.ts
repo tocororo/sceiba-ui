@@ -3,9 +3,9 @@ import { EvaluationViewComponent } from '../../src/evaluations/evaluation-view/e
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { HomeComponent } from '../../src/evaluations/home/home.component';
 import { MyEvaluationComponent } from '../../src/evaluations/my-evaluation/my-evaluation.component';
-import { PageNotFoundEvaluationComponent } from '../../src/evaluations/page-not-found-evaluation/page-not-found-evaluation.component';
 import { EvaluationsComponent } from './evaluations.component';
 
 const routes: Routes = [
@@ -41,8 +41,8 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: '**',
-        component: PageNotFoundEvaluationComponent,
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
       },
     ],
   },

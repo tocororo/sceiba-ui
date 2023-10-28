@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { HomeComponent } from '../../src/persons/home/home.component';
 import { ImportPeopleComponent } from '../../src/persons/import-people/import-people.component';
 import { MainlayoutComponent } from '../../src/persons/layout/mainlayout/mainlayout.component';
@@ -50,10 +51,10 @@ const routes: Routes = [
           },
         ],
       },
-      // {
-      // 	path: '**',
-      // 	component: PageNotFoundPeopleComponent
-      // }
+      {
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
+      },
     ],
   },
 ];

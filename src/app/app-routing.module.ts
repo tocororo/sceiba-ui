@@ -32,7 +32,6 @@ const routes: Routes = [
     loadChildren: () =>
       import("./apps/modules/records/records.module").then((mod) => mod.RecordsAppModule),
   },
-
 ];
 
 @NgModule({

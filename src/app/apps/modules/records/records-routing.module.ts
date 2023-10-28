@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { HomeComponent } from '../../src/records/home/home.component';
-import { PageNotFoundSceibaComponent } from '../../src/records/page-not-found-sceiba/page-not-found-sceiba.component';
 import { RecordsComponent } from './records.component';
 
 const routes: Routes = [
@@ -46,8 +46,8 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: '**',
-        component: PageNotFoundSceibaComponent,
+        path: "**",
+        component: SceibaUiPageNotFoundComponent,
       },
     ],
   },

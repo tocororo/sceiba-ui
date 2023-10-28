@@ -15,6 +15,7 @@ import { MenuSecondaryItemComponent } from './header/menu-secondary/menu-seconda
 import { MenuSecondaryComponent } from './header/menu-secondary/menu-secondary.component';
 import { SceibaUiMenuComponent } from './header/menu/menu.component';
 import { SceibaMenuAppsComponent } from './header/sceiba-ui-menu-apps/menu-apps.component';
+import { SceibaUiPageNotFoundComponent } from './sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -31,7 +32,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SceibaMenuAppsComponent,
     MenuSecondaryComponent,
     MenuSecondaryItemComponent,
-    SceibaUiMenuItemElementComponent
+    SceibaUiMenuItemElementComponent,
+    SceibaUiPageNotFoundComponent
   ],exports: [
     SceibaUIHeaderComponent,
     SceibaUiMenuComponent,
