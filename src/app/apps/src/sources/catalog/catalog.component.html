@@ -15,7 +15,7 @@
 </div>
 
 
-<toco-progress [loading]="!initfilters" [position]="'absolute'"></toco-progress>
+<toco-progress [loading]="!initfilters" ></toco-progress>
 
 <div *ngIf="initfilters"> <!-- fxLayout="{{ currentlayout.layout }}" fxLayout.xs="column nowrap" fxLayoutAlign="{{ currentlayout.aling }}" -->
 	<mat-drawer-container autosize style="background-color: white;">
@@ -27,7 +27,7 @@
 			<!-- fxFlex="{{ currentlayout.width }}" -->
 		</mat-drawer>
 		<div class="mx-1">
-			<toco-progress [loading]="isLoading()" [position]="'absolute'"></toco-progress>
+			<toco-progress [loading]="isLoading()" ></toco-progress>
 
 			<search-list [hitList]="dataSource"></search-list>
 

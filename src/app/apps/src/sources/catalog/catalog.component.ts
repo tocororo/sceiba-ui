@@ -11,6 +11,7 @@ import {
   Component,
   HostListener,
   Inject,
+  Input,
   OnInit,
   ViewChild,
 } from "@angular/core";
@@ -113,6 +114,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
+  @Input() public usetopMainOrganization = false;
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
   constructor(
@@ -147,42 +149,49 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     end HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
   ngOnInit() {
-    if (this.environment.topOrganizationPID != "") {
-      this.topOrganizationPID = this.environment.topOrganizationPID;
-      if (
-        localStorage.getItem("topMainOrganization") &&
-        localStorage.getItem("topMainOrganization") != ""
-      ) {
-        const response = JSON.parse(
-          localStorage.getItem("topMainOrganization")
-        );
-        this.topMainOrganization = response;
-        // new Organization();
-        // this.topMainOrganization.deepcopy(response.metadata);
-        this.init();
-      } else {
-        this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
-          (response) => {
-            // console.log(response)
+    this.activatedRoute.data.subscribe({
+      next: (data: { topOrganizationPID: string }) => {
+        if (data && data.topOrganizationPID && data.topOrganizationPID != "") {
+          this.topOrganizationPID = data.topOrganizationPID;
+          if (
+            localStorage.getItem("topMainOrganization") &&
+            localStorage.getItem("topMainOrganization") != ""
+          ) {
+            const response = JSON.parse(
+              localStorage.getItem("topMainOrganization")
+            );
             this.topMainOrganization = response;
             // new Organization();
             // this.topMainOrganization.deepcopy(response.metadata);
-            localStorage.setItem(
-              "topMainOrganization",
-              JSON.stringify(response)
-            );
             this.init();
-          },
-          (error) => {
-            console.log("error");
-          },
-          () => {}
-        );
-      }
-    } else {
-      this.init();
-    }
-    // TODO: si no hay un top level organization entonces hay que usar otro tipo de control para las organizaciones...
+          } else {
+            this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
+              (response) => {
+                // console.log(response)
+                this.topMainOrganization = response;
+                // new Organization();
+                // this.topMainOrganization.deepcopy(response.metadata);
+                localStorage.setItem(
+                  "topMainOrganization",
+                  JSON.stringify(response)
+                );
+                this.init();
+              },
+              (error) => {
+                console.log("error");
+              },
+              () => {}
+            );
+          }
+        } else {
+          this.init();
+        }
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {},
+    });
   }
 
   init() {

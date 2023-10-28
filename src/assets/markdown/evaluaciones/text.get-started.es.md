@@ -1,0 +1,1 @@
+Se espera que los resultados de estas evaluaciones sean útiles para el desarrollo de estrategias de mejoramiento continuo de la calidad de las publicaciones científicas a nivel nacional o institucional. Para iniciar la evaluación debe dar clic en el botón “Empezar”. Al finalizar obtendrá valoraciones generales y por criterios del estado, así como un conjunto de recomendaciones.

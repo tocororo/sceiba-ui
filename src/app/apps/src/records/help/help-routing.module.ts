@@ -1,7 +1,7 @@
 
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { HelpComponent } from './help/help.component';
@@ -15,27 +15,27 @@ const helpRoutes: Routes = [
 			{
 				path: 'faq',
 				component: StaticPagesComponent,
-				data: { src: 'assets/markdown/faq', title: 'FAQ' }
+				data: { src: 'assets/markdown/sceiba/faq', title: 'FAQ' }
 			  },
 			  {
 				path: 'about',
 				component: StaticPagesComponent,
-				data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' }
+				data: { src: 'assets/markdown/sceiba/about', title: 'Sobre Nosotros' }
 			  },
 			  {
 				path: 'help',
 				component: StaticPagesComponent,
-				data: { src: 'assets/markdown/help', title: 'Ayuda' }
+				data: { src: 'assets/markdown/sceiba/help', title: 'Ayuda' }
 			  },
 			  {
 				path: 'contact',
 				component: StaticPagesComponent,
-				data: { src: 'assets/markdown/contact', title: 'Contacto' }
+				data: { src: 'assets/markdown/sceiba/contact', title: 'Contacto' }
 			  },
 			  {
 				path: 'policy',
 				component: StaticPagesComponent,
-				data: { src: 'assets/markdown/policy', title: 'Política de Privacidad' }
+				data: { src: 'assets/markdown/sceiba/policy', title: 'Política de Privacidad' }
 			  }
 		]
 	}

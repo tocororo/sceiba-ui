@@ -33,22 +33,22 @@ const routes: Routes = [
       },{
         path: 'faq',
         component: StaticPagesComponent,
-        data: { src: 'assets/markdown/faq', title: 'FAQ' },
+        data: { src: 'assets/markdown/catalog/faq', title: 'FAQ' },
       },
       {
         path: 'about',
         component: StaticPagesComponent,
-        data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
+        data: { src: 'assets/markdown/catalog/about', title: 'Sobre Nosotros' },
       },
       {
         path: 'help',
         component: StaticPagesComponent,
-        data: { src: 'assets/markdown/help', title: 'Ayuda' },
+        data: { src: 'assets/markdown/catalog/help', title: 'Ayuda' },
       },
       {
         path: 'contact',
         component: StaticPagesComponent,
-        data: { src: 'assets/markdown/contact', title: 'Contacto' },
+        data: { src: 'assets/markdown/catalog/contact', title: 'Contacto' },
       },
       {
         path: 'userprofile',

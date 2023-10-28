@@ -1,0 +1,5 @@
+## Acerca de
+
+Esta herramienta ha sido desarrollada en el marco del proyecto de colaboración internacional [VLIR JOINT 2019-01-27 (SCEIBA)](https://www.vliruos.be/en/projects/project/22?pid=4202)y el proyecto sectorial del Ministerio de Educación Superior[MES](https://www.mes.gob.cu/) titulado “Control de calidad y monitoreo de las publicaciones científicas a nivel nacional e institucional”. Su objetivo está orientado a aumentar la visibilidad de las publicaciones científicas de los sistemas de educación superior cubano y peruano, así como la implementación de servicios que permitan el monitoreo y evaluación de su calidad.
+
+Se espera que los resultados de estas evaluaciones sean útiles para el desarrollo de estrategias de mejoramiento continuo de la calidad de las publicaciones científicas a nivel nacional o institucional. Para iniciar la evaluación debe dar clic en el botón “Empezar”. Al finalizar obtendrá valoraciones generales y por criterios del estado, así como un conjunto de recomendaciones.

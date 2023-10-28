@@ -1,0 +1,1 @@
+The results of these evaluations are expected to be useful for the development of strategies for continuous improvement of the quality of scientific research on national or institutional level. To start the evaluation you should click the “Get Started” button. At the end you will obtain general evaluations and by state criteria, as well as a set of recommendations.

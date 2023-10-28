@@ -2,10 +2,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://sceiba.reduniv.edu.cu/';
-  cuorHost = 'https://sceiba.reduniv.edu.cu/';
-  sceibaApi = 'https://sceiba.reduniv.edu.cu/api/';
-  cuorApi = 'https://sceiba.reduniv.edu.cu/api/';
+  sceibaHost = 'https://127.0.0.1:5000/';
+  cuorHost = 'https://127.0.0.1:5000/';
+  sceibaApi = 'https://127.0.0.1:5000/api/';
+  cuorApi = 'https://127.0.0.1:5000/api/';
 
   appHost = 'https://localhost:4200';
   appName = 'Organizaciones - Sceiba';
@@ -14,7 +14,7 @@ class EnvironmentImpl implements Environment {
   websiteUsername_Facebook = '@sceiba';
 
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'vvi64JKH9LxtFs6RbBFI3ERrfxcYWYd0QltCPXnK';
+  oauthClientId = '035fMpN08wTdlDXEKhj8RRWF6bVH4HARWBkGLuWq';
   oauthScope = 'user:email';
   topOrganizationPID = 'orgaid.223';
   cachableUrls = [];
@@ -49,4 +49,4 @@ class EnvironmentImpl implements Environment {
 
 export const environment = new EnvironmentImpl();
 
-export const allowedURLS = ['https://sceiba.reduniv.edu.cu/api/'];
+export const allowedURLS = ['https://127.0.0.1:5000/api/'];

@@ -226,5 +226,6 @@
   "SCEIBA_PERSONAS_SUB": "Sistema de Identificación de Investigadores Cubanos",
   "REVISTAS_MES_INCLUDE_JOURNAL": "Incluye tu Revista",
   "REVISTAS_MES_DIRECTORY": "Directorio",
-  "REVISTAS_MES_MY_SOURCES": "Mis Registros"
+  "REVISTAS_MES_MY_SOURCES": "Mis Registros",
+  "CATALOG_TITLE": "Catálogo de fuentes primarias de Sceiba"
 }

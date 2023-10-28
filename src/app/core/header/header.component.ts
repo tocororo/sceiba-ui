@@ -363,7 +363,9 @@ export class SceibaUIHeaderComponent implements OnInit {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
 
     if (request) {
-      this.user = request.data.userprofile.user;
+      console.log(request);
+
+      this.user = request;
       this.configRoles();
       this._menuMainIcons = [
         ...this.menuIconsStatic,
@@ -380,7 +382,7 @@ export class SceibaUIHeaderComponent implements OnInit {
       this.authenticateService.authenticationSubjectObservable.subscribe(
         (request) => {
           if (request) {
-            this.user = request.data.userprofile.user;
+            this.user = request;
             this.configRoles();
             this._menuMainIcons = [
               ...this.menuIconsStatic,
