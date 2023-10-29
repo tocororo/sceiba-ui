@@ -21,6 +21,7 @@ export class EvaluationsComponent {
   public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
 
+  public env: Environment;
   public constructor(
     private environment: Environment,
     private _router: Router,
@@ -29,7 +30,9 @@ export class EvaluationsComponent {
     private _snackBar: MatSnackBar,
     private EvaluationService: EvaluationService,
     private oauthStorage: OAuthStorage
-  ) {}
+  ) {
+    this.env = environment;
+  }
 
   public ngOnInit(): void {
     const evauluaMenu: MenuElement[] = [
@@ -65,24 +68,24 @@ export class EvaluationsComponent {
     ];
 
     this._subMenus = [
-      {
-        nameTranslate: 'HOME',
-        useRouterLink: true,
-        href: this.environment.evaluations,
-      },
+      // {
+      //   nameTranslate: 'HOME',
+      //   useRouterLink: true,
+      //   href: this.environment.evaluations,
+      // },
       {
         nameTranslate: 'EVALUA',
         childrenMenu: evauluaMenu,
       },
-      {
-        nameTranslate: 'OTRAS_HERRAMIENTAS',
-        disabled: true,
-      },
-      {
-        nameTranslate: 'LECTURAS_RECOMENDADAS',
-        useRouterLink: false,
-        disabled: true,
-      },
+      // {
+      //   nameTranslate: 'OTRAS_HERRAMIENTAS',
+      //   disabled: true,
+      // },
+      // {
+      //   nameTranslate: 'LECTURAS_RECOMENDADAS',
+      //   useRouterLink: false,
+      //   disabled: true,
+      // },
       {
         nameTranslate: 'MIS_EVALUACIONES',
         useRouterLink: true,

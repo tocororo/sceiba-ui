@@ -11,9 +11,10 @@ import { Environment } from 'toco-lib';
 export class SourcesComponent {
   public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
-
+  public env: Environment;
   constructor(private environment: Environment,private oauthStorage: OAuthStorage) {}
   ngOnInit(): void {
+    this.env = this.environment;
 
     this.extraUser = [
       {
@@ -27,13 +28,13 @@ export class SourcesComponent {
 
 
     this._subMenus = [
+      // {
+      //   nameTranslate: 'HOME',
+      //   useRouterLink: true,
+      //   href: this.environment.catalog,
+      // },
       {
-        nameTranslate: 'HOME',
-        useRouterLink: true,
-        href: this.environment.catalog,
-      },
-      {
-        nameTranslate: 'SCEIBA_CATALOGO',
+        nameTranslate: 'TOCO_SEARCH_SEARCH.SPAN_SEARCH_LABEL',
         useRouterLink: true,
         href: this.environment.catalog + '/sources',
       },

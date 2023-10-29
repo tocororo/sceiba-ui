@@ -46,6 +46,9 @@ export class SceibaUIHeaderComponent implements OnInit {
    * Gets the icon label for menu bar
    */
   @Input() public iconLabel: '';
+
+  @Input() public iconRoute: '';
+
   /**
    * Gets the icon alt for menu bar
    */
@@ -304,7 +307,7 @@ export class SceibaUIHeaderComponent implements OnInit {
         // @ts-ignore
         href: this._env.vocabularies,
         target: '_blank',
-        useRouterLink: true,
+        useRouterLink: false,
         img: {
           src: '/assets/icons/apps/vocabs.svg',
           style: 'width: 55px; height: 55px',

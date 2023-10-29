@@ -144,8 +144,8 @@
           <mat-card-actions>
             <a
               mat-button
-              href="{{ env.organizations }}"
-              target="_blank"
+              [routerLink]="[env.organizations]"
+
               class="apps"
               matTooltip="{{ 'ORGANIZACIONES' | translate }}"
               >{{ "ACCEDER" | translate }}</a
@@ -173,7 +173,7 @@
             <a
               mat-button
               href="{{ env.vocabularies }}"
-              target="_blank"
+
               class="apps"
               matTooltip="{{ 'VOCABULARIOS' | translate }}"
               >{{ "ACCEDER" | translate }}</a
@@ -200,8 +200,8 @@
           <mat-card-actions>
             <a
               mat-button
-              href="{{ env.revistasmes }}"
-              target="_blank"
+              [routerLink]="[env.revistasmes]"
+
               class="apps"
               matTooltip="{{ 'REVISTAS_MES' | translate }}"
               >{{ "ACCEDER" | translate }}</a
@@ -226,10 +226,11 @@
           <mat-card-actions>
             <a
               mat-button
-              target="_blank"
+
               class="apps"
-              matTooltip="{{ 'PROXIMAMENTE' | translate }}"
-              >{{ "PROXIMAMENTE" | translate }}</a
+              [routerLink]="[env.persons]"
+              matTooltip="{{ 'PERSONAS_SUB' | translate }}"
+              >{{ "ACCEDER" | translate }}</a
             >
           </mat-card-actions>
         </mat-card>
@@ -238,7 +239,6 @@
         <mat-card class="ligth-green-card">
           <mat-card-header>
             <div mat-card-avatar class="card2-header-image"></div>
-            <!-- <mat-card-title>{{ 'DIRECTORIO_MES' | translate }}</mat-card-title> -->
             <mat-card-title>{{ "EVALUACION" | translate }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
@@ -251,10 +251,11 @@
           <mat-card-actions>
             <a
               mat-button
-              target="_blank"
+
               class="apps"
-              matTooltip="{{ 'PROXIMAMENTE' | translate }}"
-              >{{ "PROXIMAMENTE" | translate }}</a
+              [routerLink]="[env.evaluations]"
+              matTooltip="{{ 'EVALUACION' | translate }}"
+              >{{ "ACCEDER" | translate }}</a
             >
           </mat-card-actions>
         </mat-card>

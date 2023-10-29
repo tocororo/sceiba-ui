@@ -15,11 +15,14 @@ import { Permission } from "../../src/organizations/_services/permission.service
 export class OrganizationsComponent {
   public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
+  public env: Environment;
 
   public constructor(
     private oauthStorage: OAuthStorage,
     private environment: Environment,
   ) {
+    this.env = environment;
+
   }
 
   public ngOnInit(): void {
@@ -41,11 +44,11 @@ export class OrganizationsComponent {
       },
     ]
     this._subMenus = [
-      {
-        nameTranslate: 'HOME',
-        useRouterLink: true,
-        href: this.environment.organizations,
-      },
+      // {
+      //   nameTranslate: 'HOME',
+      //   useRouterLink: true,
+      //   href: this.environment.organizations,
+      // },
       {
         nameTranslate: 'TOCO_SEARCH_SEARCH.SPAN_SEARCH_LABEL',
         useRouterLink: true,

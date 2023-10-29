@@ -17,10 +17,13 @@ export enum Layouts {
 export class PersonsComponent {
   public extraUser: MenuElement[];
   public _subMenus: MenuElement[];
+  public env: Environment;
   public constructor(
     private environment: Environment,
     private oauthStorage: OAuthStorage
-  ) {}
+  ) {
+    this.env = environment
+  }
 
   public ngOnInit(): void {
     this.extraUser = [
@@ -34,11 +37,11 @@ export class PersonsComponent {
       },
     ];
     this._subMenus = [
-      {
-        nameTranslate: 'HOME',
-        useRouterLink: true,
-        href: this.environment.persons,
-      },
+      // {
+      //   nameTranslate: 'HOME',
+      //   useRouterLink: true,
+      //   href: this.environment.persons,
+      // },
       {
         nameTranslate: 'TOCO_SEARCH_SEARCH.SPAN_SEARCH_LABEL',
         useRouterLink: true,

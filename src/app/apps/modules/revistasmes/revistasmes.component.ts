@@ -31,7 +31,7 @@ export class RevistasMesComponent {
   public _subMenus: MenuElement[];
   loading = false;
 
-
+  public env: Environment;
   constructor(
     private environment: Environment,
     private oauthStorage: OAuthStorage,
@@ -40,7 +40,7 @@ export class RevistasMesComponent {
     private router: Router,
     private _transServ: TranslateService
   ) {
-    let env: any = this.environment;
+    this.env = this.environment;
     this.router.events.subscribe(
       (event) => {
         if (event instanceof NavigationStart) {
@@ -60,11 +60,11 @@ export class RevistasMesComponent {
     );
 
     this._subMenus = [
-      {
-        nameTranslate: 'HOME',
-        useRouterLink: true,
-        href: this.environment.revistasmes,
-      },
+      // {
+      //   nameTranslate: 'HOME',
+      //   useRouterLink: true,
+      //   href: this.environment.revistasmes,
+      // },
       {
         nameTranslate: 'REVISTAS_MES_DIRECTORY',
         useRouterLink: true,

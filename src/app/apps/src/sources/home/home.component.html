@@ -11,15 +11,12 @@
   </div>
 
   <div
-    class="w-100 p1"
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="45px"
-    fxFlexFill
+  class="w-70"
+  style="margin-top: 0.5em; margin-left: 4em"
+  [ngStyle.xs]="{ width: '90%', 'margin-left': '1em', 'padding-top': '60px' }"
   >
     <div
-
+    class="mat-h2 text-format"
       markdown
       [src]="
         'assets/markdown/catalog/home.catalog.' + transServ.currentLang + '.md'
