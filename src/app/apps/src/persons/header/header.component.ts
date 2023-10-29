@@ -5,8 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import {
-  convertLangFromNumberToString,
-  Environment, OauthAuthenticationService, OauthInfo, Response, User
+  Environment, OauthAuthenticationService, OauthInfo, Response, User,
+  convertLangFromNumberToString
 } from 'toco-lib';
 import { menuHelp } from "./constants";
 
@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
   public oauthInfo: OauthInfo;
 
   private authenticateSuscription: Subscription = null;
-
+  public env: Environment;
   public constructor(
     private _env: Environment,
     private _transServ: TranslateService,
@@ -99,8 +99,8 @@ export class HeaderComponent implements OnInit {
     private oauthStorage: OAuthStorage,
     private authenticateService: OauthAuthenticationService
   ) {
-    let env: any = this._env;
-    this.oauthInfo = env.oauthInfo;
+    this.env = this._env;
+    this.oauthInfo = this.env.oauthInfo;
   }
 
   ngOnInit() {

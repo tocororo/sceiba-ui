@@ -19,11 +19,9 @@ export class SourceViewGuard {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
 
     let user = JSON.parse(this.oauthStorage.getItem("user"));
-    console.log(user,request, "REDIRECTING!!!!!!!!");
     if (!user){
       return true;
     }else{
-      console.log("REDIRECTING!!!!!!!!");
 
       this._router.navigate([this.environment.catalog, 'sources',uuid,'view']);
     }

@@ -31,7 +31,7 @@
   "SCEIBA": "Sceiba",
   "REPORTS_STATISTICS": "Reports and Statistics",
   "SCEIBA_CATALOGO": "Catalog",
-  "SCEIBA_CATALOGO_SUB": "Sceiba's primary sources",
+  "SCEIBA_CATALOGO_SUB": "Primary sources",
   "BUSQUEDA": "Discover",
   "CATALOG_PERMISSIONS": "Permissions on the Catalog",
   "EXPLORE_CATALOG": "Explore the Catalog",
@@ -222,9 +222,9 @@
   "rolesSceiba": "Roles in Sceiba :",
   "respPublications": "Responsabilities on publications :",
   "SCEIBA_PERSONAS": "Sceiba People",
-  "SCEIBA_PERSONAS_SUB": "Cuban Researchers Identification System",
+  "SCEIBA_PERSONAS_SUB": "Researchers Identification System",
   "REVISTAS_MES_INCLUDE_JOURNAL": "Include your Journal",
   "REVISTAS_MES_DIRECTORY": "Directory",
   "REVISTAS_MES_MY_SOURCES": "My Sources",
-  "CATALOG_TITLE": "Catálogo de fuentes primarias de Sceiba"
+  "CATALOG_TITLE": "Catalog"
 }

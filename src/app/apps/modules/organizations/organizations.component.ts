@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthStorage } from "angular-oauth2-oidc";
 import { MenuElement } from "src/app/core/header/header.component";
 import {
   Environment
@@ -12,10 +13,11 @@ import { Permission } from "../../src/organizations/_services/permission.service
   styleUrls: ["./organizations.component.scss"],
 })
 export class OrganizationsComponent {
-
+  public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
 
   public constructor(
+    private oauthStorage: OAuthStorage,
     private environment: Environment,
   ) {
   }
@@ -38,32 +40,49 @@ export class OrganizationsComponent {
         disabled: this.hasPermissionAdmin
       },
     ]
+    this._subMenus = [
+      {
+        nameTranslate: 'HOME',
+        useRouterLink: true,
+        href: this.environment.organizations,
+      },
+      {
+        nameTranslate: 'TOCO_SEARCH_SEARCH.SPAN_SEARCH_LABEL',
+        useRouterLink: true,
+        href: this.environment.organizations + '/search',
+      },
+      // {
+      //   nameTranslate: 'REPORTS_STATISTICS',
+      //   useRouterLink: true,
+      //   href: this.environment.catalog + '/statistics',
+      // },
+    ];
   }
   /**
    * hasPermission return true if the user have permission
    */
   public get hasPermission(): boolean {
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (
       permission.hasPermissions("curator") ||
       permission.hasPermissions("admin")
     ) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   /**
    * hasPermission return true if the user have permission
    */
   public get hasPermissionAdmin(): boolean {
-    let permission = new Permission();
+    let permission = new Permission(this.oauthStorage);
 
     if (permission.hasPermissions("admin")) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
 }

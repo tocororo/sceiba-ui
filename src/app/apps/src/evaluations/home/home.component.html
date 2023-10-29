@@ -1,105 +1,193 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-
-  <!-- <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
+  <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
     <div class="pt-2em pb-2em ph-10">
-      <h3 class="mat-display-2 main-title" style="text-align: center; color: white;">{{ 'AUT_REV_CIENT_CUBANAS' |
-        translate }}</h3>
+      <h1
+        class="mat-display-2"
+        style="margin: 0; text-align: center; color: white"
+      >
+        {{ "AUT_REV_CIENT_CUBANAS" | translate }}
+      </h1>
+      <h2
+        class="mat-display-2"
+        style="margin: 0; text-align: center; color: white"
+      >
+        {{ "AUT_REV_CIENT_CUBANAS_SUB" | translate }}
+      </h2>
     </div>
-  </div> -->
-
-  <div fxLayout="column" fxLayoutAlign="center center" style="padding: 2rem;">
-
-
-    <h1>{{ 'AUT_REV_CIENT_CUBANAS' |
-      translate }}</h1>
-    <h2>{{ 'AUT_REV_CIENT_CUBANAS_SUB' |
-      translate }}</h2>
-
   </div>
 
   <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
-  <toco-progress [position]=1 [loading]="hasTaskInProgress"></toco-progress>
+  <toco-progress [position]="1" [loading]="hasTaskInProgress"></toco-progress>
 
-  <div class="w-100 p1" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="45px" fxFlexFill>
-
-    <div fxFlex.md="80" fxFlex.xs="90" fxLayout="column wrap" fx.Layout.xs="column wrap" fxLayoutAlign="center" style="text-align:center; ">
+  <div
+    class="w-100 p1"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="45px"
+    fxFlexFill
+  >
+    <div
+      fxFlex.md="80"
+      fxFlex.xs="90"
+      fxLayout="column wrap"
+      fx.Layout.xs="column wrap"
+      fxLayoutAlign="center"
+      style="text-align: center"
+    >
       <div fxLayout="row wrap" fxLayoutAlign="center">
         <mat-card>
-        <span class="mat-h1 slogan">
-          {{ 'MONITOREA' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'MONITOREA_TEXTO' | translate }}</p>
-        </span>
-      </mat-card>
-      <mat-card>
-        <span class="mat-h1 slogan">
-          {{ 'EVALUA1' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'VISIBILIDAD_IMPACTO' | translate }}</p>
-        </span>
-      </mat-card>
-      <mat-card>
-        <span class="mat-h1 slogan">
-          {{ 'TRANSFORMA' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'MEJOR_CALIDAD' | translate }}</p>
-        </span>
-      </mat-card>
+          <span class="mat-h1 slogan">
+            {{ "MONITOREA" | translate }}
+            <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%">
+              {{ "MONITOREA_TEXTO" | translate }}
+            </p>
+          </span>
+        </mat-card>
+        <mat-card>
+          <span class="mat-h1 slogan">
+            {{ "EVALUA1" | translate }}
+            <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%">
+              {{ "VISIBILIDAD_IMPACTO" | translate }}
+            </p>
+          </span>
+        </mat-card>
+        <mat-card>
+          <span class="mat-h1 slogan">
+            {{ "TRANSFORMA" | translate }}
+            <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%">
+              {{ "MEJOR_CALIDAD" | translate }}
+            </p>
+          </span>
+        </mat-card>
       </div>
       <div>
-        <p  style="margin-top: 2.5rem;">{{ 'QUE_EVALUAR' | translate }}</p>
-        <mat-radio-group aria-label="Select an option"  fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="space-around">
+        <p style="margin-top: 2.5rem">{{ "QUE_EVALUAR" | translate }}</p>
+        <mat-radio-group
+          aria-label="Select an option"
+          fxLayout="row wrap"
+          fxLayout.xs="column wrap"
+          fxLayoutAlign="space-around"
+        >
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/icons/apps/journals.svg" [alt]="'REVISTAS' | translate"
-              style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="1" checked>{{ 'REVISTAS' | translate }}</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/journals.svg"
+                [alt]="'REVISTAS' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="1" checked>{{
+                "REVISTAS" | translate
+              }}</mat-radio-button>
             </div>
           </mat-card>
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/icons/apps/publishing.svg" [alt]="'EDITORIALES' | translate"
-              style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="3" disabled>{{ 'EDITORIALES' | translate }}</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/publishing.svg"
+                [alt]="'EDITORIALES' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="3" disabled>{{
+                "EDITORIALES" | translate
+              }}</mat-radio-button>
             </div>
           </mat-card>
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/icons/apps/publication.svg" [alt]="'PUBLICACIONES' | translate"
-              style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="3"  disabled>{{ 'PUBLICACIONES' | translate }}</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/publication.svg"
+                [alt]="'PUBLICACIONES' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="3" disabled>{{
+                "PUBLICACIONES" | translate
+              }}</mat-radio-button>
             </div>
           </mat-card>
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/icons/apps/organizaciones.svg" [alt]="'ORGANIZACIONES' | translate"
-                style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="3" disabled>{{ 'ORGANIZACIONES' | translate }}</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/organizaciones.svg"
+                [alt]="'ORGANIZACIONES' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="3" disabled>{{
+                "ORGANIZACIONES" | translate
+              }}</mat-radio-button>
             </div>
           </mat-card>
 
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content; ">
-              <img  src="/assets/icons/apps/persons.svg" [alt]="'EVALUACION' | translate"
-                style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="2" disabled >{{ 'PERSONAS' | translate }}</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/persons.svg"
+                [alt]="'EVALUACION' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="2" disabled>{{
+                "PERSONAS" | translate
+              }}</mat-radio-button>
             </div>
           </mat-card>
         </mat-radio-group>
-        <p  style="margin-top: 2.5rem;">{{ 'QUE_METODOLOGIA' | translate }}</p>
-        <mat-radio-group aria-label="Select an option"  fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="space-around">
+        <p style="margin-top: 2.5rem">{{ "QUE_METODOLOGIA" | translate }}</p>
+        <mat-radio-group
+          aria-label="Select an option"
+          fxLayout="row wrap"
+          fxLayout.xs="column wrap"
+          fxLayoutAlign="space-around"
+        >
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content; ">
-              <img  src="/assets/icons/apps/sceiba.svg" [alt]="'EVALUACION' | translate"
-                    style="width: 70px; height: 70px;"/>
-                <mat-radio-button value="1" checked>Sceiba</mat-radio-button>
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              style="width: min-content"
+            >
+              <img
+                src="/assets/icons/apps/sceiba.svg"
+                [alt]="'EVALUACION' | translate"
+                style="width: 70px; height: 70px"
+              />
+              <mat-radio-button value="1" checked>Sceiba</mat-radio-button>
             </div>
           </mat-card>
         </mat-radio-group>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center" style="width: 100%; margin: 1rem 0 1rem 0">
-        <a mat-raised-button class="button-get-started" color="primary"  (click)="createEvaluation()">
-          {{ 'EMPEZAR' | translate }}
+      <div
+        fxLayout="row"
+        fxLayoutAlign="center"
+        style="width: 100%; margin: 1rem 0 1rem 0"
+      >
+        <a
+          mat-raised-button
+          class="button-get-started"
+          color="primary"
+          (click)="createEvaluation()"
+        >
+          {{ "EMPEZAR" | translate }}
         </a>
       </div>
     </div>
   </div>
-
 </div>

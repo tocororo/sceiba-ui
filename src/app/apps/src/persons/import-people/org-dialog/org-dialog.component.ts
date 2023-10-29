@@ -14,7 +14,7 @@ import {
 } from "@angular/router";
 import { OrgService } from "../../_services/org.service";
 
-import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
+import { AggregationsSelection, Environment, Organization, SearchResponse } from "toco-lib";
 
 @Component({
   selector: "app-org-dialog",
@@ -79,10 +79,12 @@ export class OrgDialogComponent {
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
-  constructor(
+  public env: Environment;
+  public constructor(
+    private _env: Environment,
     private _cuorService: OrgService,
     public dialogRef: MatDialogRef<OrgDialogComponent>
-  ) {}
+  ) {this.env = this._env;}
 
   public ngOnInit(): void {
     this.query = "";

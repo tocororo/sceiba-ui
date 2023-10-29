@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Permission } from '../_services/permission.service';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
-import { HitList, Organization } from 'toco-lib';
+import { Environment, HitList, Organization } from 'toco-lib';
 
 @Component({
 	selector: 'search-list',
@@ -16,8 +16,11 @@ export class SearchListComponent implements OnInit
 	public hitList: HitList<Organization>;
   public pdfType: 'list' | 'single' =  'list';
 
-    public constructor()
-	{ }
+
+  public env: Environment;
+  public constructor(
+    private _env: Environment)
+	{ this.env = this._env;}
 
 	public ngOnInit(): void
 	{

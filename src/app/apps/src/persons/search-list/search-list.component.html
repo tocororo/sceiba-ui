@@ -6,10 +6,14 @@
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
 
         <h2>
-          <span mat-icon-button *ngIf="hasPermission" routerLink="/{{hit.metadata.id}}/edit" matTooltip="Editar la Organización">
+          <span mat-icon-button *ngIf="hasPermission"
+          [routerLink]="[env.persons, hit.metadata.id, 'edit']"
+          matTooltip="Editar la Persona">
             <mat-icon class="mat-18">mode_edit</mat-icon>
           </span>
-          <span routerLink="/person/{{hit.metadata.id}}/view" style="cursor: pointer;">
+          <span
+          [routerLink]="[env.persons, 'person', hit.metadata.id, 'view']"
+          style="cursor: pointer;">
             {{hit.metadata.name}}
           </span>
         </h2>

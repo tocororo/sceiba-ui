@@ -1,24 +1,40 @@
-
 <div fxLayout="column" fxLayoutAlign="center center">
-
-    <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
-        <div class="pt-2em pb-2em ph-10">
-            <h3 class="mat-display-2" style="margin: 0; text-align: center; color: white;">{{ 'SCEIBA_PERSONAS' | translate }}</h3>
-            <h3 class="mat-h2" style="margin: 0; text-align: center; color: white;">{{ 'SCEIBA_PERSONAS_SUB' | translate }}</h3>
-            <!-- mat-subheading-2 -->
-        </div>
+  <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
+    <div class="pt-2em pb-2em ph-10">
+      <h1
+        class="mat-display-2"
+        style="margin: 0; text-align: center; color: white"
+      >
+        {{ "SCEIBA_PERSONAS_SUB" | translate }}
+      </h1>
     </div>
-    <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
+  </div>
 
-    <!-- <div class="w-100 bg-primary-color" fxLayout="row" fxLayoutAlign="center center"> -->
-    <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
-        <div class="w-80" style="margin: 1em 0;">
-            <toco-search-query-input [buttonColor]="'primary'" [query]="''" (queryChange)="queryChange($event)"></toco-search-query-input>
-        </div>
+  <!-- <div class="w-100 bg-primary-color" fxLayout="row" fxLayoutAlign="center center"> -->
+  <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
+    <div class="w-80" style="margin: 1em 0">
+      <toco-search-query-input
+          [buttonColor]="'primary'"
+          [query]="''"
+          (queryChange)="queryChange($event)"
+          class="w-100"
+        ></toco-search-query-input>
     </div>
+  </div>
 
-    <div class="w-100 bg-primary-color" fxLayout="row" fxLayoutAlign="center center" style="text-align: center;">
-        <div class="w-80 mat-h4" style="margin: 0;" markdown [src]="'/assets/markdown/personas/home.people.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
-    </div>
+  <div
+    class="w-70"
+    style="margin-top: 0.5em; margin-left: 4em"
+    [ngStyle.xs]="{ width: '90%', 'margin-left': '1em', 'padding-top': '60px' }"
+  >
+    <div
+      class="mat-h2 text-format"
+      markdown
+      [src]="
+        '/assets/markdown/personas/home.people.' +
+        (transServ.currentLang == 'es' ? 'es.md' : 'en.md')
+      "
+    ></div>
 
+  </div>
 </div>

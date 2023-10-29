@@ -49,7 +49,7 @@
             <button
               mat-icon-button
               style="cursor: pointer"
-              [routerLink]="['/evaluation/' + element.uuid + '/view']"
+              [routerLink]="[env.evaluations, 'evaluation', element.uuid, 'view']"
               matTooltip="{{ 'VIEW' | translate }}"
             >
               <mat-icon>
@@ -71,7 +71,7 @@
               mat-icon-button
               [disabled]="element.state=='FINISH'"
               style="cursor: pointer"
-              [routerLink]="['/survey/' + element.uuid + '/add']"
+              [routerLink]="[env.evaluations, 'survey', element.uuid, 'add']"
               matTooltip="{{ 'EDIT' | translate }}"
             >
               <mat-icon> edit </mat-icon>

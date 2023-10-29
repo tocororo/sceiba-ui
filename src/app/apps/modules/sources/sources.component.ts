@@ -37,11 +37,11 @@ export class SourcesComponent {
         useRouterLink: true,
         href: this.environment.catalog + '/sources',
       },
-      {
-        nameTranslate: 'REPORTS_STATISTICS',
-        useRouterLink: true,
-        href: this.environment.catalog + '/statistics',
-      },
+      // {
+      //   nameTranslate: 'REPORTS_STATISTICS',
+      //   useRouterLink: true,
+      //   href: this.environment.catalog + '/statistics',
+      // },
     ];
   }
 

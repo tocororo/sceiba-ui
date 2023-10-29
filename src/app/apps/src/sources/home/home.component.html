@@ -1,12 +1,39 @@
-<div
-  class="text"
-  markdown
-  [src]="'assets/markdown/catalog/home.catalog.' + transServ.currentLang + '.md'"
-  style="margin: 2em"
-></div>
-<div
-  class="text"
-  style="margin: 2em"
->
-  <button mat-raised-button color="primary" [routerLink]="[env.catalog,'sources']">{{ 'EXPLORE_CATALOG' | translate }}</button>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
+    <div class="pt-2em pb-2em ph-10">
+      <h1
+        class="mat-display-2"
+        style="margin: 0; text-align: center; color: white"
+      >
+        {{ "SCEIBA_CATALOGO_SUB" | translate }}
+      </h1>
+    </div>
+  </div>
+
+  <div
+    class="w-100 p1"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="45px"
+    fxFlexFill
+  >
+    <div
+
+      markdown
+      [src]="
+        'assets/markdown/catalog/home.catalog.' + transServ.currentLang + '.md'
+      "
+      style="margin: 2em"
+    ></div>
+    <div style="margin: 2em">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="[env.catalog, 'sources']"
+      >
+        {{ "EXPLORE_CATALOG" | translate }}
+      </button>
+    </div>
+  </div>
 </div>

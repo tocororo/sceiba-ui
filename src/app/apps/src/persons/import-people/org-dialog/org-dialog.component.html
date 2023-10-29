@@ -59,7 +59,7 @@
           <div>
             <h2>
               <span
-                routerLink="/{{ hit.metadata.id }}/view"
+                [routerLink]="[env.persons,hit.metadata.id, 'view']"
                 style="cursor: pointer"
               >
                 {{ hit.metadata.name }}

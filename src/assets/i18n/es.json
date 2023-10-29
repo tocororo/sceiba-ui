@@ -32,7 +32,7 @@
   "HOME": "Inicio",
   "REPORTS_STATISTICS": "Reportes y Estadísticas",
   "SCEIBA_CATALOGO": "Catálogo",
-  "SCEIBA_CATALOGO_SUB": "Catálogo de fuentes primarias de Sceiba",
+  "SCEIBA_CATALOGO_SUB": "Fuentes primarias",
   "CATALOG_PERMISSIONS": "Permisos sobre el Catálogo",
   "EXPLORE_CATALOG": "Explorar el Catálogo",
   "BUSQUEDA": "Descubre",
@@ -223,9 +223,9 @@
   "rolesSceiba": "Roles en Sceiba :",
   "respPublications": "Responsabilidad sobre las publicaciones :",
   "SCEIBA_PERSONAS": "Sceiba Personas",
-  "SCEIBA_PERSONAS_SUB": "Sistema de Identificación de Investigadores Cubanos",
+  "SCEIBA_PERSONAS_SUB": "Sistema de Identificación de Investigadores",
   "REVISTAS_MES_INCLUDE_JOURNAL": "Incluye tu Revista",
   "REVISTAS_MES_DIRECTORY": "Directorio",
   "REVISTAS_MES_MY_SOURCES": "Mis Registros",
-  "CATALOG_TITLE": "Catálogo de fuentes primarias de Sceiba"
+  "CATALOG_TITLE": "Catálogo"
 }

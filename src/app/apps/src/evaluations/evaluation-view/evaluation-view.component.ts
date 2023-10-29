@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Environment } from "toco-lib";
 import { EvaluationService } from "../_services/evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
@@ -12,10 +13,13 @@ export class EvaluationViewComponent implements OnInit {
   public evaluationData: Evaluations;
   public step: number;
 
-  constructor(
+
+  public env: Environment;
+  public constructor(
+    private _env: Environment,
     private evaluationService: EvaluationService,
     private route: ActivatedRoute
-  ) {}
+  ) {this.env = this._env;}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

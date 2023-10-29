@@ -16,7 +16,7 @@ export enum Layouts {
 })
 export class PersonsComponent {
   public extraUser: MenuElement[];
-
+  public _subMenus: MenuElement[];
   public constructor(
     private environment: Environment,
     private oauthStorage: OAuthStorage
@@ -29,8 +29,20 @@ export class PersonsComponent {
         icon: 'publish',
         useRouterLink: true,
         hideLabel: true,
-        href: `${this.environment.organizations}/import`,
+        href: `${this.environment.persons}/import`,
         disabled: this.hasPermissionAdmin,
+      },
+    ];
+    this._subMenus = [
+      {
+        nameTranslate: 'HOME',
+        useRouterLink: true,
+        href: this.environment.persons,
+      },
+      {
+        nameTranslate: 'TOCO_SEARCH_SEARCH.SPAN_SEARCH_LABEL',
+        useRouterLink: true,
+        href: this.environment.persons + '/search',
       },
     ];
   }
@@ -38,7 +50,7 @@ export class PersonsComponent {
   public get hasPermissionAdmin(): boolean {
     let roles = this.oauthStorage.getItem('roles');
     if (roles) {
-      let r = JSON.parse(roles);
+      let r = roles.split(',');
       for (const rol in r) {
         if (roles[rol] == 'admin') {
           return true;

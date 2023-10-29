@@ -7,6 +7,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
+import { Environment } from "toco-lib";
 
 @Component({
   selector: "app-my-evaluation",
@@ -22,11 +23,13 @@ export class MyEvaluationComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(
+  public env: Environment;
+  public constructor(
+    private _env: Environment,
     private evaluationService: EvaluationService,
     private router: Router
   ) {
-
+    this.env = this._env;
   }
 
   ngOnInit() {
