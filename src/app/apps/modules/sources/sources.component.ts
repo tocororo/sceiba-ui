@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import { MenuElement } from 'src/app/core/header/header.component';
 import { Environment } from 'toco-lib';
 
@@ -9,9 +10,22 @@ import { Environment } from 'toco-lib';
 })
 export class SourcesComponent {
   public _subMenus: MenuElement[];
+  public extraUser: MenuElement[];
 
-  constructor(private environment: Environment) {}
+  constructor(private environment: Environment,private oauthStorage: OAuthStorage) {}
   ngOnInit(): void {
+
+    this.extraUser = [
+      {
+        nameTranslate: 'CATALOG_PERMISSIONS',
+        icon: 'vpn_key',
+        href: this.environment.catalog + '/permissions',
+        useRouterLink: true,
+        disabled: this.notAuthenticated
+      },
+    ]
+
+
     this._subMenus = [
       {
         nameTranslate: 'HOME',
@@ -31,5 +45,9 @@ export class SourcesComponent {
     ];
   }
 
+  public get notAuthenticated() : boolean {
+    let request = JSON.parse(this.oauthStorage.getItem('user'));
+    return request == (null || undefined);
+  }
   ngOnDestroy(): void {}
 }

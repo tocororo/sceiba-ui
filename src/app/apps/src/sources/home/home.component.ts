@@ -5,7 +5,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MetadataService } from 'toco-lib';
+import { Environment, MetadataService } from 'toco-lib';
 
 @Component({
     selector: 'catalog-home',
@@ -16,9 +16,11 @@ export class HomeComponent implements OnInit {
 
 
 
-    constructor(
+  public env: Environment ;
+  public constructor(private environment: Environment,
       private metadata: MetadataService,
       public transServ: TranslateService) {
+        this.env = this.environment;
     }
 
     ngOnInit() {

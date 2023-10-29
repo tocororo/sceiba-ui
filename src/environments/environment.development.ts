@@ -24,13 +24,13 @@ class EnvironmentImpl implements Environment {
 
   sceiba = '/';
   discover = '/search';
-  catalog = '/sources';
+  catalog = '/catalog';
   revistasmes = '/revistasmes';
-  organizations = '/orgs';
+  organizations = '/organizations';
   persons = '/persons';
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://courses.sceiba.org/';
-  evaluations = '/eval';
+  evaluations = '/evaluations';
 
 
   oauthInfo = {

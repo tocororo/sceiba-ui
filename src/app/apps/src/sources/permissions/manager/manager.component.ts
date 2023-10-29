@@ -1,9 +1,9 @@
 import { Component, Inject, Input, OnInit, ViewChild } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { Source } from 'toco-lib';
+import { Environment, Source } from 'toco-lib';
 
 @Component({
   selector: "catalog-mysources-manager",
@@ -23,7 +23,12 @@ export class MySourcesManagerComponent implements OnInit {
 
   @Input() asManager: Array<Source>;
 
-  constructor(public dialog: MatDialog) {}
+  public env: Environment;
+  public constructor(private environment: Environment,
+    public dialog: MatDialog) {
+        this.env = this.environment;
+    }
+
 
   loading = true;
 

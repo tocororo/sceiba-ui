@@ -13,9 +13,9 @@
           <!-- <span mat-icon-button *ngIf="hasPermission" routerLink="/{{hit.metadata.id}}/edit" matTooltip="Editar la Organización">
             <mat-icon class="mat-18">mode_edit</mat-icon>
           </span> -->
-          <span [routerLink]="['/sources', hit.id]" style="cursor: pointer;">
+          <a [routerLink]="[env.catalog,'sources', hit.id]" style="cursor: pointer;">
             {{hit.metadata.name}}
-          </span>
+          </a>
         </h2>
 
 

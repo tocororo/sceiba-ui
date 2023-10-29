@@ -45,7 +45,7 @@
           <a
             mat-list-item
             *ngIf="!item.source_count || item.source_count == 0"
-            [routerLink]="['/directory']"
+            [routerLink]="[env.revistasmes,'directory']"
             [queryParams]="{ source_type: item.source_type }"
           >
             {{ item.label }}
@@ -53,14 +53,14 @@
           <a
             mat-list-item
             *ngIf="item.source_count > 0"
-            [routerLink]="['/directory']"
+            [routerLink]="[env.revistasmes,'directory']"
             [queryParams]="{ source_type: item.source_type }"
           >
             {{ item.label }} - {{ item.source_count }}
           </a>
         </p>
-        <!-- <a mat-list-item [routerLink]="['/directory']" [queryParams]="{source_type: 'POPULARIZATION'}">Revistas Dibulgación Científicas</a>
-        <a mat-list-item [routerLink]="['/directory']" [queryParams]="{source_type: 'JOURNAL'}">Revistas Científicas</a> -->
+        <!-- <a mat-list-item [routerLink]="[env.revistasmes,'directory']" [queryParams]="{source_type: 'POPULARIZATION'}">Revistas Dibulgación Científicas</a>
+        <a mat-list-item [routerLink]="[env.revistasmes,'directory']" [queryParams]="{source_type: 'JOURNAL'}">Revistas Científicas</a> -->
       </mat-nav-list>
     </mat-card-content>
   </mat-card>

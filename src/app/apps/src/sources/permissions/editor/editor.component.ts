@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { Source } from 'toco-lib';
+import { Environment, Source } from 'toco-lib';
 
 @Component({
   selector: "catalog-mysources-editor",
@@ -22,7 +22,11 @@ export class MySourcesEditorComponent implements OnInit {
 
   @Input() asEditor: Array<Source>;
 
-  constructor() {}
+
+  public env: Environment ;
+  public constructor(private environment: Environment) {
+        this.env = this.environment;
+    }
 
   loading = true;
 

@@ -39,6 +39,7 @@ export class HomeRevistasmesComponent implements OnInit {
 
   public stats = null;
   public error = false;
+  public env: Environment;
 
   constructor(
     private environment: Environment,
@@ -48,7 +49,7 @@ export class HomeRevistasmesComponent implements OnInit {
     private orgService: OrganizationServiceNoAuth,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {}
+  ) {this.env = this.environment;}
 
   ngOnInit() {
     // console.log(this.environment.topOrganizationPID)

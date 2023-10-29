@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "eval",
+    path: "evaluations",
     loadChildren: () =>
       import("./apps/modules/evaluations/evaluations.module").then((mod) => mod.EvaluationsAppModule),
   },
   {
-    path: "orgs",
+    path: "organizations",
     loadChildren: () =>
       import("./apps/modules/organizations/organizations.module").then((mod) => mod.OrganizationsAppModule),
   },
@@ -23,7 +23,7 @@ const routes: Routes = [
       import("./apps/modules/revistasmes/revistasmes.module").then((mod) => mod.RevistasMesAppModule),
   },
   {
-    path: "sources",
+    path: "catalog",
     loadChildren: () =>
       import("./apps/modules/sources/sources.module").then((mod) => mod.SolurcesAppModule),
   },
