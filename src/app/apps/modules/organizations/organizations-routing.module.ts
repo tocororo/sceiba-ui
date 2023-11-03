@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OauthAuthenticationService } from 'toco-lib';
 import { UserService } from '../../src/organizations/_services/org.service';
 import {
   OrganizationActiveResolverService,
@@ -29,6 +28,7 @@ import { WikiVenueProfileComponent } from '../../src/organizations/wiki-organiza
 import { WikiWorkProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
 import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organizations/wiki-organizations.component';
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
+import { OauthAuthenticationService } from 'src/app/core/authentication/authentication.service';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
 import { OrganizationsComponent } from './organizations.component';

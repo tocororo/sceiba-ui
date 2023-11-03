@@ -6,13 +6,14 @@ import { ActionText, Environment, MessageHandler, StatusCode } from 'toco-lib';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OAuthStorage } from 'angular-oauth2-oidc';
+import { HeaderService } from 'src/app/core/header.service';
 import { EvaluationService } from '../../src/evaluations/_services/evaluationService.service';
 import { MenuElement } from '../../src/evaluations/header/header.component';
 
 @Component({
   selector: 'sceiba-ui-evaluations-root',
   templateUrl: './evaluations.component.html',
-  styleUrls: ['./evaluations.component.scss'],
+  styleUrls: ['./evaluations.component.scss']
 })
 export class EvaluationsComponent {
   hasTaskInProgress = false;
@@ -29,7 +30,8 @@ export class EvaluationsComponent {
     public iconRegistry: MatIconRegistry,
     private _snackBar: MatSnackBar,
     private EvaluationService: EvaluationService,
-    private oauthStorage: OAuthStorage
+    private oauthStorage: OAuthStorage,
+    private headerService: HeaderService
   ) {
     this.env = environment;
   }
@@ -100,10 +102,20 @@ export class EvaluationsComponent {
         href: this.environment.evaluations + '/evaluations',
         disabled: this.notAuthenticated,
       },
-    ]
+    ];
+
+    let data = {
+      icon: '/assets/icons/apps/evaluations.svg',
+      iconLabel: 'SCEIBA_EVALUACIONES',
+      iconAlt: 'SCEIBA_EVALUACIONES',
+      iconRoute: this.env.evaluations,
+      secondaryMenuElements: this._subMenus,
+      extraMenuAuthenticatedUser: this.extraUser,
+    };
+    this.headerService.setHeaderData(data);
   }
 
-  public get notAuthenticated() : boolean {
+  public get notAuthenticated(): boolean {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
     return request == (null || undefined);
   }

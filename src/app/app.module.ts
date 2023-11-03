@@ -23,6 +23,7 @@ import {
 } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// import { SceibaUiCoreModule } from './core/core.module';
 import { SceibaUiCoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -31,14 +32,15 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent
+],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    SceibaUiCoreModule,
+    // SceibaUiCoreModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -65,6 +67,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         sendAccessToken: true,
       },
     }),
+    SceibaUiCoreModule.forRoot()
   ],
   providers: [
     SearchService,

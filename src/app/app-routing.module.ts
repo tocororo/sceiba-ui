@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: "evaluations",
     loadChildren: () =>
-      import("./apps/modules/evaluations/evaluations.module").then((mod) => mod.EvaluationsAppModule),
+      import("./apps/modules/evaluations/evaluations.module").then((mod) => mod.EvaluationsAppModule)
   },
   {
     path: "organizations",

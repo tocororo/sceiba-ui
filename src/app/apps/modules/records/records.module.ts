@@ -6,14 +6,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule /*, RecaptchaLoaderService*/ } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
-import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from "src/app/shared/shared.module";
-import { allowedURLS, environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import {
-  AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
+  CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
   SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 } from 'toco-lib';
 import { ContactComponent } from '../../src/records/contact/contact.component';
@@ -25,10 +25,6 @@ import { RecordsRoutingModule } from './records-routing.module';
 import { RecordsComponent } from './records.component';
 
 
-
-export function storageFactory(): OAuthStorage {
-  return sessionStorage
-}
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 {
@@ -62,23 +58,21 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 
     CoreModule,
     SharedModule,
-    SceibaUiCoreModule,
 
     StaticsModule,
     TocoFormsModule,
     SearchModule,
-    AuthenticationModule,
 
     RecordsRoutingModule,
     MarkdownModule.forRoot({
       loader: HttpClient
     }),
-    OAuthModule.forRoot({
-      resourceServer: {
-          allowedUrls: allowedURLS,
-          sendAccessToken: true
-      }
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //       allowedUrls: allowedURLS,
+    //       sendAccessToken: true
+    //   }
+    // }),
     // MatomoModule
 
   ],

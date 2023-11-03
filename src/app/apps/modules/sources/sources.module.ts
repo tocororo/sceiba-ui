@@ -10,15 +10,15 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MarkdownModule } from 'ngx-markdown';
 import {
-  AuthenticationModule, CoreModule, Environment,
+  CoreModule, Environment,
   HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth,
   OrganizationsModule, SearchService, SourceService, SourceServiceNoAuth,
   TaxonomyService, TocoFormsModule, UserProfileService
 } from 'toco-lib';
 
 import { CommonModule } from '@angular/common';
-import { OAuthModule } from 'angular-oauth2-oidc';
-import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from "src/app/shared/shared.module";
 import { allowedURLS, environment } from 'src/environments/environment';
 import { SceibaFooterComponent } from '../../src/sources/footer/footer.component';
@@ -55,7 +55,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   imports: [
     CommonModule,
     SharedModule,
-    SceibaUiCoreModule,
     NgxChartsModule,
     TranslateModule.forChild({
       loader: {
@@ -71,7 +70,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
-    AuthenticationModule,
     // TaxonomyModule,
     FlexLayoutModule,
     MarkdownModule.forRoot({
@@ -91,6 +89,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     UserProfileService,
     TaxonomyService,
     OrganizationServiceNoAuth,
+    { provide: OAuthStorage, useFactory: storageFactory },
+
     HTTP_INTERCEPTOR_PROVIDERS,
     // REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },

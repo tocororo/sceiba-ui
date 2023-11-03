@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OAuthStorage } from 'angular-oauth2-oidc';
+import { HeaderService } from 'src/app/core/header.service';
 import { MenuElement } from 'src/app/core/header/header.component';
 import { Environment } from 'toco-lib';
 
@@ -12,7 +13,7 @@ export class SourcesComponent {
   public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
   public env: Environment;
-  constructor(private environment: Environment,private oauthStorage: OAuthStorage) {}
+  constructor(private environment: Environment,private oauthStorage: OAuthStorage, private headerService: HeaderService) {}
   ngOnInit(): void {
     this.env = this.environment;
 
@@ -44,6 +45,17 @@ export class SourcesComponent {
       //   href: this.environment.catalog + '/statistics',
       // },
     ];
+
+    let data = {
+      icon: '/assets/icons/apps/catalog.svg',
+      iconLabel: 'SCEIBA_CATALOGO',
+      iconAlt: 'SCEIBA_CATALOGO',
+      iconRoute: this.env.catalog,
+      secondaryMenuElements: this._subMenus,
+      extraMenuAuthenticatedUser: this.extraUser,
+    };
+    this.headerService.setHeaderData(data);
+
   }
 
   public get notAuthenticated() : boolean {

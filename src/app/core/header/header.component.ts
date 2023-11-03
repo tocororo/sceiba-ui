@@ -6,12 +6,14 @@ import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import {
   Environment,
-  OauthAuthenticationService,
-  OauthInfo,
   Response,
   User,
+  UserProfile,
   convertLangFromNumberToString,
 } from 'toco-lib';
+import { OauthInfo } from '../authentication/authentication.component';
+import { OauthAuthenticationService } from '../authentication/authentication.service';
+import { HeaderService } from '../header.service';
 
 @Component({
   selector: 'sceiba-ui-header',
@@ -94,9 +96,8 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   public _menuMainIcons: MenuElement[];
   public _menuAuthenticatedUser: MenuElement[];
-  public _menuHelp: MenuElement[]
+  public _menuHelp: MenuElement[];
   public _menuApps: MenuElement[];
-
 
   public menuIconsStatic: MenuElement[];
 
@@ -105,10 +106,13 @@ export class SceibaUIHeaderComponent implements OnInit {
   public simpleMenu = false;
 
   public user: User = null;
+  public userProfile: UserProfile = null;
 
   public oauthInfo: OauthInfo;
 
   private authenticateSuscription: Subscription = null;
+
+  private headerSubscription: Subscription;
 
   public constructor(
     private _env: Environment,
@@ -117,21 +121,41 @@ export class SceibaUIHeaderComponent implements OnInit {
     private oauthService: OAuthService,
     protected http: HttpClient,
     private oauthStorage: OAuthStorage,
-    private authenticateService: OauthAuthenticationService
+    private authenticateService: OauthAuthenticationService,
+    private headerService: HeaderService
   ) {
     let env: any = this._env;
     this.oauthInfo = env.oauthInfo;
+
+
+    this.headerSubscription = this.headerService.headerDataObservable$.subscribe({
+      next: (data) => {
+        this.icon = data.icon;
+        this.iconLabel = data.iconLabel;
+        this.iconAlt = data.iconAlt;
+        this.iconRoute = data.iconRoute;
+        this.secondaryMenuElements = data.secondaryMenuElements;
+        this.extraMenuAuthenticatedUser = data.extraMenuAuthenticatedUser;
+        this.setupMenus();
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete headerSubscription')
+    });
+
   }
 
   ngOnInit() {
     this.sceibaHost = this._env.sceibaHost;
 
+
+
+    this.setupUser();
     this.setupLang();
     this.setupMenus();
-    this.setupUser();
-    console.log("USER:", this.user, )
-    let roles = this.oauthStorage.getItem("roles");
-    console.log("ROLES:", roles )
+
+    console.log('USER:', this.user);
+    let roles = this.oauthStorage.getItem('roles');
+    console.log('ROLES:', roles);
   }
 
   private setupLang() {
@@ -186,14 +210,14 @@ export class SceibaUIHeaderComponent implements OnInit {
         useRouterLink: true,
         click: () => this.logoff(),
       },
-    ]
+    ];
     this._menuAuthenticatedUser = [];
-    if(this.extraMenuAuthenticatedUser){
-      this.extraMenuAuthenticatedUser.forEach(element => {
-        this._menuAuthenticatedUser.push(element)
+    if (this.extraMenuAuthenticatedUser) {
+      this.extraMenuAuthenticatedUser.forEach((element) => {
+        this._menuAuthenticatedUser.push(element);
       });
     }
-    defaultAuthUserMenu.forEach(element => {
+    defaultAuthUserMenu.forEach((element) => {
       this._menuAuthenticatedUser.push(element);
     });
 
@@ -229,12 +253,11 @@ export class SceibaUIHeaderComponent implements OnInit {
         icon: 'contacts',
       },
     ];
-    if(this.extraMenuHelp){
-      this.extraMenuHelp.forEach(element => {
+    if (this.extraMenuHelp) {
+      this.extraMenuHelp.forEach((element) => {
         this._menuHelp.push(element);
       });
     }
-
 
     this._menuApps = [
       {
@@ -338,8 +361,7 @@ export class SceibaUIHeaderComponent implements OnInit {
       },
     ];
 
-
-    let defaultIcons : MenuElement[] = [
+    let defaultIcons: MenuElement[] = [
       {
         nameTranslate: 'APLICACIONES',
         icon: 'apps',
@@ -353,49 +375,42 @@ export class SceibaUIHeaderComponent implements OnInit {
       },
     ];
 
-    if(this.extraMainMenuIcons){
-      this.menuIconsStatic =  this.menuIconsStatic.concat(defaultIcons);
-    }
-    else{
+    if (this.extraMainMenuIcons) {
+      this.menuIconsStatic = this.menuIconsStatic.concat(defaultIcons);
+    } else {
       this.menuIconsStatic = defaultIcons;
     }
     this._menuMainIcons = this.menuIconsStatic;
+    if (this.user) {
+      this._menuMainIcons.concat({
+        nameTranslate: this.user ? this.user.email.split('@')[0] : '',
+        icon: 'person_pin',
+        childrenMenu: this._menuAuthenticatedUser,
+        hideLabel: true,
+      });
+    }
   }
 
   private setupUser() {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
+    console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
 
-    if (request) {
-      console.log(request);
+    if (request && request.user && request.user.data) {
+      this.userProfile = request.user.data.userprofile;
+      this.user = this.userProfile.user;
 
       this.user = request;
       this.configRoles();
-      this._menuMainIcons = [
-        ...this.menuIconsStatic,
-        {
-          nameTranslate: this.user ? this.user.email.split('@')[0] : '',
-          icon: 'person_pin',
-          childrenMenu: this._menuAuthenticatedUser,
-          hideLabel: true,
-        },
-      ];
     }
 
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe(
         (request) => {
-          if (request) {
-            this.user = request;
+          if (request && request.user && request.user.data) {
+            this.userProfile = request.user.data.userprofile;
+            this.user = this.userProfile.user;
+
             this.configRoles();
-            this._menuMainIcons = [
-              ...this.menuIconsStatic,
-              {
-                nameTranslate: this.user ? this.user.email.split('@')[0] : '',
-                icon: 'person_pin',
-                childrenMenu: this._menuAuthenticatedUser,
-                hideLabel: true,
-              },
-            ];
           } else {
             this.logoff();
           }
@@ -407,16 +422,16 @@ export class SceibaUIHeaderComponent implements OnInit {
       );
   }
   private configRoles() {
-    let roles = "";
+    let roles = '';
     for (const rol in this.user.roles) {
       const element = this.user.roles[rol];
-      roles += "," + element.name;
+      roles += ',' + element.name;
     }
-    this.oauthStorage.setItem("roles", roles);
+    this.oauthStorage.setItem('roles', roles);
   }
 
   ngOnDestroy(): void {
-
+    this.headerSubscription.unsubscribe();
   }
 
   /*******************************************************************
@@ -467,7 +482,7 @@ export class SceibaUIHeaderComponent implements OnInit {
   public logoff() {
     this.oauthService.logOut();
     this.oauthStorage.removeItem('user');
-    this.oauthStorage.removeItem("roles");
+    this.oauthStorage.removeItem('roles');
     this.user = undefined;
     this._menuMainIcons = this.menuIconsStatic;
   }

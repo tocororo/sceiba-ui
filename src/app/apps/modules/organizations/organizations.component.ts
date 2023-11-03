@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 // import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { OAuthStorage } from "angular-oauth2-oidc";
+import { HeaderService } from "src/app/core/header.service";
 import { MenuElement } from "src/app/core/header/header.component";
 import {
   Environment
@@ -20,6 +21,8 @@ export class OrganizationsComponent {
   public constructor(
     private oauthStorage: OAuthStorage,
     private environment: Environment,
+    private headerService: HeaderService
+
   ) {
     this.env = environment;
 
@@ -60,6 +63,17 @@ export class OrganizationsComponent {
       //   href: this.environment.catalog + '/statistics',
       // },
     ];
+
+
+    let data = {
+      icon: '/assets/icons/apps/organizaciones.svg',
+      iconLabel: 'ORGANIZACIONES',
+      iconAlt: 'ORGANIZACIONES',
+      iconRoute: this.env.organizations,
+      secondaryMenuElements: this._subMenus,
+      extraMenuAuthenticatedUser: this.extraUser,
+    };
+    this.headerService.setHeaderData(data);
   }
   /**
    * hasPermission return true if the user have permission

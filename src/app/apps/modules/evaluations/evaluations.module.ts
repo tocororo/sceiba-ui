@@ -10,12 +10,11 @@ import { MarkdownModule } from "ngx-markdown";
 import { allowedURLS, environment } from "src/environments/environment";
 
 import {
-  AuthenticationModule,
   CoreModule,
   Environment,
   HTTP_INTERCEPTOR_PROVIDERS,
   StaticsModule,
-  TocoFormsModule,
+  TocoFormsModule
 } from "toco-lib";
 import { ContactComponent } from "../../src/evaluations/contact/contact.component";
 import { HomeComponent } from "../../src/evaluations/home/home.component";
@@ -27,7 +26,7 @@ import { EvaluationsComponent } from "./evaluations.component";
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
 import { CommonModule } from "@angular/common";
-import { SceibaUiCoreModule } from "src/app/core/core.module";
+import { storageFactory } from "src/app/core/authentication/authentication.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { CategoryTableComponent } from "../../src/evaluations/evaluation-view/category-table/category-table.component";
 import { EvaluationViewComponent } from "../../src/evaluations/evaluation-view/evaluation-view.component";
@@ -36,9 +35,7 @@ import { HeaderComponent } from "../../src/evaluations/header/header.component";
 import { MenuItemComponent } from "../../src/evaluations/header/menu-item/menu-item.component";
 import { MenuComponent } from "../../src/evaluations/header/menu/menu.component";
 import { MyEvaluationComponent } from "../../src/evaluations/my-evaluation/my-evaluation.component";
-export function storageFactory(): OAuthStorage {
-  return sessionStorage;
-}
+
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -76,11 +73,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     }),
 
     SharedModule,
-    SceibaUiCoreModule,
     CoreModule,
     StaticsModule,
     TocoFormsModule,
-    AuthenticationModule,
 
     EvaluationsRoutingModule,
     OAuthModule.forRoot({
@@ -89,6 +84,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         sendAccessToken: true,
       },
     }),
+
   ],
   providers: [
     HTTP_INTERCEPTOR_PROVIDERS,

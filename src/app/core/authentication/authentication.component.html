@@ -1,0 +1,33 @@
+
+<div *ngIf="!isButtonLogin;else template_buttonLogin" fxLayoutAlign="center center" fxLayout="row">
+    <mat-card fxLayoutAlign="center center" fxLayout="column">
+
+        <mat-card-header>
+            <mat-card-title *ngIf="!userName">{{ 'TOCO_AUTHENTICATION.MAT_CARD_TITLE_AUTH' | translate }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content fxLayoutAlign="center center" fxLayout="column">
+            <button *ngIf="!userName;else templateName" mat-raised-button color="primary" style="width: 12em" (click)="login()">
+                <img src="https://sceiba-lab.upr.edu.cu/static/images/sceiba-logo-white.png" alt="Sceiba" width="100" style="padding-top: .9em; padding-bottom: .9em">
+            </button>
+
+            <ng-template #templateName>
+                <h1>{{ 'TOCO_AUTHENTICATION.H1_HOLA' | translate }} {{ userName }}</h1>
+                <button mat-raised-button color="primary" style="width: 12em" (click)="logoff()">
+                    {{ 'TOCO_AUTHENTICATION.BUTTON_SALIR' | translate }}
+                </button>
+            </ng-template>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<ng-template #template_buttonLogin>
+    <button *ngIf="isButtonLoginIcon" mat-icon-button (click)="login()" matTooltip="{{ isButtonLoginText }}">
+        <mat-icon>lock_open</mat-icon>
+    </button>
+    <button *ngIf="!isButtonLoginIcon" mat-raised-button color="primary" (click)="login()">
+        {{ isButtonLoginText }}
+        <mat-icon class="mat-18">lock_open</mat-icon>
+    </button>
+</ng-template>

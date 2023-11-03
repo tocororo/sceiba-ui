@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { OAuthStorage } from 'angular-oauth2-oidc';
+import { HeaderService } from 'src/app/core/header.service';
 import { MenuElement } from 'src/app/core/header/header.component';
 
 import { Environment } from 'toco-lib';
@@ -20,7 +21,8 @@ export class PersonsComponent {
   public env: Environment;
   public constructor(
     private environment: Environment,
-    private oauthStorage: OAuthStorage
+    private oauthStorage: OAuthStorage,
+    private headerService: HeaderService
   ) {
     this.env = environment
   }
@@ -48,6 +50,16 @@ export class PersonsComponent {
         href: this.environment.persons + '/search',
       },
     ];
+
+    let data = {
+      icon: '/assets/icons/apps/persons.svg',
+      iconLabel: 'SCEIBA_PERSONAS',
+      iconAlt: 'PERSONAS',
+      iconRoute: this.env.persons,
+      secondaryMenuElements: this._subMenus,
+      extraMenuAuthenticatedUser: this.extraUser,
+    };
+    this.headerService.setHeaderData(data);
   }
 
   public get hasPermissionAdmin(): boolean {

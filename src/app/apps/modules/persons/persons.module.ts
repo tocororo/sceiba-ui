@@ -11,7 +11,6 @@ import { MatTableModule } from '@angular/material/table';
 
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import {
-  AuthenticationModule,
   CoreModule,
   Environment,
   OrganizationServiceNoAuth,
@@ -20,14 +19,14 @@ import {
   SearchService,
   SourceServiceNoAuth,
   StaticsModule,
-  TocoFormsModule,
+  TocoFormsModule
 } from 'toco-lib';
 
 import { allowedURLS, environment } from 'src/environments/environment';
 
 import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'node_modules/ngx-dropzone';
-import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OrgService } from '../../src/persons/_services/org.service';
 import { ContactComponent } from '../../src/persons/contact/contact.component';
@@ -50,10 +49,6 @@ import { SearchComponent } from '../../src/persons/search/search.component';
 import { SelectOrgComponent } from '../../src/persons/select-org/select-org.component';
 import { PersonsRoutingModule } from './persons-routing.module';
 import { PersonsComponent } from './persons.component';
-
-export function storageFactory(): OAuthStorage {
-  return localStorage;
-}
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -103,13 +98,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     TocoFormsModule,
     SharedModule,
-    SceibaUiCoreModule,
     FormsModule,
     CoreModule,
     StaticsModule,
     TocoFormsModule,
     SearchModule,
-    AuthenticationModule,
     OrganizationsModule,
     PersonsRoutingModule,
     OAuthModule.forRoot({
@@ -125,7 +118,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     OrganizationServiceNoAuth,
     OrgService,
     { provide: Environment, useValue: environment },
-    // { provide: OAuthStorage, useFactory: storageFactory },
+    { provide: OAuthStorage, useFactory: storageFactory },
   ],
   bootstrap: [PersonsComponent],
 })

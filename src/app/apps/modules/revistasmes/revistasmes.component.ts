@@ -13,10 +13,11 @@ import {
 } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
+import { OauthAuthenticationService } from "src/app/core/authentication/authentication.service";
+import { HeaderService } from "src/app/core/header.service";
 import { MenuElement } from "src/app/core/header/header.component";
 import {
-  Environment,
-  OauthAuthenticationService
+  Environment
 } from "toco-lib";
 
 @Component({
@@ -38,7 +39,8 @@ export class RevistasMesComponent {
     private oauthService: OAuthService,
     private authenticateService: OauthAuthenticationService,
     private router: Router,
-    private _transServ: TranslateService
+    private _transServ: TranslateService,
+    private headerService: HeaderService
   ) {
     this.env = this.environment;
     this.router.events.subscribe(
@@ -86,6 +88,15 @@ export class RevistasMesComponent {
       },
     ];
 
+    let data = {
+      icon: '/assets/icons/apps/revistasmes.svg',
+      iconLabel: 'REVISTAS_MES',
+      iconAlt: 'REVISTAS_MES',
+      iconRoute: this.env.revistasmes,
+      secondaryMenuElements: this._subMenus,
+      extraMenuAuthenticatedUser: null,
+    };
+    this.headerService.setHeaderData(data);
 
   }
   ngOnInit(): void {

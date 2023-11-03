@@ -9,11 +9,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
 import { MarkdownModule } from "ngx-markdown";
-import { SceibaUiCoreModule } from "src/app/core/core.module";
+import { storageFactory } from "src/app/core/authentication/authentication.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { allowedURLS, environment } from "src/environments/environment";
 import {
-  AuthenticationModule,
   CoreModule,
   Environment,
   OrganizationServiceNoAuth,
@@ -91,9 +90,6 @@ import { WikiOrganizationsComponent } from "../../src/organizations/wiki-organiz
 import { OrganizationsRoutingModule } from "./organizations-routing.module";
 import { OrganizationsComponent } from "./organizations.component";
 
-export function storageFactory(): OAuthStorage {
-  return localStorage;
-}
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -169,7 +165,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NgxChartsModule,
     CommonModule,
     SharedModule,
-    SceibaUiCoreModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -195,7 +190,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MarkdownModule.forRoot({
       loader: HttpClient,
     }),
-    AuthenticationModule,
     // MatomoModule.forRoot({
     //   trackers: [
     //     {
@@ -215,7 +209,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     OrganizationServiceNoAuth,
     OrgService,
     { provide: Environment, useValue: environment },
-    // { provide: OAuthStorage, useFactory: storageFactory },
+    { provide: OAuthStorage, useFactory: storageFactory },
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true }
   ],
 
