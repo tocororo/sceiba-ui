@@ -7,11 +7,10 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
+import { OAuthStorage } from "angular-oauth2-oidc";
 import { MarkdownModule } from "ngx-markdown";
-import { storageFactory } from "src/app/core/authentication/authentication.service";
 import { SharedModule } from "src/app/shared/shared.module";
-import { allowedURLS, environment } from "src/environments/environment";
+import { environment } from "src/environments/environment";
 import {
   CoreModule,
   Environment,
@@ -20,7 +19,8 @@ import {
   SearchModule,
   SearchService,
   StaticsModule,
-  TocoFormsModule
+  TocoFormsModule,
+  storageFactory
 } from "toco-lib";
 import { OrgService } from "../../src/organizations/_services/org.service";
 import { AggregationsComponent } from "../../src/organizations/aggregations/aggregations.component";
@@ -180,12 +180,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     FormsModule,
     FlexLayoutModule,
     OrganizationsRoutingModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: allowedURLS,
-        sendAccessToken: true,
-      },
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //     allowedUrls: allowedURLS,
+    //     sendAccessToken: true,
+    //   },
+    // }),
     SearchModule,
     MarkdownModule.forRoot({
       loader: HttpClient,

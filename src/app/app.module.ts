@@ -1,29 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
-import { environment } from 'src/environments/environment';
 
 import { CommonModule } from '@angular/common';
-import { allowedURLS } from 'src/environments/environment.development';
 import {
-  AuthenticationModule,
-  CoreModule,
-  Environment,
-  OrganizationServiceNoAuth,
-  SearchService,
-  SourceServiceNoAuth,
-  storageFactory,
+  CoreModule, Environment
 } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { SceibaUiCoreModule } from './core/core.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 import { SceibaUiCoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -41,7 +33,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     SharedModule,
     // SceibaUiCoreModule,
-    HttpClientModule,
+
+    // HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -55,26 +48,20 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     // RecaptchaModule,
 
     CoreModule,
-    AuthenticationModule,
 
     AppRoutingModule,
     // MarkdownModule.forRoot({
     //   loader: HttpClient
     // }),
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: allowedURLS,
-        sendAccessToken: true,
-      },
-    }),
+
     SceibaUiCoreModule.forRoot()
   ],
   providers: [
-    SearchService,
-    OrganizationServiceNoAuth,
-    SourceServiceNoAuth,
+    // SearchService,
+    // OrganizationServiceNoAuth,
+    // SourceServiceNoAuth,
     { provide: Environment, useValue: environment },
-    { provide: OAuthStorage, useFactory: storageFactory },
+    // { provide: OAuthStorage, useFactory: storageFactory },
     // {
     //   provide: RecaptchaLoaderService,
     //   useClass: RecaptchaDynamicLanguageLoaderService,

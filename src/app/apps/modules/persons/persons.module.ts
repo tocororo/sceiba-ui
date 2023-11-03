@@ -9,7 +9,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import {
   CoreModule,
   Environment,
@@ -19,14 +19,14 @@ import {
   SearchService,
   SourceServiceNoAuth,
   StaticsModule,
-  TocoFormsModule
+  TocoFormsModule,
+  storageFactory
 } from 'toco-lib';
 
-import { allowedURLS, environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'node_modules/ngx-dropzone';
-import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { OrgService } from '../../src/persons/_services/org.service';
 import { ContactComponent } from '../../src/persons/contact/contact.component';
@@ -105,12 +105,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SearchModule,
     OrganizationsModule,
     PersonsRoutingModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: allowedURLS,
-        sendAccessToken: true,
-      },
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //     allowedUrls: allowedURLS,
+    //     sendAccessToken: true,
+    //   },
+    // }),
   ],
   providers: [
     SearchService,

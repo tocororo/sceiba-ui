@@ -6,13 +6,13 @@ import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import {
   Environment,
+  OauthAuthenticationService,
+  OauthInfo,
   Response,
   User,
   UserProfile,
   convertLangFromNumberToString,
 } from 'toco-lib';
-import { OauthInfo } from '../authentication/authentication.component';
-import { OauthAuthenticationService } from '../authentication/authentication.service';
 import { HeaderService } from '../header.service';
 
 @Component({
@@ -95,6 +95,7 @@ export class SceibaUIHeaderComponent implements OnInit {
   @Input() public autehnticated_name: string = '';
 
   public _menuMainIcons: MenuElement[];
+  public _userMainMenu: MenuElement[];
   public _menuAuthenticatedUser: MenuElement[];
   public _menuHelp: MenuElement[];
   public _menuApps: MenuElement[];
@@ -124,38 +125,36 @@ export class SceibaUIHeaderComponent implements OnInit {
     private authenticateService: OauthAuthenticationService,
     private headerService: HeaderService
   ) {
-    let env: any = this._env;
-    this.oauthInfo = env.oauthInfo;
+    this.oauthInfo = this._env.oauthInfo;
 
-
-    this.headerSubscription = this.headerService.headerDataObservable$.subscribe({
-      next: (data) => {
-        this.icon = data.icon;
-        this.iconLabel = data.iconLabel;
-        this.iconAlt = data.iconAlt;
-        this.iconRoute = data.iconRoute;
-        this.secondaryMenuElements = data.secondaryMenuElements;
-        this.extraMenuAuthenticatedUser = data.extraMenuAuthenticatedUser;
-        this.setupMenus();
-      },
-      error: (e) => console.error(e),
-      complete: () => console.info('complete headerSubscription')
-    });
-
+    this.headerSubscription =
+      this.headerService.headerDataObservable$.subscribe({
+        next: (data) => {
+          this.icon = data.icon;
+          this.iconLabel = data.iconLabel;
+          this.iconAlt = data.iconAlt;
+          this.iconRoute = data.iconRoute;
+          this.secondaryMenuElements = data.secondaryMenuElements;
+          this.extraMenuAuthenticatedUser = data.extraMenuAuthenticatedUser;
+          this.setupMenus();
+          this.addUserMenu();
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete headerSubscription'),
+      });
   }
 
   ngOnInit() {
     this.sceibaHost = this._env.sceibaHost;
 
-
+    this.setupMenus();
 
     this.setupUser();
     this.setupLang();
-    this.setupMenus();
 
-    // console.log('USER:', this.user);
+    console.log('USER:', this.user);
     let roles = this.oauthStorage.getItem('roles');
-    // console.log('ROLES:', roles);
+    console.log('ROLES:', roles);
   }
 
   private setupLang() {
@@ -381,46 +380,61 @@ export class SceibaUIHeaderComponent implements OnInit {
       this.menuIconsStatic = defaultIcons;
     }
     this._menuMainIcons = this.menuIconsStatic;
-    if (this.user) {
-      this._menuMainIcons.concat({
+
+  }
+
+  private addUserMenu(){
+    if (this.user ) {
+     console.log(this._menuAuthenticatedUser, 'FFFFFF');
+
+      this._userMainMenu = [{
         nameTranslate: this.user ? this.user.email.split('@')[0] : '',
         icon: 'person_pin',
         childrenMenu: this._menuAuthenticatedUser,
         hideLabel: true,
-      });
+      }]
     }
   }
-
   private setupUser() {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
-    // console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
-
-    if (request && request.user && request.user.data) {
-      this.userProfile = request.user.data.userprofile;
-      this.user = this.userProfile.user;
+    if (request ) {
+      // this.userProfile = request.user.data.userprofile;
+      // this.user = request;
 
       this.user = request;
+      this.addUserMenu();
       this.configRoles();
     }
 
     this.authenticateSuscription =
-      this.authenticateService.authenticationSubjectObservable.subscribe(
-        (request) => {
-          if (request && request.user && request.user.data) {
-            this.userProfile = request.user.data.userprofile;
-            this.user = this.userProfile.user;
+      this.authenticateService.authenticationSubjectObservable.subscribe({
+        next: (request) => {
+          console.log('STORAGES');
 
+          console.log(this.oauthStorage,);
+          console.log(sessionStorage);
+          console.log(localStorage);
+
+
+          console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
+
+          if (request ) {
+            // this.userProfile = request.user.data.userprofile;
+
+            this.user = request;
+            this.addUserMenu();
             this.configRoles();
           } else {
             this.logoff();
           }
         },
-        (error: any) => {
+        error: (e) => {
           this.user = null;
         },
-        () => {}
-      );
+        complete: () => console.info('complete authenticateSuscription'),
+      });
   }
+
   private configRoles() {
     let roles = '';
     for (const rol in this.user.roles) {
@@ -432,6 +446,7 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.headerSubscription.unsubscribe();
+    this.authenticateSuscription.unsubscribe();
   }
 
   /*******************************************************************

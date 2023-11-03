@@ -74,28 +74,28 @@ export class AppComponent {
   }
 
   public ngOnInit(): void {
-    let request = JSON.parse(this.oauthStorage.getItem('user'));
+    // let request = JSON.parse(this.oauthStorage.getItem('user'));
 
-    if (request) {
-      this.user = request.data.userprofile.user;
-      this.configRoles();
-    }
+    // if (request) {
+    //   this.user = request.data.userprofile.user;
+    //   this.configRoles();
+    // }
 
-    this.authenticateSuscription =
-      this.authenticateService.authenticationSubjectObservable.subscribe(
-        (request) => {
-          if (request) {
-            this.user = request.data.userprofile.user;
-            this.configRoles();
-          } else {
-            this.logoff();
-          }
-        },
-        (error: any) => {
-          this.user = null;
-        },
-        () => {}
-      );
+    // this.authenticateSuscription =
+    //   this.authenticateService.authenticationSubjectObservable.subscribe(
+    //     (request) => {
+    //       if (request) {
+    //         this.user = request.data.userprofile.user;
+    //         this.configRoles();
+    //       } else {
+    //         this.logoff();
+    //       }
+    //     },
+    //     (error: any) => {
+    //       this.user = null;
+    //     },
+    //     () => {}
+    //   );
 
       this.setupIcons();
   }
@@ -154,23 +154,23 @@ export class AppComponent {
   }
 
   private configRoles() {
-    let roles = "";
-    for (const rol in this.user.roles) {
-      const element = this.user.roles[rol];
-      roles += "," + element.name;
-    }
-    this.oauthStorage.setItem("roles", roles);
+    // let roles = "";
+    // for (const rol in this.user.roles) {
+    //   const element = this.user.roles[rol];
+    //   roles += "," + element.name;
+    // }
+    // this.oauthStorage.setItem("roles", roles);
   }
   ngOnDestroy(): void {
-    if (this.authenticateSuscription) {
-      this.authenticateSuscription.unsubscribe();
-    }
+    // if (this.authenticateSuscription) {
+    //   this.authenticateSuscription.unsubscribe();
+    // }
   }
 
   public logoff() {
-    this.oauthService.logOut();
-    this.oauthStorage.removeItem('user');
-    this.user = null;
+    // this.oauthService.logOut();
+    // this.oauthStorage.removeItem('user');
+    // this.user = null;
   }
 
 }

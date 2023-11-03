@@ -4,17 +4,18 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { ReactiveFormsModule } from "@angular/forms";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
+import { OAuthStorage } from "angular-oauth2-oidc";
 import { RecaptchaModule } from "ng-recaptcha";
 import { MarkdownModule } from "ngx-markdown";
-import { allowedURLS, environment } from "src/environments/environment";
+import { environment } from "src/environments/environment";
 
 import {
   CoreModule,
   Environment,
   HTTP_INTERCEPTOR_PROVIDERS,
   StaticsModule,
-  TocoFormsModule
+  TocoFormsModule,
+  storageFactory
 } from "toco-lib";
 import { ContactComponent } from "../../src/evaluations/contact/contact.component";
 import { HomeComponent } from "../../src/evaluations/home/home.component";
@@ -26,7 +27,6 @@ import { EvaluationsComponent } from "./evaluations.component";
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
 import { CommonModule } from "@angular/common";
-import { storageFactory } from "src/app/core/authentication/authentication.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { CategoryTableComponent } from "../../src/evaluations/evaluation-view/category-table/category-table.component";
 import { EvaluationViewComponent } from "../../src/evaluations/evaluation-view/evaluation-view.component";
@@ -78,12 +78,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TocoFormsModule,
 
     EvaluationsRoutingModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: allowedURLS,
-        sendAccessToken: true,
-      },
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //     allowedUrls: allowedURLS,
+    //     sendAccessToken: true,
+    //   },
+    // }),
 
   ],
   providers: [

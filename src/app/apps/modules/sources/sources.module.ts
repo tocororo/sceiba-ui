@@ -13,14 +13,13 @@ import {
   CoreModule, Environment,
   HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth,
   OrganizationsModule, SearchService, SourceService, SourceServiceNoAuth,
-  TaxonomyService, TocoFormsModule, UserProfileService
+  TaxonomyService, TocoFormsModule, UserProfileService, storageFactory
 } from 'toco-lib';
 
 import { CommonModule } from '@angular/common';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
-import { storageFactory } from 'src/app/core/authentication/authentication.service';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 import { SharedModule } from "src/app/shared/shared.module";
-import { allowedURLS, environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { HomeComponent } from '../../src/sources/home/home.component';
 import { SceibaMenuAppsComponent } from '../../src/sources/menu-apps/menu-apps.component';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
@@ -72,12 +71,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     MarkdownModule.forRoot({
       loader: HttpClient
     }),
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: allowedURLS,
-        sendAccessToken: true,
-      },
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //     allowedUrls: allowedURLS,
+    //     sendAccessToken: true,
+    //   },
+    // }),
   ],
   providers: [
     SearchService,

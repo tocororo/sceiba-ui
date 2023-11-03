@@ -5,10 +5,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { allowedURLS } from 'src/environments/environment';
 import { AuthenticationModule } from 'toco-lib';
 import { SharedModule } from '../shared/shared.module';
-import { SceibaUiAuthenticationComponent } from './authentication/authentication.component';
-import { OauthAuthenticationService } from './authentication/authentication.service';
 import { SceibaUiFooterComponent } from './footer/footer.component';
 import { HeaderService } from './header.service';
 import { SceibaUIHeaderComponent } from './header/header.component';
@@ -25,6 +25,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+
+export function storageFactory(): OAuthStorage {
+  console.log("storageFactory in  sceiba ui core module!!!!!!");
+
+  return localStorage;
+}
+
+
 @NgModule({
   declarations: [
     SceibaUIHeaderComponent,
@@ -37,14 +45,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SceibaUiMenuItemElementComponent,
     SceibaUiPageNotFoundComponent,
     SceibaUiBreadcrumbsComponent,
-    SceibaUiAuthenticationComponent,
   ],
   exports: [
     SceibaUIHeaderComponent,
     SceibaUiMenuComponent,
     SceibaUiMenuItemComponent,
     SceibaUiFooterComponent,
-    SceibaUiAuthenticationComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +59,16 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     TranslateModule,
     AuthenticationModule,
     RouterModule.forChild([]),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: allowedURLS,
+        sendAccessToken: true,
+      },
+    }),
   ],
+  providers: [
+    { provide: OAuthStorage, useFactory: storageFactory },
+  ]
 })
 export class SceibaUiCoreModule {
   constructor(@Optional() @SkipSelf() parentModule?: SceibaUiCoreModule) {
@@ -68,7 +83,6 @@ export class SceibaUiCoreModule {
       ngModule: SceibaUiCoreModule,
       providers: [
         HeaderService,
-        OauthAuthenticationService
       ]
     };
   }

@@ -46,14 +46,17 @@
 
       <sceiba-ui-menu [menuItems]="_menuMainIcons"></sceiba-ui-menu>
 
-      <sceiba-ui-authentication
-        *ngIf="!user"
-        [oauthInfo]="oauthInfo"
-        [isButtonLogin]="true"
-        [isButtonLoginIcon]="true"
-        [isButtonLoginText]="'AUTENTICARSE' | translate"
-      >
-      </sceiba-ui-authentication>
+      <toco-authentication
+      *ngIf="!user"
+      [oauthInfo]="oauthInfo"
+      [isButtonLogin]="'true'"
+      [isButtonLoginIcon]="'true'"
+      [isButtonLoginText]="'AUTENTICARSE' | translate"
+    >
+    </toco-authentication>
+
+    <sceiba-ui-menu *ngIf="user" [menuItems]="_userMainMenu"></sceiba-ui-menu>
+
     </div>
   </mat-toolbar-row>
   <!-- <mat-toolbar-row style="height: fit-content; justify-content: space-around">

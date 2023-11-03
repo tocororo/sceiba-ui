@@ -7,14 +7,13 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from "src/app/shared/shared.module";
-import { CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+import { CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService, storageFactory } from 'toco-lib';
 import { CatalogModule } from '../../src/sources/catalog/catalog.module';
 import { PermissionsModule } from '../../src/sources/permissions/permissions.module';
 
 import { CommonModule } from '@angular/common';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
-import { storageFactory } from 'src/app/core/authentication/authentication.service';
-import { allowedURLS, environment } from 'src/environments/environment';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+import { environment } from 'src/environments/environment';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
 import { RevistasMesRoutingModule } from './revistasmes-routing.module';
 import { RevistasMesComponent } from './revistasmes.component';
@@ -54,12 +53,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         }),
         CatalogModule,
         PermissionsModule,
-        OAuthModule.forRoot({
-          resourceServer: {
-            allowedUrls: allowedURLS,
-            sendAccessToken: true,
-          },
-        }),
+        // OAuthModule.forRoot({
+        //   resourceServer: {
+        //     allowedUrls: allowedURLS,
+        //     sendAccessToken: true,
+        //   },
+        // }),
     ],
     providers: [
         SourceService,

@@ -11,9 +11,7 @@ import {
   NavigationStart,
   Router
 } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
-import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
-import { OauthAuthenticationService } from "src/app/core/authentication/authentication.service";
+import { OAuthStorage } from "angular-oauth2-oidc";
 import { HeaderService } from "src/app/core/header.service";
 import { MenuElement } from "src/app/core/header/header.component";
 import {
@@ -36,10 +34,7 @@ export class RevistasMesComponent {
   constructor(
     private environment: Environment,
     private oauthStorage: OAuthStorage,
-    private oauthService: OAuthService,
-    private authenticateService: OauthAuthenticationService,
     private router: Router,
-    private _transServ: TranslateService,
     private headerService: HeaderService
   ) {
     this.env = this.environment;
@@ -57,7 +52,7 @@ export class RevistasMesComponent {
           this.loading = false;
         }
       },
-      (error: any) => {},
+      () => {},
       () => {}
     );
 

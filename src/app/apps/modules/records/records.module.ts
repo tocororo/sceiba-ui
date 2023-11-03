@@ -9,12 +9,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule /*, RecaptchaLoaderService*/ } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
-import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from "src/app/shared/shared.module";
 import { environment } from 'src/environments/environment';
 import {
   CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
-  SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
+  SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule, storageFactory
 } from 'toco-lib';
 import { ContactComponent } from '../../src/records/contact/contact.component';
 import { HomeComponent } from '../../src/records/home/home.component';
