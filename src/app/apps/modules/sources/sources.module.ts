@@ -21,7 +21,6 @@ import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { storageFactory } from 'src/app/core/authentication/authentication.service';
 import { SharedModule } from "src/app/shared/shared.module";
 import { allowedURLS, environment } from 'src/environments/environment';
-import { SceibaFooterComponent } from '../../src/sources/footer/footer.component';
 import { HomeComponent } from '../../src/sources/home/home.component';
 import { SceibaMenuAppsComponent } from '../../src/sources/menu-apps/menu-apps.component';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
@@ -42,14 +41,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   declarations: [
     SourcesComponent,
     HomeComponent,
-    SceibaFooterComponent,
     StaticPagesComponent,
     UserProfileComponent,
     StatisticsComponent,
     SceibaMenuAppsComponent
   ],
   exports:[
-    SceibaFooterComponent,
     SceibaMenuAppsComponent
   ],
   imports: [

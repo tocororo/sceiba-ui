@@ -153,9 +153,9 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.setupLang();
     this.setupMenus();
 
-    console.log('USER:', this.user);
+    // console.log('USER:', this.user);
     let roles = this.oauthStorage.getItem('roles');
-    console.log('ROLES:', roles);
+    // console.log('ROLES:', roles);
   }
 
   private setupLang() {
@@ -393,7 +393,7 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   private setupUser() {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
-    console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
+    // console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
 
     if (request && request.user && request.user.data) {
       this.userProfile = request.user.data.userprofile;

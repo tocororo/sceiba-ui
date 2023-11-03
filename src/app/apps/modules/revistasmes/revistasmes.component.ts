@@ -89,7 +89,7 @@ export class RevistasMesComponent {
     ];
 
     let data = {
-      icon: '/assets/icons/apps/revistasmes.svg',
+      icon: '/assets/icons/apps/revistasmes.png',
       iconLabel: 'REVISTAS_MES',
       iconAlt: 'REVISTAS_MES',
       iconRoute: this.env.revistasmes,

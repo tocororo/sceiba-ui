@@ -17,7 +17,6 @@ import {
   SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 } from 'toco-lib';
 import { ContactComponent } from '../../src/records/contact/contact.component';
-import { SceibaFooterComponent } from '../../src/records/footer/footer.component';
 import { HomeComponent } from '../../src/records/home/home.component';
 import { SceibaMenuAppsComponent } from '../../src/records/menu-apps/menu-apps.component';
 import { PageNotFoundSceibaComponent } from '../../src/records/page-not-found-sceiba/page-not-found-sceiba.component';
@@ -38,7 +37,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     HomeComponent,
 
     ContactComponent,
-    SceibaFooterComponent,
     SceibaMenuAppsComponent
   ],
   imports: [
