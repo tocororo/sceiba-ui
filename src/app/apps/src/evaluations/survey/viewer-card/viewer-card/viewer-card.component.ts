@@ -3,10 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
-import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent,
-	TextInputAppearance, ValidatorArguments } from 'toco-lib';
+import {
+    InputBoolComponent, InputNumberComponent, InputSelectComponent,
+    SelectContent,
+    TextInputAppearance, ValidatorArguments
+} from 'toco-lib';
 
-import { CategoryQuestionType, SurveySection, CategoryQuestion } from '../../evaluation.entity';
+import { CategoryQuestion, CategoryQuestionType, SurveySection } from '../../evaluation.entity';
 
 @Component({
 	selector: 'app-viewer-card',
@@ -83,7 +86,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.standard,
+								'appearance': TextInputAppearance.fill,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -103,7 +106,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.standard,
+								'appearance': TextInputAppearance.fill,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -119,7 +122,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.standard,
+								'appearance': TextInputAppearance.fill,
 								'ariaLabel': question.desc,
 								'selectOptions': question.selectOptions,
 								'multiple': false,

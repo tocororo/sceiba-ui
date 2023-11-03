@@ -34,7 +34,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatTreeModule } from '@angular/material/tree';
 
 /**
  * A module that contains all angular material modules that are needed.
@@ -71,7 +70,7 @@ import { MatTreeModule } from '@angular/material/tree';
         MatDatepickerModule,
         MatNativeDateModule,
         MatListModule,
-        MatTreeModule,
+        // MatTreeModule,
         MatBadgeModule,
         MatStepperModule,
         MatRippleModule,
@@ -110,7 +109,7 @@ import { MatTreeModule } from '@angular/material/tree';
         MatDatepickerModule,
         MatNativeDateModule,
         MatListModule,
-        MatTreeModule,
+        // MatTreeModule,
         MatBadgeModule,
         MatStepperModule,
         MatRippleModule,
