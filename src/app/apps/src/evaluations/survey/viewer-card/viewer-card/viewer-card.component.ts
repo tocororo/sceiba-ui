@@ -4,9 +4,9 @@ import { UntypedFormGroup } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import {
-    InputBoolComponent, InputNumberComponent, InputSelectComponent,
-    SelectContent,
-    TextInputAppearance, ValidatorArguments
+  InputBoolComponent, InputNumberComponent, InputSelectComponent,
+  SelectContent,
+  TextInputAppearance, ValidatorArguments
 } from 'toco-lib';
 
 import { CategoryQuestion, CategoryQuestionType, SurveySection } from '../../evaluation.entity';
@@ -86,7 +86,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.fill,
+								'appearance': TextInputAppearance.outline,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -106,7 +106,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.fill,
+								'appearance': TextInputAppearance.outline,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -122,7 +122,7 @@ export class ViewerCardComponent implements OnInit
 								'value': question.answer,
 								'required': false,
 								'width': '100%',
-								'appearance': TextInputAppearance.fill,
+								'appearance': TextInputAppearance.outline,
 								'ariaLabel': question.desc,
 								'selectOptions': question.selectOptions,
 								'multiple': false,
