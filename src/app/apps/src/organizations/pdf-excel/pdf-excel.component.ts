@@ -1,10 +1,10 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// import pdfMake from 'pdfmake/build/pdfmake';
+// import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const options = [ { key: 'identifiers', value: 'Lista de los identificadores de la organización'},
   { key: 'aliases', value: 'Lista de otros nombres con los que se conoce la organización'},
@@ -341,7 +341,7 @@ export class PdfExcelComponent implements OnInit {
       },
     };
 
-    pdfMake.createPdf(documentDefinition).open();
+    // pdfMake.createPdf(documentDefinition).open();
   }
 
   openDialog(): void {

@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 
-@import './styles/typography';
-@import './styles/app-theme';
+@import './styles/_typography';
+@import './styles/_app-theme';
 /* For use in src/lib/core/theming/_palette.scss */
 $md-blue: (
     50 : #e1edf0,
