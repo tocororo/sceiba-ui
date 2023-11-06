@@ -23,24 +23,42 @@
   </mat-card-header>
 </mat-card>
 
-
 <ng-container *ngIf="!loading && !error && editingVersion">
   <mat-toolbar
     fxLayout="row wrap"
     fxLayoutAlign="space-between center"
-    [ngStyle]="{ width: '100%', 'height': 'auto', 'padding': '16px', 'min-height': '56px'}"
+    [ngStyle]="{
+      width: '100%',
+      height: 'auto',
+      padding: '16px',
+      'min-height': '56px'
+    }"
   >
-
-    <span [ngStyle]="{'white-space': 'normal'}">
-      {{source_type_label()}}: {{ editingVersion.data.name }}
-    </span>
-
+    <div fxLayout="column wrap">
+      <span class="mat-headline-6"> {{ editingVersion.data.name }}</span>
+      <span class="mat-caption" color="primary">
+        SceibaID: {{ editingVersion.source_uuid }}
+      </span>
+      <span class="mat-caption">
+        {{ source_type_label }}
+      </span>
+    </div>
 
     <div fxLayout="row wrap" fxLayoutGap="20px">
-      <button mat-stroked-button color="primary" (click)="desapprove()" *ngIf="can_publish() && is_approved()">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="desapprove()"
+        *ngIf="can_publish() && is_approved()"
+      >
         Despublicar
       </button>
-      <button mat-stroked-button color="primary" (click)="publishEditingVersion()" *ngIf="can_publish()">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="publishEditingVersion()"
+        *ngIf="can_publish()"
+      >
         Publicar la revisión actual
       </button>
       <!-- <button mat-stroked-button color="warn" (click)="editVersion()">
@@ -53,14 +71,12 @@
     </div>
   </mat-toolbar>
   <ng-container *ngIf="editingVersion && versions">
-  <catalog-journal-view
-    #view
-    [editingSource]="editingVersion"
-    [versions]="versions"
-    [topMainOrganization]="topMainOrganization"
-  >
-  </catalog-journal-view>
+    <catalog-journal-view
+      #view
+      [editingSource]="editingVersion"
+      [versions]="versions"
+      [topMainOrganization]="topMainOrganization"
+    >
+    </catalog-journal-view>
   </ng-container>
-
-
 </ng-container>

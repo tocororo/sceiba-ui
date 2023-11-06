@@ -20,17 +20,16 @@
           class="mat-18 notification-position"
           color="accent"
           *ngIf="!currentJournal.reviewed"
-          matTooltip="{{ currentJournal.comment }}"
+          matTooltip="{{ currentJournal.created_at | date }}. {{
+            currentJournal.userprofile.identify()
+          }}"
           >adjust</mat-icon
         >
       </div>
     </mat-card-title>
 
     <mat-card-subtitle>
-      <mat-label> {{ currentJournal.created_at | date }}. </mat-label>
-      <mat-label>
-        {{ currentJournal.userprofile.identify() }}
-      </mat-label>
+      <mat-label> {{ currentJournal.comment }} </mat-label>
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -53,7 +52,7 @@
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.shortname"
@@ -62,21 +61,21 @@
     <mat-label style="font-weight: bold">ISSN: </mat-label>
     <div style="margin-left: 0.8em">
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.issnP"
       ></catalog-journal-view-version-field>
 
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.issnE"
       ></catalog-journal-view-version-field>
 
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.issnL"
@@ -85,76 +84,76 @@
     <mat-label style="font-weight: bold">RNPS: </mat-label>
     <div style="margin-left: 0.8em">
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.rnpsP"
       ></catalog-journal-view-version-field>
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.rnpsE"
       ></catalog-journal-view-version-field>
     </div>
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.url"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.oaiurl"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.email"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.seriadas_cubanas"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.purpose"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.start_year"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.end_year"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.frequency"
     ></catalog-journal-view-version-field>
 
     <catalog-journal-view-version-field
-    (editingJournalChange)="fieldEditingJournalChange()"
+      (editingJournalChange)="fieldEditingJournalChange()"
       [editingJournal]="editingJournal"
       [currentJournal]="currentJournal"
       [type]="journalDataType.description"
@@ -169,21 +168,21 @@
     <mat-label style="font-weight: bold">Redes Sociales:</mat-label>
     <div style="margin-left: 0.8em">
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.facebook"
       ></catalog-journal-view-version-field>
 
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.twitter"
       ></catalog-journal-view-version-field>
 
       <catalog-journal-view-version-field
-      (editingJournalChange)="fieldEditingJournalChange()"
+        (editingJournalChange)="fieldEditingJournalChange()"
         [editingJournal]="editingJournal"
         [currentJournal]="currentJournal"
         [type]="journalDataType.linkedin"

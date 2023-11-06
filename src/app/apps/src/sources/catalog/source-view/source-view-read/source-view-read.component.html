@@ -1,26 +1,11 @@
 <toco-progress [loading]="saving"> </toco-progress>
 
-<!-- <div *ngIf="source" fxLayout="row" fxLayoutGap="1em">
-</div> -->
-
-<!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center" [ngStyle]="{'width': '100%'}">
-    <h2>
-      {{ pageTitle }}
-    </h2>
-    <button
-      *ngIf="showEditHeader"
-      mat-stroked-button
-      color="warn"
-      (click)="cancelStepper()"
-    >
-      Cancelar
-    </button>
-</div> -->
-
 <ng-container *ngIf="source" [ngSwitch]="source.data.source_type">
-  <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
-    <span class="mat-h2">{{ source.data.name | translate }}</span>
-    <div fxLayoutAlign="end center" fxLayout="row"></div>
+  <div fxLayout="column wrap" fxLayoutAlign="space-between" style="height: 80px; padding: 0px 16px;">
+    <span class="mat-headline-6"> {{ source.data.name }}</span>
+    <span class="mat-caption" color="primary">
+      SceibaID: {{ source.source_uuid }}
+    </span>
   </div>
   <ng-container *ngIf="source">
     <catalog-source-view-version-info

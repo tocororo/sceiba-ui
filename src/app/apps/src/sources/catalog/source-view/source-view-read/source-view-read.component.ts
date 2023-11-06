@@ -25,10 +25,8 @@ export class SourceViewReadComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(
-      (response) => {
-        console.log("VIEW READ SOURCE")
-        console.log(response);
+    this.route.data.subscribe({
+      next: (response) => {
         if (response.source && response.source.metadata) {
           let src = response.source.metadata;
           let data;
@@ -37,8 +35,11 @@ export class SourceViewReadComponent implements OnInit {
               data = new JournalData();
               data.deepcopy(src);
               this.source = new JournalVersion();
-              this.source.source_uuid = data.id;
               this.source.data.deepcopy(data);
+              this.source.source_uuid = response.source.id;
+
+              console.log(this.source);
+
               break;
 
             default:
@@ -55,13 +56,13 @@ export class SourceViewReadComponent implements OnInit {
           m.showMessage(StatusCode.serverError, response.toString());
         }
       },
-      (err: any) => {
+      error: (err: any) => {
         console.log("error: " + err + ".");
       },
-      () => {
+      complete: () => {
         console.log("complete");
       }
-    );
+    });
   }
   getIdentifier(idtype: IdentifierSchemas) {
     var r = this.source

@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
-import { SourceResolver } from '../../src/sources/_services/source-resolver';
+import { SourceNoAuthResolver, SourceResolver } from '../../src/sources/_services/source-resolver';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 import { RevistasMesComponent } from './revistasmes.component';
@@ -20,9 +20,38 @@ const routes: Routes = [
     component: RevistasMesComponent,
     children: [
       {
-        path: 'sources',
+        path: 'directory',
         loadChildren: () => import('../../src/sources/catalog/catalog.module').then(m => m.CatalogModule),
         data: { topOrganizationPID: 'orgaid.223'},
+        // component: CatalogComponent,
+        // children: [
+        //   {
+        //     path: 'new',
+        //     component: SourceInclusionComponent,
+        //   },
+        //   {
+        //     path: ':uuid',
+        //     component: SourceViewReadComponent,
+        //     // canActivate: [SourceViewGuard],
+        //     resolve: {
+        //       source: SourceResolver,
+        //     },
+        //   },
+        //   {
+        //     path: ':uuid/view',
+        //     component: SourceViewComponent,
+        //     resolve: {
+        //       source: SourceResolver,
+        //     },
+        //   },
+        //   {
+        //     path: ':uuid/edit',
+        //     component: SourceEditComponent,
+        //     resolve: {
+        //       source: SourceResolver,
+        //     },
+        //   },
+        // ]
         // canActivate: [OauthAuthenticationService]
       },
       {
@@ -75,6 +104,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SourceResolver],
+  providers: [SourceResolver, SourceNoAuthResolver],
 })
 export class RevistasMesRoutingModule {}

@@ -152,9 +152,7 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.setupUser();
     this.setupLang();
 
-    console.log('USER:', this.user);
     let roles = this.oauthStorage.getItem('roles');
-    console.log('ROLES:', roles);
   }
 
   private setupLang() {
@@ -385,8 +383,6 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   private addUserMenu(){
     if (this.user ) {
-     console.log(this._menuAuthenticatedUser, 'FFFFFF');
-
       this._userMainMenu = [{
         nameTranslate: this.user ? this.user.email.split('@')[0] : '',
         icon: 'person_pin',
@@ -409,14 +405,6 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe({
         next: (request) => {
-          console.log('STORAGES');
-
-          console.log(this.oauthStorage,);
-          console.log(sessionStorage);
-          console.log(localStorage);
-
-
-          console.log(this.oauthStorage, 'storageeeeee', request, 'USERRRRRRRRRRR');
 
           if (request ) {
             // this.userProfile = request.user.data.userprofile;
@@ -472,7 +460,7 @@ export class SceibaUIHeaderComponent implements OnInit {
    */
   public setLanguage(index: number): void {
     if (index != this.currentLang) {
-      console.log('setLanguage method is called with language: ', index);
+      // console.log('setLanguage method is called with language: ', index);
 
       let currentLangAsString: string = convertLangFromNumberToString(
         (this.currentLang = index)
@@ -489,7 +477,7 @@ export class SceibaUIHeaderComponent implements OnInit {
   }
 
   public login() {
-    console.log('hi');
+    // console.log('hi');
 
     this.oauthService.initImplicitFlow();
   }
@@ -523,7 +511,7 @@ export class SceibaUIHeaderComponent implements OnInit {
   public me() {
     this.getUserInfo().subscribe({
       next: (response) => {
-        console.log(response);
+        // console.log(response);
       },
 
       error: (e) => {},

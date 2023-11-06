@@ -3,30 +3,25 @@
  *   All rights reserved.
  */
 
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router
-} from "@angular/router";
-import { OAuthStorage } from "angular-oauth2-oidc";
-import { HeaderService } from "src/app/core/header.service";
-import { MenuElement } from "src/app/core/header/header.component";
-import {
-  Environment
-} from "toco-lib";
+  Router,
+} from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+import { HeaderService } from 'src/app/core/header.service';
+import { MenuElement } from 'src/app/core/header/header.component';
+import { Environment } from 'toco-lib';
 
 @Component({
-  selector: "seiba-ui-revistasmes-root",
-  templateUrl: "./revistasmes.component.html",
-  styleUrls: ["./revistasmes.component.scss"],
+  selector: 'seiba-ui-revistasmes-root',
+  templateUrl: './revistasmes.component.html',
+  styleUrls: ['./revistasmes.component.scss'],
 })
 export class RevistasMesComponent {
-
-
-
   public _subMenus: MenuElement[];
   loading = false;
 
@@ -38,8 +33,8 @@ export class RevistasMesComponent {
     private headerService: HeaderService
   ) {
     this.env = this.environment;
-    this.router.events.subscribe(
-      (event) => {
+    this.router.events.subscribe({
+      next: (event) => {
         if (event instanceof NavigationStart) {
           this.loading = true;
         }
@@ -52,9 +47,9 @@ export class RevistasMesComponent {
           this.loading = false;
         }
       },
-      () => {},
-      () => {}
-    );
+      error: () => {},
+      complete: () => {},
+    });
 
     this._subMenus = [
       // {
@@ -65,12 +60,12 @@ export class RevistasMesComponent {
       {
         nameTranslate: 'REVISTAS_MES_DIRECTORY',
         useRouterLink: true,
-        href: this.environment.revistasmes + '/sources',
+        href: this.environment.revistasmes + '/directory',
       },
       {
         nameTranslate: 'REVISTAS_MES_INCLUDE_JOURNAL',
         useRouterLink: true,
-        href: this.environment.revistasmes + '/sources/new/journal',
+        href: this.environment.revistasmes + '/directory/new/journal',
         disabled: this.notAuthenticated,
       },
       {
@@ -92,16 +87,12 @@ export class RevistasMesComponent {
       extraMenuAuthenticatedUser: null,
     };
     this.headerService.setHeaderData(data);
-
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void {}
 
-  }
-
-  public get notAuthenticated() : boolean {
+  public get notAuthenticated(): boolean {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
     return request == (null || undefined);
   }

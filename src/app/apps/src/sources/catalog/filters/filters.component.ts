@@ -28,7 +28,7 @@ export const CatalogFilterKeys = {
   subjects: "subjects",
   grupo_mes: "grupo_mes",
   indexes: "indexes",
-  // source_status: "source_status"
+  source_status: "source_status"
 };
 
 @Component({

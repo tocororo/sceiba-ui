@@ -4,8 +4,8 @@ import {
   style,
   transition,
   trigger,
-} from "@angular/animations";
-import { HttpParams } from "@angular/common/http";
+} from '@angular/animations';
+import { HttpParams } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -14,15 +14,15 @@ import {
   Input,
   OnInit,
   ViewChild,
-} from "@angular/core";
+} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
   MatDialogRef,
-} from "@angular/material/dialog";
-import { PageEvent } from "@angular/material/paginator";
-import { MatDrawer } from "@angular/material/sidenav";
-import { MatSnackBar } from "@angular/material/snack-bar";
+} from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatDrawer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ActivatedRoute,
   NavigationExtras,
@@ -30,7 +30,7 @@ import {
   Params,
   Router,
   convertToParamMap,
-} from "@angular/router";
+} from '@angular/router';
 import {
   Environment,
   FilterHttpMap,
@@ -45,23 +45,23 @@ import {
   Source,
   SourceServiceNoAuth,
   StatusCode,
-} from "toco-lib";
-import { CatalogFilterKeys } from "./filters/filters.component";
+} from 'toco-lib';
+import { CatalogFilterKeys } from './filters/filters.component';
 
 @Component({
-  selector: "catalog-search",
-  templateUrl: "./catalog.component.html",
-  styleUrls: ["./catalog.component.scss"],
+  selector: 'catalog-search',
+  templateUrl: './catalog.component.html',
+  styleUrls: ['./catalog.component.scss'],
   animations: [
-    trigger("detailExpand", [
+    trigger('detailExpand', [
       state(
-        "collapsed",
-        style({ height: "0px", minHeight: "0", display: "none" })
+        'collapsed',
+        style({ height: '0px', minHeight: '0', display: 'none' })
       ),
-      state("expanded", style({ height: "*" })),
+      state('expanded', style({ height: '*' })),
       transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       ),
     ]),
   ],
@@ -72,7 +72,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   initfilters = false;
   private hasErrors = false;
   dataSource = new HitList<Source>();
-  columnsToDisplay = ["title"]; //, "url"];
+  columnsToDisplay = ['title']; //, "url"];
   expandedElement: Source;
   length = 0;
   pageSize = 5;
@@ -84,28 +84,28 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   layoutPosition = [
     {
-      name: "Derecha",
-      layout: "row-reverse",
-      aling: "center baseline",
-      width: "22",
+      name: 'Derecha',
+      layout: 'row-reverse',
+      aling: 'center baseline',
+      width: '22',
     },
     {
-      name: "Izquierda",
-      layout: "row",
-      aling: "center baseline",
-      width: "22",
+      name: 'Izquierda',
+      layout: 'row',
+      aling: 'center baseline',
+      width: '22',
     },
     {
-      name: "Arriba",
-      layout: "column",
-      aling: "center center",
-      width: "90",
+      name: 'Arriba',
+      layout: 'column',
+      aling: 'center center',
+      width: '90',
     },
     {
-      name: "Abajo",
-      layout: "column-reverse",
-      aling: "center center",
-      width: "90",
+      name: 'Abajo',
+      layout: 'column-reverse',
+      aling: 'center center',
+      width: '90',
     },
   ];
   currentlayout = this.layoutPosition[1];
@@ -114,6 +114,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
+  public catalogPath = "";
   @Input() public usetopMainOrganization = false;
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
@@ -130,7 +131,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   /* ****************************************************
     HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     // console.log("window:resize", window.innerWidth);
     if (this.drawer) {
@@ -149,39 +150,43 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     end HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
   ngOnInit() {
+    let path = this.router.url.split('?');
+    if(path.length > 0){
+      this.catalogPath = path[0];
+    }
+
     this.activatedRoute.data.subscribe({
       next: (data: { topOrganizationPID: string }) => {
-        if (data && data.topOrganizationPID && data.topOrganizationPID != "") {
+        if (data && data.topOrganizationPID && data.topOrganizationPID != '') {
           this.topOrganizationPID = data.topOrganizationPID;
           if (
-            localStorage.getItem("topMainOrganization") &&
-            localStorage.getItem("topMainOrganization") != ""
+            localStorage.getItem('topMainOrganization') &&
+            localStorage.getItem('topMainOrganization') != ''
           ) {
             const response = JSON.parse(
-              localStorage.getItem("topMainOrganization")
+              localStorage.getItem('topMainOrganization')
             );
             this.topMainOrganization = response;
-            // new Organization();
-            // this.topMainOrganization.deepcopy(response.metadata);
             this.init();
           } else {
-            this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
-              (response) => {
-                // console.log(response)
-                this.topMainOrganization = response;
-                // new Organization();
-                // this.topMainOrganization.deepcopy(response.metadata);
-                localStorage.setItem(
-                  "topMainOrganization",
-                  JSON.stringify(response)
-                );
-                this.init();
-              },
-              (error) => {
-                console.log("error");
-              },
-              () => {}
-            );
+            this.orgService
+              .getOrganizationByPID(this.topOrganizationPID)
+              .subscribe({
+                next: (response) => {
+                  this.topMainOrganization = response;
+                  localStorage.setItem(
+                    'topMainOrganization',
+                    JSON.stringify(response)
+                  );
+                  this.init();
+                },
+
+                error: (error) => {
+                  console.log('ERROR', error);
+                },
+
+                complete: () => {},
+              });
           }
         } else {
           this.init();
@@ -195,7 +200,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   }
 
   init() {
-    this.metadata.setStandardMeta("Catálogo de Revistas Científicas", "", "");
+    this.metadata.setStandardMeta('Catálogo de Revistas Científicas', '', '');
     // this.paginator.firstPage();
     // this.paginator.pageSize = 5;
     this.searchParams = new HttpParams();
@@ -204,21 +209,21 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         this.filtersParams = params;
         // this.searchParams = this.searchParams.set('size', this.pageSize.toString(10));
         // this.searchParams = this.searchParams.set('page', this.pageIndex.toString(10));
-        if (params.has("size")) {
+        if (params.has('size')) {
           // this.pageSize = Number.parseInt(params.get("size"), 10);
-          this.searchParams = this.searchParams.set("size", params.get("size"));
+          this.searchParams = this.searchParams.set('size', params.get('size'));
         } else {
           this.searchParams = this.searchParams.set(
-            "size",
+            'size',
             this.pageSize.toString(10)
           );
         }
-        if (params.has("page")) {
+        if (params.has('page')) {
           // this.pageIndex = Number.parseInt(params.get("page"), 10);
-          this.searchParams = this.searchParams.set("page", params.get("page"));
+          this.searchParams = this.searchParams.set('page', params.get('page'));
         } else {
           this.searchParams = this.searchParams.set(
-            "page",
+            'page',
             (this.pageIndex + 1).toString(10)
           );
         }
@@ -240,85 +245,85 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           );
         }
         // TODO: this is not nice, but..
-        let query = "";
+        let query = '';
 
         if (params.has(CatalogFilterKeys.title)) {
           query = query.concat(params.get(CatalogFilterKeys.title));
         }
 
         if (this.topMainOrganization) {
-          if (query != "") {
+          if (query != '') {
             query = this.queryAddAndOp(query);
           }
           query = query.concat(
-            "(organizations.id:" + this.topMainOrganization.id + ")"
+            '(organizations.id:' + this.topMainOrganization.id + ')'
           );
         }
 
         if (params.has(CatalogFilterKeys.institutions)) {
           query = this.queryAddAndOp(query);
-          query = query.concat("(organizations.id:");
+          query = query.concat('(organizations.id:');
           params
             .get(CatalogFilterKeys.institutions)
-            .split(",")
+            .split(',')
             .forEach((uuid, index, array) => {
               query = query.concat(uuid);
               if (index < array.length - 1) {
-                query = query.concat(" OR ");
+                query = query.concat(' OR ');
               }
             });
-          query = query.concat(")");
+          query = query.concat(')');
         }
         if (params.has(CatalogFilterKeys.subjects)) {
           query = this.queryAddAndOp(query);
-          query = query.concat("(classifications.id:");
+          query = query.concat('(classifications.id:');
           params
             .get(CatalogFilterKeys.subjects)
-            .split(",")
+            .split(',')
             .forEach((uuid, index, array) => {
               query = query.concat(uuid);
               if (index < array.length - 1) {
-                query = query.concat(" OR ");
+                query = query.concat(' OR ');
               }
             });
-          query = query.concat(")");
+          query = query.concat(')');
         }
         if (params.has(CatalogFilterKeys.grupo_mes)) {
           query = this.queryAddAndOp(query);
-          query = query.concat("(classifications.id:");
+          query = query.concat('(classifications.id:');
           params
             .get(CatalogFilterKeys.grupo_mes)
-            .split(",")
+            .split(',')
             .forEach((uuid, index, array) => {
               query = query.concat(uuid);
               if (index < array.length - 1) {
-                query = query.concat(" OR ");
+                query = query.concat(' OR ');
               }
             });
-          query = query.concat(")");
+          query = query.concat(')');
         }
         if (params.has(CatalogFilterKeys.indexes)) {
           query = this.queryAddAndOp(query);
-          query = query.concat("(classifications.id:");
+          query = query.concat('(classifications.id:');
           params
             .get(CatalogFilterKeys.indexes)
-            .split(",")
+            .split(',')
             .forEach((uuid, index, array) => {
               query = query.concat(uuid);
               if (index < array.length - 1) {
-                query = query.concat(" OR ");
+                query = query.concat(' OR ');
               }
             });
-          query = query.concat(")");
+          query = query.concat(')');
         }
 
-        this.searchParams = this.searchParams.set("q", query);
-        console.log(this.searchParams, "SEARCH PAAAAAARAMS");
+        this.searchParams = this.searchParams.set('q', query);
+        console.log(this.searchParams, 'SEARCH PAAAAAARAMS');
 
         this.fetchJournalData();
         this.initfilters = true;
 
-        console.log("catalog comonent", params, this.filtersParams);
+        console.log('catalog comonent', params, this.filtersParams);
       },
       error: (e) => {},
       complete: () => {},
@@ -326,13 +331,13 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   }
 
   private queryAddAndOp(query) {
-    if (query != "") {
-      return query + " AND ";
+    if (query != '') {
+      return query + ' AND ';
     }
     return query;
   }
   ngOnChanges() {
-    console.log("change");
+    console.log('change');
   }
 
   filtersChange(values: Params) {
@@ -341,16 +346,16 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     // console.log(this.filtersParams);
     console.log(values);
     console.log(this.router.url);
-    values["page"] = this.pageIndex + 1;
-    values["size"] = this.pageSize;
+    values['page'] = this.pageIndex + 1;
+    values['size'] = this.pageSize;
 
     let navigationExtras: NavigationExtras = {
       relativeTo: this.activatedRoute,
       queryParams: values,
-      queryParamsHandling: "",
+      queryParamsHandling: '',
       replaceUrl: true,
     };
-    this.router.navigate(["."], navigationExtras);
+    this.router.navigate(['.'], navigationExtras);
     // this.paginator.firstPage();
   }
 
@@ -360,10 +365,10 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     const navigationExtras: NavigationExtras = {
       relativeTo: this.activatedRoute,
       queryParams: { page: event.pageIndex + 1, size: event.pageSize },
-      queryParamsHandling: "merge",
+      queryParamsHandling: 'merge',
     };
 
-    this.router.navigate(["."], navigationExtras);
+    this.router.navigate(['.'], navigationExtras);
   }
 
   public fetchJournalData() {
@@ -386,15 +391,15 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         // });
         // this.dataSource.data = arr;
         console.log(
-          "------------------------------------------",
+          '------------------------------------------',
           this.dataSource
         );
       },
       (err: any) => {
-        console.log("error: " + err + ".");
+        console.log('error: ' + err + '.');
       },
       () => {
-        console.log("complete");
+        console.log('complete');
         this.loading = false;
       }
     );
@@ -451,12 +456,12 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           const m = new MessageHandler(this._snackBar);
           m.showMessage(
             StatusCode.serverError,
-            "No fue posible encontrar la Revista"
+            'No fue posible encontrar la Revista'
           );
         }
       },
       (error) => {
-        console.log("error");
+        console.log('error');
       },
       () => {}
     );
@@ -464,7 +469,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 }
 
 @Component({
-  selector: "dialog-catalog-journal-info",
+  selector: 'dialog-catalog-journal-info',
   template: `
     <mat-dialog-content class="height-auto">
       <catalog-source-view-version-info

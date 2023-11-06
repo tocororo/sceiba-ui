@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
-import { SourceResolver } from '../../src/sources/_services/source-resolver';
+import { SourceNoAuthResolver, SourceResolver } from '../../src/sources/_services/source-resolver';
 import { HomeComponent } from '../../src/sources/home/home.component';
 import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
@@ -87,7 +87,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [SourceResolver],
+  providers: [SourceResolver, SourceNoAuthResolver],
 })
 export class SoucesRoutingModule
 { }

@@ -652,7 +652,7 @@ export class SourceEditJournalComponent implements OnInit {
           startHint: new HintValue(HintPosition.start, ''),
           width: '100%',
           minWidth: '100%',
-          value: this.journalData ? this.journalData._save_info.comment : '',
+          value: '',
         },
       ],
     };
@@ -782,16 +782,16 @@ export class SourceEditJournalComponent implements OnInit {
     this.journalVersion.comment = this.finalFormGroup.value['comment'];
     this.journalVersion.data.deepcopy(this.journalData);
 
-    console.log(this.identifiersFormGroup);
-    console.log(this.informationFormGroup);
-    console.log(this.organizationFormGroup);
-    console.log(this.indexesFormGroup);
-    console.log('QQQQQQQQQQQQQQQQQQQQQQQQ')
-    console.log(this.journalData);
+    // console.log(this.identifiersFormGroup);
+    // console.log(this.informationFormGroup);
+    // console.log(this.organizationFormGroup);
+    // console.log(this.indexesFormGroup);
+    // console.log('QQQQQQQQQQQQQQQQQQQQQQQQ')
+    // console.log(this.journalData);
   }
 
   public finishStepper() {
-    console.log(this.journalData);
+    // console.log(this.journalData);
     // console.log(this.journalVersion, this)
     this.fillJournalFields();
 

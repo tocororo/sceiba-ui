@@ -11,6 +11,9 @@ export class SearchListComponent implements OnInit {
   @Input()
   public hitList: HitList<Source>;
 
+  @Input()
+  public catalogPath: string = "";
+
   public env: Environment;
   public constructor(private environment: Environment) {
     this.env = this.environment;
