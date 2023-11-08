@@ -4,7 +4,7 @@
  */
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IdentifierSchemas, JournalData, JournalDataType, JournalVersion } from 'toco-lib';
+import { IdentifierSchemas, JournalData, JournalDataType, JournalVersion, SourceTypes } from 'toco-lib';
 
 /**
 * This component share the same scss that `JournalViewComponent`.
@@ -30,6 +30,8 @@ export class SourceJournalViewVersionFieldComponent implements OnInit {
     public journalDataType = JournalDataType;
     public IdentifierSchemas = IdentifierSchemas;
 
+
+    public tipos = SourceTypes;
     constructor() {
 
     }
@@ -202,6 +204,10 @@ export class SourceJournalViewVersionFieldComponent implements OnInit {
                     IdentifierSchemas.oaiurl,
                     this.currentJournal.data.getIdentifierValue(IdentifierSchemas.oaiurl));
                 break;
+            case JournalDataType.source_type:
+              concat ?
+                    this.editingJournal.data.source_type += ' ' + this.currentJournal.data.source_type :
+                    this.editingJournal.data.source_type = this.currentJournal.data.source_type;
         }
         this.editingJournalChange.emit(this.editingJournal);
     }

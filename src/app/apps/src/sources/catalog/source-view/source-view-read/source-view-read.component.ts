@@ -16,6 +16,9 @@ export class SourceViewReadComponent implements OnInit {
   public editingSource: SourceVersion;
   public dialogCommentText = "";
   public saving = false;
+  public source_type_label = SourceTypes.JOURNAL.label;
+
+
   constructor(
     private route: ActivatedRoute,
     private _router: Router,
@@ -37,7 +40,6 @@ export class SourceViewReadComponent implements OnInit {
               this.source = new JournalVersion();
               this.source.data.deepcopy(data);
               this.source.source_uuid = response.source.id;
-
               console.log(this.source);
 
               break;
@@ -50,6 +52,11 @@ export class SourceViewReadComponent implements OnInit {
               this.source.source_uuid = response.source.id;
               this.source.data.deepcopy(data);
               this.source.data.id = response.source.id;
+              if(src.source_type == this.sourceType.REPOSITORY.value){
+                this.source_type_label = this.sourceType.REPOSITORY.label;
+              } else {
+                this.source_type_label = this.sourceType.OTHER.label;
+              }
           }
         } else {
           const m = new MessageHandler(this._snackBar);

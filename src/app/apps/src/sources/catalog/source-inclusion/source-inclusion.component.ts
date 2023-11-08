@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import {
-  UntypedFormBuilder,
-  UntypedFormGroup
-} from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   ContainerPanelActionComponent,
@@ -24,9 +25,10 @@ import {
   Source,
   SourceService,
   SourceServiceNoAuth,
+  SourceStatus,
   SourceTypes,
   SourceVersion,
-  StatusCode
+  StatusCode,
 } from 'toco-lib';
 
 @Component({
@@ -42,6 +44,7 @@ export class SourceInclusionComponent implements OnInit {
   public topMainOrganization: Hit<Organization> = null;
 
   public sourceType = SourceTypes;
+  public sourceStatus = SourceStatus;
 
   public loading = false;
   public isStartProcess = true;
@@ -151,28 +154,35 @@ export class SourceInclusionComponent implements OnInit {
                   title
                 );
               }
-              console.log(response, response['status'], "***********************");
 
-              if (response && response['status'] == 'error')  {
-                console.log("++++++++++");
-
+              if (response && response['status'] == 'error') {
+                // TODO: this is not working...
                 this.source = new Journal();
                 this.versionToEdit = new JournalVersion();
                 this.source.isNew = true;
+                this.source.source_type = this.sourceType.JOURNAL.value;
+                this.source.source_status = this.sourceStatus.TO_REVIEW.value;
+                this.versionToEdit.data.source_status = this.sourceStatus.TO_REVIEW.value;
+                this.versionToEdit.data.source_type = this.sourceType.JOURNAL.value;
                 this.versionToEdit.isNew = true;
+                this.versionToEdit
                 this.loading = false;
                 this.isStartProcess = false;
+                this.versionToEdit.source_uuid = '';
                 m.showMessage(
                   StatusCode.OK,
                   content,
                   HandlerComponent.dialog,
                   title
                 );
+                console.log(
+                  '**************************',
+                  this.source,
+                  this.versionToEdit
+                );
               }
             },
-            error: (error: any) => {
-
-            },
+            error: (error: any) => {},
             complete: () => {},
           });
 
@@ -229,26 +239,39 @@ export class SourceInclusionComponent implements OnInit {
         accept: (role) => {
           this.dialog.closeAll();
           console.log(' KONIEC', role, this.versionToEdit);
-          this.sourceService
-            .newSource(this.versionToEdit, this.versionToEdit.source_uuid, role)
-            .subscribe({
-              next: (values) => {
-                let path = this._router.url.split('/');
+          let pid = this.versionToEdit.source_uuid;
 
-                this._router.navigate([
-                  path[1],
-                  path[2],
-                  this.versionToEdit.source_uuid,
-                  'view',
-                ]);
-              },
-              error: (err: any) => {
-                console.log('error: ' + err + '.');
-              },
-              complete: () => {
-                console.log('complete');
-              }
-            });
+          if (this.versionToEdit.source_uuid == '') {
+            if (this.versionToEdit.data.identifiers.length > 0) {
+              pid = this.versionToEdit.data.identifiers[0].value;
+            }
+          }
+          if (pid != '') {
+            this.sourceService
+              .newSource(this.versionToEdit, pid, role)
+              .subscribe({
+                next: (response) => {
+                  console.log(' KONIEC', response);
+                  let path = this._router.url.split('/');
+                  console.log(path);
+
+                  this._router.navigate([
+                    path[0],
+                    path[1],
+                    path[2],
+                    response.data.source.id,
+                    'view',
+                  ]);
+                },
+                error: (err: any) => {
+                  console.log('error: ' + err + '.');
+                },
+                complete: () => {
+                  console.log('complete');
+                },
+              });
+          }
+
         },
       },
     });
@@ -258,21 +281,22 @@ export class SourceInclusionComponent implements OnInit {
 @Component({
   selector: 'catalog-journal-addinstextra',
   template: `
-
-  <mat-card >
-  <mat-card-header>
-
-    <mat-card-title>Acuerdo legal</mat-card-title>
-
-  </mat-card-header>
-  <mat-card-content>
-    <div markdown [src]="'assets/markdown/catalog/source-inclusion-agreement.md'" style="margin: 2em;"></div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="primary" (click)="onAcept()" >Aceptar</button>
-    <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
-  </mat-card-actions>
-</mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Acuerdo legal</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div
+          markdown
+          [src]="'assets/markdown/catalog/source-inclusion-agreement.md'"
+          style="margin: 2em;"
+        ></div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="onAcept()">Aceptar</button>
+        <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+      </mat-card-actions>
+    </mat-card>
   `,
 })
 export class SourceInclusionAcceptComponent implements OnInit {
@@ -288,13 +312,12 @@ export class SourceInclusionAcceptComponent implements OnInit {
   ) {
     this.accept = data.accept;
   }
-  onAcept(): void{
-    this.accept("editor")
+  onAcept(): void {
+    this.accept('editor');
   }
   onCancel(): void {
     this.dialogRef.close();
   }
-
 
   ngOnInit() {
     // this.agreementFormGroup = this._formBuilder.group({
@@ -332,7 +355,6 @@ export class SourceInclusionAcceptComponent implements OnInit {
     //     {
     //       name: 'agree',
     //       label: 'Acepto',
-
     //       formControl: InputTextComponent.getFormControlByDefault(),
     //       type: FormFieldType.checkbox,
     //       controlType: CheckboxComponent,

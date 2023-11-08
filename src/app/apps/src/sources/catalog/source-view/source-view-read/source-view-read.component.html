@@ -1,12 +1,17 @@
 <toco-progress [loading]="saving"> </toco-progress>
 
+<div *ngIf="source" fxLayout="column wrap" style="padding: 0px 16px;">
+  <span class="mat-headline-6"> {{ source.data.name }}</span>
+  <span class="mat-caption" color="primary">
+    SceibaID: {{ source.source_uuid }}
+  </span>
+  <span class="mat-caption">
+    Tipo: Fuente - {{ source_type_label }}
+  </span>
+</div>
+
 <ng-container *ngIf="source" [ngSwitch]="source.data.source_type">
-  <div fxLayout="column wrap" fxLayoutAlign="space-between" style="height: 80px; padding: 0px 16px;">
-    <span class="mat-headline-6"> {{ source.data.name }}</span>
-    <span class="mat-caption" color="primary">
-      SceibaID: {{ source.source_uuid }}
-    </span>
-  </div>
+
   <ng-container *ngIf="source">
     <catalog-source-view-version-info
       #view

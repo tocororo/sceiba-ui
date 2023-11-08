@@ -15,8 +15,9 @@ import {
 
   UntypedFormControl, UntypedFormGroup
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
+import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HandlerComponent, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, StatusCode, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
 
 
 @Component({
@@ -88,7 +89,8 @@ export class SourceEditJournalComponent implements OnInit {
   public constructor(
     private metadata: MetadataService,
     public snackBar: MatSnackBar,
-    private formBuilder: UntypedFormBuilder
+    private formBuilder: UntypedFormBuilder,
+    private _dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -795,8 +797,14 @@ export class SourceEditJournalComponent implements OnInit {
     // console.log(this.journalVersion, this)
     this.fillJournalFields();
 
-    console.log(this.journalData);
-    this.journalEditDone.emit(this.journalVersion);
+    console.log(this.journalData, this.journalVersion);
+    if(this.journalData.identifiers.length  == 0 && this.journalVersion.source_uuid == ''){
+      const m = new MessageHandler(null,this._dialog);
+      m.showMessage(StatusCode.OK, 'Una revista debe tener titulo, al menos un identificador persistente y una url, revise sus datos.', HandlerComponent.dialog, "Error", "50%");
+    } else {
+      this.journalEditDone.emit(this.journalVersion);
+    }
+
   }
   public cancelStepper() {
     this.editCanceled.emit(true);

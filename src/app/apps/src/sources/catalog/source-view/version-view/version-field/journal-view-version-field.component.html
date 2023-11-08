@@ -49,6 +49,18 @@
       >
     </ng-container>
 
+    <ng-container *ngSwitchCase="journalDataType.source_type">
+      <mat-label style="font-weight: bold">Tipo:</mat-label>
+      <mat-label *ngIf="currentJournal.data.source_type">
+        {{ tipos[currentJournal.data.source_type].label }}
+      </mat-label>
+      <mat-label
+        *ngIf="!currentJournal.data.source_type"
+        class="text-muted text-through"
+        >Vacío</mat-label
+      >
+    </ng-container>
+
     <ng-container *ngSwitchCase="journalDataType.issnP">
       <catalog-source-view-version-info-field
         [label]="'Impreso'"

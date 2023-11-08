@@ -58,6 +58,13 @@
       [type]="journalDataType.shortname"
     ></catalog-journal-view-version-field>
 
+    <catalog-journal-view-version-field
+      (editingJournalChange)="fieldEditingJournalChange()"
+      [editingJournal]="editingJournal"
+      [currentJournal]="currentJournal"
+      [type]="journalDataType.source_type"
+    ></catalog-journal-view-version-field>
+
     <mat-label style="font-weight: bold">ISSN: </mat-label>
     <div style="margin-left: 0.8em">
       <catalog-journal-view-version-field

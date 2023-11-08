@@ -394,10 +394,12 @@ export class SceibaUIHeaderComponent implements OnInit {
   private setupUser() {
     let request = JSON.parse(this.oauthStorage.getItem('user'));
     if (request ) {
-      // this.userProfile = request.user.data.userprofile;
-      // this.user = request;
+      console.log('-----------------', request, '-------------------');
 
-      this.user = request;
+      this.userProfile = request.data.userprofile;
+      this.user = this.userProfile.user;
+
+      // this.user = request;
       this.addUserMenu();
       this.configRoles();
     }
@@ -405,11 +407,12 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe({
         next: (request) => {
+          console.log('++++++++++++++++++++', request, '+++++++++++++++');
 
           if (request ) {
-            // this.userProfile = request.user.data.userprofile;
+            this.userProfile = request.data.userprofile;
 
-            this.user = request;
+            this.user = this.userProfile.user;
             this.addUserMenu();
             this.configRoles();
           } else {
