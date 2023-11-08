@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SceibaUiHomeComponent } from './core/home/home.component';
+import { SceibaUiPageNotFoundComponent } from './core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 
 const routes: Routes = [
   {
@@ -28,9 +30,17 @@ const routes: Routes = [
       import("./apps/modules/sources/sources.module").then((mod) => mod.SolurcesAppModule),
   },
   {
-    path: "",
+    path: "records",
     loadChildren: () =>
       import("./apps/modules/records/records.module").then((mod) => mod.RecordsAppModule),
+  },
+  {
+    path: '',
+    component: SceibaUiHomeComponent,
+  },
+  {
+    path: "**",
+    component: SceibaUiPageNotFoundComponent,
   },
 ];
 

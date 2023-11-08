@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { MarkdownModule } from 'ngx-markdown';
 import { allowedURLS } from 'src/environments/environment';
 import { AuthenticationModule } from 'toco-lib';
 import { SharedModule } from '../shared/shared.module';
@@ -18,6 +19,7 @@ import { MenuSecondaryItemComponent } from './header/menu-secondary/menu-seconda
 import { MenuSecondaryComponent } from './header/menu-secondary/menu-secondary.component';
 import { SceibaUiMenuComponent } from './header/menu/menu.component';
 import { SceibaMenuAppsComponent } from './header/sceiba-ui-menu-apps/menu-apps.component';
+import { SceibaUiHomeComponent } from './home/home.component';
 import { SceibaUiBreadcrumbsComponent } from './sceiba-ui-breadcrumbs/sceiba-ui-breadcrumbs.component';
 import { SceibaUiPageNotFoundComponent } from './sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 
@@ -45,12 +47,14 @@ export function storageFactory(): OAuthStorage {
     SceibaUiMenuItemElementComponent,
     SceibaUiPageNotFoundComponent,
     SceibaUiBreadcrumbsComponent,
+    SceibaUiHomeComponent
   ],
   exports: [
     SceibaUIHeaderComponent,
     SceibaUiMenuComponent,
     SceibaUiMenuItemComponent,
     SceibaUiFooterComponent,
+    SceibaUiHomeComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +68,9 @@ export function storageFactory(): OAuthStorage {
         allowedUrls: allowedURLS,
         sendAccessToken: true,
       },
+    }),
+    MarkdownModule.forRoot({
+      loader: HttpClient
     }),
   ],
   providers: [

@@ -4,14 +4,15 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { timer } from 'rxjs';
 import { Environment, MetadataService, getPathWithLangExtension } from 'toco-lib';
+import { HeaderService } from "../header.service";
 
 
 @Component({
-  selector: "app-home",
+  selector: "sceiba-ui-app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
 })
-export class HomeComponent implements OnInit {
+export class SceibaUiHomeComponent implements OnInit {
 
   public documentTotal: number = 0;
   public cubanOrganizationTotal: number = 0;
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _transServ: TranslateService,
     private metadata: MetadataService,
-    private _env: Environment)
+    private _env: Environment,
+    private headerService: HeaderService)
   { }
 
   public ngOnInit(): void {
@@ -71,15 +73,17 @@ export class HomeComponent implements OnInit {
       this.showSlides(this.slideIndex);
     });
 
+    let data = {
+      icon: '/assets/icons/apps/discover.svg',
+      iconLabel: 'BUSQUEDA',
+      iconAlt: 'BUSQUEDA',
+      iconRoute: this.env.discover,
+      secondaryMenuElements: null,
+      extraMenuAuthenticatedUser: null,
+    };
+    this.headerService.setHeaderData(data);
   }
 
-  public queryChange(event?: string): void {
-    this._router.navigate(["search"], {
-      relativeTo: this._activatedRoute,
-      queryParams: { q: event },
-      queryParamsHandling: "",
-    });
-  }
 
   plusSlides(n: number) {
     this.showSlides(this.slideIndex += n);

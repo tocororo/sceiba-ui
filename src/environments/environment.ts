@@ -23,7 +23,7 @@ class EnvironmentImpl implements Environment {
   matomoSiteId = 7;
 
   sceiba = '/';
-  discover = '/search';
+  discover = '/records';
   catalog = '/catalog';
   revistasmes = '/revistasmes';
   organizations = '/organizations';
