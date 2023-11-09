@@ -1,5 +1,13 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { HttpParams } from "@angular/common/http";
-import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import {
@@ -8,14 +16,29 @@ import {
   Params, Router
 } from "@angular/router";
 import { AggregationsSelection, MetadataService, Record, SearchResponse, SearchService } from "toco-lib";
+import { RecordsAgregationsModalComponent } from "../agregations-modal/agregations-modal.component";
 
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"],
+  animations: [
+    trigger('detailExpand', [
+      state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', display: 'none' })
+      ),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
-export class SearchComponent implements OnInit {
+export class RecordSearchComponent implements OnInit, AfterViewInit {
 
+  agregations_selected_in_modal: any[];
   aggr_keys:Array<any>
   search_type:Boolean = true
   typeChart: "Polar Chart" | "Vertical Bar" | /* "Pie Grid" | */ "Gauge Chart"= "Polar Chart"
@@ -58,10 +81,13 @@ export class SearchComponent implements OnInit {
   pageSizeOptions: number[] = [5, 15, 25, 50, 100];
   // end paginator stuff
 
-  query = "";
+  query :string= "";
   aggrsSelection: AggregationsSelection = {};
 
   params: HttpParams;
+  @Output()
+  key_to_open_modal = new EventEmitter<string>();
+
   sr: SearchResponse<Record>;
   queryParams: Params;
   navigationExtras: NavigationExtras;
@@ -69,8 +95,11 @@ export class SearchComponent implements OnInit {
   loading: boolean = true;
 
   @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  public recordsPath = "";
 
   public constructor(
+    private dialog: MatDialog,
+
     private _searchService: SearchService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -79,13 +108,34 @@ export class SearchComponent implements OnInit {
     // private dialog: MatDialog
   ) {}
 
+    /* ****************************************************
+    HIDE FILTERS ACCORDING TO VIEW SIZE
+  **************************************************** */
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+      // console.log("window:resize", window.innerWidth);
+      if (this.drawer) {
+        if (window.innerWidth <= 740) {
+          this.drawer.opened = false;
+        } else {
+          this.drawer.opened = true;
+        }
+      }
+    }
+    ngAfterViewInit() {
+      this.onResize(null);
+    }
+
   public ngOnInit(): void {
+
+    let path = this.router.url.split('?');
+    if(path.length > 0){
+      this.recordsPath = path[0];
+    }
 
     this.activatedRoute.url.subscribe( () =>{
 
       })
-
-    this.query = "";
 
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
@@ -105,7 +155,7 @@ export class SearchComponent implements OnInit {
 
             case "q":
               this.query = initQueryParams.get(key);
-              this.updateMetas(this.query)
+              this.updateMetas(this.query);
               break;
 
             default:
@@ -130,7 +180,7 @@ export class SearchComponent implements OnInit {
   }
 
   changeView(): void {
-    this.search_type = !this.search_type
+    this.search_type = !this.search_type;
   }
 
   private updateFetchParams() {
@@ -193,6 +243,7 @@ export class SearchComponent implements OnInit {
 
   queryChange(event?: string) {
     this.query = event;
+    this.aggrsSelection={}
     this.updateQueryParams();
 
   }
@@ -227,14 +278,38 @@ export class SearchComponent implements OnInit {
     this.metadata.meta.updateTag({name:"DC.title", content:"Búsqueda de publicaciones científicas cubanas"});
     this.metadata.meta.updateTag({name:"DC.description", content:query});
   }
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event){
-    // console.log("window:resize", window.innerWidth);
-    if (window.innerWidth <= 740){
-      this.drawer.opened = false;
-    } else {
-      this.drawer.opened = true;
-    }
+
+
+   /**
+   * this method receives the child event and open the modal dialog by sending
+   * him the data to be displayed,when closing the modal he saves the result in a variable
+   * and then performs the search with those agregations
+   * @param event the event recibed from the click that is made on the toco-search-agregations component
+   * represent the key ,depending on the key,the respective agregations are shown
+   */
+   openAggModal(event: any) {
+    let agg_array = [];
+    this.key_to_open_modal.emit(event);
+
+    const dialogRef = this.dialog.open(RecordsAgregationsModalComponent, {width:"50%",
+      data: this.sr.aggregations[event.key].buckets,
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result != undefined) {
+        console.log("r", result);
+
+        result.forEach((agregation: any, index: number) => {
+          agg_array.push(agregation.key);
+        });
+        this.aggrsSelection={}
+        this.aggrsSelection[event.key] = agg_array;
+
+        console.log("agg", this.aggrsSelection);
+        this.updateQueryParams()
+
+      }
+    });
   }
 
 }

@@ -1,23 +1,12 @@
-<div style="height: 80px; padding: 0 16px; flex-flow: row wrap; box-sizing: border-box; display: flex; place-content: center space-between;
-    align-items: center;"
-  >
-  <span class="mat-h2">Información del Documento</span>
+
+<div *ngIf="record" fxLayout="column wrap" style="padding: 0px 16px;">
+  <span class="mat-headline-6"> {{ record.title }}</span>
+  <span class="mat-caption" color="primary"> SceibaID: {{ record.id }} </span>
+  <span class="mat-caption"> Tipo: Resultado </span>
 </div>
 
-<toco-progress [loading]="!record"></toco-progress>
-
 <div fxLayout="row" fxLayoutAlign="center" *ngIf="record">
-  <mat-card >
-    <mat-card-header>
-      <mat-card-title>{{ record.title }}</mat-card-title>
-      <!-- ID -->
-      <mat-card-subtitle class="pt-1" *ngIf="record.id">
-        <p>Sceiba ID: {{ record.id }}</p>
-      </mat-card-subtitle>
-      <!-- STATUS -->
-      <!-- <mat-card-subtitle class="pt-1" *ngIf="record.status">Estatus: {{ record.status }}</mat-card-subtitle> -->
-    </mat-card-header>
-
+  <mat-card>
     <mat-card-content>
       <!-- identifiers -->
       <static-table
@@ -29,13 +18,16 @@
       >
       </static-table>
       <!-- SOURCE -->
-      <app-record-view-source [source]="record.source_repo">
-      </app-record-view-source>
+      <app-record-view-source [source]="record.source_repo"></app-record-view-source>
+      <old-app-record-view-source [source]="record.source_repo">
+      </old-app-record-view-source>
+
+
       <!-- <static-link
         *ngIf="record.source_repo"
         [className]="'custom'"
         [desc]="'Recolectado en: '"
-        [routerlink]="'/search'"
+        [routerlink]="[env.discover, 'search']"
         [queryparams]="{ sources: record.source_repo.name }"
         [value]="record.source_repo.name"
       >
@@ -46,7 +38,7 @@
         *ngIf="record.creators && record.creators.length"
         [desc]="'Autores'"
         [value]="record.creators"
-        [routerlink]="'/search'"
+        [routerlink]="[env.discover, 'search']"
         [queryparamVariable]="['creators', 'q']"
         [columnsObjectProperty]="['name', 'affiliations']"
         [columnsHeaderText]="['Nombre', 'Afiliación']"
@@ -58,7 +50,7 @@
         *ngIf="record.keywords && record.keywords.length"
         [desc]="'Palabras Claves'"
         [value]="record.keywords"
-        [routerlink]="'/search'"
+        [routerlink]="[env.discover, 'search']"
         [queryparamVariable]="'keywords'"
       >
       </static-chips-link>

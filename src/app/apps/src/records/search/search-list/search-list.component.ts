@@ -1,44 +1,50 @@
-
 import { HttpParams } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Params, Router } from '@angular/router';
-import { AggregationsSelection, HitList, Record } from 'toco-lib';
-
+import {
+  ActivatedRoute,
+  NavigationExtras,
+  Params,
+  Router,
+} from '@angular/router';
+import { AggregationsSelection, Environment, HitList, Record } from 'toco-lib';
 
 @Component({
-	selector: 'search-list',
-	templateUrl: './search-list.component.html',
-	styleUrls: ['./search-list.component.scss']
+  selector: 'search-list',
+  templateUrl: './search-list.component.html',
+  styleUrls: ['./search-list.component.scss'],
 })
-export class SearchListComponent implements OnInit
-{
-	@Input()
-	public hitList: HitList<Record>;
+export class RecordSearchListComponent implements OnInit {
+  @Input()
+  public hitList: HitList<Record>;
+  @Input()
+  public recordsPath: string = '';
 
-	queryParams: Params;
+  queryParams: Params;
 
-	// begin paginator stuff
-	pageSize = 5;
-	pageIndex = 0;
-	pageSizeOptions: number[] = [5, 15, 25, 50, 100];
-	// end paginator stuff
-  
-	query = "";
-	aggrsSelection: AggregationsSelection = {};
-	params: HttpParams;
+  // begin paginator stuff
+  pageSize = 5;
+  pageIndex = 0;
+  pageSizeOptions: number[] = [5, 15, 25, 50, 100];
+  // end paginator stuff
 
-	navigationExtras: NavigationExtras;
+  query = '';
+  aggrsSelection: AggregationsSelection = {};
+  params: HttpParams;
 
-    public constructor(
-		private activatedRoute: ActivatedRoute,
-    	private router: Router
-	)
-	{ }
+  navigationExtras: NavigationExtras;
+  public env: Environment;
 
-	public ngOnInit(): void
-	{
-		console.log(this.hitList);
-		this.query = "";
+  public constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private _env: Environment
+  ) {
+    this.env = this._env;
+  }
+
+  public ngOnInit(): void {
+    console.log(this.hitList);
+    this.query = '';
 
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
@@ -48,15 +54,15 @@ export class SearchListComponent implements OnInit
           const key = initQueryParams.keys[index];
 
           switch (key) {
-            case "size":
+            case 'size':
               this.pageSize = Number.parseInt(initQueryParams.get(key));
               break;
 
-            case "page":
+            case 'page':
               this.pageIndex = Number.parseInt(initQueryParams.get(key));
               break;
 
-            case "q":
+            case 'q':
               this.query = initQueryParams.get(key);
               break;
 
@@ -68,56 +74,53 @@ export class SearchListComponent implements OnInit
               break;
           }
         }
-        
+
         this.updateFetchParams();
         // this.fetchSearchRequest();
-
-       
       },
 
       error: (e) => {},
-      
+
       complete: () => {},
     });
-		
-	}
+  }
 
-	private updateFetchParams() {
-		this.params = new HttpParams();
-	
-		this.params = this.params.set("size", this.pageSize.toString(10));
-	
-		this.params = this.params.set("page", (this.pageIndex + 1).toString(10));
-	
-		this.params = this.params.set("q", this.query);
-	
-		for (const aggrKey in this.aggrsSelection) {
-		  this.aggrsSelection[aggrKey].forEach((bucketKey) => {
-			this.params = this.params.set(aggrKey, bucketKey);
-		  });
-		}
-	  }
-	
-	public updateQueryParams() {
-		this.queryParams = {};
-	
-		this.queryParams["size"] = this.pageSize.toString(10);
-	
-		this.queryParams["page"] = this.pageIndex.toString(10);
-	
-		this.queryParams["q"] = this.query;
-	
-		for (const aggrKey in this.aggrsSelection) {
-		  this.aggrsSelection[aggrKey].forEach((bucketKey) => {
-			this.queryParams[aggrKey] = bucketKey;
-		  });
-		}
-		this.navigationExtras = {
-		  relativeTo: this.activatedRoute,
-		  queryParams: this.queryParams,
-		  queryParamsHandling: "",
-		};
-	
-		this.router.navigate(["."], this.navigationExtras);
-	  }
+  private updateFetchParams() {
+    this.params = new HttpParams();
+
+    this.params = this.params.set('size', this.pageSize.toString(10));
+
+    this.params = this.params.set('page', (this.pageIndex + 1).toString(10));
+
+    this.params = this.params.set('q', this.query);
+
+    for (const aggrKey in this.aggrsSelection) {
+      this.aggrsSelection[aggrKey].forEach((bucketKey) => {
+        this.params = this.params.set(aggrKey, bucketKey);
+      });
+    }
+  }
+
+  public updateQueryParams() {
+    this.queryParams = {};
+
+    this.queryParams['size'] = this.pageSize.toString(10);
+
+    this.queryParams['page'] = this.pageIndex.toString(10);
+
+    this.queryParams['q'] = this.query;
+
+    for (const aggrKey in this.aggrsSelection) {
+      this.aggrsSelection[aggrKey].forEach((bucketKey) => {
+        this.queryParams[aggrKey] = bucketKey;
+      });
+    }
+    this.navigationExtras = {
+      relativeTo: this.activatedRoute,
+      queryParams: this.queryParams,
+      queryParamsHandling: '',
+    };
+
+    this.router.navigate(['.'], this.navigationExtras);
+  }
 }

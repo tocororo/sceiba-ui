@@ -74,7 +74,9 @@
             </ng-container>
           </li>
         </ul>
-        <mat-chip *ngIf="hit.metadata.source_status">{{hit.metadata.source_status}}</mat-chip>
+        <mat-chip *ngIf="hit.metadata.source_status">{{
+          hit.metadata.source_status
+        }}</mat-chip>
         <hr class="hr-grey-ligth" *ngIf="pos < hitList.hits.length - 1" />
         <!-- <toco-org-view [org]="hit.metadata"></toco-org-view> -->
       </ng-container>

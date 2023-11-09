@@ -29,7 +29,7 @@
 <toco-progress [loading]="loading"></toco-progress>
 
 <mat-drawer-container autosize>
-  <mat-drawer #drawer mode="side" opened position="start">
+  <mat-drawer #drawer mode="side" position="start">
     <!--  <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
         fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="1em"
         class=" back-grey mat-elevation-z8"></app-aggregations>
@@ -39,7 +39,9 @@
       [aggregations]="sr.aggregations"
       [selectedAggr]="aggrsSelection"
       (keySelect)="aggrChange($event)"
-    ></toco-search-aggregations>
+      (modal_open)="openAggModal($event)"
+      >
+    </toco-search-aggregations>
 
     <!-- <toco-search-aggregations-visual
         *ngIf="sr"
@@ -57,7 +59,7 @@
   <ng-template #search_list>
     <div class="m-1" *ngIf="sr">
       <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
-        
+
         <toco-search-query-input
           [query]="query"
           class="p-1"
@@ -75,7 +77,7 @@
       >
       </mat-paginator>
 
-      <search-list [hitList]="sr.hits"></search-list>
+      <search-list [hitList]="sr.hits" [recordsPath]="recordsPath"></search-list>
 
       <mat-paginator
         [length]="sr.hits.total"

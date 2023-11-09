@@ -2,14 +2,16 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { CoreModule, SearchModule } from "toco-lib";
-import { AggregationsComponent } from "./aggregations/aggregations.component";
-import { SearchListComponent } from "./search-list/search-list.component";
-import { SearchRoutingModule } from "./search-routing.module";
-import { SearchComponent } from "./search/search.component";
+import { RecordSearchListComponent } from "./search-list/search-list.component";
+import { RecordSearchRoutingModule } from "./search-routing.module";
+import { RecordSearchComponent } from "./search/search.component";
 
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 
+import { ScrollingModule } from "@angular/cdk/scrolling";
 import { SharedModule } from "../shared/shared.module";
+import { RecordAggregationsComponent } from "./aggregations/aggregations.component";
+import { RecordsAgregationsModalComponent } from "./agregations-modal/agregations-modal.component";
 import { BarVerticalComponent } from "./charts/bar-vertical/bar-vertical.component";
 import { ChartsComponent } from "./charts/charts.component";
 import { GaugeChartComponent } from "./charts/gauge-chart/gauge-chart.component";
@@ -18,10 +20,10 @@ import { PolarChartComponent } from "./charts/polar-chart/polar-chart.component"
 
 @NgModule({
   declarations: [
-    SearchComponent,
-    SearchListComponent,
-    AggregationsComponent,
-
+    RecordSearchComponent,
+    RecordSearchListComponent,
+    RecordAggregationsComponent,
+    RecordsAgregationsModalComponent,
     ChartsComponent,
     PolarChartComponent,
     BarVerticalComponent,
@@ -31,11 +33,13 @@ import { PolarChartComponent } from "./charts/polar-chart/polar-chart.component"
 
   imports: [
     CommonModule,
-    SearchRoutingModule,
+    RecordSearchRoutingModule,
     CoreModule,
     SharedModule,
     NgxChartsModule,
     SearchModule,
+    ScrollingModule
   ],
+
 })
-export class SearchPageModule {}
+export class RecordSearchModule {}

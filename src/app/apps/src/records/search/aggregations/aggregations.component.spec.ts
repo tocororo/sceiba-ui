@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AggregationsComponent } from './aggregations.component';
+import { RecordAggregationsComponent } from './aggregations.component';
 
 describe('AggregationsComponent', () => {
-  let component: AggregationsComponent;
-  let fixture: ComponentFixture<AggregationsComponent>;
+  let component: RecordAggregationsComponent;
+  let fixture: ComponentFixture<RecordAggregationsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AggregationsComponent ]
+      declarations: [ RecordAggregationsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AggregationsComponent);
+    fixture = TestBed.createComponent(RecordAggregationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

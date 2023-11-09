@@ -1,0 +1,45 @@
+<div class="agregations-modal-container">
+  <div class="header-modal">
+    <mat-toolbar style="width: 100%">
+      <h2 class="modal-title">Seleccione:</h2>
+      <!--   <h3>Opciones Seleccionadas:</h3> <span>{{agregations_selected.selectedOptions.selected.length}}</span> -->
+    </mat-toolbar>
+  </div>
+  <div class="list-modal-container">
+    <cdk-virtual-scroll-viewport itemSize="5" class="vscroll-viewport">
+      <mat-selection-list
+        #agregations_selected
+        class="list-modal"
+        (selectionChange)="handleChange($event)"
+      >
+        <mat-list-option
+          *cdkVirtualFor="let agregation of agregations"
+          class="item"
+          [value]="agregation"
+        >
+          <h6>{{ agregation.key }}</h6>
+        </mat-list-option>
+      </mat-selection-list>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <div class="footer">
+    <div class="button-container">
+      <button
+        mat-button
+        [mat-dialog-close]="agregations_selected._value"
+        cdkFocusInitial
+      >
+        Ok
+      </button>
+    </div>
+    <div class="paginator-container">
+      <mat-paginator
+        class="paginator-column"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="changesOnParameters($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,12 @@
-
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { HttpParams } from "@angular/common/http";
-import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
@@ -14,8 +20,21 @@ import { ChartType } from "../charts/chart-utils";
   selector: "app-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"],
+  animations: [
+    trigger('detailExpand', [
+      state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', display: 'none' })
+      ),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
-export class SearchComponent implements OnInit
+export class SearchComponent implements OnInit,AfterViewInit
 {
   /**
    * Represents the `ChartType` enum for internal use.
@@ -85,6 +104,23 @@ export class SearchComponent implements OnInit
 
     this.currentChartType = this.chartType.polar;
   }
+    /* ****************************************************
+    HIDE FILTERS ACCORDING TO VIEW SIZE
+  **************************************************** */
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+      // console.log("window:resize", window.innerWidth);
+      if (this.drawer) {
+        if (window.innerWidth <= 740) {
+          this.drawer.opened = false;
+        } else {
+          this.drawer.opened = true;
+        }
+      }
+    }
+    ngAfterViewInit() {
+      this.onResize(null);
+    }
 
   public ngOnInit(): void {
 
@@ -218,15 +254,5 @@ export class SearchComponent implements OnInit
     };
 
     this.router.navigate(["."], this.navigationExtras);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event){
-    // console.log("window:resize", window.innerWidth);
-    if (window.innerWidth <= 740){
-      this.drawer.opened = false;
-    } else {
-      this.drawer.opened = true;
-    }
   }
 }

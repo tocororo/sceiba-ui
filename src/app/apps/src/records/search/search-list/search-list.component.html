@@ -1,33 +1,46 @@
 <mat-card *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
-    <mat-card-content>
-      <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
+  <mat-card-content>
+    <div
+      *ngFor="let hit of hitList.hits; let pos = index"
+      [ngStyle]="{ margin: '1em 8px' }"
+    >
+      <h2>
+        <a [routerLink]="[env.discover, hit.id]" style="cursor: pointer">{{
+          hit.metadata.title
+        }}</a>
+      </h2>
 
-        <h2 routerLink="/{{hit.metadata.id}}/view" style="cursor: pointer;">{{hit.metadata.title}}</h2>
-        
+      <p class="p-40" *ngIf="hit.metadata.description">
+        {{ hit.metadata.description }}
+      </p>
+      <ul
+        fxLayout="row wrap"
+        *ngIf="hit.metadata.creators && hit.metadata.creators.length > 0"
+      >
+        <span>Autores:</span>
+        <li
+          *ngFor="let creator of hit.metadata.creators; let i = index"
+          class="li-margin-style"
+        >
+          {{ creator.name }}
+          <ng-container *ngIf="i < hit.metadata.creators.length - 1">
+            |
+          </ng-container>
+        </li>
+      </ul>
 
-        <p class="p-40" *ngIf="hit.metadata.description">
-          {{ hit.metadata.description }}
-        </p>
-        <ul fxLayout="row wrap" *ngIf="hit.metadata.creators && hit.metadata.creators.length > 0">
-          <span>Autores:</span>
-          <li *ngFor="let creator of hit.metadata.creators; let i = index" class="li-margin-style">
-            {{creator.name}} 
-            <ng-container *ngIf="i < hit.metadata.creators.length - 1"> | </ng-container>
-          </li>
-        </ul>
+      <span *ngIf="hit.metadata.source" class="p-40"
+        >Revista: {{ hit.metadata.source.name }}</span
+      >
 
-        <span *ngIf="hit.metadata.source" class="p-40">Revista: {{hit.metadata.source.name}}</span>
+      <span *ngIf="hit.metadata.publication_date" class="p-40"
+        >Fecha de publicación: {{ hit.metadata.publication_date }}</span
+      >
 
-        <span *ngIf="hit.metadata.publication_date" class="p-40">Fecha de publicación: {{hit.metadata.publication_date}}</span>
-
-
-
-        <hr class="hr-grey-ligth" *ngIf="pos < hitList.hits.length - 1">
-        <!-- <toco-org-view [org]="hit.metadata"></toco-org-view> -->
-
-      </div>
-    </mat-card-content>
-
+      <hr class="hr-grey-ligth" *ngIf="pos < hitList.hits.length - 1" />
+      <!-- <toco-org-view [org]="hit.metadata"></toco-org-view> -->
+    </div>
+  </mat-card-content>
 </mat-card>
 
 <ng-template #templateNotInfo>

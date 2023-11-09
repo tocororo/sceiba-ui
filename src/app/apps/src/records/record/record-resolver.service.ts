@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Environment, Record, SearchResponse, SearchService } from 'toco-lib';
+import { Environment, Record, SearchResponse } from 'toco-lib';
 
 
 @Injectable({
@@ -18,7 +18,6 @@ export class RecordResolverService  {
 
   constructor(
     private router: Router,
-    private service: SearchService,
     private env: Environment,
     private handler: HttpBackend)
     {

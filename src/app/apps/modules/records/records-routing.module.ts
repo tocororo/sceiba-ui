@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { HomeComponent } from '../../src/records/home/home.component';
+import { RecordResolverService } from '../../src/records/record/record-resolver.service';
 import { RecordsComponent } from './records.component';
 
 const routes: Routes = [
@@ -10,7 +11,19 @@ const routes: Routes = [
     component: RecordsComponent,
     children: [
       {
-        path: ':uuid/view',
+        path: 'search',
+        // component: SearchComponent,
+        loadChildren: () =>
+          import('../../src/records/search/search.module').then(
+            (mod) => mod.RecordSearchModule
+          ),
+      },
+      {
+        path: ':uuid',
+        // component: RecordViewComponent,
+        resolve: {
+          record: RecordResolverService,
+        },
         loadChildren: () =>
           import('../../src/records/record/record.module').then(
             (mod) => mod.RecordModule
@@ -19,34 +32,27 @@ const routes: Routes = [
         // 	preload: true  /* In orden to use a custom preloading strategy (`SelectiveModulesPreload`). */
         // }
       },
-      {
-        path: 'search',
-        loadChildren: () =>
-          import('../../src/records/search/search.module').then(
-            (mod) => mod.SearchPageModule
-          ),
-      },
-      {
-        path: 'profile',
-        loadChildren: () =>
-          import('../../src/records/profile/profile.module').then(
-            (mod) => mod.ProfileModule
-          ),
-        canActivate: [],
-      },
-      {
-        path: 'help',
-        loadChildren: () =>
-          import('../../src/records/help/help.module').then(
-            (mod) => mod.HelpModule
-          ),
-      },
+      // {
+      //   path: 'profile',
+      //   loadChildren: () =>
+      //     import('../../src/records/profile/profile.module').then(
+      //       (mod) => mod.ProfileModule
+      //     ),
+      //   canActivate: [],
+      // },
+      // {
+      //   path: 'help',
+      //   loadChildren: () =>
+      //     import('../../src/records/help/help.module').then(
+      //       (mod) => mod.HelpModule
+      //     ),
+      // },
       {
         path: '',
         component: HomeComponent,
       },
       {
-        path: "**",
+        path: '**',
         component: SceibaUiPageNotFoundComponent,
       },
     ],

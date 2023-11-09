@@ -1,1 +1,1 @@
-System for the persistent identification of organizations dedicated to research.
+System for persistent identification of organizations dedicated to research.

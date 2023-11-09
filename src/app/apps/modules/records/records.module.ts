@@ -15,9 +15,7 @@ import {
   CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
   SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule, storageFactory
 } from 'toco-lib';
-import { ContactComponent } from '../../src/records/contact/contact.component';
 import { HomeComponent } from '../../src/records/home/home.component';
-import { SceibaMenuAppsComponent } from '../../src/records/menu-apps/menu-apps.component';
 import { PageNotFoundSceibaComponent } from '../../src/records/page-not-found-sceiba/page-not-found-sceiba.component';
 import { RecordsRoutingModule } from './records-routing.module';
 import { RecordsComponent } from './records.component';
@@ -35,8 +33,26 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     PageNotFoundSceibaComponent,
     HomeComponent,
 
-    ContactComponent,
-    SceibaMenuAppsComponent
+    // ContactComponent,
+    // SceibaMenuAppsComponent,
+    // RecordSearchComponent,
+    // RecordSearchListComponent,
+    // RecordAggregationsComponent,
+    // RecordsAgregationsModalComponent,
+    // ChartsComponent,
+    // PolarChartComponent,
+    // BarVerticalComponent,
+    // PieGridComponent,
+    // GaugeChartComponent,
+
+    // RecordViewComponent,
+    // DialogCatalogSourceInfo,
+    // SourcerecordViewComponent,
+
+    // LinkStaticComponent,
+    // StaticTableLinkComponent,
+    // StaticChipsLinkComponent,
+
   ],
   imports: [
     CommonModule,
