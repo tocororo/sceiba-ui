@@ -7,17 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { CommonModule } from '@angular/common';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 import {
   CoreModule, Environment
 } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { SceibaUiCoreModule } from './core/core.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { environment } from 'src/environments/environment';
 import { SceibaUiCoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { SceibaUiSharedModule } from './shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,11 +25,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   declarations: [AppComponent
 ],
   imports: [
-    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule,
+    SceibaUiSharedModule,
     // SceibaUiCoreModule,
 
     // HttpClientModule,

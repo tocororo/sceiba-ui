@@ -9,7 +9,7 @@ import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { MarkdownModule } from 'ngx-markdown';
 import { allowedURLS } from 'src/environments/environment';
 import { AuthenticationModule } from 'toco-lib';
-import { SharedModule } from '../shared/shared.module';
+import { SceibaUiSharedModule } from '../shared/shared.module';
 import { SceibaUiFooterComponent } from './footer/footer.component';
 import { HeaderService } from './header.service';
 import { SceibaUIHeaderComponent } from './header/header.component';
@@ -58,7 +58,7 @@ export function storageFactory(): OAuthStorage {
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    SceibaUiSharedModule,
     FlexLayoutModule,
     TranslateModule,
     AuthenticationModule,

@@ -1,9 +1,0 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="15px">
-  <app-charts 
-    *ngFor="let aggr of aggregations" 
-    [typeChart]="typeChart" 
-    [aggregation_value]="aggr.value"
-    [_yAxisLabel]="aggr.key" 
-    (aggrSelect)="selectionChange($event)">
-  </app-charts>
-</div>

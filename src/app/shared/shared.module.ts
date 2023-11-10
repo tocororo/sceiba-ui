@@ -114,8 +114,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatStepperModule,
         MatRippleModule,
         MatDividerModule,
-        MatRadioModule
+        MatRadioModule,
     ]
 })
-export class SharedModule
+export class SceibaUiSharedModule
 { }
