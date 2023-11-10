@@ -10,11 +10,19 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { SearchAggregationsComponent } from './aggregations/aggregations.component';
+import { CoreModule, SearchModule } from 'toco-lib';
+import { SceibaUiSearchAggregationsComponent } from './aggregations/aggregations.component';
+import { SceibaUiQueryInputComponent } from './query-input/query-input.component';
 
 @NgModule({
-  declarations: [SearchAggregationsComponent],
+  declarations: [
+    SceibaUiSearchAggregationsComponent,
+    SceibaUiQueryInputComponent,
+  ],
+
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -28,7 +36,11 @@ import { SearchAggregationsComponent } from './aggregations/aggregations.compone
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    CoreModule,
+    SearchModule,
   ],
-  exports: [SearchAggregationsComponent],
+  exports: [SceibaUiSearchAggregationsComponent, SceibaUiQueryInputComponent],
 })
 export class SceibaUiSearchModule {}

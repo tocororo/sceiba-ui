@@ -11,7 +11,7 @@ export interface AggregationsSelection {
   templateUrl: "./aggregations.component.html",
   styleUrls: ["./aggregations.component.scss"],
 })
-export class SearchAggregationsComponent implements OnInit {
+export class SceibaUiSearchAggregationsComponent implements OnInit {
   @Input()
   aggregations: { [id: string]: Aggr } = {};
 
@@ -31,6 +31,9 @@ export class SearchAggregationsComponent implements OnInit {
 
   @Output()
   keySelect = new EventEmitter<AggregationsSelection>();
+
+  @Output()
+  moreKeys = new EventEmitter<string>();
   /**
    * that variable is used for comunicate the state and the key of the modal to the father component search
    */
@@ -51,8 +54,6 @@ export class SearchAggregationsComponent implements OnInit {
         this.keys.push({ key: key, sp: this._translate(key) });
       }
     }
-    // console.log("cola");
-    // console.log(this.keys);
   }
 
   //aqui se agregan los casos que puedan haber en las agregaciones para q salgan siempre en español
@@ -74,8 +75,6 @@ export class SearchAggregationsComponent implements OnInit {
         return this.aggregations[key]["label"];
       }
     }
-
-    return key;
   }
 
   isSelected(aggrKey, bucket: AggrBucket) {
@@ -104,6 +103,9 @@ export class SearchAggregationsComponent implements OnInit {
   }
 
   selectionChange(aggrKey, bucket: AggrBucket) {
+    console.log(this.selectedAggr);
+    console.log('*********************');
+
     if (!this.selectedAggr.hasOwnProperty(aggrKey)) {
       this.selectedAggr[aggrKey] = [];
     }
@@ -115,35 +117,33 @@ export class SearchAggregationsComponent implements OnInit {
     } else {
       this.selectedAggr[aggrKey].push(bucket.key);
     }
+    console.log(this.selectedAggr);
+    console.log('*********************');
 
     this.keySelect.emit(this.selectedAggr);
   }
-  /**
-   *
-   * @param key  is used to comunicate with the father component what kind of data have to display
-   * by carlomonterrey
-   */
-  btnOpenModal(key) {
-    this.modal_open.emit(key);
-  }
 
-  moreAggPage(key){
-    for (const k in this.aggregations) {
-      console.log(key, k, this.aggregations[k]);
 
-      if (key.key == k){
-        let b: Array<AggrBucket> = new Array<AggrBucket> (3);
-        b.push(new AggrBucket({doc_count:0,key:"eee"}))
-        b.push(new AggrBucket({doc_count:4,key:"543242sd"}))
-        b.push(new AggrBucket({doc_count:5,key:"sadads"}))
-        let nb = this.aggregations[k].buckets.concat(b)
-        this.aggregations[k].buckets = nb;
-        console.log(this.aggregations[k].buckets);
-        console.log(this.aggregations[k]);
+  moreKeysClick(key){
+    console.log(key);
+    this.moreKeys.emit(key);
 
-      }
-    }
-    console.log(this.aggregations, this.selectedAggr);
+    // for (const k in this.aggregations) {
+    //   console.log(key, k, this.aggregations[k]);
+
+    //   if (key.key == k){
+    //     let b: Array<AggrBucket> = new Array<AggrBucket> (3);
+    //     b.push(new AggrBucket({doc_count:0,key:"eee"}))
+    //     b.push(new AggrBucket({doc_count:4,key:"543242sd"}))
+    //     b.push(new AggrBucket({doc_count:5,key:"sadads"}))
+    //     let nb = this.aggregations[k].buckets.concat(b)
+    //     this.aggregations[k].buckets = nb;
+    //     console.log(this.aggregations[k].buckets);
+    //     console.log(this.aggregations[k]);
+
+    //   }
+    // }
+    // console.log(this.aggregations, this.selectedAggr);
 
 
     // this._searchService.getAggregation('records', 'creators', 'creators.name', 10000).subscribe({

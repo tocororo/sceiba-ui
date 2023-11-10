@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchAggregationsComponent } from './aggregations.component';
+import { SceibaUiSearchAggregationsComponent } from './aggregations.component';
 
 describe('SearchAggregationsComponent', () => {
-  let component: SearchAggregationsComponent;
-  let fixture: ComponentFixture<SearchAggregationsComponent>;
+  let component: SceibaUiSearchAggregationsComponent;
+  let fixture: ComponentFixture<SceibaUiSearchAggregationsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchAggregationsComponent ]
+      declarations: [ SceibaUiSearchAggregationsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchAggregationsComponent);
+    fixture = TestBed.createComponent(SceibaUiSearchAggregationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

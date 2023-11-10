@@ -1,8 +1,15 @@
-<div style="height: 80px; padding: 0 16px; flex-flow: row wrap; box-sizing: border-box; display: flex; place-content: center space-between;
-    align-items: center;"
-  >
-
-    <span class="mat-h2">Búsqueda</span>
+<div
+  style="
+    height: 80px;
+    padding: 0 16px;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    display: flex;
+    place-content: center space-between;
+    align-items: center;
+  "
+>
+  <span class="mat-h2">Búsqueda</span>
 
   <!-- <div *ngIf="search_type; then search_list_button else search_charts_button"></div> -->
 
@@ -17,14 +24,14 @@
         <mat-icon>list</mat-icon>
       </button>
     </ng-template> -->
-    <button
-          mat-icon-button
-          (click)="drawer.toggle()"
-          matTooltip="Filtros avanzados"
-        >
-          <mat-icon>filter_list</mat-icon>
-        </button>
-  </div>
+  <button
+    mat-icon-button
+    (click)="drawer.toggle()"
+    matTooltip="Filtros avanzados"
+  >
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</div>
 
 <toco-progress [loading]="loading"></toco-progress>
 
@@ -39,8 +46,8 @@
       [aggregations]="sr.aggregations"
       [selectedAggr]="aggrsSelection"
       (keySelect)="aggrChange($event)"
-      (modal_open)="openAggModal($event)"
-      >
+      (moreKeys)="moreKeyClick($event)"
+    >
     </seiba-ui-search-aggregations>
 
     <!-- <toco-search-aggregations-visual
@@ -59,13 +66,12 @@
   <ng-template #search_list>
     <div class="m-1" *ngIf="sr">
       <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
-
-        <toco-search-query-input
+        <sceiba-ui-search-query-input
           [query]="query"
           class="p-1"
           (queryChange)="queryChange($event)"
           style="width: 100%"
-        ></toco-search-query-input>
+        ></sceiba-ui-search-query-input>
       </div>
 
       <mat-paginator
@@ -77,7 +83,10 @@
       >
       </mat-paginator>
 
-      <search-list [hitList]="sr.hits" [recordsPath]="recordsPath"></search-list>
+      <search-list
+        [hitList]="sr.hits"
+        [recordsPath]="recordsPath"
+      ></search-list>
 
       <mat-paginator
         [length]="sr.hits.total"

@@ -373,8 +373,8 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   public fetchJournalData() {
     this.loading = true;
-    this.sourceServiceNoAuth.getSources(this.searchParams).subscribe(
-      (values) => {
+    this.sourceServiceNoAuth.getSources(this.searchParams).subscribe({
+      next: (values) => {
         this.length = values.hits.total;
         this.dataSource = values.hits;
         // const arr = new Array<Source>();
@@ -395,14 +395,14 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           this.dataSource
         );
       },
-      (err: any) => {
+      error: (err: any) => {
         console.log('error: ' + err + '.');
       },
-      () => {
+      complete: () => {
         console.log('complete');
         this.loading = false;
       }
-    );
+    });
   }
 
   public onScrollUp() {
@@ -437,8 +437,8 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   }
 
   viewJournal(uuid: string): void {
-    this.sourceServiceNoAuth.getSourceByUUID(uuid).subscribe(
-      (response: Hit<JournalData>) => {
+    this.sourceServiceNoAuth.getSourceByUUID(uuid).subscribe({
+      next: (response: Hit<JournalData>) => {
         console.log(response);
         if (response) {
           let journalVersion = new JournalVersion();
@@ -460,11 +460,11 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           );
         }
       },
-      (error) => {
+      error: (error) => {
         console.log('error');
       },
-      () => {}
-    );
+      complete: () => {}
+    });
   }
 }
 
