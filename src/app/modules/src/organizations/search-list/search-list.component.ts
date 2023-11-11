@@ -5,7 +5,7 @@ import { Environment, HitList, Organization } from 'toco-lib';
 import { Permission } from '../_services/permission.service';
 
 @Component({
-  selector: 'search-list',
+  selector: 'organization-search-list',
   templateUrl: './search-list.component.html',
   styleUrls: ['./search-list.component.scss'],
 })

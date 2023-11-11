@@ -22,6 +22,7 @@ import {
   TocoFormsModule,
   storageFactory
 } from "toco-lib";
+import { SceibaUiSearchModule } from "../../common/search/search.module";
 import { OrgService } from "../../src/organizations/_services/org.service";
 import { AggregationsComponent } from "../../src/organizations/aggregations/aggregations.component";
 import { BarVerticalComponent } from "../../src/organizations/charts/bar-vertical/bar-vertical.component";
@@ -74,7 +75,7 @@ import {
 } from "../../src/organizations/pdf-excel/pdf-excel.component";
 import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "../../src/organizations/search-list/search-list.component";
-import { SearchComponent } from "../../src/organizations/search/search.component";
+import { OrganizationSearchComponent } from "../../src/organizations/search/search.component";
 import { StaticPagesComponent } from "../../src/organizations/static-pages/static-pages.component";
 import { ExpansionPanelLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";
 import { TableLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/table-layout/table-layout.component";
@@ -99,7 +100,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   declarations: [
     OrganizationsComponent,
     HomeComponent,
-    SearchComponent,
+    OrganizationSearchComponent,
     SearchListComponent,
     StaticPagesComponent,
     OrgViewerComponent,
@@ -160,6 +161,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     PdfExcelComponent,
     PdfDialogComponent,
     SceibaMenuAppsComponent,
+
   ],
   imports: [
     NgxChartsModule,
@@ -202,6 +204,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     //   },
     // }),
     // NotificationModule
+    SceibaUiSearchModule
   ],
   providers: [
     SearchService,

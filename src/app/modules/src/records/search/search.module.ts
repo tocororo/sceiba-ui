@@ -9,7 +9,7 @@ import { RecordSearchComponent } from './search/search.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { SceibaUiSearchModule } from 'src/app/modules/common/search/search';
+import { SceibaUiSearchModule } from 'src/app/modules/common/search/search.module';
 import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
 import { RecordAggregationsComponent } from './aggregations/aggregations.component';
 import { RecordsAgregationsModalComponent } from './agregations-modal/agregations-modal.component';

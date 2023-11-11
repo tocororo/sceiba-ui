@@ -17,7 +17,7 @@ import { OrgEditComponent } from '../../src/organizations/org-edit/org-edit.comp
 import { OrgReviewerComponent } from '../../src/organizations/org-reviewer/org-reviewer.component';
 import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
 import { RequestChangesListComponent } from '../../src/organizations/request-changes-list/request-changes-list.component';
-import { SearchComponent } from '../../src/organizations/search/search.component';
+import { OrganizationSearchComponent } from '../../src/organizations/search/search.component';
 import { StaticPagesComponent } from '../../src/organizations/static-pages/static-pages.component';
 import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
 import { WikiAuthorsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
@@ -82,7 +82,7 @@ const routes: Routes = [
       // },
       {
         path: 'search',
-        component: SearchComponent,
+        component: OrganizationSearchComponent,
       },
       {
         path: 'disambiguate',

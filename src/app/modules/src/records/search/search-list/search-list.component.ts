@@ -9,7 +9,7 @@ import {
 import { AggregationsSelection, Environment, HitList, Record } from 'toco-lib';
 
 @Component({
-  selector: 'search-list',
+  selector: 'records-search-list',
   templateUrl: './search-list.component.html',
   styleUrls: ['./search-list.component.scss'],
 })

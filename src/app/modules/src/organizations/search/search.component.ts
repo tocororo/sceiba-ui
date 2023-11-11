@@ -9,9 +9,9 @@ import { HttpParams } from "@angular/common/http";
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
-import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
+import { ActivatedRoute, NavigationExtras, ParamMap, Params, Router } from "@angular/router";
 
-import { AggregationsSelection, Organization, SearchResponse } from "toco-lib";
+import { AggregationsSelection, Organization, Response, SearchResponse, SearchService } from "toco-lib";
 
 import { OrgService } from "../_services/org.service";
 import { ChartType } from "../charts/chart-utils";
@@ -34,7 +34,7 @@ import { ChartType } from "../charts/chart-utils";
     ]),
   ],
 })
-export class SearchComponent implements OnInit,AfterViewInit
+export class OrganizationSearchComponent implements OnInit,AfterViewInit
 {
   /**
    * Represents the `ChartType` enum for internal use.
@@ -98,6 +98,7 @@ export class SearchComponent implements OnInit,AfterViewInit
   public constructor(
     private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
+    private _searchService: SearchService,
     private router: Router)
   {
     this.chartType = ChartType;
@@ -127,6 +128,7 @@ export class SearchComponent implements OnInit,AfterViewInit
     this.query = "";
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
+        this.defaultQueryParams(initQueryParams);
         this.aggrsSelection = {};
 
         for (let index = 0; index < initQueryParams.keys.length; index++) {
@@ -165,6 +167,18 @@ export class SearchComponent implements OnInit,AfterViewInit
 
       complete: () => {},
     });
+  }
+
+  private defaultQueryParams(initQueryParams: ParamMap) {
+    if (!initQueryParams.hasOwnProperty('q')) {
+      this.query = '';
+    }
+    if (!initQueryParams.hasOwnProperty('size')) {
+      this.pageSize = 5;
+    }
+    if (!initQueryParams.hasOwnProperty('page')) {
+      this.pageIndex = 0;
+    }
   }
 
   changeView(): void {
@@ -226,8 +240,13 @@ export class SearchComponent implements OnInit,AfterViewInit
   }
 
   queryChange(event?: string) {
-    this.query = event;
-    this.updateQueryParams();
+    if(this.query != event){
+      this.query = event;
+      // this.aggrsSelection={}
+      this.pageSize = 5;
+      this.pageIndex = 0;
+      this.updateQueryParams();
+    }
   }
 
   private updateQueryParams() {
@@ -255,4 +274,47 @@ export class SearchComponent implements OnInit,AfterViewInit
 
     this.router.navigate(["."], this.navigationExtras);
   }
+
+
+  moreKeyClick(event) {
+    console.log(event);
+    console.log(this.aggrsSelection);
+    console.log(this.sr.aggregations);
+    console.log(JSON.stringify(this.aggrsSelection));
+
+    let start = this.sr.aggregations[event].buckets.length;
+    let size = this.sr.hits.total;
+    let filters = [];
+    for (const aggrKey in this.aggrsSelection) {
+      console.log(aggrKey);
+
+      filters.push({ key: aggrKey, value: this.aggrsSelection[aggrKey] });
+    }
+    console.log(filters);
+
+    let _query = {
+      index: 'organizations',
+      filters: filters,
+      agg: {
+        filter: event,
+        size: start + 5,
+      },
+    };
+    console.log(JSON.stringify(_query));
+    this._searchService.getAggregationTerms(_query).subscribe({
+      next: (response: Response<any>) => {
+        console.log(response.data['terms']);
+
+        let buckets = response.data.terms;
+        console.log(buckets);
+        console.log(this.sr.aggregations[event].buckets);
+
+        this.sr.aggregations[event].buckets = buckets;
+      },
+      error: (error) => {},
+      complete: () => {},
+    });
+  }
+
+
 }

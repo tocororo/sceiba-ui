@@ -15,7 +15,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDrawer } from '@angular/material/sidenav';
 import {
@@ -28,14 +27,13 @@ import {
 import {
   AggregationsSelection,
   MetadataService,
-  Record,
   Response,
   SearchResponse,
   SearchService
 } from 'toco-lib';
 
 @Component({
-  selector: 'app-search',
+  selector: 'sceiba-ui-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   animations: [
@@ -52,7 +50,7 @@ import {
     ]),
   ],
 })
-export class RecordSearchComponent implements OnInit, AfterViewInit {
+export class SceibaUiSearchComponent<T> implements OnInit, AfterViewInit {
   agregations_selected_in_modal: any[];
   aggr_keys: Array<any>;
   search_type: Boolean = true;
@@ -104,7 +102,6 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
   @Output()
   key_to_open_modal = new EventEmitter<string>();
 
-  sr: SearchResponse<Record>;
   queryParams: Params;
   navigationExtras: NavigationExtras;
 
@@ -114,12 +111,10 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
   public recordsPath = '';
 
   public constructor(
-    private dialog: MatDialog,
-
-    private _searchService: SearchService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private metadata: MetadataService // private dialog: MatDialog
+    public _searchService: SearchService,
+    public activatedRoute: ActivatedRoute,
+    public router: Router,
+    public metadata: MetadataService // private dialog: MatDialog
   ) {}
 
   /* ****************************************************
@@ -192,7 +187,6 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
         this.updateFetchParams();
         this.fetchSearchRequest();
         this.updateMetas();
-
       },
 
       error: (e) => {},
@@ -233,34 +227,7 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public fetchSearchRequest() {
-    this._searchService.getRecords(this.params).subscribe({
-      next: (response: SearchResponse<Record>) => {
-        // this.pageEvent.length = response.hits.total;
-        this.sr = response;
 
-        this.aggr_keys = [
-          { value: this.sr.aggregations.creators, key: 'Creadores' },
-          { value: this.sr.aggregations.keywords, key: 'Palabras Claves' },
-          { value: this.sr.aggregations.sources, key: 'Fuentes' },
-          { value: this.sr.aggregations.terms, key: 'Términos' },
-        ];
-        this.sr.aggregations.creators['label'] = 'Autores';
-        this.sr.aggregations.keywords['label'] = 'Palabras Clave';
-        this.sr.aggregations.sources['label'] = 'Fuentes';
-        this.sr.aggregations.terms['label'] = 'Términos';
-
-        console.log(this.sr);
-      },
-      error: (error: any) => {
-        console.log('ERROPR');
-      },
-      complete: () => {
-        console.log('END...', this.params, this.query, this.aggrsSelection);
-        this.loading = false;
-      },
-    });
-  }
 
   public pageChange(event?: PageEvent): void {
     this.pageSize = event.pageSize;
@@ -364,4 +331,39 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
       content: this.query,
     });
   }
+
+  sr: SearchResponse<T>;
+
+  public  fetchSearchRequest()
+  {
+    console.log("implement fetchSearchRecuest based on Hit Tipe");
+
+    // this._searchService.getRecords(this.params).subscribe({
+    //   next: (response: SearchResponse<Record>) => {
+    //     // this.pageEvent.length = response.hits.total;
+    //     this.sr = response;
+
+    //     this.aggr_keys = [
+    //       { value: this.sr.aggregations.creators, key: 'Creadores' },
+    //       { value: this.sr.aggregations.keywords, key: 'Palabras Claves' },
+    //       { value: this.sr.aggregations.sources, key: 'Fuentes' },
+    //       { value: this.sr.aggregations.terms, key: 'Términos' },
+    //     ];
+    //     this.sr.aggregations.creators['label'] = 'Autores';
+    //     this.sr.aggregations.keywords['label'] = 'Palabras Clave';
+    //     this.sr.aggregations.sources['label'] = 'Fuentes';
+    //     this.sr.aggregations.terms['label'] = 'Términos';
+
+    //     console.log(this.sr);
+    //   },
+    //   error: (error: any) => {
+    //     console.log('ERROPR');
+    //   },
+    //   complete: () => {
+    //     console.log('END...', this.params, this.query, this.aggrsSelection);
+    //     this.loading = false;
+    //   },
+    // });
+  }
+
 }
