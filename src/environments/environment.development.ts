@@ -37,7 +37,7 @@ class EnvironmentImpl implements Environment {
     serverHost: this.sceibaHost,
     loginUrl: this.sceibaHost + 'oauth/internal/authorize',
     tokenEndpoint: this.sceibaHost + 'oauth/token',
-    userInfoEndpoint: this.sceibaApi + 'me',
+    userInfoEndpoint: this.sceibaApi + 'profile/me',
     appHost: this.appHost,
     appName: this.appName,
     oauthRedirectUri: this.oauthRedirectUri,
