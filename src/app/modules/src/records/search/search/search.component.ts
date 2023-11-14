@@ -35,7 +35,7 @@ import {
 } from 'toco-lib';
 
 @Component({
-  selector: 'app-search',
+  selector: 'records-app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   animations: [

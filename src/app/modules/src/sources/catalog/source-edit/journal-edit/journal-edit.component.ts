@@ -1,24 +1,41 @@
-import {
-  Component,
-
-
-
-
-  EventEmitter, Input,
-  OnInit,
-
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   UntypedFormBuilder,
-
-
-  UntypedFormControl, UntypedFormGroup
+  UntypedFormControl,
+  UntypedFormGroup,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HandlerComponent, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, StatusCode, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
-
+import {
+  ContainerPanelComponent,
+  DatepickerYearComponent,
+  FormContainerAction,
+  FormFieldType,
+  HandlerComponent,
+  HintPosition,
+  HintValue,
+  Hit,
+  IdentifierSchemas,
+  InputEmailComponent,
+  InputRnpsComponent,
+  InputTextComponent,
+  InputUrlComponent,
+  JournalData,
+  JournalVersion,
+  MessageHandler,
+  MetadataService,
+  Organization,
+  PanelContent,
+  SelectComponent,
+  SourceClasification,
+  SourceSystems,
+  SourceTypes,
+  StatusCode,
+  Term,
+  TextareaComponent,
+  VocabulariesInmutableNames,
+  VocabularyComponent,
+} from 'toco-lib';
 
 @Component({
   selector: 'catalog-source-edit-journal',
@@ -90,8 +107,8 @@ export class SourceEditJournalComponent implements OnInit {
     private metadata: MetadataService,
     public snackBar: MatSnackBar,
     private formBuilder: UntypedFormBuilder,
-    private _dialog: MatDialog,
-  ) { }
+    private _dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.journalData = new JournalData();
@@ -404,8 +421,8 @@ export class SourceEditJournalComponent implements OnInit {
             multiple: false,
             selectedTermsIds: this.journalData
               ? this.journalData.classifications.map(
-                (termSource) => termSource.id
-              )
+                  (termSource) => termSource.id
+                )
               : null,
             vocab: VocabulariesInmutableNames.LICENCES,
             level: 0,
@@ -423,8 +440,8 @@ export class SourceEditJournalComponent implements OnInit {
             multiple: false,
             selectedTermsIds: this.journalData
               ? this.journalData.classifications.map(
-                (termSource) => termSource.id
-              )
+                  (termSource) => termSource.id
+                )
               : null,
             vocab: VocabulariesInmutableNames.SUBJECTS,
             level: 0,
@@ -441,8 +458,8 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData ? this.journalData.start_year : '',
           extraContent: {
             minYear: 1492,
-            maxYear: new Date(Date.now())
-          }
+            maxYear: new Date(Date.now()),
+          },
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -455,8 +472,8 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData ? this.journalData.end_year : '',
           extraContent: {
             minYear: 1492,
-            maxYear: new Date(Date.now())
-          }
+            maxYear: new Date(Date.now()),
+          },
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -473,32 +490,32 @@ export class SourceEditJournalComponent implements OnInit {
             getOptions: () => {
               return [
                 {
-                  label: "Anual",
-                  value: "anual",
+                  label: 'Anual',
+                  value: 'anual',
                 },
                 {
-                  label: "Semestral",
-                  value: "semestral",
+                  label: 'Semestral',
+                  value: 'semestral',
                 },
                 {
-                  label: "Cuatrimestral",
-                  value: "cuatrimestral",
+                  label: 'Cuatrimestral',
+                  value: 'cuatrimestral',
                 },
                 {
-                  label: "Trimestral",
-                  value: "trimestral",
+                  label: 'Trimestral',
+                  value: 'trimestral',
                 },
                 {
-                  label: "Bimestral",
-                  value: "bimestral",
+                  label: 'Bimestral',
+                  value: 'bimestral',
                 },
                 {
-                  label: "Publicación continua",
-                  value: "publicación continua",
+                  label: 'Publicación continua',
+                  value: 'publicación continua',
                 },
                 {
-                  label: "Otro",
-                  value: "otro",
+                  label: 'Otro',
+                  value: 'otro',
                 },
               ];
             },
@@ -572,7 +589,7 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData
             ? this.journalData.socialNetworks.linkedin
             : '',
-        }
+        },
       ],
     };
     // {
@@ -613,7 +630,6 @@ export class SourceEditJournalComponent implements OnInit {
     //     },
     //   ],
     // },
-
   }
 
   initStep2() {
@@ -627,7 +643,6 @@ export class SourceEditJournalComponent implements OnInit {
   }
   indexerStepper() {
     // console.log(this.journalData);
-
     // this.indexes = this.journalData.classifications.filter(
     //   (value) => value.vocabulary == VocabulariesInmutableNames.INDEXES
     // );
@@ -692,7 +707,7 @@ export class SourceEditJournalComponent implements OnInit {
     //   this.identifiersFormGroup.value
     // );
 
-    console.log(this.informationFormGroup)
+    console.log(this.informationFormGroup);
     this.journalData.deepcopy(this.informationFormGroup.value);
     this.journalData.socialNetworks.deepcopy(this.informationFormGroup.value);
 
@@ -705,9 +720,8 @@ export class SourceEditJournalComponent implements OnInit {
       this.informationFormGroup.value.oaiurl
     );
 
-    this.journalData.source_type = this.informationFormGroup.value[
-      'source_type'
-    ];
+    this.journalData.source_type =
+      this.informationFormGroup.value['source_type'];
 
     const indexes = this.journalData.classifications.filter(
       (value) => value.vocabulary == VocabulariesInmutableNames.INDEXES
@@ -739,13 +753,11 @@ export class SourceEditJournalComponent implements OnInit {
         ts.vocabulary = term.vocabulary_id;
         this.journalData.classifications.push(ts);
       });
-
     }
 
     console.log(indexes);
-    this.journalData.classifications = this.journalData.classifications.concat(
-      indexes
-    );
+    this.journalData.classifications =
+      this.journalData.classifications.concat(indexes);
     // this.journalData.organizations = this.source.data.organizations;
 
     // this.organizationFormGroup.value[
@@ -798,13 +810,21 @@ export class SourceEditJournalComponent implements OnInit {
     this.fillJournalFields();
 
     console.log(this.journalData, this.journalVersion);
-    if(this.journalData.identifiers.length  == 0 && this.journalVersion.source_uuid == ''){
-      const m = new MessageHandler(null,this._dialog);
-      m.showMessage(StatusCode.OK, 'Una revista debe tener titulo, al menos un identificador persistente y una url, revise sus datos.', HandlerComponent.dialog, "Error", "50%");
+    if (
+      this.journalData.identifiers.length == 0 &&
+      this.journalVersion.source_uuid == ''
+    ) {
+      const m = new MessageHandler(null, this._dialog);
+      m.showMessage(
+        StatusCode.OK,
+        'Una revista debe tener titulo, al menos un identificador persistente y una url, revise sus datos.',
+        HandlerComponent.dialog,
+        'Error',
+        '50%'
+      );
     } else {
       this.journalEditDone.emit(this.journalVersion);
     }
-
   }
   public cancelStepper() {
     this.editCanceled.emit(true);

@@ -17,7 +17,7 @@ import { OrgService } from "../_services/org.service";
 import { ChartType } from "../charts/chart-utils";
 
 @Component({
-  selector: "app-search",
+  selector: "organization-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"],
   animations: [
@@ -205,27 +205,31 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
   }
 
   public fetchSearchRequest() {
-    this._cuorService.getOrganizations(this.params).subscribe(
-      (response: SearchResponse<Organization>) => {
+    this._cuorService.getOrganizations(this.params).subscribe({
+      next: (response: SearchResponse<Organization>) => {
 
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
-        delete this.sr.aggregations["country"];
+        // delete this.sr.aggregations["country"];
+        this.sr.aggregations["country"]["disabled"] = true;
+        console.log(this.sr);
+
         this.aggr_keys = [
           //{value: this.sr.aggregations.country, key: 'País'},
           {value: this.sr.aggregations.state, key: 'Provincia'},
           {value: this.sr.aggregations.status, key: 'Estado'},
           {value: this.sr.aggregations.types, key: 'Tipo'},
+          {value: this.sr.aggregations.country, key: 'Pais'},
         ]
       },
-      (error: any) => {
+      error: (error: any) => {
         console.log("ERROPR");
       },
-      () => {
+      complete: () => {
         console.log("END...");
         this.loading = false;
       }
-    );
+    });
   }
 
   public pageChange(event?: PageEvent): void {
@@ -277,11 +281,6 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
 
 
   moreKeyClick(event) {
-    console.log(event);
-    console.log(this.aggrsSelection);
-    console.log(this.sr.aggregations);
-    console.log(JSON.stringify(this.aggrsSelection));
-
     let start = this.sr.aggregations[event].buckets.length;
     let size = this.sr.hits.total;
     let filters = [];

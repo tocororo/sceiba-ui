@@ -23,7 +23,6 @@ export class OrgViewerComponent implements OnInit {
   public isAnomaly = true;
   public isDuplicate = false;
   public appHost: string;
-  public user: string;
   orgFilter = [{ type: 'country', value: 'Cuba' }, { type: 'status', value: 'active' }];
   public form = new UntypedFormGroup({
     anomalyDescription: new UntypedFormControl('', Validators.required),
@@ -52,8 +51,7 @@ export class OrgViewerComponent implements OnInit {
   identifiers = [];
 
   public ngOnInit(): void {
-    this.user = JSON.parse(this.oauthStorage.getItem('user'));
-    console.log('user===', JSON.parse(this.oauthStorage.getItem('user')));
+
     this.iconRegistry.addSvgIcon('wikidata', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/Wikidata-logo.svg'));
     /* Gets the `Organization` data. */
 

@@ -15,7 +15,7 @@ import { Person } from "../people/person.entity";
  * The search result can be showed as a list or charts.
  */
 @Component({
-    selector: "app-search",
+    selector: "persons-app-search",
     templateUrl: "./search.component.html",
     styleUrls: ["./search.component.scss"],
 })

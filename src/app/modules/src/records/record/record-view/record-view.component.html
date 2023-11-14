@@ -1,9 +1,19 @@
-<div *ngIf="record" fxLayout="column wrap" style="padding: 0px 16px">
-  <span class="mat-headline-6"> {{ record.title }}</span>
+<mat-toolbar
+fxLayout="row wrap"
+fxLayoutAlign="space-between center"
+[ngStyle]="{
+  width: '100%',
+  height: 'auto',
+  padding: '16px',
+  'min-height': '56px'
+}"
+>
+<div *ngIf="record" fxLayout="column" style="padding: 0px 16px;white-space: normal;">
+  <h1 class="mat-headline-6"> {{ record.title }}</h1>
   <span class="mat-caption" color="primary"> SceibaID: {{ record.id }} </span>
   <span class="mat-caption"> Tipo: Resultado </span>
 </div>
-
+</mat-toolbar>
 <div fxLayout="row" fxLayoutAlign="center" *ngIf="record">
   <mat-card>
     <mat-card-content>

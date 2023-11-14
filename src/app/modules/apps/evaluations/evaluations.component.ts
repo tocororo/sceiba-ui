@@ -10,6 +10,9 @@ import { HeaderService } from 'src/app/core/header.service';
 import { EvaluationService } from '../../src/evaluations/_services/evaluationService.service';
 import { MenuElement } from '../../src/evaluations/header/header.component';
 
+import { USER_STORAGE_VAR } from 'toco-lib';
+
+
 @Component({
   selector: 'sceiba-ui-evaluations-root',
   templateUrl: './evaluations.component.html',
@@ -116,7 +119,8 @@ export class EvaluationsComponent {
   }
 
   public get notAuthenticated(): boolean {
-    let request = JSON.parse(this.oauthStorage.getItem('user'));
+
+    let request = JSON.parse(this.oauthStorage.getItem(USER_STORAGE_VAR));
     return request == (null || undefined);
   }
   ngOnDestroy(): void {}

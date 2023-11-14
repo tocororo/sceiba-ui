@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
+import { Params } from "@angular/router";
 import { MessageHandler, StatusCode } from "toco-lib";
+import { SceibaUiOrgSearchDialogComponent } from "../../../common/search/org-search-dialog/org-dialog.component";
 import { PeopleService } from "../people/people.service";
-import { ParamMap, Params, Router } from "@angular/router";
-import { OrgDialogComponent } from "./org-dialog/org-dialog.component";
 
 @Component({
   selector: "app-import-people",
@@ -183,7 +182,7 @@ export class ImportPeopleComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(OrgDialogComponent, {
+    const dialogRef = this.dialog.open(SceibaUiOrgSearchDialogComponent, {
       width: "95%",
       data: {},
     });

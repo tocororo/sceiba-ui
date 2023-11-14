@@ -3,27 +3,36 @@
 
 <!-- <toco-page-header [info]="['Catálogo de Revistas Científicas Cubanas']">
     </toco-page-header> -->
-<div
+
+<mat-toolbar
   fxLayout="row wrap"
   fxLayoutAlign="space-between center"
-  style="height: 80px; padding: 0px 16px"
+  [ngStyle]="{
+    width: '100%',
+    height: 'auto',
+    padding: '16px',
+    'min-height': '56px'
+  }"
 >
-  <span class="mat-h2">{{ "CATALOG_TITLE" | translate }}</span>
-  <button
-    mat-icon-button
-    (click)="drawer.toggle()"
-    matTooltip="Filtros avanzados"
-  >
+  <span [ngStyle]="{ 'white-space': 'normal' }">
+    <span class="mat-h2">{{ "CATALOG_TITLE" | translate }}</span>
+  </span>
+  <button mat-icon-button (click)="drawer.toggle()" matTooltip="Filtros">
     <mat-icon>filter_list</mat-icon>
   </button>
-</div>
-
+</mat-toolbar>
 <toco-progress [loading]="!initfilters"></toco-progress>
 
 <div *ngIf="initfilters">
   <!-- fxLayout="{{ currentlayout.layout }}" fxLayout.xs="column nowrap" fxLayoutAlign="{{ currentlayout.aling }}" -->
-  <mat-drawer-container autosize style="background-color: white">
-    <mat-drawer #drawer mode="side" opened position="start">
+  <mat-drawer-container style="background-color: white">
+    <mat-drawer
+      #drawer
+      mode="side"
+      closed
+      position="end"
+      style="min-width: 30%;"
+    >
       <catalog-search-filters
         fxLayout="row wrap"
         fxLayout.xs="column wrap"
@@ -33,12 +42,14 @@
         [params]="filtersParams"
         (paramsChange)="filtersChange($event)"
         [topMainOrganization]="topMainOrganization"
+
       >
       </catalog-search-filters>
       <!-- fxFlex="{{ currentlayout.width }}" -->
     </mat-drawer>
     <div class="mx-1">
       <toco-progress [loading]="isLoading()"></toco-progress>
+
       <mat-paginator
         [length]="length"
         [pageSize]="pageSize"
@@ -47,10 +58,11 @@
         (page)="pageChange($event)"
       >
       </mat-paginator>
-      <search-list
+      <catalog-search-list
         [hitList]="dataSource"
         [catalogPath]="catalogPath"
-      ></search-list>
+        style="height: 50em;"
+      ></catalog-search-list>
 
       <mat-paginator
         [length]="length"

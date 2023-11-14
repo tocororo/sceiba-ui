@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Environment, HitList, Source } from "toco-lib";
 
 @Component({
-  selector: "search-list",
+  selector: "catalog-search-list",
   templateUrl: "./search-list.component.html",
   styleUrls: ["./search-list.component.scss"],
 })

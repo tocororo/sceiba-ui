@@ -1,13 +1,30 @@
-import { Component, OnInit, Input, Inject, OnChanges } from "@angular/core";
+import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
-import { FormArray } from "@angular/forms";
-import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNoAuth, SourceOrganization, MessageHandler, StatusCode, HandlerComponent, OrganizationRelationships, Relationship, Hit, OrganizationFlatNode } from 'toco-lib';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { SceibaUiOrgSearchDialogComponent } from 'src/app/modules/common/search/org-search-dialog/org-dialog.component';
+import {
+  HandlerComponent,
+  Hit,
+  MessageHandler,
+  Organization,
+  OrganizationFlatNode,
+  OrganizationRelationships,
+  OrganizationServiceNoAuth,
+  Relationship,
+  SourceData,
+  SourceOrganization,
+  SourceOrganizationRole,
+  StatusCode,
+} from 'toco-lib';
 
 @Component({
-  selector: "catalog-source-edit-organizations",
-  templateUrl: "./source-organizations.component.html",
-  styleUrls: ["./source-organizations.component.scss"],
+  selector: 'catalog-source-edit-organizations',
+  templateUrl: './source-organizations.component.html',
+  styleUrls: ['./source-organizations.component.scss'],
 })
 export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
   @Input()
@@ -30,50 +47,64 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
     this.sourceData.organizations = this.sourceData.organizations.filter(
       (element) => element && element.role
     );
-    console.log('**** SourceEditOrganizationsComponent *** complete process initIndexes', this.sourceData);
+    console.log(
+      '**** SourceEditOrganizationsComponent *** complete process initIndexes',
+      this.sourceData
+    );
   }
+
   ngOnChanges(): void {
     this.ngOnInit();
   }
+
   addOrg(cuban = true, topMain = false) {
-    if (topMain && this.topMainOrganization) {
-      this.dialog.open(SourceEditOrganizationSelectTopDialog, {
-        width: "500px",
-        data: {
-          topMainOrganization: this.topMainOrganization,
-          selectOrg: (org: Organization, parents: Array<Organization>) => {
-            this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
-            parents.forEach((element) => {
-              this.addOrgToSource(
-                element,
-                SourceOrganizationRole.COLABORATOR.value
-              );
-            });
-          },
-        },
-      });
-    } else {
-      this.dialog.open(SourceEditOrganizationSelectDialog, {
-        width: "500px",
-        data: {
-          filter: cuban ? { type: "country", value: "Cuba" } : null,
-          canSelectRole: this.topMainOrganization == null,
-          selectOrg: (
-            org: Organization,
-            role,
-            parents: Array<Organization>
-          ) => {
-            this.addOrgToSource(org, role);
-            parents.forEach((element) => {
-              this.addOrgToSource(
-                element,
-                SourceOrganizationRole.COLABORATOR.value
-              );
-            });
-          },
-        },
-      });
-    }
+    const dialogRef = this.dialog.open(SceibaUiOrgSearchDialogComponent, {
+      height: '90%',
+      data: {cuban:false, multiple:true},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+    // if (topMain && this.topMainOrganization) {
+    //   this.dialog.open(SourceEditOrganizationSelectTopDialog, {
+    //     width: "500px",
+    //     data: {
+    //       topMainOrganization: this.topMainOrganization,
+    //       selectOrg: (org: Organization, parents: Array<Organization>) => {
+    //         this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
+    //         parents.forEach((element) => {
+    //           this.addOrgToSource(
+    //             element,
+    //             SourceOrganizationRole.COLABORATOR.value
+    //           );
+    //         });
+    //       },
+    //     },
+    //   });
+    // } else {
+    //   this.dialog.open(SourceEditOrganizationSelectDialog, {
+    //     width: "500px",
+    //     data: {
+    //       filter: cuban ? { type: "country", value: "Cuba" } : null,
+    //       canSelectRole: this.topMainOrganization == null,
+    //       selectOrg: (
+    //         org: Organization,
+    //         role,
+    //         parents: Array<Organization>
+    //       ) => {
+    //         this.addOrgToSource(org, role);
+    //         parents.forEach((element) => {
+    //           this.addOrgToSource(
+    //             element,
+    //             SourceOrganizationRole.COLABORATOR.value
+    //           );
+    //         });
+    //       },
+    //     },
+    //   });
+    // }
   }
   private addOrgToSource(org: Organization, role) {
     if (!this.sourceData.organizations.find((o) => o.id == org.id)) {
@@ -103,20 +134,20 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
     if (child == null) {
       let parents = this.getOrgToDelete(organization);
       let toDelete = [];
-      let msg = "";
+      let msg = '';
       for (let i = 0; i < parents.length; i++) {
         const element = parents[i];
         toDelete.push(this.sourceData.organizations[element]);
-        msg += this.sourceData.organizations[element].name + ", ";
+        msg += this.sourceData.organizations[element].name + ', ';
       }
       toDelete.push(organization);
       console.log(toDelete);
-      if(toDelete.length>0){
+      if (toDelete.length > 0) {
         m.showMessage(
           StatusCode.OK,
           msg,
           HandlerComponent.dialog,
-          "Se eliminó también: "
+          'Se eliminó también: '
         );
       }
 
@@ -138,7 +169,7 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
         StatusCode.OK,
         child.name,
         HandlerComponent.dialog,
-        "Para eliminar este elemento debe eliminar:"
+        'Para eliminar este elemento debe eliminar:'
       );
     }
   }
@@ -201,9 +232,9 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
         pidindex++
       ) {
         const identifier = element.identifiers[pidindex];
-        console.log(identifier.value + "==" + pid);
+        console.log(identifier.value + '==' + pid);
         if (identifier.value == pid) {
-          console.log(identifier.value + "==" + pid + "  iguales!!!");
+          console.log(identifier.value + '==' + pid + '  iguales!!!');
           return index;
         }
       }
@@ -213,35 +244,34 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
 }
 
 @Component({
-  selector: "catalog-source-organizations-select-top-main",
+  selector: 'catalog-source-organizations-select-top-main',
   template: `<mat-dialog-content class="height-auto">
+    <ng-container *ngIf="selectedOrg">
+      <mat-label>Principal: </mat-label>
+      <br />
+      <mat-label>{{ selectedOrg.metadata.name }}</mat-label>
+      <br />
+    </ng-container>
 
-  <ng-container *ngIf="selectedOrg">
-  <mat-label>Principal: </mat-label>
-  <br />
-    <mat-label>{{ selectedOrg.metadata.name }}</mat-label>
-  <br />
-  </ng-container>
+    <ng-container *ngIf="parents.length > 0">
+      <mat-label>Colaboradores: </mat-label>
+      <ng-container *ngFor="let item of parents">
+        <br />
+        <mat-label>{{ item.name }}</mat-label>
+        <br />
+      </ng-container>
+      <br />
+    </ng-container>
 
-  <ng-container *ngIf="parents.length > 0">
-  <mat-label>Colaboradores: </mat-label>
-  <ng-container *ngFor="let item of parents">
-    <br />
-    <mat-label>{{ item.name }}</mat-label>
-    <br />
-  </ng-container>
-  <br />
-  </ng-container>
-
-  <toco-org-tree-viewer
-  [organizations]="[topMainOrganization]"
-  [orgRelationshipType]="'child'"
-  [iconAction]="'done'"
-  [labelAction]="'Seleccionar'"
-  (action)="selectOrg($event)"
-  [ngStyle]="{'height': '300px','overflow': 'auto'}"
->
-</toco-org-tree-viewer>
+    <toco-org-tree-viewer
+      [organizations]="[topMainOrganization]"
+      [orgRelationshipType]="'child'"
+      [iconAction]="'done'"
+      [labelAction]="'Seleccionar'"
+      (action)="selectOrg($event)"
+      [ngStyle]="{ height: '300px', overflow: 'auto' }"
+    >
+    </toco-org-tree-viewer>
     <button mat-raised-button (click)="ok()">OK</button>
   </mat-dialog-content>`,
 })
@@ -255,9 +285,8 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
   public toSelect: Array<Relationship> = null;
   public selected = -1;
 
-  public selectedOrg: Hit<Organization> = null
+  public selectedOrg: Hit<Organization> = null;
   public parents: Array<Organization> = new Array<Organization>();
-
 
   ngOnInit(): void {
     this.topMainOrganization = this.data.topMainOrganization;
@@ -279,7 +308,7 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
   }
 
   private addParents(org: OrganizationFlatNode) {
-    if(org.parent != null){
+    if (org.parent != null) {
       this.parents.push(org.parent.item.metadata);
       this.addParents(org.parent);
     }
@@ -304,7 +333,7 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
     // let selected = new SourceOrganization()
     // selected.organization = org;
     // selected.role = SourceOrganizationRole.MAIN.value;
-    if (this.selectedOrg ) {
+    if (this.selectedOrg) {
       this.data.selectOrg(this.selectedOrg.metadata, this.parents);
       this.dialogRef.close();
       // console.log(this.toSelect[this.selected]);
@@ -321,7 +350,7 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
 }
 
 @Component({
-  selector: "catalog-source-organizations-select-dialog",
+  selector: 'catalog-source-organizations-select-dialog',
   template: `<mat-dialog-content class="height-auto">
     <toco-org-search
       [orgFilter]="data.filter"
@@ -364,20 +393,20 @@ export class SourceEditOrganizationSelectDialog implements OnInit {
   ) {}
 
   public roles = [
-    { label: "Principal", value: "MAIN" },
-    { label: "Colaborador", value: "COLABORATOR" },
+    { label: 'Principal', value: 'MAIN' },
+    { label: 'Colaborador', value: 'COLABORATOR' },
   ];
   public role = null;
   public org: Organization;
   public parents: Array<Organization> = new Array<Organization>();
-  placeholder = "Buscar una organización";
+  placeholder = 'Buscar una organización';
   public canSelectRole = true;
 
   ngOnInit(): void {
     console.log(this.data);
     this.canSelectRole = this.data.canSelectRole;
     if (this.data.filter) {
-      this.placeholder = "Buscar una organización cubana";
+      this.placeholder = 'Buscar una organización cubana';
     }
   }
   onNoClick(): void {

@@ -9,14 +9,28 @@
       <mat-card-title class="text-capitalize">{{ key.sp }}</mat-card-title>
     </mat-card-header>
     <mat-card-content fxLayout="column">
-      <mat-checkbox
-        *ngFor="let bucket of aggregations[key.key].buckets"
-        [checked]="isSelected(key.key, bucket)"
-        (change)="selectionChange(key.key, bucket)"
-        class="text-capitalize"
-      >
-        {{ bucket.key }} ({{ bucket.doc_count }})
-      </mat-checkbox>
+      <ng-container *ngIf="aggregations[key.key].disabled">
+        <mat-checkbox
+          *ngFor="let bucket of aggregations[key.key].buckets"
+          [checked]="isSelected(key.key, bucket)"
+          (change)="selectionChange(key.key, bucket)"
+          class="text-capitalize"
+          disabled
+        >
+          {{ bucket.key }} ({{ bucket.doc_count }})
+        </mat-checkbox>
+      </ng-container>
+      <ng-container *ngIf="!aggregations[key.key].disabled">
+        <mat-checkbox
+          *ngFor="let bucket of aggregations[key.key].buckets"
+          [checked]="isSelected(key.key, bucket)"
+          (change)="selectionChange(key.key, bucket)"
+          class="text-capitalize"
+        >
+          {{ bucket.key }} ({{ bucket.doc_count }})
+        </mat-checkbox>
+      </ng-container>
+
     </mat-card-content>
     <mat-card-actions>
       <!-- <button
@@ -27,7 +41,18 @@
       >
         <mat-icon>add</mat-icon>
     </button> -->
-
+    <ng-container *ngIf="aggregations[key.key].disabled">
+      <button
+        [value]="key"
+        mat-button
+        matTooltip="More..."
+        (click)="moreKeysClick(key.key)"
+        disabled
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="!aggregations[key.key].disabled">
       <button
         [value]="key"
         mat-button
@@ -36,6 +61,8 @@
       >
         <mat-icon>add</mat-icon>
       </button>
+    </ng-container>
+
     </mat-card-actions>
   </mat-card>
 </ng-container>

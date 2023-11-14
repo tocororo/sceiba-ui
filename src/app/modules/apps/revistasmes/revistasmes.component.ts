@@ -14,7 +14,7 @@ import {
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HeaderService } from 'src/app/core/header.service';
 import { MenuElement } from 'src/app/core/header/header.component';
-import { Environment } from 'toco-lib';
+import { Environment, USER_STORAGE_VAR } from 'toco-lib';
 
 @Component({
   selector: 'seiba-ui-revistasmes-root',
@@ -93,7 +93,7 @@ export class RevistasMesComponent {
   ngOnDestroy(): void {}
 
   public get notAuthenticated(): boolean {
-    let request = JSON.parse(this.oauthStorage.getItem('user'));
+    let request = JSON.parse(this.oauthStorage.getItem(USER_STORAGE_VAR));
     return request == (null || undefined);
   }
 }

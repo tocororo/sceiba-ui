@@ -1,61 +1,32 @@
 import { HttpParams } from "@angular/common/http";
 import {
   Component,
-  HostListener,
-  Input,
+  Inject,
   ViewChild
 } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import {
   NavigationExtras,
   Params
 } from "@angular/router";
-import { OrgService } from "../../_services/org.service";
+import { OrgService } from "../../../src/persons/_services/org.service";
 
-import { AggregationsSelection, Environment, Organization, SearchResponse } from "toco-lib";
+import { AggregationsSelection, Environment, Organization, Response, SearchResponse, SearchService } from "toco-lib";
+
+interface SceibaUiOrgSearchDialogComponentData{
+  cuban: boolean;
+  multiple: boolean;
+}
 
 @Component({
-  selector: "app-org-dialog",
+  selector: "sceiba-ui-org-search-dialog",
   templateUrl: "./org-dialog.component.html",
   styleUrls: ["./org-dialog.component.scss"],
 })
-export class OrgDialogComponent {
+export class SceibaUiOrgSearchDialogComponent {
   aggr_keys: Array<any>;
-  search_type: Boolean = true;
-
-  layoutPosition = [
-    {
-      name: "Derecha",
-      layout: "row-reverse",
-      aling: "center baseline",
-      width: "22",
-    },
-    {
-      name: "Izquierda",
-      layout: "row",
-      aling: "center baseline",
-      width: "22",
-    },
-    {
-      name: "Arriba",
-      layout: "column",
-      aling: "center center",
-      width: "90",
-    },
-    {
-      name: "Abajo",
-      layout: "column-reverse",
-      aling: "center center",
-      width: "90",
-    },
-  ];
-  currentlayout = this.layoutPosition[0];
-  public changeLayoutPosition(index: number) {
-    this.currentlayout = this.layoutPosition[index];
-  }
-  // end Layout stuff
 
   // begin paginator stuff
   pageSize = 5;
@@ -74,8 +45,8 @@ export class OrgDialogComponent {
   loading: boolean = true;
   selectedOrgs: any;
 
-  @Input() multipleSelection: boolean = false;
-  @Input() header: string = 'Seleccione la organización a que pertenecen las personas a importar.';
+  multipleSelection: boolean = false;
+  header: string = 'SELECT_ORGANIZATION';
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
@@ -83,19 +54,21 @@ export class OrgDialogComponent {
   public constructor(
     private _env: Environment,
     private _cuorService: OrgService,
-    public dialogRef: MatDialogRef<OrgDialogComponent>
+    public dialogRef: MatDialogRef<SceibaUiOrgSearchDialogComponent>,
+    private _searchService: SearchService,
+    @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
   ) {this.env = this._env;}
 
   public ngOnInit(): void {
-    this.query = "";
 
-    this.aggrsSelection["country"] = ["Cuba"]; //porque aun si cambian la url arriba seguira diciendo cuba
+    this.query = "";
+    this.multipleSelection = this.data.multiple;
+    if(this.data.cuban){
+      this.aggrsSelection["country"] = ["Cuba"];
+    }
+
     this.updateFetchParams();
     this.fetchSearchRequest();
-  }
-
-  changeView(): void {
-    this.search_type = !this.search_type;
   }
 
   private updateFetchParams() {
@@ -118,30 +91,29 @@ export class OrgDialogComponent {
   }
 
   public fetchSearchRequest() {
-    this._cuorService.getOrganizations(this.params).subscribe(
-      (response: SearchResponse<Organization>) => {
+    this._cuorService.getOrganizations(this.params).subscribe({
+      next: (response: SearchResponse<Organization>) => {
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
-        console.log(
-          "🚀 ~ file: org-dialog.component.ts:115 ~ OrgDialogComponent ~ fetchSearchRequest ~ this.sr",
-          this.sr
-        );
-        delete this.sr.aggregations["country"];
+
         this.aggr_keys = [
-          //{value: this.sr.aggregations.country, key: 'País'},
+          {value: this.sr.aggregations.country, key: 'País'},
           { value: this.sr.aggregations.state, key: "Provincia" },
           { value: this.sr.aggregations.status, key: "Estado" },
           { value: this.sr.aggregations.types, key: "Tipo" },
         ];
+        if(this.data.cuban){
+          this.sr.aggregations.country['disabled'] = true;
+        }
       },
-      (error: any) => {
+      error: (error: any) => {
         console.log("ERROPR");
       },
-      () => {
+      complete: () => {
         console.log("END...");
         this.loading = false;
       }
-    );
+    });
   }
 
   public pageChange(event?: PageEvent): void {
@@ -157,18 +129,54 @@ export class OrgDialogComponent {
     this.query = event;
   }
 
-  @HostListener("window:resize", ["$event"])
-  onResize(event: Event) {
-    // console.log("window:resize", window.innerWidth);
-    if (window.innerWidth <= 740) {
-      this.drawer.opened = false;
-    } else {
-      this.drawer.opened = true;
+  moreKeyClick(event) {
+    let start = this.sr.aggregations[event].buckets.length;
+    let size = this.sr.hits.total;
+    let filters = [];
+    for (const aggrKey in this.aggrsSelection) {
+      console.log(aggrKey);
+
+      filters.push({ key: aggrKey, value: this.aggrsSelection[aggrKey] });
     }
+    console.log(filters);
+
+    let _query = {
+      index: 'organizations',
+      filters: filters,
+      agg: {
+        filter: event,
+        size: start + 5,
+      },
+    };
+    console.log(JSON.stringify(_query));
+    this._searchService.getAggregationTerms(_query).subscribe({
+      next: (response: Response<any>) => {
+        console.log(response.data['terms']);
+
+        let buckets = response.data.terms;
+        console.log(buckets);
+        console.log(this.sr.aggregations[event].buckets);
+
+        this.sr.aggregations[event].buckets = buckets;
+      },
+      error: (error) => {},
+      complete: () => {},
+    });
   }
+
+  // @HostListener("window:resize", ["$event"])
+  // onResize(event: Event) {
+  //   // console.log("window:resize", window.innerWidth);
+  //   if (window.innerWidth <= 740) {
+  //     this.drawer.opened = false;
+  //   } else {
+  //     this.drawer.opened = true;
+  //   }
+  // }
 
   onNoClick(): void {
     this.dialogRef.close();
+
   }
 
   checkMultiple(e, org) {

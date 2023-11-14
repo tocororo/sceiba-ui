@@ -9,9 +9,9 @@ import {
   OauthAuthenticationService,
   OauthInfo,
   Response,
-  User,
+  USER_STORAGE_VAR,
   UserProfile,
-  convertLangFromNumberToString,
+  convertLangFromNumberToString
 } from 'toco-lib';
 import { HeaderService } from '../header.service';
 
@@ -106,7 +106,6 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   public simpleMenu = false;
 
-  public user: User = null;
   public userProfile: UserProfile = null;
 
   public oauthInfo: OauthInfo;
@@ -151,6 +150,7 @@ export class SceibaUIHeaderComponent implements OnInit {
 
     this.setupUser();
     this.setupLang();
+    this.addUserMenu();
 
     let roles = this.oauthStorage.getItem('roles');
   }
@@ -176,7 +176,7 @@ export class SceibaUIHeaderComponent implements OnInit {
       {
         nameTranslate: 'PERFIL_USUARIO',
         icon: 'person_outline',
-        href: `/person/${this.user && this.user.id}`,
+        href: `/person/${this.userProfile && this.userProfile.user.id}`,
         useRouterLink: true,
       },
       {
@@ -382,9 +382,9 @@ export class SceibaUIHeaderComponent implements OnInit {
   }
 
   private addUserMenu(){
-    if (this.user ) {
+    if (this.userProfile ) {
       this._userMainMenu = [{
-        nameTranslate: this.user ? this.user.email.split('@')[0] : '',
+        nameTranslate: this.userProfile ? this.userProfile.user.email.split('@')[0] : '',
         icon: 'person_pin',
         childrenMenu: this._menuAuthenticatedUser,
         hideLabel: true,
@@ -392,27 +392,20 @@ export class SceibaUIHeaderComponent implements OnInit {
     }
   }
   private setupUser() {
-    let request = JSON.parse(this.oauthStorage.getItem('user'));
-    if (request ) {
-      console.log('-----------------', request, '-------------------');
-
-      this.userProfile = request.data.userprofile;
-      this.user = this.userProfile.user;
-
+    this.userProfile = this.authenticateService.getUserFromStorage();
+    if(this.userProfile){
       // this.user = request;
       this.addUserMenu();
       this.configRoles();
-    }
+    } else {
 
-    this.authenticateSuscription =
+      this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe({
         next: (request) => {
-          console.log('++++++++++++++++++++', request, '+++++++++++++++');
 
           if (request ) {
-            this.userProfile = request.data.userprofile;
+            this.userProfile = this.authenticateService.getUserFromStorage();
 
-            this.user = this.userProfile.user;
             this.addUserMenu();
             this.configRoles();
           } else {
@@ -420,16 +413,18 @@ export class SceibaUIHeaderComponent implements OnInit {
           }
         },
         error: (e) => {
-          this.user = null;
+          this.userProfile = null;
         },
         complete: () => console.info('complete authenticateSuscription'),
       });
+    }
+
   }
 
   private configRoles() {
     let roles = '';
-    for (const rol in this.user.roles) {
-      const element = this.user.roles[rol];
+    for (const rol in this.userProfile.user.roles) {
+      const element = this.userProfile.user.roles[rol];
       roles += ',' + element.name;
     }
     this.oauthStorage.setItem('roles', roles);
@@ -487,16 +482,17 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   public logoff() {
     this.oauthService.logOut();
-    this.oauthStorage.removeItem('user');
+    this.oauthStorage.removeItem(USER_STORAGE_VAR);
     this.oauthStorage.removeItem('roles');
-    this.user = undefined;
+    this.userProfile = undefined;
     this._menuMainIcons = this.menuIconsStatic;
   }
 
   public get name() {
-    let user = JSON.parse(this.oauthStorage.getItem('user'));
+
+    let user: UserProfile = this.authenticateService.getUserFromStorage();
     if (!user) return null;
-    return user['email'];
+    return user.user.email;
   }
 
   getUserInfo(): Observable<Response<any>> {

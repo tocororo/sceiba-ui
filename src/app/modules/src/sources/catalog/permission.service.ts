@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
-import { Environment } from 'toco-lib';
+import { Environment, USER_STORAGE_VAR } from 'toco-lib';
 
 @Injectable({
   providedIn: 'any',
@@ -29,7 +29,7 @@ export class SourceViewGuard {
     | Promise<boolean | UrlTree> {
     const uuid = route.params['uuid'];
     // TODO: if current user can edit source version, else redirect.
-    let user = JSON.parse(this.oauthStorage.getItem('user'));
+    let user = JSON.parse(this.oauthStorage.getItem(USER_STORAGE_VAR));
     if (user) {
       return true;
     } else {
@@ -60,7 +60,7 @@ export class SourceViewGuardRedirect {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     const uuid = route.params['uuid'];
-    let user = JSON.parse(this.oauthStorage.getItem('user'));
+    let user = JSON.parse(this.oauthStorage.getItem(USER_STORAGE_VAR));
     if (!user) {
       return true;
     } else {

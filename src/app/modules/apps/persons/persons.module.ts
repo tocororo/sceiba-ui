@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'node_modules/ngx-dropzone';
 import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
+import { SceibaUiSearchModule } from '../../common/search/search.module';
 import { OrgService } from '../../src/persons/_services/org.service';
 import { ContactComponent } from '../../src/persons/contact/contact.component';
 import { FooterComponent } from '../../src/persons/footer/footer.component';
@@ -38,7 +39,6 @@ import { HomeComponent } from '../../src/persons/home/home.component';
 import { CsvTableComponent } from '../../src/persons/import-people/csv-table/csv-table.component';
 import { ImportPeopleComponent } from '../../src/persons/import-people/import-people.component';
 import { JsonTableComponent } from '../../src/persons/import-people/json-table/json-table.component';
-import { OrgDialogComponent } from '../../src/persons/import-people/org-dialog/org-dialog.component';
 import { MainlayoutComponent } from '../../src/persons/layout/mainlayout/mainlayout.component';
 import { PeopleLayoutComponent } from '../../src/persons/layout/people-layout/people-layout.component';
 import { PageNotFoundPeopleComponent } from '../../src/persons/page-not-found-people/page-not-found-people.component';
@@ -72,7 +72,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MenuItemComponent,
     ImportPeopleComponent,
     SelectOrgComponent,
-    OrgDialogComponent,
     ContactComponent,
     JsonTableComponent,
     CsvTableComponent,
@@ -105,6 +104,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     SearchModule,
     OrganizationsModule,
     PersonsRoutingModule,
+    SceibaUiSearchModule
     // OAuthModule.forRoot({
     //   resourceServer: {
     //     allowedUrls: allowedURLS,

@@ -1,0 +1,133 @@
+<toco-progress [loading]="loading"></toco-progress>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ header | translate }} </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-drawer-container>
+      <mat-drawer #drawer mode="side" closed position="start">
+        <seiba-ui-search-aggregations
+          *ngIf="sr"
+          [aggregations]="sr.aggregations"
+          [selectedAggr]="aggrsSelection"
+          (keySelect)="aggrChange($event)"
+          (moreKeys)="moreKeyClick($event)"
+        ></seiba-ui-search-aggregations>
+      </mat-drawer>
+      <!-- templatefor search list -->
+
+      <div class="m-1" *ngIf="sr">
+        <div
+          fxLayout="row nowrap"
+          fxLayout.xs="column"
+          fxLayoutAlign="space-between center"
+        >
+          <button
+            mat-icon-button
+            (click)="drawer.toggle()"
+            matTooltip="Filtros avanzados"
+          >
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <sceiba-ui-search-query-input
+            [query]="query"
+            class="p-1"
+            (queryChange)="queryChange($event)"
+            style="width: 100%"
+          ></sceiba-ui-search-query-input>
+        </div>
+
+        <ng-component
+          *ngIf="sr.hits && sr.hits.hits.length > 0; else templateNotInfo"
+        >
+          <div
+            *ngFor="let hit of sr.hits.hits; let pos = index"
+            style="margin: 1em 8px; display: flex"
+          >
+            <div style="padding-top: 25px; margin-right: 25px">
+              <mat-checkbox
+                *ngIf="multipleSelection; else single"
+                (change)="checkMultiple($event, hit.metadata)"
+              ></mat-checkbox>
+              <ng-template #single
+                ><mat-checkbox
+                  [checked]="
+                    selectedOrgs && selectedOrgs.id === hit.metadata.id
+                  "
+                  (change)="checkSingle($event, hit.metadata)"
+                ></mat-checkbox
+              ></ng-template>
+            </div>
+            <div>
+              <span class="mat-headline-6">
+                {{ hit.metadata.name }}
+              </span>
+              <ul
+                fxLayout="row wrap"
+                *ngIf="
+                  hit.metadata.acronyms && hit.metadata.acronyms.length > 0
+                "
+              >
+                <span class="mat-headline-8">Acrónimos:</span>
+                <li
+                  *ngFor="let acronym of hit.metadata.acronyms; let i = index"
+                  class="li-margin-style mat-caption"
+                >
+                  {{ acronym }}
+                </li>
+              </ul>
+
+              <ul
+                fxLayout="row wrap"
+                *ngIf="
+                  hit.metadata.identifiers &&
+                  hit.metadata.identifiers.length > 0
+                "
+              >
+                <span class="mat-headline-8">Identificadores:</span>
+                <li
+                  *ngFor="
+                    let identifier of hit.metadata.identifiers;
+                    let i = index
+                  "
+                  class="li-margin-style mat-caption"
+                >
+                  {{ identifier.idtype }}: {{ identifier.value }}
+                  <ng-container *ngIf="i < hit.metadata.identifiers.length - 1">
+                    |
+                  </ng-container>
+                </li>
+              </ul>
+              <hr class="hr-grey-ligth" *ngIf="pos < sr.hits.hits.length - 1" />
+            </div>
+          </div>
+        </ng-component>
+
+        <ng-template #templateNotInfo>
+          <h2>No hay resultados para su búsqueda...</h2>
+        </ng-template>
+
+        <mat-paginator
+          [length]="sr.hits.total"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChange($event)"
+        >
+        </mat-paginator>
+      </div>
+    </mat-drawer-container>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button
+      style="margin-left: 8px"
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="selectedOrgs"
+    >
+      Ok
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -248,7 +248,18 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         let query = '';
 
         if (params.has(CatalogFilterKeys.title)) {
-          query = query.concat(params.get(CatalogFilterKeys.title));
+          query = query.concat(
+            '(name:' + params.get(CatalogFilterKeys.title) + ')'
+          );
+        }
+
+        if (params.has(CatalogFilterKeys.identifier)) {
+          if (query != '') {
+            query = this.queryAddAndOp(query);
+          }
+          query = query.concat(
+            '(identifiers.value:"' + params.get(CatalogFilterKeys.identifier)  + '")'
+          );
         }
 
         if (this.topMainOrganization) {
@@ -346,6 +357,8 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     // console.log(this.filtersParams);
     console.log(values);
     console.log(this.router.url);
+    this.pageSize = 5;
+    this.pageIndex = 0;
     values['page'] = this.pageIndex + 1;
     values['size'] = this.pageSize;
 
