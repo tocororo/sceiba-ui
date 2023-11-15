@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
+import { SceibaUiSearchModule } from 'src/app/modules/common/search/search.module';
 import {
   CoreModule,
   OrganizationsModule,
@@ -98,6 +99,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     FormsModule,
     FlexLayoutModule,
     OrganizationsModule,
+    SceibaUiSearchModule,
     MarkdownModule.forRoot({
       loader: HttpClient,
     }),

@@ -30,7 +30,8 @@ import { SceibaUiSearchComponent } from './search/search.component';
   exports: [
     SceibaUiSearchAggregationsComponent,
     SceibaUiQueryInputComponent,
-    SceibaUiSearchComponent
+    SceibaUiSearchComponent,
+    SceibaUiOrgSearchDialogComponent
   ],
 })
 export class SceibaUiSearchModule {}

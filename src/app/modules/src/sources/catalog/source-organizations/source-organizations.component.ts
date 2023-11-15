@@ -5,7 +5,6 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { SceibaUiOrgSearchDialogComponent } from 'src/app/modules/common/search/org-search-dialog/org-dialog.component';
 import {
   HandlerComponent,
   Hit,
@@ -58,53 +57,55 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
   }
 
   addOrg(cuban = true, topMain = false) {
-    const dialogRef = this.dialog.open(SceibaUiOrgSearchDialogComponent, {
-      height: '90%',
-      data: {cuban:false, multiple:true},
-    });
+    // const dialogRef = this.dialog.open(SceibaUiOrgSearchDialogComponent, {
+    //   height: '90%',
+    //   data: {cuban:false, multiple:true},
+    // });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      console.log(result);
-    });
-    // if (topMain && this.topMainOrganization) {
-    //   this.dialog.open(SourceEditOrganizationSelectTopDialog, {
-    //     width: "500px",
-    //     data: {
-    //       topMainOrganization: this.topMainOrganization,
-    //       selectOrg: (org: Organization, parents: Array<Organization>) => {
-    //         this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
-    //         parents.forEach((element) => {
-    //           this.addOrgToSource(
-    //             element,
-    //             SourceOrganizationRole.COLABORATOR.value
-    //           );
-    //         });
-    //       },
-    //     },
-    //   });
-    // } else {
-    //   this.dialog.open(SourceEditOrganizationSelectDialog, {
-    //     width: "500px",
-    //     data: {
-    //       filter: cuban ? { type: "country", value: "Cuba" } : null,
-    //       canSelectRole: this.topMainOrganization == null,
-    //       selectOrg: (
-    //         org: Organization,
-    //         role,
-    //         parents: Array<Organization>
-    //       ) => {
-    //         this.addOrgToSource(org, role);
-    //         parents.forEach((element) => {
-    //           this.addOrgToSource(
-    //             element,
-    //             SourceOrganizationRole.COLABORATOR.value
-    //           );
-    //         });
-    //       },
-    //     },
-    //   });
-    // }
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log('The dialog was closed');
+    //   console.log(result);
+    // });
+    if (topMain && this.topMainOrganization) {
+      this.dialog.open(SourceEditOrganizationSelectTopDialog, {
+        width: '90%',
+        height:'90%',
+        data: {
+          topMainOrganization: this.topMainOrganization,
+          selectOrg: (org: Organization, parents: Array<Organization>) => {
+            this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
+            parents.forEach((element) => {
+              this.addOrgToSource(
+                element,
+                SourceOrganizationRole.COLABORATOR.value
+              );
+            });
+          },
+        },
+      });
+    } else {
+      this.dialog.open(SourceEditOrganizationSelectDialog, {
+        width: '90%',
+        height:'90%',
+        data: {
+          filter: cuban ? { type: 'country', value: 'Cuba' } : null,
+          canSelectRole: this.topMainOrganization == null,
+          selectOrg: (
+            org: Organization,
+            role,
+            parents: Array<Organization>
+          ) => {
+            this.addOrgToSource(org, role);
+            parents.forEach((element) => {
+              this.addOrgToSource(
+                element,
+                SourceOrganizationRole.COLABORATOR.value
+              );
+            });
+          },
+        },
+      });
+    }
   }
   private addOrgToSource(org: Organization, role) {
     if (!this.sourceData.organizations.find((o) => o.id == org.id)) {
@@ -351,39 +352,7 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
 
 @Component({
   selector: 'catalog-source-organizations-select-dialog',
-  template: `<mat-dialog-content class="height-auto">
-    <toco-org-search
-      [orgFilter]="data.filter"
-      (selectedOrg)="selectedOrg($event)"
-      [placeholder]="placeholder"
-    >
-    </toco-org-search>
-    <br />
-    <mat-label *ngIf="org">{{ org.name }}</mat-label>
-    <br />
-    <mat-form-field *ngIf="canSelectRole">
-      <mat-label>Rol</mat-label>
-      <mat-select [(value)]="role" required>
-        <mat-option *ngFor="let item of roles" value="{{ item.value }}">{{
-          item.label
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <br />
-
-    <ng-container *ngIf="parents.length > 0">
-      <mat-label>Se añadirá también: </mat-label>
-      <ng-container *ngFor="let item of parents">
-        <br />
-        <mat-label>{{ item.name }}</mat-label>
-        <br />
-      </ng-container>
-      <br />
-    </ng-container>
-
-    <button mat-raised-button (click)="ok()">OK</button>
-  </mat-dialog-content>`,
+  templateUrl: './source-organizations-select-org-dialog.html',
 })
 export class SourceEditOrganizationSelectDialog implements OnInit {
   constructor(
@@ -413,27 +382,33 @@ export class SourceEditOrganizationSelectDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  public selectedOrg(org?: Organization): void {
-    console.log(org);
-    this.org = org;
-    this.addParent(this.org);
+  public selectedOrg(orgs: Organization[]): void {
+    this.parents = new Array<Organization>();
+    this.org = null;
+    if(orgs && orgs.length > 0){
+      this.org = orgs[0];
+      this.addParent(this.org);
+    }
+
   }
   private addParent(child: Organization) {
-    child.relationships.forEach((p) => {
-      if (p.type == OrganizationRelationships.PARENT.value) {
-        if (p.identifiers.length > 0 && p.identifiers[0].value) {
-          this.orgService
-            .getOrganizationByPID(p.identifiers[0].value)
-            .subscribe({
-              next: (response) => {
-                console.log(response);
-                this.parents.push(response.metadata);
-                this.addParent(response.metadata);
-              },
-            });
+    if (child.relationships) {
+      child.relationships.forEach((p) => {
+        if (p.type == OrganizationRelationships.PARENT.value) {
+          if (p.identifiers.length > 0 && p.identifiers[0].value) {
+            this.orgService
+              .getOrganizationByPID(p.identifiers[0].value)
+              .subscribe({
+                next: (response) => {
+                  console.log(response);
+                  this.parents.push(response.metadata);
+                  this.addParent(response.metadata);
+                },
+              });
+          }
         }
-      }
-    });
+      });
+    }
   }
   public ok() {
     // let selected = new SourceOrganization()

@@ -1,0 +1,36 @@
+<mat-dialog-content class="height-auto">
+  <sceiba-ui-org-search-dialog
+    [multipleSelection]="true"
+    [showActions]="false"
+    [filterCuban]="true"
+    (selectedOrgEmiter)="selectedOrg($event)"
+  >
+  </sceiba-ui-org-search-dialog>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div  fxLayout="column wrap" style="margin: 10px;">
+
+    <mat-form-field *ngIf="canSelectRole">
+      <mat-label>Rol</mat-label>
+      <mat-select [(value)]="role" required>
+        <mat-option *ngFor="let item of roles" value="{{ item.value }}"
+          >{{ item.label }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button (click)="ok()">OK</button>
+  </div>
+  <div  fxLayout="column wrap" style="margin: 10px;">
+    <mat-label *ngIf="org">{{ org.name }}</mat-label>
+
+    <ng-container *ngIf="parents.length > 0">
+      <mat-label>Se añadirá también: </mat-label>
+      <ng-container *ngFor="let item of parents">
+        <mat-label>{{ item.name }}</mat-label>
+      </ng-container>
+    </ng-container>
+
+  </div>
+
+</mat-dialog-actions>
