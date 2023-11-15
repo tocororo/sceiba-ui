@@ -81,35 +81,35 @@
         </div>
     </div> -->
 
-    <div class="" ngClass.xs="pt-20 ph-30 pb-20">
-      <h1 class="mat-display-1 text-center" style="margin: 20px">
-        {{ "PROD_SERV" | translate }}
-      </h1>
-      <div
-        class="pt-20"
-        ngClass.xs="pt-5"
-        fxLayout="row wrap"
-        fxLayoutAlign="center"
-        fxLayoutGap="20px"
-        fxLayout.xs="column"
-      >
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="product1-image"></div>
-              <!-- <mat-card-title>{{ 'SCEIBA_DESCUBRE' | translate }}</mat-card-title> -->
-              <mat-card-title>{{
-                "SCEIBA_DESCUBRE_SUB" | translate
-              }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.catalog.abstract')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
+  <div class="" ngClass.xs="pt-20 ph-30 pb-20">
+    <h1 class="mat-display-1 text-center" style="margin: 20px">
+      {{ "PROD_SERV" | translate }}
+    </h1>
+    <div
+      ngClass.xs="pt-5"
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+      fxLayoutGap="20px"
+      fxLayout.xs="column"
+    >
+      <a [routerLink]="[env.discover]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <!-- <div mat-card-avatar class="product1-image"></div> -->
+            <!-- <mat-card-title>{{ 'SCEIBA_DESCUBRE' | translate }}</mat-card-title> -->
+            <mat-card-title>{{
+              "SCEIBA_DESCUBRE_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/discover.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.catalog.abstract')"
+            ></div>
+          </mat-card-content>
+          <!-- <mat-card-actions>
               <a
                 mat-button
                 [routerLink]="[env.discover]"
@@ -117,141 +117,129 @@
                 matTooltip="{{ 'CATALOGO' | translate }}"
                 >{{ "ACCEDER" | translate }}</a
               >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="product2-image"></div>
-              <!-- <mat-card-title>{{ 'SCEIBA_ORGANIZACIONES' | translate }}</mat-card-title> -->
-              <mat-card-title>{{
-                "SCEIBA_ORGANIZACIONES_SUB" | translate
-              }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.orgs')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
-              <a
-                mat-button
-                [routerLink]="[env.organizations]"
-                class="apps"
-                matTooltip="{{ 'ORGANIZACIONES' | translate }}"
-                >{{ "ACCEDER" | translate }}</a
-              >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="product3-image"></div>
-              <!-- <mat-card-title>{{ 'SCEIBA_VOCABULARIOS' | translate }}</mat-card-title> -->
-              <mat-card-title>{{
-                "SCEIBA_VOCABULARIOS_SUB" | translate
-              }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.vocabularios')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
-              <a
-                mat-button
-                href="{{ env.vocabularies }}"
-                class="apps"
-                matTooltip="{{ 'VOCABULARIOS' | translate }}"
-                >{{ "ACCEDER" | translate }}</a
-              >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="product4-image"></div>
-              <!-- <mat-card-title>{{ 'DIRECTORIO_MES' | translate }}</mat-card-title> -->
-              <mat-card-title>{{
-                "DIRECTORIO_MES_SUB" | translate
-              }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.mes')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
-              <a
-                mat-button
-                [routerLink]="[env.revistasmes]"
-                class="apps"
-                matTooltip="{{ 'REVISTAS_MES' | translate }}"
-                >{{ "ACCEDER" | translate }}</a
-              >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="card1-header-image"></div>
-              <!-- <mat-card-title>{{ 'DIRECTORIO_MES' | translate }}</mat-card-title> -->
-              <mat-card-title>{{ "PERSONAS_SUB" | translate }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.persons')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
-              <a
-                mat-button
-                class="apps"
-                [routerLink]="[env.persons]"
-                matTooltip="{{ 'PERSONAS_SUB' | translate }}"
-                >{{ "ACCEDER" | translate }}</a
-              >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        <div class="pt-20" fxFlex="30%">
-          <mat-card class="ligth-green-card">
-            <mat-card-header>
-              <div mat-card-avatar class="card2-header-image"></div>
-              <mat-card-title>{{ "EVALUACION" | translate }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <div
-                class="p"
-                markdown
-                [src]="getPath('/assets/markdown/sceiba/home.evaluations')"
-              ></div>
-            </mat-card-content>
-            <mat-card-actions>
-              <a
-                mat-button
-                class="apps"
-                [routerLink]="[env.evaluations]"
-                matTooltip="{{ 'EVALUACION' | translate }}"
-                >{{ "ACCEDER" | translate }}</a
-              >
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </div>
+            </mat-card-actions> -->
+        </mat-card>
+      </a>
+      <a [routerLink]="[env.revistasmes]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "DIRECTORIO_MES_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/revistasmes.png" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.mes')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+      <a [routerLink]="[env.organizations]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "SCEIBA_ORGANIZACIONES_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/organizaciones.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.orgs')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+      <a [routerLink]="[env.persons]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{ "PERSONAS_SUB" | translate }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/persons.svg" >
+          </mat-card-header>
+
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.persons')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+      <a [routerLink]="[env.evaluations]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{ "EVALUACION" | translate }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/evaluations.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.evaluations')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+      <a href="{{ env.vocabularies }}" class="pt-20" target="_blank">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "SCEIBA_VOCABULARIOS_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/vocabs.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.vocabularios')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+
+      <a href="{{ env.moodle }}" class="pt-20" target="_blank">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "SMOODLE_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/scourses.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.courses')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
+
+      <a [routerLink]="[env.catalog]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "SCEIBA_CATALOGO_SUB" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/catalog.svg" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.catalog')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
     </div>
+  </div>
   <!-- <img src="assets/icons/sceiba.middle.top.svg" alt="" style="margin-bottom: -4px; width: 100%;"> -->
   <!-- <div class="w-100 bg-primary-color" fxLayout="column" fxLayoutAlign="center center" style="margin-top: 20px; width: 100%;">
         <div class="w-70 white-title" fxLayout="center">

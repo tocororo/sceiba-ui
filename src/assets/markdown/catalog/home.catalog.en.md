@@ -1,5 +1,4 @@
+**Primary sources** are those from which research results are collected. For most cases in the Cuban context, these are the national journals and institutional repositories.
 
-Las **fuentes primarias** son aquellas de las que se recolectan los resultados de investigación. Para la mayoría de los casos en el contexto cubano, estos son las revistas nacionales y los repositorios institucionales.
-
-* Sceiba Catálogo no constituye un registro oficial. 
-* Para el listado de las revistas científicas del MES ir a la aplicación **RevistasMES**
+* Sceiba Catalog does not constitute an official record.
+* For the list of MES scientific journals go to the application **RevistasMES**

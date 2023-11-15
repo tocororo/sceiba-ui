@@ -1,0 +1,1 @@
+Las fuentes primarias son aquellas de las que se recolectan los resultados de investigación. Para la mayoría de los casos en el contexto cubano, estos son las revistas nacionales y los repositorios institucionales.
