@@ -5,17 +5,17 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { MetadataService } from 'toco-lib';
 
 @Component({
-    selector: 'toco-static-pages',
+    selector: 'sceiba-ui-static-pages',
     templateUrl: './static-pages.component.html',
     styleUrls: ['./static-pages.component.scss']
 })
-export class StaticPagesComponent implements OnInit {
-
+export class StaticPagesComponent implements OnInit
+{
     @Input()
     public src: string;
 
@@ -39,16 +39,19 @@ export class StaticPagesComponent implements OnInit {
                 {
                     // console.log('data', data);
 
-                    this.src = data.src + '.' + this.transServ.currentLang + '.md';
+                    this.src = data.src + ((this.transServ.currentLang == 'es') ? '.es.md' : '.en.md');
                     this.title = data.title;
                     // this.metadata.setTitleDescription(this.title, '');
-                    this.metadata.meta.updateTag({name:"DC.title", content:data['title']});
-                    this.metadata.meta.updateTag({name:"DC.description", content:data['src'].substring(0,160)});
 
                     /* Changes the translation when the language changes. */
                     this.transServ.onLangChange.subscribe((params: LangChangeEvent) => {
-                        this.src = data.src + '.' + this.transServ.currentLang + '.md';
+                        this.src = data.src + ((params.lang == 'es') ? 'es.md' : 'en.md');
                     });
+                    this.metadata.meta.updateTag({name:"DC.title", content:data['title']});
+                    this.metadata.meta.updateTag({name:"DC.description", content:data['src'].substring(0,160)});
+                    this.metadata.meta.updateTag({name:"generator", content:"Sceiba Organizaciones Cubanas en Proyecto Vlir Joint"});
+                    this.metadata.meta.updateTag({name:"keywords", content:"Sceiba, organizaciones, identificación persistente, Cuba, " + data['title'] });
+                    this.metadata.meta.updateTag({name:"robots", content:"index,follow"});
                 }
 
             },
@@ -56,4 +59,5 @@ export class StaticPagesComponent implements OnInit {
             complete: () => { }
         });
     }
+
 }

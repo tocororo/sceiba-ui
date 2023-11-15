@@ -18,7 +18,6 @@ import { OrgReviewerComponent } from '../../src/organizations/org-reviewer/org-r
 import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
 import { RequestChangesListComponent } from '../../src/organizations/request-changes-list/request-changes-list.component';
 import { OrganizationSearchComponent } from '../../src/organizations/search/search.component';
-import { StaticPagesComponent } from '../../src/organizations/static-pages/static-pages.component';
 import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
 import { WikiAuthorsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
 import { WikiOrgEmployesProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
@@ -106,47 +105,7 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
       },
-      {
-        path: 'faq',
-        component: StaticPagesComponent,
-        data: { src: '/assets/markdown/organizaciones/faq.', title: 'FAQ' },
-      },
-      {
-        path: 'terms',
-        component: StaticPagesComponent,
-        data: { src: '/assets/markdown/organizaciones/terms.', title: 'Términos de uso' },
-      },
-      {
-        path: 'privacy',
-        component: StaticPagesComponent,
-        data: {
-          src: '/assets/markdown/organizaciones/privacy.',
-          title: 'Políticas de privacidad',
-        },
-      },
-      {
-        path: 'about',
-        component: StaticPagesComponent,
-        data: { src: '/assets/markdown/organizaciones/about.', title: 'Sobre Nosotros' },
-      },
-      {
-        path: 'help',
-        component: StaticPagesComponent,
-        data: { src: '/assets/markdown/organizaciones/help.', title: 'Ayuda' },
-      },
-      {
-        path: 'contact',
-        component: StaticPagesComponent,
-        data: { src: '/assets/markdown/organizaciones/contact.', title: 'Contacto' },
-      },
-      {
-        path: 'inclussion',
-        component: StaticPagesComponent,
-        data: {
-          src: 'assets/markdown/organizaciones/inclussion.',
-          title: '¿Nueva Organización?',
-        },
-      },
+
       /*
       Perfiles
       */

@@ -226,12 +226,6 @@ export class SceibaUIHeaderComponent implements OnInit {
         icon: 'question_answer',
       },
       {
-        nameTranslate: 'TERMINOS_DE_USO',
-        href: '/help/terms',
-        useRouterLink: true,
-        icon: 'info',
-      },
-      {
         nameTranslate: 'ACERCA_DE',
         href: '/help/about',
         useRouterLink: true,

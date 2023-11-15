@@ -26,13 +26,6 @@ const routes: Routes = [
         component: EvaluationViewComponent,
       },
       {
-        path: 'help',
-        loadChildren: () =>
-          import('../../src/evaluations/help/help.module').then(
-            (mod) => mod.HelpModule
-          ),
-      },
-      {
         path: 'evaluations',
         component: MyEvaluationComponent,
       },

@@ -5,7 +5,6 @@ import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-f
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { SourceNoAuthResolver, SourceResolver } from '../../src/sources/_services/source-resolver';
 import { HomeComponent } from '../../src/sources/home/home.component';
-import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { StatisticsComponent } from '../../src/sources/statistics/statistics.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 import { SourcesComponent } from './sources.component';
@@ -31,25 +30,6 @@ const routes: Routes = [
         path: 'harvester',
         loadChildren: () => import('../../src/sources/harvester/harvester.module').then(m => m.HarvesterModule) ,
         canActivate: [OauthAuthenticationService]
-      },{
-        path: 'faq',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/catalog/faq', title: 'FAQ' },
-      },
-      {
-        path: 'about',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/catalog/about', title: 'Sobre Nosotros' },
-      },
-      {
-        path: 'help',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/catalog/help', title: 'Ayuda' },
-      },
-      {
-        path: 'contact',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/catalog/contact', title: 'Contacto' },
       },
       {
         path: 'userprofile',

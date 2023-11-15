@@ -32,21 +32,6 @@ const routes: Routes = [
         // 	preload: true  /* In orden to use a custom preloading strategy (`SelectiveModulesPreload`). */
         // }
       },
-      // {
-      //   path: 'profile',
-      //   loadChildren: () =>
-      //     import('../../src/records/profile/profile.module').then(
-      //       (mod) => mod.ProfileModule
-      //     ),
-      //   canActivate: [],
-      // },
-      // {
-      //   path: 'help',
-      //   loadChildren: () =>
-      //     import('../../src/records/help/help.module').then(
-      //       (mod) => mod.HelpModule
-      //     ),
-      // },
       {
         path: '',
         component: HomeComponent,

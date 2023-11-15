@@ -76,7 +76,7 @@ import {
 import { RequestChangesListComponent } from "../../src/organizations/request-changes-list/request-changes-list.component";
 import { SearchListComponent } from "../../src/organizations/search-list/search-list.component";
 import { OrganizationSearchComponent } from "../../src/organizations/search/search.component";
-import { StaticPagesComponent } from "../../src/organizations/static-pages/static-pages.component";
+
 import { ExpansionPanelLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component";
 import { TableLayoutComponent } from "../../src/organizations/wiki-organizations/profile-layouts/table-layout/table-layout.component";
 import { WikiAuthorProfileComponent } from "../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component";
@@ -102,7 +102,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     HomeComponent,
     OrganizationSearchComponent,
     SearchListComponent,
-    StaticPagesComponent,
     OrgViewerComponent,
     OrgGetComponent,
     OrgEditComponent,

@@ -1,0 +1,21 @@
+<!-- <mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened>
+    <h2>Documentación</h2>
+
+    <mat-list *ngIf="docsList">
+      <mat-list-item
+        role="listitem"
+        *ngFor="let doc of docsList; let i = index"
+      >
+        <a mat-button [routerLink]="doc.path">
+          {{ doc.title }}
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+ -->
+
+<router-outlet></router-outlet>
+
+<!-- The router renders the components here. -->

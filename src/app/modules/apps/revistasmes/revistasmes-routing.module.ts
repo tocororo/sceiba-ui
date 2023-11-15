@@ -9,7 +9,6 @@ import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-f
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from '../../src/revistasmes/home/home.component';
 import { SourceNoAuthResolver, SourceResolver } from '../../src/sources/_services/source-resolver';
-import { StaticPagesComponent } from '../../src/sources/static-pages/static-pages.component';
 import { UserProfileComponent } from '../../src/sources/user-profile/user-profile.component';
 import { RevistasMesComponent } from './revistasmes.component';
 
@@ -58,26 +57,6 @@ const routes: Routes = [
         path: 'permissions',
         loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
         canActivate: [OauthAuthenticationService]
-      },
-      {
-        path: 'faq',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/revistasmes/revistasmes/faq', title: 'FAQ' },
-      },
-      {
-        path: 'about',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/revistasmes/about', title: 'Sobre Nosotros' },
-      },
-      {
-        path: 'help',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/revistasmes/help', title: 'Ayuda' },
-      },
-      {
-        path: 'contact',
-        component: StaticPagesComponent,
-        data: { src: 'assets/markdown/revistasmes/contact', title: 'Contacto' },
       },
       {
         path: 'userprofile',

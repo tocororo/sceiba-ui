@@ -35,6 +35,11 @@ const routes: Routes = [
       import("./modules/apps/records/records.module").then((mod) => mod.RecordsAppModule),
   },
   {
+    path: "help",
+    loadChildren: () =>
+      import("./modules/apps/help/help.module").then((mod) => mod.HelpModule),
+  },
+  {
     path: '',
     component: SceibaUiHomeComponent,
   },
