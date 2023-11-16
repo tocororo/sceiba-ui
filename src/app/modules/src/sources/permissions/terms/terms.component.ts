@@ -1,9 +1,9 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { of } from 'rxjs';
-import { Term, TermNode, TaxonomyService } from 'toco-lib';
+import { TaxonomyService, Term, TermNode } from 'toco-lib';
 
 
 
@@ -76,7 +76,7 @@ export class MySourcesTermsComponent implements OnInit {
   /** Transform the data to something the tree can read. */
   transformer(node: TermNode, level: number) {
     return {
-        name: node.term.description,
+        name: node.term.description + ' - [' + node.term.identifier + ']',
         term: node.term,
         level: level,
         expandable: (node.children.length > 0)

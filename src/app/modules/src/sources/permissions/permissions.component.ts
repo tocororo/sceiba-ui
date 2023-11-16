@@ -1,13 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { OAuthStorage } from "angular-oauth2-oidc";
-import { Environment, Hit, Organization, OrganizationServiceNoAuth, Source, SourceService, Term } from 'toco-lib';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
+import {
+  Environment,
+  Hit,
+  Organization,
+  OrganizationServiceNoAuth,
+  Source,
+  SourceService,
+  Term,
+} from 'toco-lib';
 @Component({
-  selector: "catalog-permissions",
-  templateUrl: "./permissions.component.html",
-  styleUrls: ["./permissions.component.scss"],
+  selector: 'catalog-permissions',
+  templateUrl: './permissions.component.html',
+  styleUrls: ['./permissions.component.scss'],
 })
 export class PermissionsComponent implements OnInit {
-
   asEditor: Array<Source>;
   asManager: Array<Source>;
   isAdmin = false;
@@ -18,7 +26,8 @@ export class PermissionsComponent implements OnInit {
     private sourceService: SourceService,
     private oauthStorage: OAuthStorage,
     private environment: Environment,
-    private orgService: OrganizationServiceNoAuth
+    private orgService: OrganizationServiceNoAuth,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   loading = true;
@@ -30,43 +39,50 @@ export class PermissionsComponent implements OnInit {
     this.terms = response.data.sources.terms;
     this.organizations = response.data.sources.organizations;
 
-    if(this.isAdmin){
+    if (this.isAdmin) {
       // TODO: use cache!!!
-
-      if (this.environment.topOrganizationPID) {
-        if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
-          const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-          this.organizations = [response];
-
-        } else {
-          this.orgService.getOrganizationByPID(this.environment.topOrganizationPID).subscribe(
-            (response) => {
-              this.organizations = [response];
-            },
-            (error) => {},
-            () => { }
-          );
-        }
-      }
+      this.activatedRoute.data.subscribe({
+        next: (data: { topOrganizationPID: string }) => {
+          if (
+            data &&
+            data.topOrganizationPID &&
+            data.topOrganizationPID != ''
+          ) {
+            this.orgService
+              .getOrganizationByPID(data.topOrganizationPID)
+              .subscribe({
+                next: (response) => {
+                  this.organizations = [response];
+                },
+                error: (error) => {},
+                complete: () => {},
+              });
+          }
+        },
+        error: (e) => {
+          console.log(e);
+        },
+        complete: () => {},
+      });
     }
     this.loading = false;
   }
 
   ngOnInit() {
-    this.sourceService.getMySourcesAllRoles().subscribe(
-      (response) => {
+    this.sourceService.getMySourcesAllRoles().subscribe({
+      next: (response) => {
         console.log(response);
         localStorage.setItem('mysources', JSON.stringify(response));
         this.loading = false;
-        this.init(response)
+        this.init(response);
       },
-      (err: any) => {
-        console.log("error: " + err + ".");
+      error: (err: any) => {
+        console.log('error: ' + err + '.');
       },
-      () => {
-        console.log("complete");
-      }
-    );
+      complete: () => {
+        console.log('complete');
+      },
+    });
     // if (localStorage.getItem('mysources') && localStorage.getItem('mysources') != '' ) {
     //   const response = JSON.parse(localStorage.getItem('mysources'));
     //   this.init(response);
@@ -87,5 +103,4 @@ export class PermissionsComponent implements OnInit {
     //   );
     // }
   }
-
 }

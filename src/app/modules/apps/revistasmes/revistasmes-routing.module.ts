@@ -56,7 +56,8 @@ const routes: Routes = [
       {
         path: 'permissions',
         loadChildren: () => import('../../src/sources/permissions/permissions.module').then(m => m.PermissionsModule),
-        canActivate: [OauthAuthenticationService]
+        canActivate: [OauthAuthenticationService],
+        data: { topOrganizationPID: 'orgaid.223'},
       },
       {
         path: 'userprofile',

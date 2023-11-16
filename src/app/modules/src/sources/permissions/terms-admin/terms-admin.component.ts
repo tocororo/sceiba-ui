@@ -3,14 +3,12 @@
  *   All rights reserved.
  */
 
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
 import { FlatTreeControl } from "@angular/cdk/tree";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { MatTreeFlattener, MatTreeFlatDataSource } from "@angular/material/tree";
-import { SelectionModel } from "@angular/cdk/collections";
+import { MatTreeFlatDataSource, MatTreeFlattener } from "@angular/material/tree";
 import { of } from "rxjs";
-import { Term, Vocabulary, TermNode, TaxonomyService } from 'toco-lib';
+import { TaxonomyService, Term, TermNode, Vocabulary } from 'toco-lib';
 import { MySourcesTermsPermissionDialog } from '../terms/terms.component';
 
 
@@ -102,7 +100,7 @@ export class MySourcesTermsAdminComponent
   /** Transform the data to something the tree can read. */
   transformer(node: TermNode, level: number) {
     return {
-      name: node.term.description,
+      name: node.term.description + ' - [' + node.term.identifier + ']',
       term: node.term,
       level: level,
       expandable: (node.children.length > 0)

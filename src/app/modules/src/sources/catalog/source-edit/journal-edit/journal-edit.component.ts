@@ -677,7 +677,6 @@ export class SourceEditJournalComponent implements OnInit {
 
   private fillJournalFields() {
     // this.journalVersion.source_type = this.informationFormGroup.value['source_type'];
-    this.journalData.name = this.journalData.title;
 
     this.journalData.setIdentifierValue(
       IdentifierSchemas.issn_p,
@@ -710,6 +709,7 @@ export class SourceEditJournalComponent implements OnInit {
     console.log(this.informationFormGroup);
     this.journalData.deepcopy(this.informationFormGroup.value);
     this.journalData.socialNetworks.deepcopy(this.informationFormGroup.value);
+    this.journalData.name = this.journalData.title;
 
     this.journalData.setIdentifierValue(
       IdentifierSchemas.url,
@@ -800,8 +800,8 @@ export class SourceEditJournalComponent implements OnInit {
     // console.log(this.informationFormGroup);
     // console.log(this.organizationFormGroup);
     // console.log(this.indexesFormGroup);
-    // console.log('QQQQQQQQQQQQQQQQQQQQQQQQ')
-    // console.log(this.journalData);
+    console.log('QQQQQQQQQQQQQQQQQQQQQQQQ')
+    console.log(this.journalData);
   }
 
   public finishStepper() {
