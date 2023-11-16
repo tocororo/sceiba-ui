@@ -6,7 +6,7 @@
 >
   <span class="mat-h2">Búsqueda</span>
 
-  <div
+  <!-- <div
     *ngIf="search_type; then search_list_button; else search_charts_button"
   ></div>
 
@@ -20,7 +20,7 @@
     <button mat-button matTooltip="Organizaciones" (click)="changeView()">
       <mat-icon>list</mat-icon>
     </button>
-  </ng-template>
+  </ng-template> -->
 </div>
 
 <toco-progress [loading]="loading"></toco-progress>
@@ -46,13 +46,13 @@
         (keySelect)="aggrChange($event)"
       ></toco-search-aggregations-visual> -->
   </mat-drawer>
-
+<!--
   <div *ngIf="search_type; then search_list; else search_charts">
     {{ search_type }}
-  </div>
+  </div> -->
 
   <!-- templatefor search list -->
-  <ng-template #search_list>
+  <!-- <ng-template #search_list> -->
     <div class="m-1" *ngIf="sr">
       <div
         fxLayout="row nowrap"
@@ -84,10 +84,10 @@
       >
       </mat-paginator>
     </div>
-  </ng-template>
+  <!-- </ng-template> -->
 
   <!-- template for charts -->
-  <ng-template #search_charts>
+  <!-- <ng-template #search_charts>
     <div class="m-1" *ngIf="sr">
       <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
         <button
@@ -99,8 +99,6 @@
         </button>
 
         <mat-card>
-          <!-- <section class="mat-card-section"> -->
-          <!--  <label class="mat-card-margin">Align:</label> -->
           <mat-radio-group [(ngModel)]="currentChartType">
             <mat-radio-button class="mat-card-margin" value="chartType.polar"
               >Pastel</mat-radio-button
@@ -110,12 +108,10 @@
               value="chartType.verticalBar"
               >Barra</mat-radio-button
             >
-            <!-- <mat-radio-button class="mat-card-section" value="chartType.pieGrid">Pie Grid</mat-radio-button> -->
             <mat-radio-button class="mat-card-section" value="chartType.gauge"
               >Calibración</mat-radio-button
             >
           </mat-radio-group>
-          <!-- </section> -->
         </mat-card>
       </div>
 
@@ -127,5 +123,5 @@
         (keySelect)="aggrChange($event)"
       ></toco-search-aggregations-visual>
     </div>
-  </ng-template>
+  </ng-template> -->
 </mat-drawer-container>

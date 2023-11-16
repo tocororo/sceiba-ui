@@ -1,27 +1,36 @@
-<mat-dialog-content class="height-auto">
-  <sceiba-ui-org-search-dialog
-    [multipleSelection]="true"
+
+  <button mat-button-fab (click)="dialogRef.close()"
+  style="right: 0px; margin: 5px;position: fixed; ">
+    <mat-icon >close</mat-icon>
+  </button>
+
+
+<h2 mat-dialog-title>Seleccionar Organizaciones</h2>
+<div mat-dialog-content class="height-auto">
+  <sceiba-ui-search-select-org
+    [multipleSelection]="false"
     [showActions]="false"
-    [filterCuban]="true"
+    [filterCuban]="cuban"
+    [showTitle]="false"
     (selectedOrgEmiter)="selectedOrg($event)"
   >
-  </sceiba-ui-org-search-dialog>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <div  fxLayout="column wrap" style="margin: 10px;">
-
+  </sceiba-ui-search-select-org>
+</div>
+<div mat-dialog-actions>
+  <div fxLayout="column wrap" style="margin: 10px">
     <mat-form-field *ngIf="canSelectRole">
       <mat-label>Rol</mat-label>
-      <mat-select [(value)]="role" required>
+      <mat-select [required]="true" [(value)]="role" required>
         <mat-option *ngFor="let item of roles" value="{{ item.value }}"
           >{{ item.label }}</mat-option
         >
       </mat-select>
+      <button mat-raised-button (click)="ok()">OK</button>
     </mat-form-field>
 
-    <button mat-raised-button (click)="ok()">OK</button>
+
   </div>
-  <div  fxLayout="column wrap" style="margin: 10px;">
+  <div fxLayout="column wrap" style="margin: 10px">
     <mat-label *ngIf="org">{{ org.name }}</mat-label>
 
     <ng-container *ngIf="parents.length > 0">
@@ -30,7 +39,5 @@
         <mat-label>{{ item.name }}</mat-label>
       </ng-container>
     </ng-container>
-
   </div>
-
-</mat-dialog-actions>
+</div>

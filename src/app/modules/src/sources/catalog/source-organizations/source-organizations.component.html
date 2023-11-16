@@ -11,9 +11,9 @@
       fxLayoutAlign="space-between center"
       fxLayoutGap="20px"
     >
-    <button *ngIf="topMainOrganization" mat-raised-button (click)="addOrg(true, true)">
+    <!-- <button *ngIf="topMainOrganization" mat-raised-button (click)="addOrg(true, true)">
       Organización Principal
-    </button>
+    </button> -->
       <button mat-raised-button (click)="addOrg(true)">
         Organizaciones Cubanas
       </button>
@@ -42,7 +42,6 @@
           mat-stroked-button
           [disabled]="org.length === 1"
           (click)="setAsMain(org)"
-          *ngIf="!topMainOrganization"
         >
           Establecer como Principal
         </button>

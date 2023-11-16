@@ -103,8 +103,6 @@ export class SceibaUiSearchAggregationsComponent implements OnInit {
   }
 
   selectionChange(aggrKey, bucket: AggrBucket) {
-    console.log(this.selectedAggr);
-    console.log('*********************');
 
     if (!this.selectedAggr.hasOwnProperty(aggrKey)) {
       this.selectedAggr[aggrKey] = [];
@@ -117,8 +115,6 @@ export class SceibaUiSearchAggregationsComponent implements OnInit {
     } else {
       this.selectedAggr[aggrKey].push(bucket.key);
     }
-    console.log(this.selectedAggr);
-    console.log('*********************');
 
     this.keySelect.emit(this.selectedAggr);
   }

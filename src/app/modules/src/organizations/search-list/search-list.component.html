@@ -26,6 +26,7 @@
           {{ hit.metadata.name }}
         </a>
       </h2>
+      <span class="mat-caption" color="primary"> SceibaID: {{ hit.metadata.id }} </span>
 
       <span *ngIf="hit.metadata.established != -1" class="p-40"
         >Fundada en: {{ hit.metadata.established }}</span

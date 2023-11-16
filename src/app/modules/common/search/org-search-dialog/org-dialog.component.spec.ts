@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SceibaUiOrgSearchDialogComponent } from './org-dialog.component';
+import { SceibaUiSearchSelectOrgComponent } from './org-dialog.component';
 
 describe('OrgDialogComponent', () => {
-  let component: SceibaUiOrgSearchDialogComponent;
-  let fixture: ComponentFixture<SceibaUiOrgSearchDialogComponent>;
+  let component: SceibaUiSearchSelectOrgComponent;
+  let fixture: ComponentFixture<SceibaUiSearchSelectOrgComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SceibaUiOrgSearchDialogComponent ]
+      declarations: [ SceibaUiSearchSelectOrgComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SceibaUiOrgSearchDialogComponent);
+    fixture = TestBed.createComponent(SceibaUiSearchSelectOrgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,7 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
 import { Params } from "@angular/router";
 import { MessageHandler, StatusCode } from "toco-lib";
-import { SceibaUiOrgSearchDialogComponent } from "../../../common/search/org-search-dialog/org-dialog.component";
+import { SceibaUiSearchSelectOrgComponent } from "../../../common/search/org-search-dialog/org-dialog.component";
 import { PeopleService } from "../people/people.service";
 
 @Component({
@@ -182,7 +182,7 @@ export class ImportPeopleComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(SceibaUiOrgSearchDialogComponent, {
+    const dialogRef = this.dialog.open(SceibaUiSearchSelectOrgComponent, {
       width: "95%",
       data: {},
     });

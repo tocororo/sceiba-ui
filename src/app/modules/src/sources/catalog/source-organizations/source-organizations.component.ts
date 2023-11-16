@@ -46,10 +46,10 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
     this.sourceData.organizations = this.sourceData.organizations.filter(
       (element) => element && element.role
     );
-    console.log(
-      '**** SourceEditOrganizationsComponent *** complete process initIndexes',
-      this.sourceData
-    );
+    // console.log(
+    //   '**** SourceEditOrganizationsComponent *** complete process initIndexes',
+    //   this.sourceData
+    // );
   }
 
   ngOnChanges(): void {
@@ -66,46 +66,42 @@ export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
     //   console.log('The dialog was closed');
     //   console.log(result);
     // });
-    if (topMain && this.topMainOrganization) {
-      this.dialog.open(SourceEditOrganizationSelectTopDialog, {
-        width: '90%',
-        height:'90%',
-        data: {
-          topMainOrganization: this.topMainOrganization,
-          selectOrg: (org: Organization, parents: Array<Organization>) => {
-            this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
-            parents.forEach((element) => {
-              this.addOrgToSource(
-                element,
-                SourceOrganizationRole.COLABORATOR.value
-              );
-            });
-          },
+    // if (topMain && this.topMainOrganization) {
+    //   this.dialog.open(SourceEditOrganizationSelectTopDialog, {
+    //     width: '90%',
+    //     height:'100%',
+    //     data: {
+    //       topMainOrganization: this.topMainOrganization,
+    //       selectOrg: (org: Organization, parents: Array<Organization>) => {
+    //         this.addOrgToSource(org, SourceOrganizationRole.MAIN.value);
+    //         parents.forEach((element) => {
+    //           this.addOrgToSource(
+    //             element,
+    //             SourceOrganizationRole.COLABORATOR.value
+    //           );
+    //         });
+    //       },
+    //     },
+    //   });
+    // } else {
+    this.dialog.open(SourceEditOrganizationSelectDialog, {
+      width: '90%',
+      height: '100%',
+      data: {
+        cuban: cuban,
+        canSelectRole: true,
+        selectOrg: (org: Organization, role, parents: Array<Organization>) => {
+          this.addOrgToSource(org, role);
+          parents.forEach((element) => {
+            this.addOrgToSource(
+              element,
+              SourceOrganizationRole.COLABORATOR.value
+            );
+          });
         },
-      });
-    } else {
-      this.dialog.open(SourceEditOrganizationSelectDialog, {
-        width: '90%',
-        height:'90%',
-        data: {
-          filter: cuban ? { type: 'country', value: 'Cuba' } : null,
-          canSelectRole: this.topMainOrganization == null,
-          selectOrg: (
-            org: Organization,
-            role,
-            parents: Array<Organization>
-          ) => {
-            this.addOrgToSource(org, role);
-            parents.forEach((element) => {
-              this.addOrgToSource(
-                element,
-                SourceOrganizationRole.COLABORATOR.value
-              );
-            });
-          },
-        },
-      });
-    }
+      },
+    });
+    // }
   }
   private addOrgToSource(org: Organization, role) {
     if (!this.sourceData.organizations.find((o) => o.id == org.id)) {
@@ -370,10 +366,12 @@ export class SourceEditOrganizationSelectDialog implements OnInit {
   public parents: Array<Organization> = new Array<Organization>();
   placeholder = 'Buscar una organización';
   public canSelectRole = true;
+  public cuban = true;
 
   ngOnInit(): void {
     console.log(this.data);
     this.canSelectRole = this.data.canSelectRole;
+    this.cuban = this.data.cuban;
     if (this.data.filter) {
       this.placeholder = 'Buscar una organización cubana';
     }
@@ -382,14 +380,15 @@ export class SourceEditOrganizationSelectDialog implements OnInit {
     this.dialogRef.close();
   }
 
-  public selectedOrg(orgs: Organization[]): void {
+  public selectedOrg(orgs): void {
+    console.log(orgs);
+
     this.parents = new Array<Organization>();
     this.org = null;
-    if(orgs && orgs.length > 0){
+    if (orgs && orgs.length > 0) {
       this.org = orgs[0];
       this.addParent(this.org);
     }
-
   }
   private addParent(child: Organization) {
     if (child.relationships) {

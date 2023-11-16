@@ -1,7 +1,7 @@
 <toco-progress [loading]="loading"></toco-progress>
 
 <mat-card>
-  <mat-card-header>
+  <mat-card-header *ngIf="showTitle">
     <mat-card-title>{{ header | translate }} </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -38,21 +38,29 @@
           ></sceiba-ui-search-query-input>
         </div>
 
-        <mat-selection-list  [multiple]="false"
+        <mat-paginator
+          [length]="sr.hits.total"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+
+          (page)="pageChange($event)"
+        >
+        </mat-paginator>
+        <mat-selection-list  [multiple]="multipleSelection"
           *ngIf="sr.hits && sr.hits.hits.length > 0; else templateNotInfo"
+          (selectionChange)="selectionChange($event)"
         >
           <mat-list-option
 
-          (change)="checkOrganization($event,hit.metadata)"
-
             *ngFor="let hit of sr.hits.hits; let pos = index"
             style="margin: 1em 8px; display: flex;height: 130px;"
-            (value)="hit.metadata"
+            [value]="hit.metadata"
           >
           <ng-container>
             <span class="mat-headline-6">
               {{ hit.metadata.name }}
             </span>
+            <span class="mat-caption" color="primary"> SceibaID: {{ hit.metadata.id }} </span>
             <div
                 fxLayout="row wrap"
                 *ngIf="

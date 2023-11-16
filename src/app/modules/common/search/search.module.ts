@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
 import { CoreModule, SearchModule } from 'toco-lib';
 import { SceibaUiSearchAggregationsComponent } from './aggregations/aggregations.component';
-import { SceibaUiOrgSearchDialogComponent } from './org-search-dialog/org-dialog.component';
+import { SceibaUiSearchSelectOrgComponent } from './org-search-dialog/org-dialog.component';
 import { SceibaUiQueryInputComponent } from './query-input/query-input.component';
 import { SceibaUiSearchComponent } from './search/search.component';
 
@@ -15,7 +15,7 @@ import { SceibaUiSearchComponent } from './search/search.component';
     SceibaUiSearchAggregationsComponent,
     SceibaUiQueryInputComponent,
     SceibaUiSearchComponent,
-    SceibaUiOrgSearchDialogComponent
+    SceibaUiSearchSelectOrgComponent
   ],
 
   imports: [
@@ -31,7 +31,7 @@ import { SceibaUiSearchComponent } from './search/search.component';
     SceibaUiSearchAggregationsComponent,
     SceibaUiQueryInputComponent,
     SceibaUiSearchComponent,
-    SceibaUiOrgSearchDialogComponent
+    SceibaUiSearchSelectOrgComponent
   ],
 })
 export class SceibaUiSearchModule {}

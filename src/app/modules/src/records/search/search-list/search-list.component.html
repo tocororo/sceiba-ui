@@ -4,11 +4,13 @@
       *ngFor="let hit of hitList.hits; let pos = index"
       [ngStyle]="{ margin: '1em 8px' }"
     >
-      <h2>
+      <h2 class="mat-headline-6">
         <a [routerLink]="[env.discover, hit.id]" >{{
           hit.metadata.title
         }}</a>
       </h2>
+      <span class="mat-caption" color="primary"> SceibaID: {{ hit.metadata.id }} </span>
+
 
       <p class="p-40" *ngIf="hit.metadata.description">
         {{ hit.metadata.description }}

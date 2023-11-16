@@ -2,12 +2,11 @@ import { HttpParams } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
-  Inject,
   Input,
   Output,
   ViewChild,
 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDrawer } from '@angular/material/sidenav';
 import { NavigationExtras, Params } from '@angular/router';
@@ -29,17 +28,17 @@ interface SceibaUiOrgSearchDialogComponentData {
 }
 
 @Component({
-  selector: 'sceiba-ui-org-search-dialog',
+  selector: 'sceiba-ui-search-select-org',
   templateUrl: './org-dialog.component.html',
   styleUrls: ['./org-dialog.component.scss'],
 })
-export class SceibaUiOrgSearchDialogComponent {
+export class SceibaUiSearchSelectOrgComponent {
   aggr_keys: Array<any>;
 
   // begin paginator stuff
   pageSize = 5;
   pageIndex = 0;
-  pageSizeOptions: number[] = [5, 15, 25, 50, 100];
+  pageSizeOptions: number[] = [5];
   // end paginator stuff
 
   query = '';
@@ -62,6 +61,9 @@ export class SceibaUiOrgSearchDialogComponent {
   multipleSelection: boolean = false;
 
   @Input()
+  showTitle: boolean = true;
+
+  @Input()
   filterCuban: boolean = true;
 
   @Input()
@@ -75,20 +77,22 @@ export class SceibaUiOrgSearchDialogComponent {
   public constructor(
     private _env: Environment,
     private _cuorService: OrgService,
-    public dialogRef: MatDialogRef<SceibaUiOrgSearchDialogComponent>,
-    private _searchService: SearchService,
-    @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
+    public dialogRef: MatDialogRef<SceibaUiSearchSelectOrgComponent>,
+    private _searchService: SearchService // @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
   ) {
     this.env = this._env;
   }
 
   public ngOnInit(): void {
     this.query = '';
-    this.multipleSelection = this.data.multiple;
-    if (this.filterCuban || this.data.cuban) {
+    if (this.filterCuban) {
       this.aggrsSelection['country'] = ['Cuba'];
     }
 
+    this.doSearch();
+  }
+
+  public doSearch() {
     this.updateFetchParams();
     this.fetchSearchRequest();
   }
@@ -102,19 +106,25 @@ export class SceibaUiOrgSearchDialogComponent {
 
     this.params = this.params.set('q', this.query);
 
-    for (const aggrKey in this.aggrsSelection) {
-      this.aggrsSelection[aggrKey].forEach((bucketKey) => {
-        if (aggrKey != 'country') {
-          this.params = this.params.set(aggrKey, bucketKey);
-        }
-      });
-    }
-    if (this.filterCuban || this.data.cuban) {
+    if (this.filterCuban) {
+      for (const aggrKey in this.aggrsSelection) {
+        this.aggrsSelection[aggrKey].forEach((bucketKey) => {
+          if (aggrKey != 'country') {
+            this.params = this.params.set(aggrKey, bucketKey);
+          }
+        });
+      }
       this.params = this.params.set('country', 'Cuba');
+    } else {
+      for (const aggrKey in this.aggrsSelection) {
+        this.aggrsSelection[aggrKey].forEach((bucketKey) => {
+          this.params = this.params.set(aggrKey, bucketKey);
+        });
+      }
     }
   }
 
-  public fetchSearchRequest() {
+  private fetchSearchRequest() {
     this._cuorService.getOrganizations(this.params).subscribe({
       next: (response: SearchResponse<Organization>) => {
         // this.pageEvent.length = response.hits.total;
@@ -126,29 +136,37 @@ export class SceibaUiOrgSearchDialogComponent {
           { value: this.sr.aggregations.status, key: 'Estado' },
           { value: this.sr.aggregations.types, key: 'Tipo' },
         ];
-        if (this.filterCuban || this.data.cuban) {
+        if (this.filterCuban) {
           this.sr.aggregations.country['disabled'] = true;
         }
       },
-      error: (error: any) => {
-      },
+      error: (error: any) => {},
       complete: () => {
         this.loading = false;
       },
     });
   }
 
+  private defaultPage() {
+    this.pageSize = 5;
+    this.pageIndex = 0;
+  }
   public pageChange(event?: PageEvent): void {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
+    this.doSearch();
   }
 
   public aggrChange(event /* ?: AggregationsSelection */): void {
     this.aggrsSelection = event;
+    this.defaultPage();
+    this.doSearch();
   }
 
   queryChange(event?: string) {
     this.query = event;
+    this.defaultPage();
+    this.doSearch();
   }
 
   moreKeyClick(event) {
@@ -197,51 +215,62 @@ export class SceibaUiOrgSearchDialogComponent {
     this.dialogRef.close();
   }
 
-  checkMultiple(e, org: Organization) {
-    if (!this.selectedOrgs) {
-      this.selectedOrgs = [];
-    }
-
-    if (e.checked === true) {
-      this.selectedOrgs.push(org);
-    }
-
-    if (e.checked === false) {
-      this.selectedOrgs = this.selectedOrgs.filter((ele) => ele.id !== org.id);
-    }
-    console.log('multiple: ', this.selectedOrgs);
-
-    this.selectedOrgEmiter.emit(this.selectedOrgs);
-  }
-
-  checkSingle(e, org: Organization) {
+  selectionChange(event) {
+    console.log(event.source.selectedOptions.selected[0].value);
     this.selectedOrgs = [];
+    event.source.selectedOptions.selected.forEach((element) => {
+      this.selectedOrgs.push(element.value);
+    });
+    console.log(this.selectedOrgs);
 
-    if ((e.checked = true)) {
-      this.selectedOrgs.push(org);
-    }
-    console.log('sigle: ', this.selectedOrgs);
     this.selectedOrgEmiter.emit(this.selectedOrgs);
   }
 
-  checkOrganization(e, org: Organization) {
-    if (this.multipleSelection) {
-      this.checkMultiple(e, org);
-    } else {
-      this.checkSingle(e, org);
-    }
-  }
+  // checkMultiple(e, org: Organization) {
+  //   if (!this.selectedOrgs) {
+  //     this.selectedOrgs = [];
+  //   }
 
-  isSelected(org: Organization) {
-    if (this.selectedOrgs) {
-      this.selectedOrgs.forEach((element) => {
-        if (element.id == org.id) {
-          console.log("selected: ", org);
+  //   if (e.checked === true) {
+  //     this.selectedOrgs.push(org);
+  //   }
 
-          return true;
-        }
-      });
-    }
-    return false;
-  }
+  //   if (e.checked === false) {
+  //     this.selectedOrgs = this.selectedOrgs.filter((ele) => ele.id !== org.id);
+  //   }
+  //   console.log('multiple: ', this.selectedOrgs);
+
+  //   this.selectedOrgEmiter.emit(this.selectedOrgs);
+  // }
+
+  // checkSingle(e, org: Organization) {
+  //   this.selectedOrgs = [];
+
+  //   if ((e.checked = true)) {
+  //     this.selectedOrgs.push(org);
+  //   }
+  //   console.log('sigle: ', this.selectedOrgs);
+  //   this.selectedOrgEmiter.emit(this.selectedOrgs);
+  // }
+
+  // checkOrganization(e, org: Organization) {
+  //   if (this.multipleSelection) {
+  //     this.checkMultiple(e, org);
+  //   } else {
+  //     this.checkSingle(e, org);
+  //   }
+  // }
+
+  // isSelected(org: Organization) {
+  //   if (this.selectedOrgs) {
+  //     this.selectedOrgs.forEach((element) => {
+  //       if (element.id == org.id) {
+  //         console.log("selected: ", org);
+
+  //         return true;
+  //       }
+  //     });
+  //   }
+  //   return false;
+  // }
 }
