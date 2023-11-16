@@ -5,21 +5,40 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { HttpParams } from "@angular/common/http";
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from "@angular/core";
-import { PageEvent } from "@angular/material/paginator";
-import { MatDrawer } from "@angular/material/sidenav";
-import { ActivatedRoute, NavigationExtras, ParamMap, Params, Router } from "@angular/router";
+import { HttpParams } from '@angular/common/http';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { MatDrawer } from '@angular/material/sidenav';
+import {
+  ActivatedRoute,
+  NavigationExtras,
+  ParamMap,
+  Params,
+  Router,
+} from '@angular/router';
 
-import { AggregationsSelection, Organization, Response, SearchResponse, SearchService } from "toco-lib";
+import {
+  AggregationsSelection,
+  Organization,
+  Response,
+  ResponseStatus,
+  SearchResponse,
+  SearchService,
+} from 'toco-lib';
 
-import { OrgService } from "../_services/org.service";
-import { ChartType } from "../charts/chart-utils";
+import { OrgService } from '../_services/org.service';
+import { ChartType } from '../charts/chart-utils';
 
 @Component({
-  selector: "organization-search",
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.scss"],
+  selector: 'organization-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -34,41 +53,40 @@ import { ChartType } from "../charts/chart-utils";
     ]),
   ],
 })
-export class OrganizationSearchComponent implements OnInit,AfterViewInit
-{
+export class OrganizationSearchComponent implements OnInit, AfterViewInit {
   /**
    * Represents the `ChartType` enum for internal use.
    */
   public readonly chartType: typeof ChartType;
 
-  aggr_keys:Array<any>;
-  search_type:Boolean = true;
+  aggr_keys: Array<any>;
+  search_type: Boolean = true;
   public currentChartType: ChartType;
 
   layoutPosition = [
     {
-      name: "Derecha",
-      layout: "row-reverse",
-      aling: "center baseline",
-      width: "22",
+      name: 'Derecha',
+      layout: 'row-reverse',
+      aling: 'center baseline',
+      width: '22',
     },
     {
-      name: "Izquierda",
-      layout: "row",
-      aling: "center baseline",
-      width: "22",
+      name: 'Izquierda',
+      layout: 'row',
+      aling: 'center baseline',
+      width: '22',
     },
     {
-      name: "Arriba",
-      layout: "column",
-      aling: "center center",
-      width: "90",
+      name: 'Arriba',
+      layout: 'column',
+      aling: 'center center',
+      width: '90',
     },
     {
-      name: "Abajo",
-      layout: "column-reverse",
-      aling: "center center",
-      width: "90",
+      name: 'Abajo',
+      layout: 'column-reverse',
+      aling: 'center center',
+      width: '90',
     },
   ];
   currentlayout = this.layoutPosition[0];
@@ -83,7 +101,7 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
   pageSizeOptions: number[] = [5, 15, 25, 50, 100];
   // end paginator stuff
 
-  query = "";
+  query = '';
   aggrsSelection: AggregationsSelection = {};
 
   params: HttpParams;
@@ -99,33 +117,32 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
     private _cuorService: OrgService,
     private activatedRoute: ActivatedRoute,
     private _searchService: SearchService,
-    private router: Router)
-  {
+    private router: Router
+  ) {
     this.chartType = ChartType;
 
     this.currentChartType = this.chartType.polar;
   }
-    /* ****************************************************
+  /* ****************************************************
     HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
-    @HostListener('window:resize', ['$event'])
-    onResize(event: Event) {
-      // console.log("window:resize", window.innerWidth);
-      if (this.drawer) {
-        if (window.innerWidth <= 740) {
-          this.drawer.opened = false;
-        } else {
-          this.drawer.opened = true;
-        }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    // console.log("window:resize", window.innerWidth);
+    if (this.drawer) {
+      if (window.innerWidth <= 740) {
+        this.drawer.opened = false;
+      } else {
+        this.drawer.opened = true;
       }
     }
-    ngAfterViewInit() {
-      this.onResize(null);
-    }
+  }
+  ngAfterViewInit() {
+    this.onResize(null);
+  }
 
   public ngOnInit(): void {
-
-    this.query = "";
+    this.query = '';
     this.activatedRoute.queryParamMap.subscribe({
       next: (initQueryParams) => {
         this.defaultQueryParams(initQueryParams);
@@ -135,15 +152,15 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
           const key = initQueryParams.keys[index];
 
           switch (key) {
-            case "size":
+            case 'size':
               this.pageSize = Number.parseInt(initQueryParams.get(key));
               break;
 
-            case "page":
+            case 'page':
               this.pageIndex = Number.parseInt(initQueryParams.get(key));
               break;
 
-            case "q":
+            case 'q':
               this.query = initQueryParams.get(key);
               break;
 
@@ -156,11 +173,9 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
           }
         }
 
-        this.aggrsSelection["country"] = ["Cuba"]; //porque aun si cambian la url arriba seguira diciendo cuba
+        this.aggrsSelection['country'] = ['Cuba']; //porque aun si cambian la url arriba seguira diciendo cuba
         this.updateFetchParams();
         this.fetchSearchRequest();
-
-
       },
 
       error: (e) => {},
@@ -182,53 +197,52 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
   }
 
   changeView(): void {
-    this.search_type = !this.search_type
+    this.search_type = !this.search_type;
   }
 
   private updateFetchParams() {
     this.params = new HttpParams();
 
-    this.params = this.params.set("size", this.pageSize.toString(10));
+    this.params = this.params.set('size', this.pageSize.toString(10));
 
-    this.params = this.params.set("page", (this.pageIndex + 1).toString(10));
+    this.params = this.params.set('page', (this.pageIndex + 1).toString(10));
 
-    this.params = this.params.set("q", this.query);
+    this.params = this.params.set('q', this.query);
 
     for (const aggrKey in this.aggrsSelection) {
       this.aggrsSelection[aggrKey].forEach((bucketKey) => {
-        if (aggrKey != 'country'){
+        if (aggrKey != 'country') {
           this.params = this.params.set(aggrKey, bucketKey);
         }
       });
     }
-    this.params = this.params.set("country", "Cuba");
+    this.params = this.params.set('country', 'Cuba');
   }
 
   public fetchSearchRequest() {
     this._cuorService.getOrganizations(this.params).subscribe({
       next: (response: SearchResponse<Organization>) => {
-
         // this.pageEvent.length = response.hits.total;
         this.sr = response;
         // delete this.sr.aggregations["country"];
-        this.sr.aggregations["country"]["disabled"] = true;
+        this.sr.aggregations['country']['disabled'] = true;
         console.log(this.sr);
 
         this.aggr_keys = [
           //{value: this.sr.aggregations.country, key: 'País'},
-          {value: this.sr.aggregations.state, key: 'Provincia'},
-          {value: this.sr.aggregations.status, key: 'Estado'},
-          {value: this.sr.aggregations.types, key: 'Tipo'},
-          {value: this.sr.aggregations.country, key: 'Pais'},
-        ]
+          { value: this.sr.aggregations.state, key: 'Provincia' },
+          { value: this.sr.aggregations.status, key: 'Estado' },
+          { value: this.sr.aggregations.types, key: 'Tipo' },
+          { value: this.sr.aggregations.country, key: 'Pais' },
+        ];
       },
       error: (error: any) => {
-        console.log("ERROPR");
+        console.log('ERROPR');
       },
       complete: () => {
-        console.log("END...");
+        console.log('END...');
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -238,13 +252,13 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
     this.updateQueryParams();
   }
 
-  public aggrChange(event/* ?: AggregationsSelection */): void {
+  public aggrChange(event /* ?: AggregationsSelection */): void {
     this.aggrsSelection = event;
     this.updateQueryParams();
   }
 
   queryChange(event?: string) {
-    if(this.query != event){
+    if (this.query != event) {
       this.query = event;
       // this.aggrsSelection={}
       this.pageSize = 5;
@@ -254,16 +268,15 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
   }
 
   private updateQueryParams() {
-
     this.loading = true;
 
     this.queryParams = {};
 
-    this.queryParams["size"] = this.pageSize.toString(10);
+    this.queryParams['size'] = this.pageSize.toString(10);
 
-    this.queryParams["page"] = this.pageIndex.toString(10);
+    this.queryParams['page'] = this.pageIndex.toString(10);
 
-    this.queryParams["q"] = this.query;
+    this.queryParams['q'] = this.query;
 
     for (const aggrKey in this.aggrsSelection) {
       this.aggrsSelection[aggrKey].forEach((bucketKey) => {
@@ -273,24 +286,19 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
     this.navigationExtras = {
       relativeTo: this.activatedRoute,
       queryParams: this.queryParams,
-      queryParamsHandling: "",
+      queryParamsHandling: '',
     };
 
-    this.router.navigate(["."], this.navigationExtras);
+    this.router.navigate(['.'], this.navigationExtras);
   }
-
 
   moreKeyClick(event) {
     let start = this.sr.aggregations[event].buckets.length;
     let size = this.sr.hits.total;
     let filters = [];
     for (const aggrKey in this.aggrsSelection) {
-      console.log(aggrKey);
-
       filters.push({ key: aggrKey, value: this.aggrsSelection[aggrKey] });
     }
-    console.log(filters);
-
     let _query = {
       index: 'organizations',
       filters: filters,
@@ -299,21 +307,15 @@ export class OrganizationSearchComponent implements OnInit,AfterViewInit
         size: start + 5,
       },
     };
-    console.log(JSON.stringify(_query));
     this._searchService.getAggregationTerms(_query).subscribe({
       next: (response: Response<any>) => {
-        console.log(response.data['terms']);
-
-        let buckets = response.data.terms;
-        console.log(buckets);
-        console.log(this.sr.aggregations[event].buckets);
-
-        this.sr.aggregations[event].buckets = buckets;
+        if (response.status == ResponseStatus.SUCCESS) {
+          let buckets = response.data.terms;
+          this.sr.aggregations[event].buckets = buckets;
+        }
       },
       error: (error) => {},
       complete: () => {},
     });
   }
-
-
 }

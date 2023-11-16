@@ -1,9 +1,8 @@
 <div fxLayout="row" [ngStyle]="{ 'align-items': 'center', 'width.%': width }">
   <mat-form-field
-    *ngIf="appearance == 'outline'; else templateMatFormField"
+    *ngIf="appearance == 'outline'"
     appearance="{{ appearance }}"
     [color]="inputColor"
-    class="query-input"
     [ngStyle]="{ 'width.%': 100 }"
   >
     <mat-label>{{
@@ -21,28 +20,29 @@
       [formControl]="queryCtrl"
       (keyup.enter)="riseQuery()"
     />
-    <button *ngIf="query!=''" mat-round-button (click)="clearQuery()">
+    <button *ngIf="query != ''" mat-round-button (click)="clearQuery()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
-  <ng-template #templateMatFormField>
-    <mat-form-field [ngStyle]="{ 'width.%': width }">
-      <mat-label>{{
-        "TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_LABEL" | translate
-      }}</mat-label>
-      <input
-        matInput
-        placeholder="{{
-          'TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_PLACEHOLDER' | translate
-        }}"
-        type="search"
-        [value]="query"
-        [formControl]="queryCtrl"
-        (keyup.enter)="riseQuery()"
-      />
-    </mat-form-field>
-  </ng-template>
+  <mat-form-field
+    *ngIf="appearance != 'outline'"
+    [ngStyle]="{ 'width.%': width }"
+  >
+    <mat-label>{{
+      "TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_LABEL" | translate
+    }}</mat-label>
+    <input
+      matInput
+      placeholder="{{
+        'TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_PLACEHOLDER' | translate
+      }}"
+      type="search"
+      [value]="query"
+      [formControl]="queryCtrl"
+      (keyup.enter)="riseQuery()"
+    />
+  </mat-form-field>
 
   <button
     mat-raised-button

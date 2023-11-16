@@ -30,6 +30,7 @@ import {
   MetadataService,
   Record,
   Response,
+  ResponseStatus,
   SearchResponse,
   SearchService
 } from 'toco-lib';
@@ -290,11 +291,6 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
   }
 
   moreKeyClick(event) {
-    console.log(event);
-    console.log(this.aggrsSelection);
-    console.log(this.sr.aggregations);
-    console.log(JSON.stringify(this.aggrsSelection));
-
     let start = this.sr.aggregations[event].buckets.length;
     let size = this.sr.hits.total;
     let filters = [];
@@ -303,7 +299,6 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
 
       filters.push({ key: aggrKey, value: this.aggrsSelection[aggrKey] });
     }
-    console.log(filters);
 
     let _query = {
       index: 'records',
@@ -313,16 +308,12 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
         size: start + 5,
       },
     };
-    console.log(JSON.stringify(_query));
     this._searchService.getAggregationTerms(_query).subscribe({
       next: (response: Response<any>) => {
-        console.log(response.data['terms']);
-
-        let buckets = response.data.terms;
-        console.log(buckets);
-        console.log(this.sr.aggregations[event].buckets);
-
-        this.sr.aggregations[event].buckets = buckets;
+        if (response.status == ResponseStatus.SUCCESS) {
+          let buckets = response.data.terms;
+          this.sr.aggregations[event].buckets = buckets;
+        }
       },
       error: (error) => {},
       complete: () => {},
