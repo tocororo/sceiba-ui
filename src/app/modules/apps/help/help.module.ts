@@ -8,6 +8,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { HelpComponent } from '../../common/help/help/help.component';
 import { StaticPagesComponent } from '../../common/help/static-pages/static-pages.component';
 import { HelpRoutingModule } from './help-routing.module';
+import { SceibaUiCoreModule } from 'src/app/core/core.module';
+import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -21,7 +23,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   imports: [
     CommonModule,
     // HttpClientModule,
-    // SceibaUiSharedModule,
+    SceibaUiSharedModule,
     // FlexLayoutModule,
     MarkdownModule.forRoot({
       loader: HttpClient,
