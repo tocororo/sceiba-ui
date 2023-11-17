@@ -1,21 +1,20 @@
 <mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
   <mat-toolbar-row
     fxLayout="row wrap"
-    fxLayout.xs="column"
     fxLayoutAlign="space-between center"
-    fxLayoutAlign.xs="space-between stretch"
-    style="height: auto !important; min-height: 80px"
+    style="height: auto !important; min-height: 80px; padding: 20px 16px;"
   >
-    <div style="width: 330px; display: flex; align-items: center">
-      <div *ngIf="isBeta" class="triangle">
+    <!-- <div style="width: 330px; display: flex; align-items: center"> -->
+      <!-- <div *ngIf="isBeta" class="triangle">
         <span
           matTooltipClass="tooltip-beta-red"
           matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
         >
           <strong>{{ "BETA" | translate }}</strong>
         </span>
-      </div>
+      </div> -->
       <a
+       *ngIf="!isMobile"
         mat-button
         [routerLink]="['/']"
         style="white-space: normal; display: flex; align-items: center"
@@ -26,14 +25,22 @@
           style="height: 40px; margin-right: 6px"
         />
       </a>
-    </div>
+
+      <button
+        *ngIf="isMobile"
+        mat-icon-button
+        matTooltip="{{ 'MENU' | translate }}"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon class="mat-18">menu</mat-icon>
+      </button>
+    <!-- </div> -->
     <div
       class="center-elements"
       appearance="legacy"
       aria-label="'MENU_INICIO' | translate"
       fxLayout="row wrap"
       fxLayoutAlign="center"
-      fxLayoutGap="15px"
     >
       <button
         *ngIf="showMenuLang"
@@ -44,7 +51,7 @@
         <mat-icon class="mat-18">translate</mat-icon>
       </button>
 
-      <sceiba-ui-menu [menuItems]="_menuMainIcons"></sceiba-ui-menu>
+      <sceiba-ui-menu [menuItems]="menuIconsStatic"></sceiba-ui-menu>
 
       <toco-authentication
       *ngIf="!userProfile"
@@ -64,7 +71,7 @@
   </mat-toolbar-row> -->
 
   <mat-toolbar-row
-    *ngIf="secondaryMenuElements && secondaryMenuElements.length > 0"
+    *ngIf="secondaryMenuElements && secondaryMenuElements.length > 0 && !isMobile"
     style="height: fit-content"
   >
     <button

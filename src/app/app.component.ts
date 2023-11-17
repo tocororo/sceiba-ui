@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {
+  Router,
+  Event as NavigationEvent,
+  NavigationStart,
+} from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
@@ -10,8 +14,17 @@ import {
   Environment,
   OauthAuthenticationService,
   OauthInfo,
-  User
+  User,
 } from 'toco-lib';
+import { isMobile } from './modules/common/is-mobile';
+import { HeaderService } from './core/header.service';
+
+interface Menu {
+  label: string;
+  href: string;
+  icon: string;
+  children?: Menu[];
+}
 
 @Component({
   selector: 'app-root',
@@ -19,7 +32,7 @@ import {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title = "Sceiba";
+  public title = 'Sceiba';
   /**
    * Returns the available language texts.
    */
@@ -38,13 +51,11 @@ export class AppComponent {
   public footerSites: Array<{
     name: string;
     url: string;
-    useRouterLink: boolean;
   }> = [];
 
   public footerInformation: Array<{
     name: string;
     url: string;
-    useRouterLink: boolean;
   }> = [];
 
   public user: User | null = new User();
@@ -54,6 +65,14 @@ export class AppComponent {
   public oauthInfo: OauthInfo;
 
   private authenticateSuscription: Subscription | null = null;
+
+  currentPath: string;
+  routerEvent;
+  mode: 'side' | 'push' | 'over' = 'side';
+  menuApps: Menu[];
+  secondaryMenuElements: [];
+
+  private headerSubscription: Subscription;
 
   public constructor(
     private environment: Environment,
@@ -65,15 +84,104 @@ export class AppComponent {
     private sanitizer: DomSanitizer,
     private _transServ: TranslateService,
     private oauthStorage: OAuthStorage,
+    private headerService: HeaderService,
     private authenticateService: OauthAuthenticationService //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
   ) /*@Inject(RecaptchaLoaderService) private _recaptchaDynamicLanguageLoaderServ: RecaptchaDynamicLanguageLoaderService*/ {
     // this.configure()
     let env: any = this.environment;
     this.oauthInfo = env.oauthInfo;
     // this.matomoInjector.init('https://crai-stats.upr.edu.cu/', 6);
+
+    this.headerSubscription =
+      this.headerService.headerDataObservable$.subscribe({
+        next: (data) => {
+          this.menuApps = [
+            {
+              label: 'SCEIBA',
+              // @ts-ignore
+              href: this.environment.sceiba,
+              icon: '/assets/icons/apps/sceiba.svg',
+            },
+            {
+              label: 'BUSQUEDA',
+              // @ts-ignore
+              href: this.environment.discover,
+              icon: '/assets/icons/apps/discover.svg',
+            },
+            {
+              label: 'REVISTAS_MES',
+              // @ts-ignore
+              href: this.environment.revistasmes,
+              icon: '/assets/icons/apps/revistasmes.png',
+            },
+            {
+              label: 'CATALOGO',
+              // @ts-ignore
+              href: this.environment.catalog,
+              icon: '/assets/icons/apps/catalog.svg',
+            },
+            {
+              label: 'ORGANIZACIONES',
+              // @ts-ignore
+              href: this.environment.organizations,
+              icon: '/assets/icons/apps/organizaciones.svg',
+            },
+            {
+              label: 'PERSONAS',
+              // @ts-ignore
+              href: this.environment.persons,
+              icon: '/assets/icons/apps/persons.svg',
+            },
+            {
+              label: 'VOCABULARIOS',
+              // @ts-ignore
+              href: this.environment.vocabularies,
+              icon: '/assets/icons/apps/vocabs.svg',
+            },
+            {
+              label: 'SMOODLE',
+              // @ts-ignore
+              href: this.environment.moodle,
+              icon: '/assets/icons/apps/scourses.svg',
+            },
+            {
+              label: 'EVALUACION_APP',
+              // @ts-ignore
+              href: this.environment.evaluations,
+              icon: '/assets/icons/apps/evaluations.svg',
+            },
+          ];
+          const children = data?.secondaryMenuElements?.map((menu) => ({
+            label: menu.nameTranslate,
+            href: menu.href,
+          }));
+          const index = this.menuApps.findIndex(
+            (menu) => menu.href != '/' && children[0].href.includes(menu.href)
+          );
+          if (index > -1) {
+            this.menuApps[index] = { ...this.menuApps[index], children };
+          }
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete headerSubscription'),
+      });
   }
 
   public ngOnInit(): void {
+    console.log(isMobile());
+    this.mode = isMobile() ? 'over' : 'side';
+
+    this.currentPath = this.router.url;
+    this.routerEvent = this.router.events.subscribe(
+      (event: NavigationEvent) => {
+        if (event instanceof NavigationStart) {
+          this.currentPath = event.url;
+        }
+      }
+    );
+
+    this.setupIcons();
+
     // let request = JSON.parse(this.oauthStorage.getItem('user'));
 
     // if (request) {
@@ -96,59 +204,56 @@ export class AppComponent {
     //     },
     //     () => {}
     //   );
-
-      this.setupIcons();
   }
 
-  private setupIcons(){
+  private setupIcons() {
+    this.iconRegistry.addSvgIcon(
+      'facebook',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/images/svg/facebook.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'twitter',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/images/svg/twitter.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'github',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/images/svg/github.svg'
+      )
+    );
 
     this.iconRegistry.addSvgIcon(
-      "facebook",
+      'journals',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/facebook.svg"
+        '/assets/icons/apps/journals.svg'
       )
     );
     this.iconRegistry.addSvgIcon(
-      "twitter",
+      'publishing',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/twitter.svg"
+        '/assets/icons/apps/publishing.svg'
       )
     );
     this.iconRegistry.addSvgIcon(
-      "github",
+      'publication',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/images/svg/github.svg"
-      )
-    );
-
-    this.iconRegistry.addSvgIcon(
-      "journals",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/journals.svg"
+        '/assets/icons/apps/publication.svg'
       )
     );
     this.iconRegistry.addSvgIcon(
-      "publishing",
+      'organizaciones',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/publishing.svg"
+        '/assets/icons/apps/organizaciones.svg'
       )
     );
     this.iconRegistry.addSvgIcon(
-      "publication",
+      'persons',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/publication.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "organizaciones",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/organizaciones.svg"
-      )
-    );
-    this.iconRegistry.addSvgIcon(
-      "persons",
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        "/assets/icons/apps/persons.svg"
+        '/assets/icons/apps/persons.svg'
       )
     );
   }
@@ -172,5 +277,4 @@ export class AppComponent {
     // this.oauthStorage.removeItem('user');
     // this.user = null;
   }
-
 }
