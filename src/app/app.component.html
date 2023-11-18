@@ -1,9 +1,54 @@
-<sceiba-ui-header
-  [showMenuLang]="'true'"
-></sceiba-ui-header>
+<mat-drawer-container class="sidebar-container" autosize>
+  <mat-drawer #drawer class="sidebar" [mode]="mode">
+    <div style="width: 100%; padding-bottom: 1rem; margin-bottom: 0.5rem; border-bottom: 1px solid darkgray;" fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <a
+        [routerLink]="['/']"
+        style="white-space: normal; display: flex; align-items: center"
+      >
+        <img
+          src="/assets/icons/logo.sceiba.letras.svg"
+          [alt]="'SCEIBA' | translate"
+          style="height: 40px; margin-right: 6px"
+        />
+      </a>
 
+      <div class="button-colse">
+        <button mat-icon-button (click)="drawer.toggle()">
+          <span class="material-symbols-outlined"> arrow_left_alt </span>
+        </button>
+      </div>
+    </div>
+    <ng-container *ngFor="let item of menuApps">
+      <a mat-button [routerLink]="item.href" style="margin: 0.6rem 0">
+        <img
+          [src]="item.icon"
+          [alt]="item.label | translate"
+          style="width: 1.5rem; height: 1.5rem"
+        />
+        <span style="margin-left: 12px; font-size: 16px">{{
+          item.label | translate
+        }}</span>
+      </a>
+      <mat-nav-list *ngIf="!!item.children" style="margin-left: 1.8rem">
+        <a
+          mat-list-item
+          *ngFor="let child of item.children"
+          [activated]="currentPath == child.href"
+          [routerLink]="child.href"
+        >
+          {{ child.label | translate }}
+        </a>
+      </mat-nav-list>
+    </ng-container>
+  </mat-drawer>
 
-<router-outlet></router-outlet>
+  <sceiba-ui-header
+    [showMenuLang]="'true'"
+    [drawer]="drawer"
+  ></sceiba-ui-header>
 
-<sceiba-ui-app-footer [sites]="footerSites" [information]="footerInformation">
-</sceiba-ui-app-footer>
+  <router-outlet></router-outlet>
+
+  <sceiba-ui-app-footer [sites]="footerSites" [information]="footerInformation">
+  </sceiba-ui-app-footer>
+</mat-drawer-container>

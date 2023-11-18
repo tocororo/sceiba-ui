@@ -11,9 +11,10 @@ import {
   Response,
   USER_STORAGE_VAR,
   UserProfile,
-  convertLangFromNumberToString
+  convertLangFromNumberToString,
 } from 'toco-lib';
 import { HeaderService } from '../header.service';
+import { isMobile } from 'src/app/modules/common/is-mobile';
 
 @Component({
   selector: 'sceiba-ui-header',
@@ -94,6 +95,8 @@ export class SceibaUIHeaderComponent implements OnInit {
    */
   @Input() public autehnticated_name: string = '';
 
+  @Input() public drawer: any;
+
   public _menuMainIcons: MenuElement[];
   public _userMainMenu: MenuElement[];
   public _menuAuthenticatedUser: MenuElement[];
@@ -113,6 +116,8 @@ export class SceibaUIHeaderComponent implements OnInit {
   private authenticateSuscription: Subscription = null;
 
   private headerSubscription: Subscription;
+
+  isMobile: boolean = false;
 
   public constructor(
     private _env: Environment,
@@ -145,7 +150,7 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.sceibaHost = this._env.sceibaHost;
-
+    this.isMobile = isMobile();
     this.setupMenus();
 
     this.setupUser();
@@ -354,19 +359,31 @@ export class SceibaUIHeaderComponent implements OnInit {
 
     ];
 
-    let defaultIcons: MenuElement[] = [
-      {
-        nameTranslate: 'APLICACIONES',
-        icon: 'apps',
-        childrenMenu: this._menuApps,
-        isMenuApps: true,
-      },
-      {
-        nameTranslate: 'AYUDA',
-        icon: 'help',
-        childrenMenu: this._menuHelp,
-      },
-    ];
+    let defaultIcons: MenuElement[] = this.isMobile
+      ? [
+          {
+            nameTranslate: 'AYUDA',
+            icon: 'help',
+            href: '/help/faq',
+            useRouterLink: true,
+            hideLabel: true,
+          },
+        ]
+      : [
+          {
+            nameTranslate: 'APLICACIONES',
+            icon: 'apps',
+            childrenMenu: this._menuApps,
+            isMenuApps: true,
+          },
+          {
+            nameTranslate: 'AYUDA',
+            icon: 'help',
+            href: '/help/faq',
+            useRouterLink: true,
+            hideLabel: true,
+          },
+        ];
 
     if (this.extraMainMenuIcons) {
       this.menuIconsStatic = this.menuIconsStatic.concat(defaultIcons);
@@ -374,47 +391,47 @@ export class SceibaUIHeaderComponent implements OnInit {
       this.menuIconsStatic = defaultIcons;
     }
     this._menuMainIcons = this.menuIconsStatic;
-
   }
 
-  private addUserMenu(){
-    if (this.userProfile ) {
-      this._userMainMenu = [{
-        nameTranslate: this.userProfile ? this.userProfile.user.email.split('@')[0] : '',
-        icon: 'person_pin',
-        childrenMenu: this._menuAuthenticatedUser,
-        hideLabel: true,
-      }]
+  private addUserMenu() {
+    if (this.userProfile) {
+      this._userMainMenu = [
+        {
+          nameTranslate: this.userProfile
+            ? this.userProfile.user.email.split('@')[0]
+            : '',
+          icon: 'person_pin',
+          childrenMenu: this._menuAuthenticatedUser,
+          hideLabel: true,
+        },
+      ];
     }
   }
   private setupUser() {
     this.userProfile = this.authenticateService.getUserFromStorage();
-    if(this.userProfile){
+    if (this.userProfile) {
       // this.user = request;
       this.addUserMenu();
       this.configRoles();
     } else {
-
       this.authenticateSuscription =
-      this.authenticateService.authenticationSubjectObservable.subscribe({
-        next: (request) => {
+        this.authenticateService.authenticationSubjectObservable.subscribe({
+          next: (request) => {
+            if (request) {
+              this.userProfile = this.authenticateService.getUserFromStorage();
 
-          if (request ) {
-            this.userProfile = this.authenticateService.getUserFromStorage();
-
-            this.addUserMenu();
-            this.configRoles();
-          } else {
-            this.logoff();
-          }
-        },
-        error: (e) => {
-          this.userProfile = null;
-        },
-        complete: () => console.info('complete authenticateSuscription'),
-      });
+              this.addUserMenu();
+              this.configRoles();
+            } else {
+              this.logoff();
+            }
+          },
+          error: (e) => {
+            this.userProfile = null;
+          },
+          complete: () => console.info('complete authenticateSuscription'),
+        });
     }
-
   }
 
   private configRoles() {
@@ -485,7 +502,6 @@ export class SceibaUIHeaderComponent implements OnInit {
   }
 
   public get name() {
-
     let user: UserProfile = this.authenticateService.getUserFromStorage();
     if (!user) return null;
     return user.user.email;

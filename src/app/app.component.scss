@@ -1,0 +1,33 @@
+.sidebar-container {
+  min-height: 70dvh;
+}
+
+:host ::ng-deep {
+  .mat-drawer-content {
+    overflow: hidden;
+  }
+
+  .sidebar {
+    // width: 22rem;
+    border-right: 1px solid darkgrey;
+  }
+  .sidebar .mat-drawer-inner-container {
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  align-items: flex-start;
+  }
+  .sidebar .mat-drawer-inner-container .button-colse {
+    justify-content: flex-end;
+    display: flex;
+  }
+
+  .sidebar .mat-drawer-inner-container .button-colse button {
+    padding: 0.5rem
+  }
+  .sidebar .mat-drawer-inner-container a {
+    color: black;
+  }
+}

@@ -1,21 +1,33 @@
-<!-- <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened>
-    <h2>Documentación</h2>
-
-    <mat-list *ngIf="docsList">
-      <mat-list-item
-        role="listitem"
-        *ngFor="let doc of docsList; let i = index"
-      >
-        <a mat-button [routerLink]="doc.path">
-          {{ doc.title }}
+<!-- <div class="wrapper"> -->
+<mat-drawer-container class="sidebar-container" autosize>
+  <mat-drawer #drawer class="sidebar" [mode]="mode" [opened]="mode == 'side'">
+    <div class="button-colse">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <span class="material-symbols-outlined"> arrow_left_alt </span>
+      </button>
+    </div>
+    <ng-container *ngFor="let item of docsList">
+      <h3>{{ item.label }}</h3>
+      <mat-nav-list *ngIf="!!item.children">
+        <a
+          mat-list-item
+          *ngFor="let child of item.children"
+          [activated]="currentPath == child.path"
+          [routerLink]="child.path"
+        >
+          {{ child.label }}
         </a>
-      </mat-list-item>
-    </mat-list>
-  </mat-sidenav>
-</mat-sidenav-container>
- -->
+      </mat-nav-list>
+    </ng-container>
+  </mat-drawer>
 
-<router-outlet></router-outlet>
-
-<!-- The router renders the components here. -->
+  <div class="container">
+    <div *ngIf="mode == 'over'" style="margin-top: 1rem">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        <span class="material-symbols-outlined"> menu </span>
+      </button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+<!-- </div> -->
