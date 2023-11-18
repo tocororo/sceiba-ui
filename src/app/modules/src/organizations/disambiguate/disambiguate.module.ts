@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MarkdownModule } from 'ngx-markdown';
 import { SceibaUiSearchModule } from 'src/app/modules/common/search/search.module';
 import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
+import { CoreModule } from 'toco-lib';
 import { DisambiguateRoutingModule } from './disambiguate-routing.module';
 import { DesambiguateOrganizationSelectDialog, DisambiguateComponent } from './disambiguate.component';
 import { DisambiguateAccordChipsFieldComponent } from './disambiguation/disambiguate-accord-chips-field/disambiguate-accord-chips-field.component';
@@ -18,6 +20,7 @@ import { DisambiguationComponent, Step3DisambiguateHelp } from './disambiguation
 
 @NgModule({
   declarations: [
+
     DisambiguateComponent,
     DesambiguateOrganizationSelectDialog,
     Step3DisambiguateHelp,
@@ -27,10 +30,12 @@ import { DisambiguationComponent, Step3DisambiguateHelp } from './disambiguation
     ShowOneRelationshipComponent,
     DisambiguateCardFieldComponent,
     DisambiguateCardChipsFieldComponent,
-    DisambiguateAccordChipsFieldComponent
+    DisambiguateAccordChipsFieldComponent,
   ],
   imports: [
     CommonModule,
+    CoreModule,
+    FlexLayoutModule,
     SceibaUiSearchModule,
     SceibaUiSharedModule,
     MarkdownModule.forRoot({

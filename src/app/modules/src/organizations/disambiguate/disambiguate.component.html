@@ -32,8 +32,8 @@
           (selectedOrg)="receivingMaster($event)">
         </app-org-get> -->
 
-    <toco-org-view *ngIf="masterOrganization" [org]="masterOrganization">
-    </toco-org-view>
+    <org-view *ngIf="masterOrganization" [org]="masterOrganization">
+    </org-view>
 
     <div fxLayout="row wrap" fxLayoutAlign="end center">
       <button mat-raised-button color="primary" matStepperNext>
@@ -98,7 +98,7 @@
           </div>
         </mat-expansion-panel-header>
 
-        <toco-org-view [org]="org"> </toco-org-view>
+        <org-view [org]="org"> </org-view>
 
         <!-- <div
               fxLAyout="row"
