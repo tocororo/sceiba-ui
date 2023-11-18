@@ -39,7 +39,6 @@ import { CardsSliderComponent } from '../../src/organizations/home/cards-slider/
 import { HomeComponent } from '../../src/organizations/home/home.component';
 import { ImportComponent } from '../../src/organizations/import/import.component';
 import { InputFileComponent } from '../../src/organizations/import/input-file/input-file.component';
-import { SceibaMenuAppsComponent } from '../../src/organizations/menu-apps/menu-apps.component';
 import { NotificationsComponent } from '../../src/organizations/notifications/notifications.component';
 import { EditAddressComponent } from '../../src/organizations/org-edit/edit-address/edit-address.component';
 import {
@@ -50,7 +49,6 @@ import {
   OrganizationDialogorgEditAddress,
 } from '../../src/organizations/org-edit/org-edit-form/org-edit-form.component';
 import { OrgEditComponent } from '../../src/organizations/org-edit/org-edit.component';
-import { OrgFooterComponent } from '../../src/organizations/org-footer/org-footer.component';
 import { OrgGetComponent } from '../../src/organizations/org-get/org-get.component';
 import {
   CommentDialogComponent,
@@ -71,17 +69,6 @@ import { OrgViewAddressComponent } from '../../src/organizations/org-viewer/org-
 import { OrgViewGeoNamesCityComponent } from '../../src/organizations/org-viewer/org-view/org-view-geo-names-city/org-view-geo-names-city.component';
 import { OrgViewRelationshipComponent } from '../../src/organizations/org-viewer/org-view/org-view-relationship/org-view-relationship.component';
 import { OrgViewComponent } from '../../src/organizations/org-viewer/org-view/org-view.component';
-import { ExpansionPanelLayoutComponent } from '../../src/organizations/wiki-organizations/profile-layouts/expansion-panel-layout/expansion-panel-layout.component';
-import { TableLayoutComponent } from '../../src/organizations/wiki-organizations/profile-layouts/table-layout/table-layout.component';
-import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
-import { WikiAuthorsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
-import { WikiOrgEmployesProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
-import { WikiTopicProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
-import { WikiTopicsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
-import { WikiVenueProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
-import { WikiWorkProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
-import { OrgSearchWikiComponent } from '../../src/organizations/wiki-organizations/wiki-org-search/wiki-org-search.component';
-import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organizations/wiki-organizations.component';
 import { OrganizationsRoutingModule } from './organizations-routing.module';
 import { OrganizationsComponent } from './organizations.component';
 
@@ -120,7 +107,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     // DialogChartComponent
     ImportComponent,
     InputFileComponent,
-    OrgFooterComponent,
     CardSvgComponent,
     CardItemInfoComponent,
     CardsSliderComponent,
@@ -137,17 +123,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     // DisambiguateCardChipsFieldComponent,
     // DisambiguateAccordChipsFieldComponent,
 
-    WikiOrganizationsComponent,
-    WikiOrgEmployesProfileComponent,
-    TableLayoutComponent,
-    OrgSearchWikiComponent,
-    WikiAuthorProfileComponent,
-    WikiWorkProfileComponent,
-    WikiTopicProfileComponent,
-    WikiVenueProfileComponent,
-    WikiAuthorsProfileComponent,
-    ExpansionPanelLayoutComponent,
-    WikiTopicsProfileComponent,
     OrgEditFormComponent,
     CommentDialogComponent,
 
@@ -160,7 +135,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
     PdfExcelComponent,
     PdfDialogComponent,
-    SceibaMenuAppsComponent,
   ],
   imports: [
     NgxChartsModule,

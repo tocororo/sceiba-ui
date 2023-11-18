@@ -17,14 +17,6 @@ import { OrgReviewerComponent } from '../../src/organizations/org-reviewer/org-r
 import { OrgViewerComponent } from '../../src/organizations/org-viewer/org-viewer.component';
 import { RequestChangesListComponent } from '../../src/organizations/request-changes-list/request-changes-list.component';
 import { OrganizationSearchComponent } from '../../src/organizations/search/search.component';
-import { WikiAuthorProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-author-profile/wiki-author-profile.component';
-import { WikiAuthorsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-authors-profile/wiki-authors-profile.component';
-import { WikiOrgEmployesProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-org-employes-profile/wiki-org-employes-profile.component';
-import { WikiTopicProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topic-profile/wiki-topic-profile.component';
-import { WikiTopicsProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-topics-profile/wiki-topics-profile.component';
-import { WikiVenueProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-venue-profile/wiki-venue-profile.component';
-import { WikiWorkProfileComponent } from '../../src/organizations/wiki-organizations/profiles/wiki-work-profile/wiki-work-profile.component';
-import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organizations/wiki-organizations.component';
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { OauthAuthenticationService } from 'toco-lib';
@@ -111,35 +103,8 @@ const routes: Routes = [
       */
       {
         path: 'wiki-organizations',
-        component: WikiOrganizationsComponent,
-      },
-      {
-        path: 'wiki-organizations/organization',
-        component: WikiOrgEmployesProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/author',
-        component: WikiAuthorProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/authors',
-        component: WikiAuthorsProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/work',
-        component: WikiWorkProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/venue',
-        component: WikiVenueProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/topic',
-        component: WikiTopicProfileComponent,
-      },
-      {
-        path: 'wiki-organizations/topics',
-        component: WikiTopicsProfileComponent,
+        // component: DisambiguateComponent,
+        loadChildren: () => import('../../src/organizations/wiki-organizations/wiki-organizations.module').then(m => m.WikiOrganizationsModule),
       },
       /*
       end of Perfiles
