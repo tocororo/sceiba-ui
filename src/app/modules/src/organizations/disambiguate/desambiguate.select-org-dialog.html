@@ -1,0 +1,29 @@
+<button
+  mat-button-fab
+  (click)="dialogRef.close()"
+  style="right: 0px; margin: 5px; position: fixed"
+>
+  <mat-icon>close</mat-icon>
+</button>
+
+<h2 mat-dialog-title>Seleccionar Organización</h2>
+<div mat-dialog-content class="height-auto">
+  <sceiba-ui-search-select-org
+    [multipleSelection]="multiple"
+    [showActions]="false"
+    [filterCuban]="cuban"
+    [showTitle]="false"
+    (selectedOrgEmiter)="selectedOrg($event)"
+  >
+  </sceiba-ui-search-select-org>
+</div>
+<div mat-dialog-actions fxLayout="row wrap">
+  <div fxLayout="row wrap" style="margin: 10px">
+    <ng-container *ngIf="orgs && orgs.length > 0">
+      <mat-chip *ngFor="let item of orgs" >{{ item.name }}</mat-chip>
+
+    </ng-container>
+  </div>
+  <button mat-raised-button color="primary" (click)="ok()">OK</button>
+
+</div>

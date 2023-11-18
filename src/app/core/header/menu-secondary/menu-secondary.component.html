@@ -6,7 +6,7 @@
 >
 
 <ng-container *ngFor="let item of secondaryMenuElements">
-  <ng-container *ngIf="!item.disabled; else disabledItem">
+  <ng-container *ngIf="!item.disabled">
     <ng-container *ngIf="item.childrenMenu; else noChildrenItem">
       <button mat-button [matMenuTriggerFor]="menu">
         {{ item.nameTranslate | translate }}
@@ -25,10 +25,10 @@
       ></sceiba-ui-menu-secondary-item>
     </ng-template>
   </ng-container>
-  <ng-template #disabledItem>
+  <!-- <ng-template #disabledItem>
     <button mat-button disabled>
       {{ item.nameTranslate | translate }}
     </button>
-  </ng-template>
+  </ng-template> -->
 </ng-container>
 

@@ -9,7 +9,6 @@ import {
   AdminPermissionService,
   CuratorPermissionService,
 } from '../../src/organizations/_services/permission.service';
-import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
 import { HomeComponent } from '../../src/organizations/home/home.component';
 import { ImportComponent } from '../../src/organizations/import/import.component';
 import { NotificationsComponent } from '../../src/organizations/notifications/notifications.component';
@@ -29,6 +28,7 @@ import { WikiOrganizationsComponent } from '../../src/organizations/wiki-organiz
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { OauthAuthenticationService } from 'toco-lib';
+import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
 import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
 import { OrganizationsComponent } from './organizations.component';
 
@@ -86,6 +86,7 @@ const routes: Routes = [
       {
         path: 'disambiguate',
         component: DisambiguateComponent,
+        // loadChildren: () => import('../../src/organizations/disambiguate/disambiguate.module').then(m => m.DisambiguateModule),
         canActivate: [
           OauthAuthenticationService,
           CuratorPermissionService,

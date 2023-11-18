@@ -6,7 +6,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDrawer } from '@angular/material/sidenav';
 import { NavigationExtras, Params } from '@angular/router';
@@ -27,6 +26,9 @@ interface SceibaUiOrgSearchDialogComponentData {
   multiple: boolean;
 }
 
+// TODO: Importante. La logica para la seleccion multiple en este componente esta mal.
+//       Cuando se pagina se pierde la lista de los elementos que estan seleccionados.
+//
 @Component({
   selector: 'sceiba-ui-search-select-org',
   templateUrl: './org-dialog.component.html',
@@ -50,7 +52,7 @@ export class SceibaUiSearchSelectOrgComponent {
   navigationExtras: NavigationExtras;
 
   loading: boolean = true;
-  selectedOrgs: Organization[];
+  selectedOrgs: Organization[] = [];
 
   @Output()
   selectedOrgEmiter: EventEmitter<Organization[]> = new EventEmitter<
@@ -77,7 +79,6 @@ export class SceibaUiSearchSelectOrgComponent {
   public constructor(
     private _env: Environment,
     private _cuorService: OrgService,
-    public dialogRef: MatDialogRef<SceibaUiSearchSelectOrgComponent>,
     private _searchService: SearchService // @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
   ) {
     this.env = this._env;
@@ -211,17 +212,22 @@ export class SceibaUiSearchSelectOrgComponent {
   //   }
   // }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 
-  selectionChange(event) {
-    console.log(event.source.selectedOptions.selected[0].value);
-    this.selectedOrgs = [];
-    event.source.selectedOptions.selected.forEach((element) => {
-      this.selectedOrgs.push(element.value);
+  isSelected(org: Organization){
+    return this.selectedOrgs.find((o) => o.id == org.id);
+  }
+  currentPageSelectionChange(event) {
+    let aux: Organization[] = [];
+    this.selectedOrgs.forEach(element => {
+      if (!this.sr.hits.hits.find((hit) => hit.id == element.id)){
+        aux.push(element)
+      }
     });
-    console.log(this.selectedOrgs);
+    this.sr.hits.hits
+    event.source.selectedOptions.selected.forEach((element) => {
+      aux.push(element.value);
+    });
+    this.selectedOrgs = aux;
 
     this.selectedOrgEmiter.emit(this.selectedOrgs);
   }

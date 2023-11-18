@@ -48,13 +48,14 @@
         </mat-paginator>
         <mat-selection-list  [multiple]="multipleSelection"
           *ngIf="sr.hits && sr.hits.hits.length > 0; else templateNotInfo"
-          (selectionChange)="selectionChange($event)"
+          (selectionChange)="currentPageSelectionChange($event)"
         >
           <mat-list-option
 
             *ngFor="let hit of sr.hits.hits; let pos = index"
             style="margin: 1em 8px; display: flex;height: 130px;"
             [value]="hit.metadata"
+            [selected]="isSelected(hit.metadata)"
           >
           <ng-container>
             <span class="mat-headline-6">

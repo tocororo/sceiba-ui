@@ -79,7 +79,7 @@ export class OrgEditComponent implements OnInit {
         this.loading = false;
 
         if (leave){
-          this._router.navigate(["/"+this.org.id+"/view"]);
+          this._router.navigate([this.env.organizations, this.org.id, "view"]);
         }
       },
       error: err => {

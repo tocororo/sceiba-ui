@@ -22,8 +22,19 @@ export class DisambiguateCardChipsFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPropagate(message){
-    this.propagate.emit(message)
+  onPropagate(elements: string[]){
+    this.propagate.emit(elements)
+    if(!this.isMaster){
+      let newContentList: string[] = this.contentList.filter( newElement=> {
+        elements.forEach(toDelete => {
+          if(newElement == toDelete){
+            return false;
+          }
+        });
+        return true;
+      })
+      this.contentList = newContentList;
+    }
   }
 
 }

@@ -1,41 +1,59 @@
 <div
-    fxLayout="row wrap"
-    fxLayout.xs="column"
-    fxLayoutAlign="space-between center"
-    style="height: 80px; padding: 0 16px;"
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between center"
+  style="height: 80px; padding: 0 16px"
 >
-    <span class="mat-h2">Desambiguación</span>
+  <span class="mat-h2">Desambiguación</span>
 </div>
 
 <toco-progress [loading]="loading"></toco-progress>
 
-<mat-horizontal-stepper linear #stepper
-(selectionChange)="changingStep($event)"
+<mat-horizontal-stepper
+  linear
+  #stepper
+  (selectionChange)="changingStep($event)"
 >
-    <mat-step [stepControl]="masterFormControl">
-        <ng-template matStepLabel>Seleccione una Organización</ng-template>
+  <mat-step [stepControl]="masterFormControl">
+    <ng-template matStepLabel>Seleccione una Organización</ng-template>
 
+    <button mat-raised-button (click)="addMaster()">Buscar Organización</button>
+
+    <!-- <sceiba-ui-search-select-org
+        [multipleSelection]="false"
+        [showActions]="false"
+        [filterCuban]="true"
+        [showTitle]="true"
+        (selectedOrgEmiter)="receivingMaster($event)"
+      >
+      </sceiba-ui-search-select-org> -->
+    <!--
         <app-org-get
           (selectedOrg)="receivingMaster($event)">
-        </app-org-get>
+        </app-org-get> -->
 
-        <toco-org-view
-          *ngIf="masterOrganization"
-          [org]="masterOrganization">
-        </toco-org-view>
+    <toco-org-view *ngIf="masterOrganization" [org]="masterOrganization">
+    </toco-org-view>
 
-        <button mat-raised-button matStepperNext color="primary" class="mt-1">Siguiente</button>
+    <div fxLayout="row wrap" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" matStepperNext>
+        Siguiente
+      </button>
+    </div>
+  </mat-step>
 
-    </mat-step>
+  <mat-step [stepControl]="secundaryFormGroup">
+    <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>
 
-    <mat-step [stepControl]="secundaryFormGroup">
-      <ng-template matStepLabel>Seleccione organizaciones análogas</ng-template>
+    <button mat-raised-button (click)="addSecundaries()">
+      Buscar organizaciones
+    </button>
 
-      <app-org-get
+    <!-- <app-org-get
           (selectedOrg)="receivingSecundaries($event)">
-        </app-org-get>
+        </app-org-get> -->
 
-      <!-- <toco-org-search
+    <!-- <toco-org-search
         [orgFilter]="orgFilter"
         [label]="'Seleccionando organizaciones que son análogas'"
         [cleaning]="'true'"
@@ -44,7 +62,7 @@
         (keyup)="loading = true">
       </toco-org-search> -->
 
-      <!-- <mat-action-list *ngIf="secundaryFormGroup">
+    <!-- <mat-action-list *ngIf="secundaryFormGroup">
         <ng-container *ngFor="let org of secundaryFormGroup.value.analogas; let pos = index">
             <button mat-list-item
                 (click)="deleteSecundaryOrg(pos)" matTooltip="Click para 'ELIMINAR'" matTooltipClass="tooltip-red">
@@ -53,34 +71,36 @@
         </ng-container>
       </mat-action-list>    -->
 
-      <mat-accordion>
-        <mat-expansion-panel
-          *ngFor="let org of secundariesOrganizations; let pos = index"
-          [expanded]="step === pos"
-          (opened)="setStep(pos)"
-          hideToggle>
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngFor="let org of secundariesOrganizations; let pos = index"
+        [expanded]="step === pos"
+        (opened)="setStep(pos)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <div
+            fxLAyout="row"
+            fxLayoutAlign="space-between center"
+            style="width: 100%"
+          >
+            <mat-label>
+              <strong>{{ org.name }}</strong></mat-label
+            >
 
-            <mat-expansion-panel-header>
-              <div
-                fxLAyout="row"
-                fxLayoutAlign="space-between center"
-                style="width: 100%;">
+            <button
+              mat-button
+              (click)="deleteSecundaryOrg(pos)"
+              matTooltip="Eliminar"
+            >
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel-header>
 
-                <mat-label> <strong>{{ org.name }}</strong></mat-label>
+        <toco-org-view [org]="org"> </toco-org-view>
 
-                <button mat-button (click)="deleteSecundaryOrg(pos)" matTooltip="Eliminar">
-                  <mat-icon color="warn">delete</mat-icon>
-                </button>
-
-              </div>
-
-            </mat-expansion-panel-header>
-
-            <toco-org-view
-              [org]="org">
-            </toco-org-view>
-
-            <!-- <div
+        <!-- <div
               fxLAyout="row"
               fxLayoutAlign="space-between start"
               fxFlexFill>
@@ -105,44 +125,116 @@
                 style="margin: .5em;">
               </app-disambiguate-accord-chips-field>
             </div> -->
-        </mat-expansion-panel>
-      </mat-accordion>
+      </mat-expansion-panel>
+    </mat-accordion>
 
-      <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-1 mx-1">Siguiente</button>
-    </mat-step>
+    <div fxLayout="row wrap" fxLayoutAlign="end center">
+      <button
+        mat-raised-button
+        matStepperPrevious
+        color="accent"
+        class="mt-1 mx-1"
+      >
+        Anterior
+      </button>
+      <button
+        mat-raised-button
+        matStepperNext
+        color="primary"
+        class="mt-1 mx-1"
+      >
+        Siguiente
+      </button>
+    </div>
+  </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Desambiguar metadatos</ng-template>
+  <mat-step>
+    <ng-template matStepLabel>Desambiguar metadatos</ng-template>
 
-      <app-disambiguation #disambiguatecomp
-        [masterOrganization]="masterOrganization"
-        [secundariesOrganizations]="secundariesOrganizations"
-        [showSecundaries]="showSecundaries"
-      ></app-disambiguation>
+    <app-disambiguation
+      #disambiguatecomp
+      [masterOrganization]="masterOrganization"
+      [secundariesOrganizations]="secundariesOrganizations"
+      [showSecundaries]="showSecundaries"
+    ></app-disambiguation>
 
-      <button mat-raised-button matStepperPrevious color="accent" class="mt-1 mx-1">Anterior</button>
-      <button mat-raised-button matStepperNext color="primary" class="mt-1 mx-1">Siguiente</button>
-    </mat-step>
+    <div fxLayout="row wrap" fxLayoutAlign="end center">
+      <button
+        mat-raised-button
+        matStepperPrevious
+        color="accent"
+        class="mt-1 mx-1"
+      >
+        Anterior
+      </button>
+      <button
+        mat-raised-button
+        matStepperNext
+        color="primary"
+        class="mt-1 mx-1"
+      >
+        Siguiente
+      </button>
+    </div>
+  </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Editar y/o Finalizar</ng-template>
+  <mat-step>
+    <ng-template matStepLabel>Editar y/o Finalizar</ng-template>
 
-      <org-edit-form #orgeditcomp *ngIf="masterOrganization"
-          [org]="masterOrganization"
-          [loading]="'false'"
-      ></org-edit-form>
+    <org-edit-form
+      #orgeditcomp
+      *ngIf="masterOrganization"
+      [org]="masterOrganization"
+      [loading]="'false'"
+    ></org-edit-form>
 
-      <button mat-raised-button color="accent" matStepperPrevious class="mt-1 mx-1">Anterior</button>
-      <ng-container *ngIf="isValidForm();else templateButtonUpdate">
-        <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)">Finalizar</button>
-        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()">Guardar y seguir desambiguando</button>
+    <div fxLayout="row wrap" fxLayoutAlign="end center">
+      <button
+        mat-raised-button
+        color="accent"
+        matStepperPrevious
+        class="mt-1 mx-1"
+      >
+        Anterior
+      </button>
+      <ng-container *ngIf="isValidForm(); else templateButtonUpdate">
+        <button
+          mat-raised-button
+          color="primary"
+          class="mt-1 mx-1"
+          (click)="goDisambiguate(true)"
+        >
+          Finalizar
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="mt-1 mx-1"
+          (click)="goDisambiguate()"
+        >
+          Guardar y seguir desambiguando
+        </button>
       </ng-container>
       <ng-template #templateButtonUpdate>
-        <button mat-raised-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate(true)" disabled>Finalizar</button>
-        <button mat-stroked-button color="primary" class="mt-1 mx-1" (click)="goDisambiguate()" disabled>Guardar y seguir desambiguando</button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="mt-1 mx-1"
+          (click)="goDisambiguate(true)"
+          disabled
+        >
+          Finalizar
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="mt-1 mx-1"
+          (click)="goDisambiguate()"
+          disabled
+        >
+          Guardar y seguir desambiguando
+        </button>
       </ng-template>
-
-
-    </mat-step>
-  </mat-horizontal-stepper>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

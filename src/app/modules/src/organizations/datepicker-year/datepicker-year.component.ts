@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, UntypedFormControl } from '@angular/forms';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 
@@ -117,9 +117,12 @@ export class DatepickerYearComponent implements OnInit, ControlValueAccessor, Af
 
   // Allows Angular to disable the input.
   setDisabledState(isDisabled: boolean): void {
-    isDisabled
+    if(this._picker && this._picker.disabled){
+      isDisabled
       ? (this._picker.disabled = true)
       : (this._picker.disabled = false);
+
+    }
 
     isDisabled ? this._inputCtrl.disable() : this._inputCtrl.enable();
   }

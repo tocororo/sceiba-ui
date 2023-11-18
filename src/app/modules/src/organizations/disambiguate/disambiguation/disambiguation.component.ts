@@ -165,8 +165,10 @@ export class DisambiguationComponent implements OnInit, OnChanges {
     }
   }
 
-  mergeIdentifiers(pids){
+  mergeIdentifiers(pids, selectedsecundaryOrganization: Organization){
+
     var oldPids = this.masterOrganization.identifiers;
+
     var newOnes = pids.filter(a => {return !oldPids.some(x => x.value == a.value) })
     console.log("merging pids: ", oldPids, newOnes);
 

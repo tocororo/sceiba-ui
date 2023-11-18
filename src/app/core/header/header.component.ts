@@ -282,18 +282,7 @@ export class SceibaUIHeaderComponent implements OnInit {
           style: 'width: 55px; height: 55px',
         },
       },
-      {
-        nameTranslate: 'CATALOGO',
-        // @ts-ignore
-        href: this._env.catalog,
-        target: '_self',
-        useRouterLink: true,
-        img: {
-          src: '/assets/icons/apps/catalog.svg',
-          style: 'width: 55px; height: 55px',
-        },
-        divider: true,
-      },
+
       {
         nameTranslate: 'ORGANIZACIONES',
         // @ts-ignore
@@ -313,6 +302,17 @@ export class SceibaUIHeaderComponent implements OnInit {
         useRouterLink: true,
         img: {
           src: '/assets/icons/apps/persons.svg',
+          style: 'width: 55px; height: 55px',
+        },
+      },
+      {
+        nameTranslate: 'EVALUACION_APP',
+        // @ts-ignore
+        href: this._env.evaluations,
+        target: '_self',
+        useRouterLink: true,
+        img: {
+          src: '/assets/icons/apps/evaluations.svg',
           style: 'width: 55px; height: 55px',
         },
       },
@@ -340,16 +340,18 @@ export class SceibaUIHeaderComponent implements OnInit {
         },
       },
       {
-        nameTranslate: 'EVALUACION_APP',
+        nameTranslate: 'CATALOGO',
         // @ts-ignore
-        href: this._env.evaluations,
+        href: this._env.catalog,
         target: '_self',
         useRouterLink: true,
         img: {
-          src: '/assets/icons/apps/evaluations.svg',
+          src: '/assets/icons/apps/catalog.svg',
           style: 'width: 55px; height: 55px',
         },
+        divider: true,
       },
+
     ];
 
     let defaultIcons: MenuElement[] = [

@@ -87,7 +87,7 @@
           [contentList]="selectedsecundaryOrganization.identifiers"
           idName="idtype"
           valueName="value"
-          (propagate)="mergeIdentifiers($event)"
+          (propagate)="mergeIdentifiers($event, selectedsecundaryOrganization)"
           fxFlex="1 2 calc(15em + 20px)"
           style="margin: .5em;"
         ></app-disambiguate-card-chips-field>
