@@ -1,5 +1,6 @@
 <mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
   <mat-toolbar-row
+  *ngIf="!isMobile"
     fxLayout="row wrap"
     fxLayoutAlign="space-between center"
     style="height: auto !important; min-height: 80px;"
@@ -14,7 +15,6 @@
         </span>
       </div>
       <a
-        *ngIf="!isMobile"
         mat-button
         [routerLink]="['/']"
         style="white-space: normal; display: flex; align-items: center"
@@ -26,14 +26,6 @@
         />
       </a>
 
-      <button
-        *ngIf="isMobile"
-        mat-icon-button
-        matTooltip="{{ 'MENU' | translate }}"
-        (click)="drawer.toggle()"
-      >
-        <mat-icon class="mat-18">menu</mat-icon>
-      </button>
     </div>
     <div
       class="center-elements"
@@ -42,6 +34,8 @@
       fxLayout="row wrap"
       fxLayoutAlign="center"
     >
+    <sceiba-ui-menu [menuItems]="menuIconsStatic"></sceiba-ui-menu>
+
       <button
         *ngIf="showMenuLang"
         mat-icon-button
@@ -51,7 +45,6 @@
         <mat-icon class="mat-18">translate</mat-icon>
       </button>
 
-      <sceiba-ui-menu [menuItems]="menuIconsStatic"></sceiba-ui-menu>
 
       <toco-authentication
         *ngIf="!userProfile"
@@ -68,6 +61,79 @@
       ></sceiba-ui-menu>
     </div>
   </mat-toolbar-row>
+
+  <mat-toolbar-row
+  *ngIf="isMobile"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between center"
+  style="height: auto !important; min-height: 80px;"
+>
+  <div style="width: 330px; display: flex; align-items: center">
+    <div *ngIf="isBeta" class="triangle">
+      <span
+        matTooltipClass="tooltip-beta-red"
+        matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
+      >
+        <strong>{{ "BETA" | translate }}</strong>
+      </span>
+    </div>
+    <a
+      mat-button
+      [routerLink]="['/']"
+      style="white-space: normal; display: flex; align-items: center"
+    >
+      <img
+        src="/assets/icons/sceiba.svg"
+        [alt]="'SCEIBA' | translate"
+        style="height: 40px; margin-right: 6px"
+      />
+    </a>
+
+    <button
+      mat-icon-button
+      matTooltip="{{ 'MENU' | translate }}"
+      (click)="drawer.toggle()"
+    >
+      <mat-icon class="mat-18">menu</mat-icon>
+    </button>
+    <sceiba-ui-menu [menuItems]="menuIconsStatic"></sceiba-ui-menu>
+
+    <button
+      *ngIf="showMenuLang"
+      mat-icon-button
+      [matMenuTriggerFor]="menuLanguages"
+      matTooltip="{{ 'IDIOMA' | translate }}"
+    >
+      <mat-icon class="mat-18">translate</mat-icon>
+    </button>
+
+
+    <toco-authentication
+      *ngIf="!userProfile"
+      [oauthInfo]="oauthInfo"
+      [isButtonLogin]="'true'"
+      [isButtonLoginIcon]="'true'"
+      [isButtonLoginText]="'AUTENTICARSE' | translate"
+    >
+    </toco-authentication>
+
+    <sceiba-ui-menu
+      *ngIf="userProfile"
+      [menuItems]="_userMainMenu"
+    ></sceiba-ui-menu>
+  </div>
+  <div
+    class="center-elements"
+    appearance="legacy"
+    aria-label="'MENU_INICIO' | translate"
+    fxLayout="row wrap"
+    fxLayoutAlign="center"
+  >
+
+  </div>
+</mat-toolbar-row>
+
+
   <!-- <mat-toolbar-row style="height: fit-content; justify-content: space-around">
     <sceiba-ui-breadcrumbs> </sceiba-ui-breadcrumbs>
   </mat-toolbar-row> -->
