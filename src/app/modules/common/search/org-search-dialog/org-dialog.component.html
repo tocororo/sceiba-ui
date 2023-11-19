@@ -42,27 +42,34 @@
           [length]="sr.hits.total"
           [pageSize]="pageSize"
           [pageIndex]="pageIndex"
-
           (page)="pageChange($event)"
         >
         </mat-paginator>
-        <mat-selection-list  [multiple]="multipleSelection"
+        <mat-selection-list
+          [multiple]="multipleSelection"
           *ngIf="sr.hits && sr.hits.hits.length > 0; else templateNotInfo"
           (selectionChange)="currentPageSelectionChange($event)"
         >
           <mat-list-option
-
             *ngFor="let hit of sr.hits.hits; let pos = index"
-            style="margin: 1em 8px; display: flex;height: 130px;"
+            style="margin: 1em 8px; display: flex; height: 200px"
             [value]="hit.metadata"
             [selected]="isSelected(hit.metadata)"
           >
-          <ng-container>
-            <span class="mat-headline-6">
-              {{ hit.metadata.name }}
-            </span>
-            <span class="mat-caption" color="primary"> SceibaID: {{ hit.metadata.id }} </span>
-            <div
+            <ng-container
+              fxLayout="column"
+              style="padding: 0px 16px; white-space: normal"
+            >
+              <div class="mat-headline-6">
+                {{ hit.metadata.name }}
+              </div>
+              <div class="mat-caption" color="primary">
+                SceibaID: {{ hit.metadata.id }}
+              </div>
+              <div class="mat-caption" color="primary">
+                status: {{ hit.metadata.status }}
+              </div>
+              <div
                 fxLayout="row wrap"
                 *ngIf="
                   hit.metadata.identifiers &&
@@ -83,7 +90,7 @@
                   </ng-container>
                 </span>
               </div>
-          </ng-container>
+            </ng-container>
 
             <!-- <div  style="padding-top: 25px; margin-right: 25px">
               <span class="mat-headline-6">
@@ -127,7 +134,7 @@
               </ul>
               <hr class="hr-grey-ligth" *ngIf="pos < sr.hits.hits.length - 1" />
             </div> -->
-          </mat-list-option >
+          </mat-list-option>
         </mat-selection-list>
 
         <ng-template #templateNotInfo>

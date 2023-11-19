@@ -64,6 +64,14 @@ import { RequestChangesListComponent } from '../../src/organizations/request-cha
 import { SearchListComponent } from '../../src/organizations/search-list/search-list.component';
 import { OrganizationSearchComponent } from '../../src/organizations/search/search.component';
 
+import { DesambiguateOrganizationSelectDialog, DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
+import { DisambiguateAccordChipsFieldComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-accord-chips-field/disambiguate-accord-chips-field.component';
+import { DisambiguateCardChipsFieldComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-card-chips-field/disambiguate-card-chips-field.component';
+import { DisambiguateCardFieldComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-card-field/disambiguate-card-field.component';
+import { DisambiguateRelationshipsComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-relationships/disambiguate-relationships.component';
+import { ShowOneRelationshipComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-relationships/show-one-relationship/show-one-relationship.component';
+import { DisambiguateTextFieldComponent } from '../../src/organizations/disambiguate/disambiguation/disambiguate-text-field/disambiguate-text-field.component';
+import { DisambiguationComponent, Step3DisambiguateHelp } from '../../src/organizations/disambiguate/disambiguation/disambiguation.component';
 import { OrgViewAccordionComponent } from '../../src/organizations/org-viewer/org-view/org-view-accordion/org-view-accordion.component';
 import { OrgViewAddressComponent } from '../../src/organizations/org-viewer/org-view/org-view-address/org-view-address.component';
 import { OrgViewGeoNamesCityComponent } from '../../src/organizations/org-viewer/org-view/org-view-geo-names-city/org-view-geo-names-city.component';
@@ -112,16 +120,16 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     CardsSliderComponent,
     EditAddressComponent,
 
-    // DisambiguateComponent,
-    // DesambiguateOrganizationSelectDialog,
-    // Step3DisambiguateHelp,
-    // DisambiguationComponent,
-    // DisambiguateTextFieldComponent,
-    // DisambiguateRelationshipsComponent,
-    // ShowOneRelationshipComponent,
-    // DisambiguateCardFieldComponent,
-    // DisambiguateCardChipsFieldComponent,
-    // DisambiguateAccordChipsFieldComponent,
+    DisambiguateComponent,
+    DesambiguateOrganizationSelectDialog,
+    Step3DisambiguateHelp,
+    DisambiguationComponent,
+    DisambiguateTextFieldComponent,
+    DisambiguateRelationshipsComponent,
+    ShowOneRelationshipComponent,
+    DisambiguateCardFieldComponent,
+    DisambiguateCardChipsFieldComponent,
+    DisambiguateAccordChipsFieldComponent,
 
     OrgEditFormComponent,
     CommentDialogComponent,

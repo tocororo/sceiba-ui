@@ -23,6 +23,7 @@ import {
   Relationship,
 } from 'toco-lib';
 import { OrgService } from '../../_services/org.service';
+import { DesambiguateOrganizationSelectDialog } from '../../disambiguate/disambiguate.component';
 
 @Component({
   selector: 'org-edit-form',
@@ -108,6 +109,7 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
     let newOrg = new Organization();
     newOrg.deepcopy(this.org);
     this.org = newOrg;
+    this.org.relationships.sort((a, b) => a.label.localeCompare(b.label));
   }
 
   ngOnInit() {
@@ -672,24 +674,48 @@ export class OrgEditFormComponent implements OnInit, OnChanges {
   }
 
   addToRelationship(type: string): void {
-    const dialogRef = this._dialog.open(OrganizationDialogRelasionship, {
-      width: '60%',
-      data: {},
+    this._dialog.open(DesambiguateOrganizationSelectDialog, {
+      width: '90%',
+      height: '90%',
+      data: {
+        cuban: true,
+        multiple: true,
+        selectOrg: (orgs: Organization[]) => {
+          console.log('closed searc');
+          orgs.forEach((o) => {
+            let rel: Relationship = new Relationship();
+            rel.id = o.id;
+            rel.label = o.name;
+            rel.identifiers = o.identifiers;
+            rel.type = type;
+
+            this.org.relationships.push(rel);
+          });
+          this.org.relationships.sort((a, b) => a.label.localeCompare(b.label));
+
+          this.orgFormGroup.setControl(
+            'relationships',
+            this.addItemsFormArrayRelationships(this.org.relationships)
+          );
+          this.relationshipsControl = this.addItemsFormArrayRelationships(
+            this.org.relationships
+          );
+        },
+      },
     });
 
-    dialogRef.afterClosed().subscribe((result: Relationship) => {
-      if (result) {
-        result.type = type;
-        this.org.relationships.push(result);
-        this.orgFormGroup.setControl(
-          'relationships',
-          this.addItemsFormArrayRelationships(this.org.relationships)
-        );
-        this.relationshipsControl = this.addItemsFormArrayRelationships(
-          this.org.relationships
-        );
-      }
-    });
+    // const dialogRef = this._dialog.open(OrganizationDialogRelasionship, {
+    //   width: '60%',
+    //   data: {},
+    // });
+
+    // dialogRef.afterClosed().subscribe((result: Relationship) => {
+    //   if (result) {
+    //     result.type = type;
+    //     this.org.relationships.push(result);
+
+    //   }
+    // });
   }
 
   isValidForm() {

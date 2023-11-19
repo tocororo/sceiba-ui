@@ -57,6 +57,8 @@ export class OrgViewComponent implements OnInit, OnChanges
     org_full.deepcopy(this.org);
     this.org = org_full;
 
+    this.org.relationships.sort((a, b) => a.label.localeCompare(b.label));
+
     this._panelsTitle_Relationships = ['Organizaciones Padres', 'Organizaciones Hijas', 'Organizaciones Relacionadas'];
     this._relationshipsValue = this._createRelationshipsValue();
 

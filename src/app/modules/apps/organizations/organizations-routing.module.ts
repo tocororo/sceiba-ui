@@ -20,6 +20,7 @@ import { OrganizationSearchComponent } from '../../src/organizations/search/sear
 // import { SimpleAuthenticationService, OrgAddComponent } from 'toco-lib';
 import { SceibaUiPageNotFoundComponent } from 'src/app/core/sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
 import { OauthAuthenticationService } from 'toco-lib';
+import { DisambiguateComponent } from '../../src/organizations/disambiguate/disambiguate.component';
 import { ErrorPageComponent } from '../../src/organizations/error-page/error-page.component';
 import { OrganizationsComponent } from './organizations.component';
 
@@ -103,8 +104,8 @@ const routes: Routes = [
       */
       {
         path: 'wiki-organizations',
-        // component: DisambiguateComponent,
-        loadChildren: () => import('../../src/organizations/wiki-organizations/wiki-organizations.module').then(m => m.WikiOrganizationsModule),
+        component: DisambiguateComponent,
+        // loadChildren: () => import('../../src/organizations/wiki-organizations/wiki-organizations.module').then(m => m.WikiOrganizationsModule),
       },
       /*
       end of Perfiles
