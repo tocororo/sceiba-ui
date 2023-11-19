@@ -1,0 +1,84 @@
+<!-- <div class="wrapper"> -->
+<div
+  class="bg-primary-color"
+  style="
+    height: 100px;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to right, #007e3e, #373131);
+  "
+></div>
+
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  style="border-radius: 40px 40px 0 0"
+>
+  <div
+    [ngStyle.xs]="{ width: '95%' }"
+    style="
+      margin-top: -170px;
+      width: 95%;
+      background-color: white;
+      border-radius: 0px 0px 0 0;
+      box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+    "
+  >
+    <mat-toolbar
+      fxLayout="row wrap"
+      fxLayoutAlign="space-between center"
+      [ngStyle]="{
+        width: '100%',
+        height: 'auto',
+        padding: '16px',
+        'min-height': '56px'
+      }"
+    >
+      <span [ngStyle]="{ 'white-space': 'normal' }">
+        <span class="mat-h2">{{ "AYUDA" | translate }}</span>
+      </span>
+      <mat-icon>help</mat-icon>
+    </mat-toolbar>
+
+    <mat-drawer-container class="sidebar-container" autosize>
+      <mat-drawer
+        #drawer
+        class="sidebar"
+        [mode]="mode"
+        [opened]="mode == 'side'"
+      >
+        <div class="button-colse"></div>
+        <ng-container *ngFor="let item of docsList">
+          <h3>{{ item.label }}</h3>
+          <mat-nav-list *ngIf="!!item.children">
+            <a
+              mat-list-item
+              *ngFor="let child of item.children"
+              [activated]="currentPath == child.path"
+              [routerLink]="child.path"
+            >
+              {{ child.label }}
+            </a>
+          </mat-nav-list>
+        </ng-container>
+      </mat-drawer>
+
+      <div class="container">
+        <div style="margin-top: 1rem">
+          <button
+            mat-icon-button
+            (click)="drawer.toggle()"
+            matTooltip="Tabla de Contenido"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+<!--
+          <button type="button" mat-button (click)="drawer.toggle()">
+            <span class="material-symbols-outlined"> menu </span>
+          </button> -->
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-container>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
+import { isMobile } from 'src/app/modules/common/is-mobile';
 import {
   Environment,
   OauthAuthenticationService,
@@ -14,7 +15,6 @@ import {
   convertLangFromNumberToString,
 } from 'toco-lib';
 import { HeaderService } from '../header.service';
-import { isMobile } from 'src/app/modules/common/is-mobile';
 
 @Component({
   selector: 'sceiba-ui-header',
@@ -364,7 +364,7 @@ export class SceibaUIHeaderComponent implements OnInit {
           {
             nameTranslate: 'AYUDA',
             icon: 'help',
-            href: '/help/faq',
+            href: '/help',
             useRouterLink: true,
             hideLabel: true,
           },
@@ -379,7 +379,7 @@ export class SceibaUIHeaderComponent implements OnInit {
           {
             nameTranslate: 'AYUDA',
             icon: 'help',
-            href: '/help/faq',
+            href: '/help',
             useRouterLink: true,
             hideLabel: true,
           },

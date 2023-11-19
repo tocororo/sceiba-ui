@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
-  Router,
-  NavigationStart,
   Event as NavigationEvent,
+  NavigationStart,
+  Router,
 } from '@angular/router';
-import { isMobile } from '../../is-mobile';
+import { HeaderService } from 'src/app/core/header.service';
+import { isMobile } from '../../common/is-mobile';
 
 export interface HelpDoc {
   label: string;
@@ -22,13 +23,17 @@ export class HelpComponent implements OnInit {
   docsList: HelpDoc[] = [];
   currentPath: string;
   routerEvent;
-  mode: "side" | "push" | "over" = "side"
+  mode: 'side' | 'push' | 'over' = 'side';
 
-  public constructor(private route: ActivatedRoute, private router: Router) {}
+  public constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private headerService: HeaderService
+  ) {}
 
   public ngOnInit(): void {
     console.log(isMobile());
-    this.mode = isMobile() ? "over" : "side"
+    this.mode = isMobile() ? 'over' : 'side';
 
     this.currentPath = this.router.url;
     this.routerEvent = this.router.events.subscribe(
@@ -43,8 +48,8 @@ export class HelpComponent implements OnInit {
       {
         label: 'Sceiba',
         children: [
+          { label: 'Ayuda', path: '/help' },
           { label: 'FAQ', path: '/help/faq' },
-          { label: 'Ayuda', path: '/help/help' },
           { label: 'Acerca de', path: '/help/about' },
           { label: 'Equipo y contactos', path: '/help/contact' },
           { label: 'Política de Privacidad', path: '/help/policy' },
@@ -84,6 +89,18 @@ export class HelpComponent implements OnInit {
         ],
       },
     ];
+
+
+    let data = {
+      icon: '/assets/icons/apps/evaluations.svg',
+      iconLabel: 'AYUDA',
+      iconAlt: 'AYUDA',
+      iconRoute: 'help',
+      secondaryMenuElements: null,
+      extraMenuAuthenticatedUser: null,
+    };
+    this.headerService.setHeaderData(data);
+
   }
 
   ngOnDestroy() {

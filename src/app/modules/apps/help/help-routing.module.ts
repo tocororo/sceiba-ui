@@ -3,10 +3,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { HelpComponent } from '../../common/help/help/help.component';
 import { StaticPagesComponent } from '../../common/help/static-pages/static-pages.component';
+import { HelpComponent } from './help.component';
 
 const childrenRoutes = [
+
+  {
+    path: '',
+    component: StaticPagesComponent,
+    data: { src: 'assets/markdown/sceiba/help', title: 'Ayuda' },
+  },
   {
     path: 'faq',
     component: StaticPagesComponent,
@@ -16,11 +22,6 @@ const childrenRoutes = [
     path: 'about',
     component: StaticPagesComponent,
     data: { src: 'assets/markdown/sceiba/about', title: 'Sobre Nosotros' },
-  },
-  {
-    path: 'help',
-    component: StaticPagesComponent,
-    data: { src: 'assets/markdown/sceiba/help', title: 'Ayuda' },
   },
   {
     path: 'contact',
