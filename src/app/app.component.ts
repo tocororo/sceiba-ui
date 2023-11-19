@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
-  Router,
   Event as NavigationEvent,
   NavigationStart,
+  Router,
 } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
@@ -16,14 +16,15 @@ import {
   OauthInfo,
   User,
 } from 'toco-lib';
-import { isMobile } from './modules/common/is-mobile';
 import { HeaderService } from './core/header.service';
+import { isMobile } from './modules/common/is-mobile';
 
 interface Menu {
   label: string;
   href: string;
   icon: string;
   children?: Menu[];
+  useHrefLink?: boolean;
 }
 
 @Component({
@@ -96,12 +97,12 @@ export class AppComponent {
       this.headerService.headerDataObservable$.subscribe({
         next: (data) => {
           this.menuApps = [
-            {
-              label: 'SCEIBA',
-              // @ts-ignore
-              href: this.environment.sceiba,
-              icon: '/assets/icons/apps/sceiba.svg',
-            },
+            // {
+            //   label: 'SCEIBA',
+            //   // @ts-ignore
+            //   href: this.environment.sceiba,
+            //   icon: '/assets/icons/apps/sceiba.svg',
+            // },
             {
               label: 'BUSQUEDA',
               // @ts-ignore
@@ -113,12 +114,6 @@ export class AppComponent {
               // @ts-ignore
               href: this.environment.revistasmes,
               icon: '/assets/icons/apps/revistasmes.png',
-            },
-            {
-              label: 'CATALOGO',
-              // @ts-ignore
-              href: this.environment.catalog,
-              icon: '/assets/icons/apps/catalog.svg',
             },
             {
               label: 'ORGANIZACIONES',
@@ -133,34 +128,45 @@ export class AppComponent {
               icon: '/assets/icons/apps/persons.svg',
             },
             {
+              label: 'EVALUACION_APP',
+              // @ts-ignore
+              href: this.environment.evaluations,
+              icon: '/assets/icons/apps/evaluations.svg',
+            },
+            {
               label: 'VOCABULARIOS',
               // @ts-ignore
               href: this.environment.vocabularies,
               icon: '/assets/icons/apps/vocabs.svg',
+              useHrefLink:true
             },
             {
               label: 'SMOODLE',
               // @ts-ignore
               href: this.environment.moodle,
               icon: '/assets/icons/apps/scourses.svg',
+              useHrefLink:true
             },
             {
-              label: 'EVALUACION_APP',
+              label: 'CATALOGO',
               // @ts-ignore
-              href: this.environment.evaluations,
-              icon: '/assets/icons/apps/evaluations.svg',
+              href: this.environment.catalog,
+              icon: '/assets/icons/apps/catalog.svg',
             },
           ];
           const children = data?.secondaryMenuElements?.map((menu) => ({
             label: menu.nameTranslate,
             href: menu.href,
-          }));
-          const index = this.menuApps.findIndex(
-            (menu) => menu.href != '/' && children[0].href.includes(menu.href)
-          );
-          if (index > -1) {
-            this.menuApps[index] = { ...this.menuApps[index], children };
+          }));this.menuApps.length
+          if (children && children.length > 0){
+            const index = this.menuApps.findIndex(
+              (menu) => menu.href != '/' && children[0].href.includes(menu.href)
+            );
+            if (index > -1) {
+              this.menuApps[index] = { ...this.menuApps[index], children };
+            }
           }
+
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete headerSubscription'),
