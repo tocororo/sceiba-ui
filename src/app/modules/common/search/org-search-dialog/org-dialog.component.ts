@@ -20,6 +20,7 @@ import {
   SearchResponse,
   SearchService,
 } from 'toco-lib';
+import { MatDialog } from '@angular/material/dialog';
 
 interface SceibaUiOrgSearchDialogComponentData {
   cuban: boolean;
@@ -79,7 +80,8 @@ export class SceibaUiSearchSelectOrgComponent {
   public constructor(
     private _env: Environment,
     private _cuorService: OrgService,
-    private _searchService: SearchService // @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
+    private _searchService: SearchService, // @Inject(MAT_DIALOG_DATA) public data: SceibaUiOrgSearchDialogComponentData
+    public dialog: MatDialog
   ) {
     this.env = this._env;
   }
@@ -91,6 +93,11 @@ export class SceibaUiSearchSelectOrgComponent {
     }
 
     this.doSearch();
+  }
+
+
+  onNoClick(): void {
+    this.dialog.closeAll();
   }
 
   public doSearch() {
