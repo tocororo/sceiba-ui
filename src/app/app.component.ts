@@ -57,6 +57,7 @@ export class AppComponent {
   public footerInformation: Array<{
     name: string;
     url: string;
+    useRouterLink: boolean;
   }> = [];
 
   public user: User | null = new User();
@@ -185,6 +186,10 @@ export class AppComponent {
         }
       }
     );
+    
+		this.footerInformation.push({ name: "ACERCA_DE", url: "/help/about", useRouterLink: true });
+		this.footerInformation.push({ name: "PRIVACIDAD", url: "/help/policy", useRouterLink: true });
+		this.footerInformation.push({ name: "CONTACTOS", url: "/help/contact", useRouterLink: true });
 
     this.setupIcons();
 
