@@ -46,6 +46,7 @@
         >
         </mat-paginator>
         <mat-selection-list
+          style="overflow: hidden; overflow-y: auto; height: 400px;"
           [multiple]="multipleSelection"
           *ngIf="sr.hits && sr.hits.hits.length > 0; else templateNotInfo"
           (selectionChange)="currentPageSelectionChange($event)"
