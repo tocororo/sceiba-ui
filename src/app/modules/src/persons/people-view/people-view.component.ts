@@ -5,23 +5,22 @@ import { Person } from '../people/person.entity';
 @Component({
   selector: 'app-people-view',
   templateUrl: './people-view.component.html',
-  styleUrls: ['./people-view.component.scss']
+  styleUrls: ['./people-view.component.scss'],
 })
 export class PeopleViewComponent implements OnInit {
+  constructor(private _activatedRoute: ActivatedRoute) {}
 
-  constructor(private _activatedRoute: ActivatedRoute,) { }
-
-  public person: Person = null;
+  public person: any = null;
 
   ngOnInit() {
-    
-    this._activatedRoute.parent.data.subscribe(
-      (data) => {
-        console.log(data);
-        
-          this.person = data.person.metadata;
-      }
-    );
+    this._activatedRoute.parent.data.subscribe((data) => {
+      this.person = {
+        ...data.person.metadata,
+        country:
+          // `${data.person.metadata.country.code.toLowerCase()}-${
+          data.person.metadata.country.name,
+        // }`,
+      };
+    });
   }
-
 }
