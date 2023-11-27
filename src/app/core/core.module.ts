@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { MarkdownModule } from 'ngx-markdown';
-import { allowedURLS } from 'src/environments/environment';
-import { AuthenticationModule } from 'toco-lib';
+// import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+// import { allowedURLS } from 'src/environments/environment';
+// import { AuthenticationModule } from 'toco-lib';
 import { SceibaUiSharedModule } from '../shared/shared.module';
 import { SceibaUiFooterComponent } from './footer/footer.component';
 import { HeaderService } from './header.service';
@@ -22,6 +22,9 @@ import { SceibaMenuAppsComponent } from './header/sceiba-ui-menu-apps/menu-apps.
 import { SceibaUiHomeComponent } from './home/home.component';
 import { SceibaUiBreadcrumbsComponent } from './sceiba-ui-breadcrumbs/sceiba-ui-breadcrumbs.component';
 import { SceibaUiPageNotFoundComponent } from './sceiba-ui-page-not-found/sceiba-ui-page-not-found.component';
+import { OAuthModule, OAuthStorage, ValidationHandler } from 'angular-oauth2-oidc';
+import { allowedURLS } from 'src/environments/environment';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,7 +64,8 @@ export function storageFactory(): OAuthStorage {
     SceibaUiSharedModule,
     FlexLayoutModule,
     TranslateModule,
-    AuthenticationModule,
+    // AuthenticationModule,
+    HttpClientModule,
     RouterModule.forChild([]),
     OAuthModule.forRoot({
       resourceServer: {

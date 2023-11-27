@@ -45,15 +45,22 @@
         <mat-icon class="mat-18">translate</mat-icon>
       </button>
 
+      <button
+      mat-icon-button
+      matTooltip="{{ 'LOGIN' | translate }}"
+      (click)="login()"
+      >
+        <mat-icon class="mat-18">lock_open</mat-icon>
+      </button>
 
-      <toco-authentication
+      <!-- <toco-authentication
         *ngIf="!userProfile"
         [oauthInfo]="oauthInfo"
         [isButtonLogin]="'true'"
         [isButtonLoginIcon]="'true'"
         [isButtonLoginText]="'AUTENTICARSE' | translate"
       >
-      </toco-authentication>
+      </toco-authentication> -->
 
       <sceiba-ui-menu
         *ngIf="userProfile"

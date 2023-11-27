@@ -3023,6 +3023,14 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha512-S2Hw0TtNkMJhIabBwIojKL9YHO5T0n5eNqWJ7Lrlel/zDbftQpxpapi8tZs3X1HWa+u+QeydGmzzNU0m09+Rcg==
 
+angular-auth-oidc-client@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/angular-auth-oidc-client/-/angular-auth-oidc-client-16.0.1.tgz#f7453913c352f756bc41c1c35f95751f6d1bf203"
+  integrity sha512-jWNNw4LgKcfskMX5ZDt33/qKp2NmlI6PL+s8ptlIixpzCdNLQv7FwMhYlyq22MMjk87WSsOCWmMlGBoMTeNOfw==
+  dependencies:
+    rfc4648 "^1.5.0"
+    tslib "^2.3.0"
+
 angular-oauth2-oidc-jwks@^15.0.1:
   version "15.0.1"
   resolved "https://registry.yarnpkg.com/angular-oauth2-oidc-jwks/-/angular-oauth2-oidc-jwks-15.0.1.tgz#7302a517dfd36e45e31bd22887b254cd5e838cb9"
@@ -7375,6 +7383,11 @@ reusify@^1.0.4:
   version "1.0.4"
   resolved "https://nexus.uclv.edu.cu/repository/npm/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
+
+rfc4648@^1.5.0:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.5.3.tgz#e62b81736c10361ca614efe618a566e93d0b41c0"
+  integrity sha512-MjOWxM065+WswwnmNONOT+bD1nXzY9Km6u3kzvnx8F8/HXGZdz3T6e6vZJ8Q/RIMUSp/nxqjH3GwvJDy8ijeQQ==
 
 rfdc@^1.3.0:
   version "1.3.0"

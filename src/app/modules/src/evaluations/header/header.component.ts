@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
 import { Observable, Subscription } from "rxjs";
 import {
   ActionText,
@@ -109,9 +108,7 @@ export class HeaderComponent implements OnInit {
     private _env: Environment,
     private _transServ: TranslateService,
     private router: Router,
-    private oauthService: OAuthService,
     protected http: HttpClient,
-    private oauthStorage: OAuthStorage,
     private authenticateService: OauthAuthenticationService,
     private _snackBar: MatSnackBar,
     private EvaluationService: EvaluationService
@@ -380,45 +377,45 @@ export class HeaderComponent implements OnInit {
 
     this._menuOptions = this.staticMenuOptions;
 
-    let request = JSON.parse(this.oauthStorage.getItem("user"));
+    // let request = JSON.parse(this.oauthStorage.getItem("user"));
 
-    if (request) {
-      this.user = request.data.userprofile.user;
-      this._menuOptions = [
-        ...this.staticMenuOptions,
-        {
-          nameTranslate: this.user ? this.user.email.split("@")[0] : "",
-          icon: "person_pin",
-          childrenMenu: this._menuUser,
-          hideLabel: true,
-        },
-      ];
-    }
+    // if (request) {
+    //   this.user = request.data.userprofile.user;
+    //   this._menuOptions = [
+    //     ...this.staticMenuOptions,
+    //     {
+    //       nameTranslate: this.user ? this.user.email.split("@")[0] : "",
+    //       icon: "person_pin",
+    //       childrenMenu: this._menuUser,
+    //       hideLabel: true,
+    //     },
+    //   ];
+    // }
 
-    this.authenticateSuscription =
-      this.authenticateService.authenticationSubjectObservable.subscribe(
-        (request) => {
-          if (request) {
-            this.user = request.data.userprofile.user;
+    // this.authenticateSuscription =
+    //   this.authenticateService.authenticationSubjectObservable.subscribe(
+    //     (request) => {
+    //       if (request) {
+    //         this.user = request.data.userprofile.user;
 
-            this._menuOptions = [
-              ...this.staticMenuOptions,
-              {
-                nameTranslate: this.user ? this.user.email.split("@")[0] : "",
-                icon: "person_pin",
-                childrenMenu: this._menuUser,
-                hideLabel: true,
-              },
-            ];
-          } else {
-            this.logoff();
-          }
-        },
-        (error: any) => {
-          this.user = null;
-        },
-        () => {}
-      );
+    //         this._menuOptions = [
+    //           ...this.staticMenuOptions,
+    //           {
+    //             nameTranslate: this.user ? this.user.email.split("@")[0] : "",
+    //             icon: "person_pin",
+    //             childrenMenu: this._menuUser,
+    //             hideLabel: true,
+    //           },
+    //         ];
+    //       } else {
+    //         this.logoff();
+    //       }
+    //     },
+    //     (error: any) => {
+    //       this.user = null;
+    //     },
+    //     () => {}
+    //   );
   }
 
   ngOnDestroy(): void {
@@ -469,20 +466,20 @@ export class HeaderComponent implements OnInit {
   public login() {
     console.log("hi");
 
-    this.oauthService.initImplicitFlow();
+    // this.oauthService.initImplicitFlow();
   }
 
   public logoff() {
-    this.oauthService.logOut();
-    this.oauthStorage.removeItem("user");
+    // this.oauthService.logOut();
+    // this.oauthStorage.removeItem("user");
     this.user = undefined;
     this._menuOptions = this.staticMenuOptions;
   }
 
   public get name() {
-    let user = JSON.parse(this.oauthStorage.getItem("user"));
-    if (!user) return null;
-    return user["email"];
+    // let user = JSON.parse(this.oauthStorage.getItem("user"));
+    // if (!user) return null;
+    return 'aaa';//user["email"];
   }
 
   getUserInfo(): Observable<Response<any>> {
