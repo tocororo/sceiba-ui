@@ -8,11 +8,9 @@ import {
   Router,
 } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
 import {
   Environment,
-  OauthAuthenticationService,
   OauthInfo,
   User,
 } from 'toco-lib';
@@ -79,14 +77,11 @@ export class AppComponent {
     private environment: Environment,
     // private matomoInjector: MatomoInjector,
     private router: Router,
-    private oauthService: OAuthService,
     protected http: HttpClient,
     public iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
     private _transServ: TranslateService,
-    private oauthStorage: OAuthStorage,
-    private headerService: HeaderService,
-    private authenticateService: OauthAuthenticationService //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
+    private headerService: HeaderService, //private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
   ) /*@Inject(RecaptchaLoaderService) private _recaptchaDynamicLanguageLoaderServ: RecaptchaDynamicLanguageLoaderService*/ {
     // this.configure()
     let env: any = this.environment;

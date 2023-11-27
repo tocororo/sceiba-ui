@@ -25,6 +25,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@swimlane/ngx-charts": "^20.4.1",
+    "angular-auth-oidc-client": "^16.0.1",
     "angular-oauth2-oidc": "^15.0.1",
     "angular-oauth2-oidc-jwks": "^15.0.1",
     "is-what": "^4.1.15",

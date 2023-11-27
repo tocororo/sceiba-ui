@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+// import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import {
   Environment, OauthAuthenticationService, OauthInfo, Response, User,
@@ -94,9 +94,9 @@ export class HeaderComponent implements OnInit {
     private _env: Environment,
     private _transServ: TranslateService,
     private router: Router,
-    private oauthService: OAuthService,
+    // private oauthService: OAuthService,
     protected http: HttpClient,
-    private oauthStorage: OAuthStorage,
+    // private oauthStorage: OAuthStorage,
     private authenticateService: OauthAuthenticationService
   ) {
     this.env = this._env;
@@ -290,20 +290,20 @@ export class HeaderComponent implements OnInit {
 
 
 
-    let request = JSON.parse(this.oauthStorage.getItem("user"));
+    // let request = JSON.parse(this.oauthStorage.getItem("user"));
 
-    if (request) {
-      this.user = request.data.userprofile.user;
-      this._menuOptions = [
-        ...this.staticMenuOptions,
-        {
-          nameTranslate: this.user ? this.user.email.split('@')[0] : '',
-          icon: 'person_pin',
-          childrenMenu: this._menuUser,
-          hideLabel: true
-        }
-       ]
-    }
+    // if (request) {
+    //   this.user = request.data.userprofile.user;
+    //   this._menuOptions = [
+    //     ...this.staticMenuOptions,
+    //     {
+    //       nameTranslate: this.user ? this.user.email.split('@')[0] : '',
+    //       icon: 'person_pin',
+    //       childrenMenu: this._menuUser,
+    //       hideLabel: true
+    //     }
+    //    ]
+    // }
 
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe(
@@ -375,21 +375,21 @@ export class HeaderComponent implements OnInit {
   public login() {
     console.log('hi');
 
-    this.oauthService.initImplicitFlow();
+    // this.oauthService.initImplicitFlow();
   }
 
   public logoff() {
-    this.oauthService.logOut();
-    this.oauthStorage.removeItem("user");
+    // this.oauthService.logOut();
+    // this.oauthStorage.removeItem("user");
     this.user = undefined;
     this._menuOptions = this.staticMenuOptions;
   }
 
   public get name()
   {
-    let user = JSON.parse(this.oauthStorage.getItem("user"));
-    if (!user) return null;
-    return user['email'];
+    // let user = JSON.parse(this.oauthStorage.getItem("user"));
+    // if (!user) return null;
+    return 'user["email"]';
   }
 
   getUserInfo(): Observable<Response<any>> {

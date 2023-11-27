@@ -2,19 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable, Subscription } from 'rxjs';
 import { isMobile } from 'src/app/modules/common/is-mobile';
 import {
   Environment,
-  OauthAuthenticationService,
   OauthInfo,
   Response,
-  USER_STORAGE_VAR,
-  UserProfile,
   convertLangFromNumberToString,
 } from 'toco-lib';
-import { HeaderService } from '../header.service';
+import { ConfigService, HeaderService } from '../header.service';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 
 @Component({
   selector: 'sceiba-ui-header',
@@ -87,16 +85,17 @@ export class SceibaUIHeaderComponent implements OnInit {
    */
   @Input() public showMenuLang: boolean;
   /**
-   * Gets a value of input `isAuthenticated` to know when user is authenticated
-   */
-  @Input() public isAuthenticated: boolean = false;
-  /**
    * Gets a value of input `autehnticated_name` to know the name of the authenticated user
    */
   @Input() public autehnticated_name: string = '';
 
   @Input() public drawer: any;
 
+  /**
+  * Gets a value of input `isAuthenticated` to know when user is authenticated
+  */
+  public isAuthenticated:  Observable<any>;
+  
   public _menuMainIcons: MenuElement[];
   public _userMainMenu: MenuElement[];
   public _menuAuthenticatedUser: MenuElement[];
@@ -109,7 +108,7 @@ export class SceibaUIHeaderComponent implements OnInit {
 
   public simpleMenu = false;
 
-  public userProfile: UserProfile = null;
+  public userProfile: Observable<any>;
 
   public oauthInfo: OauthInfo;
 
@@ -123,14 +122,17 @@ export class SceibaUIHeaderComponent implements OnInit {
     private _env: Environment,
     private _transServ: TranslateService,
     private router: Router,
-    private oauthService: OAuthService,
     protected http: HttpClient,
-    private oauthStorage: OAuthStorage,
-    private authenticateService: OauthAuthenticationService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private oauthService: OAuthService,
+    private configService: ConfigService,
   ) {
     this.oauthInfo = this._env.oauthInfo;
 
+    this.oauthService.configure(this.configService.getConfig());
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    
     this.headerSubscription =
       this.headerService.headerDataObservable$.subscribe({
         next: (data) => {
@@ -141,7 +143,8 @@ export class SceibaUIHeaderComponent implements OnInit {
           this.secondaryMenuElements = data.secondaryMenuElements;
           this.extraMenuAuthenticatedUser = data.extraMenuAuthenticatedUser;
           this.setupMenus();
-          this.addUserMenu();
+          
+          // this.addUserMenu();
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete headerSubscription'),
@@ -152,12 +155,15 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.sceibaHost = this._env.sceibaHost;
     this.isMobile = isMobile();
     this.setupMenus();
-
-    this.setupUser();
     this.setupLang();
-    this.addUserMenu();
+    
+    
+    this.givenName();
 
-    let roles = this.oauthStorage.getItem('roles');
+    // this.setupUser();
+    // this.addUserMenu();
+
+    // let roles = this.oauthStorage.getItem('roles');
   }
 
   private setupLang() {
@@ -178,12 +184,12 @@ export class SceibaUIHeaderComponent implements OnInit {
         useRouterLink: false,
         target: '_blank',
       },
-      {
-        nameTranslate: 'PERFIL_USUARIO',
-        icon: 'person_outline',
-        href: `/person/${this.userProfile && this.userProfile.user.id}`,
-        useRouterLink: true,
-      },
+      // {
+      //   nameTranslate: 'PERFIL_USUARIO',
+      //   icon: 'person_outline',
+      //   href: `/person/${this.userProfile && this.userProfile.user.id}`,
+      //   useRouterLink: true,
+      // },
       {
         nameTranslate: 'CAMBIAR_CONTRASEÑA',
         icon: 'vpn_key',
@@ -394,54 +400,54 @@ export class SceibaUIHeaderComponent implements OnInit {
   }
 
   private addUserMenu() {
-    if (this.userProfile) {
-      this._userMainMenu = [
-        {
-          nameTranslate: this.userProfile
-            ? this.userProfile.user.email.split('@')[0]
-            : '',
-          icon: 'person_pin',
-          childrenMenu: this._menuAuthenticatedUser,
-          hideLabel: true,
-        },
-      ];
-    }
+    // if (this.userProfile) {
+    //   this._userMainMenu = [
+    //     {
+    //       nameTranslate: this.userProfile
+    //         ? this.userProfile.user.email.split('@')[0]
+    //         : '',
+    //       icon: 'person_pin',
+    //       childrenMenu: this._menuAuthenticatedUser,
+    //       hideLabel: true,
+    //     },
+    //   ];
+    // }
   }
   private setupUser() {
-    this.userProfile = this.authenticateService.getUserFromStorage();
-    if (this.userProfile) {
-      // this.user = request;
-      this.addUserMenu();
-      this.configRoles();
-    } else {
-      this.authenticateSuscription =
-        this.authenticateService.authenticationSubjectObservable.subscribe({
-          next: (request) => {
-            if (request) {
-              this.userProfile = this.authenticateService.getUserFromStorage();
+    // this.userProfile = this.authenticateService.getUserFromStorage();
+    // if (this.userProfile) {
+    //   // this.user = request;
+    //   this.addUserMenu();
+    //   this.configRoles();
+    // } else {
+    //   this.authenticateSuscription =
+    //     this.authenticateService.authenticationSubjectObservable.subscribe({
+    //       next: (request) => {
+    //         if (request) {
+    //           this.userProfile = this.authenticateService.getUserFromStorage();
 
-              this.addUserMenu();
-              this.configRoles();
-            } else {
-              this.logoff();
-            }
-          },
-          error: (e) => {
-            this.userProfile = null;
-          },
-          complete: () => console.info('complete authenticateSuscription'),
-        });
-    }
+    //           this.addUserMenu();
+    //           this.configRoles();
+    //         } else {
+    //           this.logoff();
+    //         }
+    //       },
+    //       error: (e) => {
+    //         this.userProfile = null;
+    //       },
+    //       complete: () => console.info('complete authenticateSuscription'),
+    //     });
+    // }
   }
 
-  private configRoles() {
-    let roles = '';
-    for (const rol in this.userProfile.user.roles) {
-      const element = this.userProfile.user.roles[rol];
-      roles += ',' + element.name;
-    }
-    this.oauthStorage.setItem('roles', roles);
-  }
+  // private configRoles() {
+  //   let roles = '';
+  //   for (const rol in this.userProfile.user.roles) {
+  //     const element = this.userProfile.user.roles[rol];
+  //     roles += ',' + element.name;
+  //   }
+  //   this.oauthStorage.setItem('roles', roles);
+  // }
 
   ngOnDestroy(): void {
     this.headerSubscription.unsubscribe();
@@ -488,23 +494,25 @@ export class SceibaUIHeaderComponent implements OnInit {
   }
 
   public login() {
-    // console.log('hi');
-
+    console.log('********* login ********');
+    // this.oauthService.initCodeFlow();
+    // this.oauthService.initLoginFlow();
     this.oauthService.initImplicitFlow();
   }
 
   public logoff() {
     this.oauthService.logOut();
-    this.oauthStorage.removeItem(USER_STORAGE_VAR);
-    this.oauthStorage.removeItem('roles');
-    this.userProfile = undefined;
+    this.oauthService.revokeTokenAndLogout();
+    // this.oauthStorage.removeItem(USER_STORAGE_VAR);
+    // this.oauthStorage.removeItem('roles');
+    // this.userProfile = undefined;
     this._menuMainIcons = this.menuIconsStatic;
   }
 
   public get name() {
-    let user: UserProfile = this.authenticateService.getUserFromStorage();
-    if (!user) return null;
-    return user.user.email;
+    // let user: UserProfile = this.authenticateService.getUserFromStorage();
+    // if (!user) return null;
+    return //user.user.email;
   }
 
   getUserInfo(): Observable<Response<any>> {
@@ -529,6 +537,16 @@ export class SceibaUIHeaderComponent implements OnInit {
 
       complete: () => {},
     });
+  }
+
+  public givenName() {
+    console.log("******* givenName *******");
+    
+    const claims: any = this.oauthService.getAccessToken()//getIdentityClaims();
+    if (!claims) {
+      return null;
+    }
+    return console.log(claims) ;
   }
 }
 
