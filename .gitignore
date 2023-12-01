@@ -43,3 +43,4 @@ Thumbs.db
 .angular
 capacitor.config.ts
 android
+build.sh
