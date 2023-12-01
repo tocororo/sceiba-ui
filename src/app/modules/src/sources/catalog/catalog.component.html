@@ -28,11 +28,11 @@
   <mat-drawer-container style="background-color: white">
     <mat-drawer
       #drawer
-      mode="side"
       closed
       position="end"
       style="min-width: 30%;"
     >
+    {{mode}}
       <catalog-search-filters
         fxLayout="row wrap"
         fxLayout.xs="column wrap"

@@ -25,6 +25,7 @@ import {
   Params,
   Router,
 } from '@angular/router';
+import { isMobile } from 'src/app/modules/common/is-mobile';
 import {
   AggregationsSelection,
   MetadataService,
@@ -130,11 +131,8 @@ export class RecordSearchComponent implements OnInit, AfterViewInit {
   onResize(event: Event) {
     // console.log("window:resize", window.innerWidth);
     if (this.drawer) {
-      if (window.innerWidth <= 740) {
-        this.drawer.opened = false;
-      } else {
-        this.drawer.opened = true;
-      }
+      this.drawer.mode = isMobile() ? 'over' : 'side';
+      this.drawer.opened = !isMobile();
     }
   }
   ngAfterViewInit() {

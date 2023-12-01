@@ -32,6 +32,7 @@ import {
   SearchService,
 } from 'toco-lib';
 
+import { isMobile } from 'src/app/modules/common/is-mobile';
 import { OrgService } from '../_services/org.service';
 import { ChartType } from '../charts/chart-utils';
 
@@ -128,13 +129,9 @@ export class OrganizationSearchComponent implements OnInit, AfterViewInit {
   **************************************************** */
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    // console.log("window:resize", window.innerWidth);
     if (this.drawer) {
-      if (window.innerWidth <= 740) {
-        this.drawer.opened = false;
-      } else {
-        this.drawer.opened = true;
-      }
+      this.drawer.mode = isMobile() ? 'over' : 'side';
+      this.drawer.opened = !isMobile();
     }
   }
   ngAfterViewInit() {

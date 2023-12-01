@@ -1,39 +1,37 @@
 <div
-  style="
-    height: 80px;
-    padding: 0 16px;
-    flex-flow: row wrap;
-    box-sizing: border-box;
-    display: flex;
-    place-content: center space-between;
-    align-items: center;
-  "
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-between center"
+  style="height: 80px; padding: 0 16px"
 >
   <span class="mat-h2">Búsqueda</span>
 
-  <!-- <div *ngIf="search_type; then search_list_button else search_charts_button"></div> -->
-
-  <!-- <ng-template #search_list_button>
-      <button mat-icon-button  matTooltip="Estadisticas" (click)="changeView()">
-        <mat-icon>insert_chart</mat-icon>
-      </button>
-    </ng-template>
-
-    <ng-template #search_charts_button>
-      <button mat-icon-button  matTooltip="Búsqueda" (click)="changeView()">
-        <mat-icon>list</mat-icon>
-      </button>
-    </ng-template> -->
 </div>
 
 <toco-progress [loading]="loading"></toco-progress>
-
+<div class="m-1" *ngIf="sr">
+  <div
+    fxLayout="row nowrap"
+    fxLayoutAlign="space-between center"
+    fxLayout.xs="column"
+  >
+    <button
+      mat-icon-button
+      (click)="drawer.toggle()"
+      matTooltip="Filtros avanzados"
+    >
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <sceiba-ui-search-query-input
+      [query]="query"
+      class="p-1"
+      (queryChange)="queryChange($event)"
+      style="width: 100%"
+    ></sceiba-ui-search-query-input>
+  </div>
+</div>
 <mat-drawer-container autosize>
-  <mat-drawer #drawer mode="side" position="start">
-    <!--  <app-aggregations fxLayout="row wrap" fxLayout.xs="column wrap" fxFlex="{{ currentlayout.width }}"
-        fxLayoutAlign="start center" fxLayoutAlign.xs="center center" fxLayoutGap="1em"
-        class=" back-grey mat-elevation-z8"></app-aggregations>
-      <toco-org-search></toco-org-search>  -->
+  <mat-drawer position="start">
     <seiba-ui-search-aggregations
       *ngIf="sr"
       [aggregations]="sr.aggregations"
@@ -58,21 +56,6 @@
   <!-- templatefor search list -->
   <ng-template #search_list>
     <div class="m-1" *ngIf="sr">
-      <div fxLayout="row nowrap" fxLayoutAlign="space-between center">
-        <sceiba-ui-search-query-input
-          [query]="query"
-          class="p-1"
-          (queryChange)="queryChange($event)"
-          style="width: 100%"
-        ></sceiba-ui-search-query-input>
-      </div>
-      <button
-        mat-icon-button
-        (click)="drawer.toggle()"
-        matTooltip="Filtros avanzados"
-      >
-        <mat-icon>filter_list</mat-icon>
-      </button>
       <mat-paginator
         [length]="sr.hits.total"
         [pageSize]="pageSize"

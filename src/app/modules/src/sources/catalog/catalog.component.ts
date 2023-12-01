@@ -31,6 +31,7 @@ import {
   Router,
   convertToParamMap,
 } from '@angular/router';
+import { isMobile } from 'src/app/modules/common/is-mobile';
 import {
   Environment,
   FilterHttpMap,
@@ -114,7 +115,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
-  public catalogPath = "";
+  public catalogPath = '';
   @Input() public usetopMainOrganization = false;
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
@@ -135,11 +136,8 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   onResize(event: Event) {
     // console.log("window:resize", window.innerWidth);
     if (this.drawer) {
-      if (window.innerWidth <= 740) {
-        this.drawer.opened = false;
-      } else {
-        this.drawer.opened = true;
-      }
+      this.drawer.mode = isMobile() ? 'over' : 'side';
+      this.drawer.opened = !isMobile();
     }
   }
 
@@ -151,7 +149,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   **************************************************** */
   ngOnInit() {
     let path = this.router.url.split('?');
-    if(path.length > 0){
+    if (path.length > 0) {
       this.catalogPath = path[0];
     }
 
@@ -258,7 +256,9 @@ export class CatalogComponent implements OnInit, AfterViewInit {
             query = this.queryAddAndOp(query);
           }
           query = query.concat(
-            '(identifiers.value:"' + params.get(CatalogFilterKeys.identifier)  + '")'
+            '(identifiers.value:"' +
+              params.get(CatalogFilterKeys.identifier) +
+              '")'
           );
         }
 
@@ -414,7 +414,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
       complete: () => {
         console.log('complete');
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -476,7 +476,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
       error: (error) => {
         console.log('error');
       },
-      complete: () => {}
+      complete: () => {},
     });
   }
 }

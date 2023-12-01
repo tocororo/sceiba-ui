@@ -1,11 +1,12 @@
 
 import { HttpParams } from "@angular/common/http";
-import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 
-import { AggregationsSelection, SearchResponse } from "toco-lib";
+import { isMobile } from "src/app/modules/common/is-mobile";
+import { AggregationsSelection, Response, ResponseStatus, SearchResponse, SearchService } from "toco-lib";
 import { PeopleService } from "../people/people.service";
 import { Person } from "../people/person.entity";
 
@@ -19,7 +20,7 @@ import { Person } from "../people/person.entity";
     templateUrl: "./search.component.html",
     styleUrls: ["./search.component.scss"],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit,  AfterViewInit  {
     /**
      * Represents the `QueryParamKey` enum for internal use.
      */
@@ -61,10 +62,25 @@ export class SearchComponent implements OnInit {
 
     @ViewChild(MatDrawer)
     public drawer: MatDrawer;
+  /* ****************************************************
+    HIDE FILTERS ACCORDING TO VIEW SIZE
+  **************************************************** */
+    @HostListener('window:resize', ['$event'])
+    onResize(event: Event) {
+      // console.log("window:resize", window.innerWidth);
+      if (this.drawer) {
+        this.drawer.mode = isMobile() ? 'over' : 'side';
+        this.drawer.opened = !isMobile();
+      }
+    }
+    ngAfterViewInit() {
+      this.onResize(null);
+    }
 
     public constructor(
         private peopleService: PeopleService,
         private activatedRoute: ActivatedRoute,
+        private _searchService: SearchService,
         private router: Router) {
 
     }
@@ -239,15 +255,31 @@ export class SearchComponent implements OnInit {
         this.router.navigate(["."], this.navigationExtras);
     }
 
-    //TODO: What does this code do?
-    @HostListener('window:resize', ['$event'])
-    public onResize(event: Event): void {
-        // console.log("window:resize", window.innerWidth);
-        if (window.innerWidth <= 740) {
-            this.drawer.opened = false;
-        }
-        else {
-            this.drawer.opened = true;
-        }
+
+  moreKeyClick(event) {
+    let start = this.sr.aggregations[event].buckets.length;
+    let size = this.sr.hits.total;
+    let filters = [];
+    for (const aggrKey in this.aggrsSelection) {
+      filters.push({ key: aggrKey, value: this.aggrsSelection[aggrKey] });
     }
+    let _query = {
+      index: 'organizations',
+      filters: filters,
+      agg: {
+        filter: event,
+        size: start + 5,
+      },
+    };
+    this._searchService.getAggregationTerms(_query).subscribe({
+      next: (response: Response<any>) => {
+        if (response.status == ResponseStatus.SUCCESS) {
+          let buckets = response.data.terms;
+          this.sr.aggregations[event].buckets = buckets;
+        }
+      },
+      error: (error) => {},
+      complete: () => {},
+    });
+  }
 }
