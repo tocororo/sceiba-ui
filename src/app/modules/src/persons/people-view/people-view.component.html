@@ -1,9 +1,29 @@
 <toco-progress [loading]="!person"></toco-progress>
 
+<mat-toolbar class="header">
+  <div>
+    <span class="material-icons" style="font-size: 4.5rem;"> account_circle </span>
+    <div class="user">
+      <p>{{person.name}} {{person.last_name}}</p>
+      <p style="opacity: 0.7; font-size: 14px;">{{person.email_addresses[0]}}</p>
+    </div>
+  </div>
+</mat-toolbar>
+
 <mat-tab-group>
   <mat-tab label="General">
     <app-general-tab [person]="person"></app-general-tab>
   </mat-tab>
-  <mat-tab label="Artículos"> Content 2 </mat-tab>
-  <mat-tab label="Estadisticas"> Content 2 </mat-tab>
+  <mat-tab label="Artículos">
+    <div class="not-found">
+      <span class="material-icons"> list_alt </span>
+      <p>No se encontraron datos</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Estadisticas">
+    <div class="not-found">
+      <span class="material-icons"> list_alt </span>
+      <p>No se encontraron datos</p>
+    </div>
+  </mat-tab>
 </mat-tab-group>

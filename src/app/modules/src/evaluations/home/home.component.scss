@@ -1,3 +1,14 @@
+:host ::ng-deep {
+    .mat-mdc-card{
+        padding-right: 1rem;
+        padding-left: 0.5rem;
+        margin-bottom: 3rem;
+    }
+    // .mat-mdc-card:not(:first-child){
+        // margin-top: 3rem;
+    // }
+}
+
 .main-title {
     margin: 0;
     font-size: x-large;

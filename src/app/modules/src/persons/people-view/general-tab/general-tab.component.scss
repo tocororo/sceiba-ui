@@ -6,6 +6,7 @@
 
 .row {
   display: flex;
+  align-items: center;
   margin-bottom: 30px;
 
   .title, .data-elements {
@@ -15,7 +16,7 @@
   .title {
     opacity: 0.6;
     margin-right: 10px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
   }
 }
 

@@ -33,9 +33,9 @@
       fxLayout="column wrap"
       fx.Layout.xs="column wrap"
       fxLayoutAlign="center"
-      style="text-align: center"
+      style="text-align: center; padding-top: 3rem;"
     >
-      <div fxLayout="row wrap" fxLayoutAlign="center">
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="2rem">
         <mat-card>
           <span class="mat-h1 slogan">
             {{ "MONITOREA" | translate }}
@@ -66,8 +66,9 @@
         <mat-radio-group
           aria-label="Select an option"
           fxLayout="row wrap"
-          fxLayout.xs="column wrap"
-          fxLayoutAlign="space-around"
+          fxLayout.xs="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="2rem"
         >
           <mat-card>
             <div
@@ -155,8 +156,8 @@
         <mat-radio-group
           aria-label="Select an option"
           fxLayout="row wrap"
-          fxLayout.xs="column wrap"
-          fxLayoutAlign="space-around"
+          fxLayout.xs="column"
+          fxLayoutAlign="center center"
         >
           <mat-card>
             <div
@@ -176,7 +177,7 @@
       </div>
       <div
         fxLayout="row"
-        fxLayoutAlign="center"
+        fxLayoutAlign="center center"
         style="width: 100%; margin: 1rem 0 1rem 0"
       >
         <a

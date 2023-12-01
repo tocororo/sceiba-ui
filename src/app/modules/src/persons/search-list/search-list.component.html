@@ -14,7 +14,7 @@
           <span
           [routerLink]="[env.persons, 'person', hit.metadata.id, 'view']"
           style="cursor: pointer;">
-            {{hit.metadata.name}}
+            {{hit.metadata.name}} {{ hit.metadata.last_name }}
           </span>
         </h2>
 
