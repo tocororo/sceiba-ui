@@ -32,7 +32,7 @@ import {
   SearchService,
 } from 'toco-lib';
 
-import { isMobile } from 'src/app/modules/common/is-mobile';
+import { isMinWindows, isMobile, isMobileBrowser } from 'src/app/modules/common/is-mobile';
 import { OrgService } from '../_services/org.service';
 import { ChartType } from '../charts/chart-utils';
 
@@ -131,7 +131,10 @@ export class OrganizationSearchComponent implements OnInit, AfterViewInit {
   onResize(event: Event) {
     if (this.drawer) {
       this.drawer.mode = isMobile() ? 'over' : 'side';
-      this.drawer.opened = !isMobile();
+      if(!isMobileBrowser()){
+        this.drawer.opened = !isMinWindows();
+      }
+
     }
   }
   ngAfterViewInit() {

@@ -31,7 +31,7 @@ import {
   Router,
   convertToParamMap,
 } from '@angular/router';
-import { isMobile } from 'src/app/modules/common/is-mobile';
+import { isMinWindows, isMobile, isMobileBrowser } from 'src/app/modules/common/is-mobile';
 import {
   Environment,
   FilterHttpMap,
@@ -137,7 +137,9 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     // console.log("window:resize", window.innerWidth);
     if (this.drawer) {
       this.drawer.mode = isMobile() ? 'over' : 'side';
-      this.drawer.opened = !isMobile();
+      if(!isMobileBrowser()){
+        this.drawer.opened = !isMinWindows();
+      }
     }
   }
 

@@ -5,7 +5,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { ActivatedRoute, NavigationExtras, Params, Router } from "@angular/router";
 
-import { isMobile } from "src/app/modules/common/is-mobile";
+import { isMinWindows, isMobile, isMobileBrowser } from "src/app/modules/common/is-mobile";
 import { AggregationsSelection, Response, ResponseStatus, SearchResponse, SearchService } from "toco-lib";
 import { PeopleService } from "../people/people.service";
 import { Person } from "../people/person.entity";
@@ -70,7 +70,10 @@ export class SearchComponent implements OnInit,  AfterViewInit  {
       // console.log("window:resize", window.innerWidth);
       if (this.drawer) {
         this.drawer.mode = isMobile() ? 'over' : 'side';
-        this.drawer.opened = !isMobile();
+        if(!isMobileBrowser()){
+          this.drawer.opened = !isMinWindows();
+        }
+
       }
     }
     ngAfterViewInit() {
