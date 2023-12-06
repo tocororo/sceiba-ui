@@ -18,6 +18,7 @@
           </a>
         </ng-container>
         <ng-template #useHrefMenu>
+
           <a
             [href]="item.href"
             [target]="item.target"
@@ -38,6 +39,7 @@
   </ng-container>
 
   <ng-template #simpleMenu>
+
     <ng-container *ngFor="let child of subMenuElements">
       <!-- Handle branch node menu items -->
       <span *ngIf="child.childrenMenu && child.childrenMenu.length > 0">

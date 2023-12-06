@@ -178,12 +178,12 @@ export class SceibaUIHeaderComponent implements OnInit {
         useRouterLink: false,
         target: '_blank',
       },
-      {
-        nameTranslate: 'PERFIL_USUARIO',
-        icon: 'person_outline',
-        href: `/person/${this.userProfile && this.userProfile.user.id}`,
-        useRouterLink: true,
-      },
+      // {
+      //   nameTranslate: 'PERFIL_USUARIO',
+      //   icon: 'person_outline',
+      //   href: `/person/${this.userProfile && this.userProfile.user.id}`,
+      //   useRouterLink: true,
+      // },
       {
         nameTranslate: 'CAMBIAR_CONTRASEÑA',
         icon: 'vpn_key',

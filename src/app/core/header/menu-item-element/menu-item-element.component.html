@@ -21,22 +21,24 @@
   </ng-container>
 
   <ng-template #itemHref>
+
     <ng-container *ngIf="item.click; else noClickHref">
+      <!-- href click TODO: ? ESTO tiene sentido...? -->
       <button
         [href]="item.href"
         [target]="item.target"
         mat-menu-item
         (click)="item.click()"
       >
-      <mat-icon>{{ item.icon }}</mat-icon>
-      <span>{{ item.nameTranslate | translate }}</span>
-      </button>
-    </ng-container>
-    <ng-template #noClickHref>
-      <button [href]="item.href" [target]="item.target" mat-menu-item>
         <mat-icon>{{ item.icon }}</mat-icon>
         <span>{{ item.nameTranslate | translate }}</span>
       </button>
+    </ng-container>
+    <ng-template #noClickHref>
+      <a [href]="item.href" [target]="item.target" mat-menu-item>
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.nameTranslate | translate }}</span>
+      </a>
     </ng-template>
   </ng-template>
 </ng-container>
