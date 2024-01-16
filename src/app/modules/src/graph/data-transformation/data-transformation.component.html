@@ -1,0 +1,70 @@
+
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <div fxLayout="row" fxAlign="center center" fxLayoutGap="1rem">
+        <!--  <button mat-raised-button (click)="openDialog('0ms', '0ms')">Import</button> -->
+        <button mat-raised-button [disabled]="item.isdisabled" [matTooltip]="item.toltip| translate "
+          (click)="handleButtonClick(item.label)" [color]="item.color" *ngFor="let item of buttons_array">
+          {{ item.label | translate }}
+        </button>
+
+
+      </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row *ngIf="configuration_name && configuration_name !== ''">
+        <div class="chip-item" >
+          <mat-chip color="primary">
+            name </mat-chip>
+          <div class="text-container">
+            <p (click)="openEDitNameDialog(configuration_name)">{{configuration_name}}</p>
+          </div>
+          <button (click)="openEDitNameDialog(configuration_name)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+    
+        </div>
+       
+        
+      
+    </mat-toolbar-row>
+    <mat-toolbar-row  *ngIf="configuration_description">
+
+      <div class="chip-item">
+        <mat-chip color="primary">
+          description </mat-chip>
+        <div class="text-container">
+          <p (click)="openEDitDescriptionDialog(configuration_description)">{{configuration_description}}</p>
+        </div>
+        <button (click)="openEDitDescriptionDialog(configuration_description)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+  
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+<mat-grid-list [cols]="cols_section1">
+  <mat-grid-tile>
+    <div class="tile-height-entity-panel">
+      <app-entity-panel [breakpoint]="get_breakpoint_service.getBreakpoint()">
+
+      </app-entity-panel>
+
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="tile-height-rules-panel">
+      <app-transform-rules style="width: 100%; height: 100%"></app-transform-rules>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list class="output-section" [cols]="cols_section2">
+  <mat-grid-tile [colspan]="colspan_section2">
+  </mat-grid-tile>
+  <mat-grid-tile>
+
+  </mat-grid-tile>
+</mat-grid-list>

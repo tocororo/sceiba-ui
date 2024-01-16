@@ -1,0 +1,126 @@
+.container{
+    display: grid;
+    height: 40vh;
+    width: auto;
+  
+.head-title{
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    ngx-dropzone{
+        margin: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+        .main-drop-label{
+        }
+    }
+    .button-container{
+        display: grid;
+        justify-content: center;
+        gap: 1em;
+        margin: 0px;
+      
+        button:hover {
+            background-color: #e0e0e0; /* Cambia el color según tus preferencias */
+            color: black;
+          
+          }
+          button {
+            transition: background-color 0.3s ease; /* Ajusta la duración y el tipo de animación según tus preferencias */
+          }
+          button:hover {
+            transform: scale(1.05); /* Ajusta el valor según tus preferencias */
+          }
+    }
+    }
+    
+/* Tamaño  para pantallas pequenas */
+
+@media screen and (max-width: 600px) {
+    .head-title{
+        font-size: 1.2em;
+
+    }
+    ngx-dropzone{
+        margin: 0.5em;
+        height: 25vh;
+        
+        .main-drop-label{
+            font-size: 1.2em;
+        }
+        ngx-dropzone-preview {
+            height: 15vh;
+            min-width: 42vw;
+
+        }
+    }
+    .button-container{
+        display: flex;
+        justify-content: center;
+        margin: 0.5em;
+    }
+}
+
+/* Tamaño  para pantallas medianas */
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+    .head-title{
+        font-size: 20px;
+
+    }
+    .button-container{
+        display: grid;
+       button{
+            width: 30vw;
+        }
+    }
+    .main-drop-label{
+        font-size: 20px;
+    }
+}
+/* Tamaño  para pantallas grandes */
+
+@media screen and (min-width: 1201px) {
+    .container{
+        display: grid;
+        height: 40vh;
+        width: auto;
+        .head-title{
+            font-size: x-large;
+        }
+    }
+    ngx-dropzone{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2em;
+        
+        .main-drop-label{
+            font-size: larger;
+            margin: 2em;
+        }
+        ngx-dropzone-preview {
+          
+            .name-label{
+                font-size: larger;
+            }
+
+        }
+    }
+    .button-container{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        margin: 1em;
+        button{
+            width: 16vw;
+            margin: 1px;
+      
+          }
+    }
+ 
+}

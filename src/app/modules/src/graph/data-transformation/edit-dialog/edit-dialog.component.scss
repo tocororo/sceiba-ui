@@ -1,0 +1,82 @@
+.main-section {
+  display: grid;
+  gap: 2em;
+  margin: 1em;
+}
+.form-section {
+  max-height: 20vh;
+  margin-left: 1em;
+
+  mat-chip-grid{
+    max-height: 8vh; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+  }
+}
+
+
+.button-section {
+  .button-container{
+    display: grid;
+    justify-content: center;
+    gap: 1em;
+    button{
+      margin: 1px;
+
+    }
+
+ button:hover {
+  background-color: #e0e0e0; /* Cambia el color según tus preferencias */
+  color: black;
+
+}
+button {
+  transition: background-color 0.3s ease; /* Ajusta la duración y el tipo de animación según tus preferencias */
+}
+button:hover {
+  transform: scale(1.05); /* Ajusta el valor según tus preferencias */
+}
+
+  }
+ 
+}
+.example-chip-list {
+  width: 90%;
+  margin: 1em;
+
+  mat-label{
+    font-size: large;
+    margin: 2px;
+  }
+  mat-chip-grid{
+    margin: 1em;
+    mat-chip-row{
+      height: 5vh;
+    }
+  }
+
+}
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  .button-container{
+    display: grid;
+    justify-content: center;
+    gap: 1em;
+    button{
+      width: 30vw;
+
+
+    }}
+}
+
+  /* Tamaño  para pantallas grandes */
+
+@media screen and (min-width: 1201px) {
+ 
+  .button-container{
+   
+    button{
+      width: 16vw;
+
+    }
+    
+  }
+    }

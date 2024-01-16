@@ -1,0 +1,117 @@
+<header>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</header>
+
+<div class="transform-rules-container">
+  <h1 class="title" *ngIf="!entity_label" >{{ "REGLAS_TRANSFORMACION" | translate }} {{entity_label}}</h1>
+  <h1 class="title" *ngIf="entity_label" >{{ "REGLAS_DE" | translate }} {{entity_label}}</h1>
+
+  <cdk-virtual-scroll-viewport itemSize="50">
+    <div class="virtual-scroll-container">
+      <mat-accordion *cdkVirtualFor="let item of items" class="w-100-h-100">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="expansion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-description class="rule-title">
+              {{ item.key }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            <div class="expansion-panel-body-container">
+              <!-- Para cuando es un string -->
+              <ng-container *ngIf="isString(item.value)">
+                <div class="rule-description">
+                  <p>{{ item.value }}</p>
+                  <div class="action-container">
+                    <mat-icon class="material-symbols-outlined delete-icon" (click)="ToDeleteRule(item.value,item.key)">
+                      delete
+                    </mat-icon>
+                    <mat-checkbox color="primary" (click)="toAddRule($event, item)"></mat-checkbox>
+                  </div>
+                </div>
+              </ng-container>
+  
+              <!-- Para cuando es un objeto JSON -->
+              <ng-container *ngIf="isJSONObject(item.value) && !isAnArrayofValues(item.value)">
+                <mat-accordion *ngFor="let subkey of getObjectKeys(item.value); let posi = index" class="w-100-h-100">
+                  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="expansion-subpanel">
+                    <mat-expansion-panel-header>
+                      <mat-panel-description class="rule-title">
+                        {{ subkey }}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+  
+                    <ng-container *ngIf="isAnArrayofValues(item.value[subkey])">
+                      <div class="rule-description" *ngFor="let subvalue of item.value[subkey]">
+                        <p>{{ subvalue }}</p>
+                        <div class="action-container">
+                          <mat-icon class="material-symbols-outlined delete-icon" (click)="ToDeleteRule(subvalue,item.key,subkey)">
+                            delete
+                          </mat-icon>
+                        
+                          <mat-checkbox color="primary"></mat-checkbox>
+                        </div>
+                      </div>
+                    </ng-container>
+  
+                    <ng-container *ngIf="!isAnArrayofValues(item.value[subkey])">
+                      <div class="rule-description">
+                        <p>{{ item.value[subkey] }}</p>
+                        <div class="action-container">
+                          <mat-icon class="material-symbols-outlined delete-icon" (click)="ToDeleteRule(item.value[subkey],item.key,subkey)">
+                            delete
+                          </mat-icon>
+                          <mat-checkbox color="primary"></mat-checkbox>
+                        </div>
+                      </div>
+                    </ng-container>
+  
+                    <mat-form-field class="add-value">
+                      <mat-label>{{'ADD' | translate}}</mat-label>
+                      <input type="url" matInput [(ngModel)]="inputValue">
+                    </mat-form-field>
+                    <div class="add-button-container">
+                      <mat-icon   (click)="toAddValue(item.key,subkey,inputValue)" color="basic">add_circle_outline</mat-icon >
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </ng-container>
+  
+              <!-- Para cuando es un arreglo -->
+              <ng-container *ngIf="isAnArrayofValues(item.value)">
+                <div class="rule-description" *ngFor="let value of item.value">
+                  <p>{{ value }}</p>
+                  <div class="action-container">
+                    <mat-icon class="material-symbols-outlined delete-icon" (click)="ToDeleteRule(value,item.key)">
+                      delete
+                    </mat-icon>
+                    <mat-checkbox color="primary" (click)="toAddRule($event, item)"></mat-checkbox>
+                  </div>
+                </div>
+                <mat-form-field class="add-value">
+                  <mat-label>{{'ADD' | translate}}</mat-label>
+                  <input type="url" matInput #inputField [(ngModel)]="inputValue">
+                </mat-form-field>
+                <div class="add-button-container">
+                  <mat-icon  (click)="toAddValue(item.key)" color="basic">add_circle_outline</mat-icon>
+                </div>
+              </ng-container>
+  
+              <ng-container *ngIf="isString(item.value)">
+                <mat-form-field class="add-value">
+                  <mat-label>{{'ADD' | translate}}</mat-label>
+                  <input type="url" matInput #inputField [(ngModel)]="inputValue">
+                </mat-form-field>
+                <div class="add-button-container">
+                 <mat-icon  (click)="toAddValue(item.key)" color="basic">add_circle_outline</mat-icon>
+                </div>
+              </ng-container>
+            </div>
+          
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    
+  </cdk-virtual-scroll-viewport>
+</div>
+
+<mat-divider></mat-divider>

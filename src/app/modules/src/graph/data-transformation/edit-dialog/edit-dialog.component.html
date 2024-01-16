@@ -1,0 +1,36 @@
+<section class="main-section">
+  <section class="form-section">
+    <form>
+      <mat-form-field class="example-chip-list">
+        <mat-label>{{'PUT_ORDER'|translate}}</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Entities selection">
+          <mat-chip-row *ngFor="let entity of entities" (removed)="remove(entity)">
+            {{entity}}
+            <button matChipRemove [attr.aria-label]="'remove ' + entity">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input placeholder="{{'NEW_ENTITY'|translate}}" #entityInput [formControl]="entityCtrl"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let entity of filteredEntities | async" [value]="entity">
+            {{entity}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </section>
+  
+  <section class="button-section">
+    <div class="button-container" >
+    
+      <button  mat-dialog-close (click)="onSaveEntityOrder()" mat-stroked-button color="primary" [disabled]="allentities.length === 0">Guardar</button>
+      <button mat-stroked-button mat-dialog-close color="basic">Cancelar</button>
+
+    </div>
+  </section>
+</section>
+  
