@@ -129,6 +129,12 @@ export class AppComponent {
               icon: '/assets/icons/apps/persons.svg',
             },
             {
+              label: 'PATENTES',
+              // @ts-ignore
+              href: this.environment.patents,
+              icon: '/assets/icons/apps/persons.svg',
+            },
+            {
               label: 'EVALUACION_APP',
               // @ts-ignore
               href: this.environment.evaluations,

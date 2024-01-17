@@ -9,7 +9,6 @@ import { Register } from '../interfaces/register.interface';
 import { formatDate } from '@angular/common';
 import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { request } from 'http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 

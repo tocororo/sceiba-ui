@@ -14,7 +14,7 @@ import { AddModalComponent } from '../add-modal/add-modal.component';
 import { allowedURLS } from 'src/environments/environment.prod.sceiba';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2'
-import { error } from 'console';
+// import { error } from 'console';
 
 @Component({
   selector: 'app-solicitar-patente',
