@@ -5,7 +5,13 @@ import { DataTransformationComponent } from '../../src/graph/data-transformation
 
 const routes: Routes = [
   {path:"",
-  component:DataTransformationComponent
+  component:GraphComponent,
+  children:[{
+   path: '',
+   component: DataTransformationComponent,
+      
+   
+  }]
 }];
 
 @NgModule({
