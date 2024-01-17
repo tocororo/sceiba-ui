@@ -1,0 +1,43 @@
+h3{
+  text-align: center;
+}
+div{
+  margin-top: 50px;
+  justify-content: center;
+  margin-left: 20%;
+  margin-bottom: 50px;
+  width: 60%;
+}
+
+@media screen and (max-width: 1000px) {
+  div{
+    margin-left: 5%;
+    width: 90%;
+
+    table{
+      width: 100%;
+    }
+  }
+}
+
+// @media screen and (max-width: 812px) {
+//   div{
+//     margin-left: 5px;
+//     width: 98%;
+
+//     table{
+//       width: 100%;
+//     }
+//   }
+// }
+
+@media screen and (max-width: 508px) {
+  div{
+    width: 100%;
+    margin-left: 0;
+
+    table{
+      width: 100%;
+    }
+  }
+}

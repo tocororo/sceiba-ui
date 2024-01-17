@@ -1,0 +1,44 @@
+<section class="header">
+  <h3>{{ "IMPORTAR" | translate }}</h3>
+  <p>
+    El archivo (.json ) de importación para personas debe cumplir con las
+    siguientes estructuras/campos
+  </p>
+  <div
+    class="instructions-markdown"
+    style="margin: 0"
+    markdown
+    [src]="'/assets/markdown/import.instructions.es.md'"
+  ></div>
+</section>
+
+<section class="dropzone">
+  <ngx-dropzone (change)="onSelect($event)" accept=".csv,.json">
+    <ngx-dropzone-label>
+      <mat-icon style="width: 10px; height: 10px"></mat-icon>
+    </ngx-dropzone-label>
+    <ngx-dropzone-preview
+      *ngFor="let f of file"
+      [removable]="true"
+      (removed)="onRemove(f)"
+    >
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+
+  <app-table *ngIf="table" [dataSource]="dataSource"></app-table>
+
+  <div class="button-container">
+    <button
+      mat-raised-button
+      (click)="showData()"
+      color="primary"
+      style="margin-right: 10px"
+    >
+      {{ "MOSTRAR" | translate }}
+    </button>
+    <button mat-raised-button color="primary" (click)="saveData()">
+      {{ "GUARDAR" | translate }}
+    </button>
+  </div>
+</section>

@@ -1,0 +1,168 @@
+h3{
+  margin-top: 37px;
+  text-align: center;
+}
+
+mat-stepper{
+  margin-top: 20px;
+}
+.grid-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 50px 0 0 30px;
+}
+
+
+mat-form-field{
+  width: 70%;
+}
+
+.form-field-resumen{
+  height: 230px;
+}
+
+
+.column-right{
+
+  div{
+
+    mat-form-field{
+      margin-left: 20%;
+    }
+
+  }
+}
+
+.second-stepper{
+
+  .author-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .affiliation-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+
+  .button{
+    text-align: end;
+    width: 100%;
+    margin-right: 10%;
+    button{
+      width: 50%;
+      background-color: #006128;
+      color: white;
+    }
+    button:hover{
+      background-color: #26915b;
+    }
+  }
+
+  .affiliation{
+    margin-top: 80px;
+  }
+
+}
+
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.button-last{
+  display: flex;
+  justify-content: end;
+}
+
+.mat-mdc-button{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.file-name {
+  margin-left: 1rem; /* or whatever margin you require */
+}
+
+@media(max-width: 800px){
+  .grid-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div{
+      width: 90%;
+    }
+  }
+
+  mat-form-field{
+    width: 100%;
+  }
+
+  .column-right{
+
+    div{
+
+      mat-form-field{
+        margin-left: 0;
+      }
+
+    }
+  }
+
+  .second-stepper{
+    display: flex;
+    flex-direction: row;
+
+
+    .button{
+      margin-left: 0;
+        button{
+          width: 90%;
+        }
+    }
+    .author{
+      text-align: start;
+    }
+
+    .affiliation{
+      margin-top: 0;
+      text-align: end;
+    }
+  }
+}
+
+@media(max-width: 510px){
+  .second-stepper{
+    display: flex;
+    flex-direction: column;
+
+    .button{
+      margin-left: 0;
+      margin-right: 0;
+        button{
+          width: 100%;
+        }
+    }}
+
+  .affiliation-container{
+    margin-top: 15px;
+    text-align: start;
+  }
+
+  .affiliation{
+    width: 100%;
+    text-align: start;
+    margin-left: 0;
+    button{
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}

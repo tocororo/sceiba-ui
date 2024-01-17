@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Introduzca los datos requeridos:</h1>
+
+<form [formGroup]="result">
+  <div mat-dialog-content>
+    <div class="identifier-container">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'IDENTIFICADORES' | translate }}</mat-label>
+        <button mat-icon-button matPrefix (click)="addIdentifier()">
+          <mat-icon>add</mat-icon>
+        </button>
+        <input  matInput
+                [formControl]="value">
+      </mat-form-field>
+    </div>
+
+    <div class="name-container">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'NAME' | translate }}</mat-label>
+        <input  matInput
+                formControlName="name">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="button-container">
+    <button mat-button (click)="agregar()" color="primary">{{ 'AGREGAR' | translate }}</button>
+    <button mat-button (click)="cerrar()" color="warn">{{ 'CANCELAR' | translate }}</button>
+  </div>
+</form>
+

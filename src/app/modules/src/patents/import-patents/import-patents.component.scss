@@ -1,0 +1,30 @@
+.header{
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+h3{
+  margin-top: 30px;
+  text-align: center;
+}
+.dropzone{
+  padding-top: 50px;
+  padding-left: 5%;
+}
+
+ngx-dropzone {
+  width: 95%;
+}
+
+.swal2-actions button{
+  width: 100px;
+  height: 50px;
+
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: end;
+  margin: 15px;
+}

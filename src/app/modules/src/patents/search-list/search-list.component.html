@@ -1,0 +1,65 @@
+<mat-card class="mat-elevation-z0" *ngIf="hitList && hitList.hits.length > 0; else templateNotInfo">
+
+  <mat-card-header>
+    <app-export-pdf-excel [inputValue]="hitList.hits" viewType="button" pdfType="list"></app-export-pdf-excel>
+  </mat-card-header>
+
+    <mat-card-content>
+      <div class="card" *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
+
+        <!-- Titulo de la patente -->
+        <div class="column-left">
+          <h3>
+            <!-- <span mat-icon-button *ngIf="hasPermission" routerLink="/{{hit.metadata.id}}/edit" matTooltip="Editar la Organización">
+              <mat-icon class="mat-18">mode_edit</mat-icon>
+            </span> -->
+            <span [routerLink]="['/patent', hit.metadata.id]"
+                  style="cursor: pointer;">
+              {{hit.metadata.title | titlecase}}
+            </span>
+          </h3>
+
+          <!-- <h4 class="p-40"
+                *ngIf="hit.metadata.authors && hit.metadata.authors.length > 0"
+                style="cursor: pointer;">
+            Autor:
+            <li *ngFor="let author of hit.metadata.authors">
+              {{author.name}}
+            </li>
+          </h4> -->
+
+          <!-- <ul fxLayout="row wrap" *ngIf="hit.metadata.affiliations && hit.metadata.affiliations.length > 0">
+            <h4>Organizaciones:</h4>
+            <li *ngFor="let affiliation of hit.metadata.affiliations">
+              {{affiliation.name}}
+            </li>
+          </ul> -->
+        </div>
+
+        <section class="button-container">
+
+          <div class="button-edit-container" *ngIf="isLogged">
+            <button mat-icon-button color="accent"  matTooltip="Editar" [routerLink]="['/editar', hit.metadata.id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+
+          <div class="button-delete-container" *ngIf="isLogged">
+            <button mat-icon-button color="warn"  matTooltip="Eliminar" (click)="eliminar(hit)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </section>
+      </div>
+    </mat-card-content>
+
+</mat-card>
+
+<ng-template #templateNotInfo>
+  <mat-card>
+    <mat-card-content>
+      <h2>No hay resultados para su búsqueda...</h2>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

@@ -1,0 +1,34 @@
+.p-40{
+    padding-left: 40px;
+}
+.li-margin-style{
+    margin: 0 8px;
+    list-style: none;
+}
+.hr-grey-ligth{
+    border-color: #ffffff33;
+}
+
+h3{
+  font-weight: bold;
+}
+
+.card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
+
+  .button-delete-container{
+    margin-left: 10px;
+  }
+
+  button{
+    width: 40px;
+    height: 40px;
+  }
+}
