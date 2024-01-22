@@ -1,0 +1,77 @@
+
+
+
+
+
+@media screen and (max-width: 600px) {
+  .app-query-result{
+    display:block;
+     height:32vh;
+     width: 100%;
+  }
+  .result-visualization-section{
+    width: 100%;
+    height: 100%;
+
+  }
+
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  /* Tamaño  para pantallas medianas */
+  .result-visualization-section{
+    width: 100%;
+    height: 100%;
+    .app-query-result{
+      display:block; height:31vh;
+      width: 100%;
+
+    }
+
+  }
+  .query-result-detail{
+    display: flex;
+    justify-content: center;
+    height: 96%;
+  }
+
+}
+
+@media screen and (min-width: 1201px) {
+  /* Tamaño de fuente para pantallas grandes */
+  .container-output{
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    grid-template-columns: 70% 30%;
+    height: 38vh;
+    gap: 1em;
+
+  }
+  .result-visualization-section{
+    width: 100%;
+    height: 34vh;
+    margin: 1em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta los valores según tu preferencia */
+
+ 
+
+  }
+  .result-detail-section{
+    width: 95%;
+    height: 34vh;
+    margin: 1em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    .query-result-detail{
+      margin: 1em;
+      height: 32vh;
+      .app-query-result{
+        max-height: 100%;
+      }
+
+
+    }
+  }
+ 
+}

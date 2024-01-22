@@ -1,0 +1,61 @@
+<mat-toolbar *ngIf="graph_label" >
+    <p>{{graph_label}}</p>
+</mat-toolbar>
+
+  <main >
+    <section class="query-input-section">
+        <div class="editor-container">
+            <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+        </div>
+        <div class="button-container">
+            <button  mat-mini-fab color="primary" (click)="getQuery()"  aria-label="Example icon button with a heart icon">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+        </div>
+
+    </section>
+    <section class="query-output-section">
+        <mat-drawer-container class="example-container">
+            <mat-drawer mode="side" opened>
+                <mat-list role="list">
+                    <mat-list-item (click)="onSelectOutput('Grafo')" [ngClass]="{'selected-item' : selectedOutput === 'Grafo'}"  role="listitem">         
+                        <div class="item-container  ">
+                            <mat-icon>device_hub</mat-icon>
+                            <label for="">{{'GRAFO' | translate}}</label>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item  [ngClass]="{'selected-item ': selectedOutput === 'Tabla'}" (click)="onSelectOutput('Tabla')" role="listitem"> <div class="item-container" >
+                        <mat-icon>table_chart</mat-icon>
+                        <label for="">{{'TABLA' | translate}}</label>
+                    </div></mat-list-item>
+                    <mat-list-item  *ngIf="label_response"
+                     (click)="drawer.toggle()" role="listitem"> <div class="item-container" >
+                        <mat-icon >visibility</mat-icon>
+                        
+                        <label class="overview-label" for="">{{'OVERVIEW' | translate}}</label>
+                    </div></mat-list-item>
+
+                  </mat-list>
+            </mat-drawer>
+            <mat-drawer-content>
+                <mat-drawer-container  class="example-container"  hasBackdrop="false">
+                    <mat-drawer class="overview-drawer" #drawer position="end" mode="side">
+                                         </mat-drawer>
+                    <mat-drawer-content>
+                      
+                        <section class="results-section">
+                            <app-graph *ngIf="selectedOutput === 'Grafo'" class="hiden-overflow"></app-graph>
+                            <app-table-results *ngIf="selectedOutput === 'Tabla'"></app-table-results>
+                    </section>
+                    </mat-drawer-content>
+                  </mat-drawer-container>
+                
+                
+               
+            </mat-drawer-content>
+          </mat-drawer-container>
+    </section>
+
+  </main>
+ 

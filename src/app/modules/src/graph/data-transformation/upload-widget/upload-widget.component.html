@@ -1,12 +1,12 @@
 <div class="container">
     <h5 class="head-title">{{'IMPOPRTE_SU_FICHERO'| translate}}</h5>
-<!-- <ngx-dropzone (change)="onSelect($event)">
+ <ngx-dropzone (change)="onSelect($event)">
 	<ngx-dropzone-label class="main-drop-label">{{'AQUI'|translate}}</ngx-dropzone-label>
 	<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
 		<ngx-dropzone-label class="name-label">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
 	</ngx-dropzone-preview>
    
-</ngx-dropzone> -->
+</ngx-dropzone> 
 <div class="button-container">
     <button mat-stroked-button mat-dialog-close color="primary" (click)="onSave()" [disabled]="files.length === 0">{{'IMPORT' | translate }}</button>
     <button mat-stroked-button mat-dialog-close color="basic" >{{'CANCELAR' | translate }}</button>

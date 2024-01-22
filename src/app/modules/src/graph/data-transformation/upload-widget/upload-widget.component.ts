@@ -6,7 +6,8 @@ import { ConfigurationJsonService } from '../../_services/configuration-json.ser
 @Component({
   selector: 'app-upload-widget',
   templateUrl: './upload-widget.component.html',
-  styleUrls: ['./upload-widget.component.scss']
+  styleUrls: ['./upload-widget.component.scss'],
+  
 })
 export class UploadWidgetComponent {
   files: File[] = [];

@@ -13,10 +13,17 @@ import { TransformRulesComponent } from '../../src/graph/data-transformation/tra
 import { UploadWidgetComponent } from '../../src/graph/data-transformation/upload-widget/upload-widget.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SceibaUiSharedModule } from 'src/app/shared/shared.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { QueryViewComponent } from '../../src/graph/query-view/query-view.component';
+import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { SparqlInputComponent } from '../../src/graph/query-view/sparql-input/sparql-input.component';
+import { QueryResultComponent } from '../../src/graph/query-view/query-result/query-result.component';
+import { QueryResultDetailComponent } from '../../src/graph/query-view/query-result-detail/query-result-detail.component';
 
 
 @NgModule({
@@ -26,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EditDialogComponent,
     EntityPanelComponent,
     TransformRulesComponent,
-    UploadWidgetComponent],
+    UploadWidgetComponent,
+    QueryViewComponent,SparqlInputComponent,QueryResultComponent,QueryResultDetailComponent],
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -36,7 +44,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     GraphRoutingModule,
     RouterModule,
-    FlexLayoutModule
+    MatIconModule,
+    FlexLayoutModule,NgxDropzoneModule,MonacoEditorModule,NgxGraphModule
   ]
 })
 export class GraphModule { }

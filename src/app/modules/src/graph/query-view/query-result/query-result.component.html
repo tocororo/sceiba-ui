@@ -1,0 +1,82 @@
+
+
+
+  <mat-tab-group class="tab-group-container"   mat-stretch-tabs="false" mat-align-tabs="end">
+    <mat-tab [label]="'GRAFO' | translate ">    
+      <ngx-graph
+      class="chart-container  "
+      [animate]="true"
+      [autoZoom]="true"
+      [autoCenter]="true"
+      [showMiniMap]="true"
+      [links]="links"
+      [nodes]=nodes
+    >
+    <ng-template #nodeTemplate let-node>
+      <svg:g class="node">
+        <svg:rect *ngIf="node.label=='URIRef'"
+          [attr.width]="node.dimension.width"
+          [attr.height]="node.dimension.height"
+          [attr.fill]="node.data.color"
+        />
+        <svg:ellipse *ngIf="node.label=='Literal'"
+        [attr.cx]="node.dimension.width/2"
+        [attr.cy]="node.dimension.height/2"
+        [attr.fill]="node.data.color"
+        [attr.rx]="node.dimension.width/2"
+        [attr.ry]="node.dimension.height/2"
+
+        />  
+
+        <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
+          {{node.id}}
+        </svg:text>
+      </svg:g>
+    </ng-template>
+  
+    <ng-template #defsTemplate>
+      <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+        <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+      </svg:marker>
+    </ng-template>
+    
+    </ngx-graph></mat-tab>
+    <mat-tab [label]="'JSON' | translate ">
+<div class="editor-container">
+
+
+  <section class="example-container mat-elevation-z8" tabindex="0">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef> Elemento 1 </th>
+        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="predicate">
+        <th mat-header-cell *matHeaderCellDef> Elemento 2 </th>
+        <td mat-cell *matCellDef="let element"> {{element.predicate}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="object">
+        <th mat-header-cell *matHeaderCellDef> Elemento 3 </th>
+        <td mat-cell *matCellDef="let element"> {{element.object_value}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </section>
+</div>
+    </mat-tab>
+
+  </mat-tab-group>
