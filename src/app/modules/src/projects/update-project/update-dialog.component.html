@@ -1,0 +1,577 @@
+<div *ngIf="project" class="container">
+  <div style="align-self: baseline; margin-bottom: 20px">
+    <h3 style="font-weight: 600; color: #007e3e">Editar Proyecto</h3>
+    <span style="color: grey">SceibaUID: {{ project.id }}</span>
+    <div>
+      <span
+        *ngFor="let id of project.identifiers"
+        style="color: grey; margin-left: 5px"
+        >{{ id.idtype }}: {{ id.value }}</span
+      >
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center">
+    <form class="first-seccion" [formGroup]="projectForm">
+      <div style="align-self: flex-end">
+        <mat-form-field appearance="outline" formGroupName="publishDate">
+          <mat-label>Fecha de Publicacion</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateValue"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field
+          formGroupName="publishDate"
+          class="custom-input"
+          appearance="outline"
+        >
+          <mat-label>Estado de Fecha</mat-label>
+          <mat-select formControlName="dateType">
+            <mat-option *ngFor="let type of dateTypes" [value]="type">{{
+              type
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="margin: 10px">
+        <mat-accordion class="custom-accordion">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Titulo </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus titulos aqui</mat-panel-description
+              >
+              <mat-icon>toc</mat-icon>
+            </mat-expansion-panel-header>
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="title"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addTitle()"
+              >
+                + Agregar otro titulo
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let titulo of title.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Titulo:</mat-label>
+                    <input
+                      matInput
+                      id="title-{{ i }}"
+                      type="text"
+                      formControlName="title"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Tipo de titulo</mat-label>
+                    <mat-select formControlName="titleType">
+                      <mat-option
+                        *ngFor="let type of titleTypes"
+                        [value]="type"
+                        >{{ type }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Lenguaje:</mat-label>
+                    <input
+                      matInput
+                      id="lang-{{ i }}"
+                      type="text"
+                      formControlName="lang"
+                    />
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delTitle(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Identificadores </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus Identificadores aqui</mat-panel-description
+              >
+              <mat-icon>fingerprint</mat-icon>
+            </mat-expansion-panel-header>
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="identifiers"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addIdentifier()"
+              >
+                + Agregar otro identificador
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let identifier of identifiers.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Valor de identificador:</mat-label>
+                    <input
+                      matInput
+                      id="value-{{ i }}"
+                      type="text"
+                      formControlName="value"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Tipo de Identificador</mat-label>
+                    <mat-select formControlName="idtype">
+                      <mat-option *ngFor="let type of idTypes" [value]="type">{{
+                        type
+                      }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delIdentifier(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Identificadores Relacionados </mat-panel-title>
+              <mat-panel-description
+                >Identificadores Relacionados aqui</mat-panel-description
+              >
+              <mat-icon>fingerprint</mat-icon>
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="relatedIdentifier"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addRelatedIdentifier()"
+              >
+                + Agregar otro identificador
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="
+                  let identificador of relatedIdentifier.controls;
+                  let i = index
+                "
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Valor:</mat-label>
+                    <input
+                      matInput
+                      id="nombre-{{ i }}"
+                      type="text"
+                      formControlName="idValue"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Tipo de identificador</mat-label>
+                    <mat-select formControlName="idType">
+                      <mat-option *ngFor="let type of idTypes" [value]="type">{{
+                        type
+                      }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delRelatedId(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div style="margin: 10px">
+        <mat-accordion class="custom-accordion">
+          <mat-expansion-panel (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Autor </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus autores aqui</mat-panel-description
+              >
+              <mat-icon>people</mat-icon>
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="creator"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addCreator()"
+              >
+                + Agregar otro autor
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let creator of creator.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Nombre:</mat-label>
+                    <input
+                      matInput
+                      id="nombre-{{ i }}"
+                      type="text"
+                      formControlName="creatorName"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Segundo Nombre</mat-label>
+                    <input
+                      matInput
+                      id="segundoNombre-{{ i }}"
+                      type="text"
+                      formControlName="givenName"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Apellido:</mat-label>
+                    <input
+                      matInput
+                      id="familyName-{{ i }}"
+                      type="text"
+                      formControlName="familyName"
+                    />
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delCreator(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Contribuidor </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus contribuidores aqui</mat-panel-description
+              >
+              <mat-icon>groups_3</mat-icon>
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="contributor"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addContributor()"
+              >
+                + Agregar otro autor
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let contributor of contributor.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Nombre:</mat-label>
+                    <input
+                      matInput
+                      id="nombre-{{ i }}"
+                      type="text"
+                      formControlName="contributorName"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Tipo de contribuidor</mat-label>
+                    <mat-select formControlName="contributorType">
+                      <mat-option
+                        *ngFor="let type of contributorType"
+                        [value]="type"
+                        >{{ type }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Apellido:</mat-label>
+                    <input
+                      matInput
+                      id="familyName-{{ i }}"
+                      type="text"
+                      formControlName="familyName"
+                    />
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delContributor(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div style="margin: 10px">
+        <mat-accordion class="custom-accordion">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Referencia de Financiamiento </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus Referencias aqui</mat-panel-description
+              >
+              <mat-icon>attach_money</mat-icon>
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="fundingReference"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addFundingReference()"
+              >
+                + Agregar otra referencia
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let fund of fundingReference.controls; let i = index"
+              >
+                <div [formGroupName]="i">
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Nombre:</mat-label>
+                    <input
+                      matInput
+                      id="nombre-{{ i }}"
+                      type="text"
+                      formControlName="founderName"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Identificación subvención:</mat-label>
+                    <input
+                      matInput
+                      id="awardURI--{{ i }}"
+                      type="text"
+                      formControlName="awardURI"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="custom-input" appearance="outline">
+                    <mat-label>Url del proyecto:</mat-label>
+                    <input
+                      matInput
+                      id="awardNumber--{ i }}"
+                      type="text"
+                      formControlName="awardNumber"
+                    />
+                  </mat-form-field>
+                </div>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delCreator(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Disponibilidad en lenguajes </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus lenguajes aqui</mat-panel-description
+              >
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="lenguaje"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addLenguaje()"
+              >
+                + Agregar otro lenguaje
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let lenguaje of lenguaje.controls; let i = index"
+              >
+                <mat-form-field class="custom-input" appearance="outline">
+                  <mat-label>Lenguaje:</mat-label>
+                  <input
+                    matInput
+                    id="lenguaje-{{ i }}"
+                    type="text"
+                    formControlName="{{ i }}"
+                  />
+                </mat-form-field>
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delLenguaje(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Editoriales </mat-panel-title>
+              <mat-panel-description
+                >Agregue sus editoriales aqui</mat-panel-description
+              >
+              <mat-icon>public</mat-icon>
+            </mat-expansion-panel-header>
+
+            <div
+              style="display: flex; flex-direction: column"
+              formArrayName="publisher"
+            >
+              <button
+                style="margin-bottom: 10px"
+                mat-raised-button
+                color="primary"
+                (click)="addContributor()"
+              >
+                + Agregar otra editorial
+              </button>
+
+              <div
+                class="input-container"
+                style="display: flex"
+                *ngFor="let publisher of publisher.controls; let i = index"
+              >
+                <mat-form-field class="custom-input" appearance="outline">
+                  <mat-label>Editorial:</mat-label>
+                  <input
+                    matInput
+                    id="publisher-{{ i }}"
+                    type="text"
+                    formControlName="{{ i }}"
+                  />
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  class="delete-button"
+                  color="warn"
+                  (click)="delContributor(i)"
+                  style="background-color: #dd2c00; margin-top: 10px"
+                >
+                  <mat-icon
+                    style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+                    >delete</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div style="width: 100%">
+        <button
+          style="float: inline-end"
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

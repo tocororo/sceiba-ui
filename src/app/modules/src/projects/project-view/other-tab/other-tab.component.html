@@ -1,0 +1,103 @@
+<mat-card class="general-card">
+  <mat-card-content>
+    <div class="container">
+      <div class="section">
+        <div class="date-container">
+          <label class="label-id"
+            >Fecha de Publicacion: {{ project.publishDate.dateValue }}</label
+          ><label class="date-type {{ project.publishDate.dateType }}">
+            {{ project.publishDate.dateType }}
+          </label>
+        </div>
+
+        <label class="label-id">SceibaID: {{ project.id }}</label>
+        <div *ngIf="project.title.length > 1">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 5px;
+            "
+          >
+            <h4 class="section-title">Otros Titulos</h4>
+            <hr
+              style="
+                border-style: none;
+                border-color: rgba(255, 255, 255, 0);
+                margin: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                flex-grow: 1;
+              "
+            />
+            <h4 class="section-title">Lenguaje</h4>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 5px;
+            "
+            *ngFor="let title of project.title.slice(1)"
+          >
+            <label style="margin: 0">
+              {{ title.title }}
+            </label>
+            <hr
+              style="
+                border-style: dashed;
+                border-color: rgba(85, 85, 85, 0.616);
+                border-width: 1px;
+                margin: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                flex-grow: 1;
+              "
+            />
+            <p style="display: inline-block; margin: 0; margin-right: 2rem">
+              {{ title.lang }}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="project.lenguaje">
+          <hr />
+          <h4 class="section-title">Traducciones</h4>
+          <div style="display: flex; align-items: center; margin-bottom: 5px">
+            <mat-chip
+              style="margin: 5px"
+              *ngFor="let lang of project.lenguaje"
+              >{{ lang }}</mat-chip
+            >
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div *ngIf="project.relatedIdentifier">
+          <h4 class="section-title">Identificadores Relacionados</h4>
+          <div
+            style="display: flex; flex-direction: column; margin-bottom: 5px"
+          >
+            <mat-chip
+              style="margin: 5px"
+              *ngFor="let iden of project.relatedIdentifier"
+              >{{ iden.idType + ": " + iden.idValue }}</mat-chip
+            >
+          </div>
+        </div>
+        <div *ngIf="project.publisher">
+          <hr />
+          <h4 class="section-title">Editoriales</h4>
+          <div style="display: flex; align-items: center; margin-bottom: 5px">
+            <mat-chip
+              style="margin: 5px"
+              *ngFor="let pub of project.publisher"
+              >{{ pub }}</mat-chip
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  width: 100%;
+  justify-content: center;
+}
+.mat-content {
+  justify-content: space-between;
+}
+.custom-accordion {
+  max-width: 800px;
+}
+.custom-input {
+  margin: 5px;
+}
+.input-container {
+  margin-bottom: 10px;
+}
+.first-seccion {
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.custom-accordion-2 {
+  display: block;
+  max-width: 500px;
+}
+.delete-button {
+}
+
+@media only screen and (max-width: 768px) {
+  .delete-button {
+    width: 100%;
+  }
+  .custom-input {
+    width: 100%;
+  }
+  .input-container {
+    flex-wrap: wrap;
+  }
+}
