@@ -20,6 +20,11 @@ const routes: Routes = [
       import("./modules/apps/persons/persons.module").then((mod) => mod.PersonsAppModule),
   },
   {
+    path: "projects",
+    loadChildren: () =>
+      import("./modules/apps/projects/projects.module").then((mod) => mod.ProjectsModule)
+  },
+  {
     path: "revistasmes",
     loadChildren: () =>
       import("./modules/apps/revistasmes/revistasmes.module").then((mod) => mod.RevistasMesAppModule),
