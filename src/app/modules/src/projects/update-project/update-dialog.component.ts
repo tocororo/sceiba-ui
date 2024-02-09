@@ -16,7 +16,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { CommonModule } from "@angular/common";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { TocoSnackbarComponent } from "src/app/toco-snackbar/toco-snackbar.component";
+import { TocoSnackbarComponent } from "../toco-snackbar/toco-snackbar.component";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import { Project } from "../project/person.entity";

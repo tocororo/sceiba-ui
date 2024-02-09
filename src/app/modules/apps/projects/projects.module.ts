@@ -67,7 +67,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     ProjectsComponent,
     ProjectViewComponent,
     SearchComponent,
-    SearchListComponent
+    SearchListComponent,
+
   ],
   imports: [
     CommonModule,
