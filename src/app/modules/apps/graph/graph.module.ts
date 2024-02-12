@@ -18,12 +18,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { QueryViewComponent } from '../../src/graph/query-view/query-view.component';
-import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { SparqlInputComponent } from '../../src/graph/query-view/sparql-input/sparql-input.component';
 import { QueryResultComponent } from '../../src/graph/query-view/query-result/query-result.component';
 import { QueryResultDetailComponent } from '../../src/graph/query-view/query-result-detail/query-result-detail.component';
+import { MonacoEditorModule } from 'ng-monaco-editor';
 
 
 @NgModule({

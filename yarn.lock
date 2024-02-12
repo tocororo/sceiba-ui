@@ -1648,13 +1648,6 @@
   resolved "https://nexus.uclv.edu.cu/repository/npm/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@materia-ui/ngx-monaco-editor@^6.0.0":
-  version "6.0.0"
-  resolved "https://r.cnpmjs.org/@materia-ui/ngx-monaco-editor/-/ngx-monaco-editor-6.0.0.tgz#9ae93666019e9a6d4f787370b4373cbb63a04a38"
-  integrity sha512-gTqNQjOGznZxOC0NlmKdKSGCJuTts8YmK4dsTQAGc5IgIV7cZdQWiW6AL742h0ruED6q0cAunEYjXT6jzHBoIQ==
-  dependencies:
-    tslib "^2.0.0"
-
 "@material/animation@15.0.0-canary.bc9ae6c9c.0":
   version "15.0.0-canary.bc9ae6c9c.0"
   resolved "https://registry.yarnpkg.com/@material/animation/-/animation-15.0.0-canary.bc9ae6c9c.0.tgz#7c27a42b027fcc2cd9a97c9d3b8f54a16b47333d"
@@ -2513,7 +2506,7 @@
     rfdc "^1.3.0"
     tslib "^2.0.0"
 
-"@swimlane/ngx-graph@^8.2.4":
+"@swimlane/ngx-graph@^8.2.3":
   version "8.2.4"
   resolved "https://r.cnpmjs.org/@swimlane/ngx-graph/-/ngx-graph-8.2.4.tgz#213ebf54ae178aa0761e2298fb12d3aaf2638c78"
   integrity sha512-/f/2JZc3AwRuGY3+1b8BgkXXy99GwcobV39tL3PneyWfO19U3ATG8gCW4z3xQdmh9094L03wcAoFxisnnDe5gA==
@@ -7898,7 +7891,7 @@ source-map-loader@4.0.1:
     iconv-lite "^0.6.3"
     source-map-js "^1.0.2"
 
-source-map-support@0.5.21, source-map-support@^0.5.21, source-map-support@^0.5.5, source-map-support@~0.5.20:
+source-map-support@0.5.21, source-map-support@^0.5.5, source-map-support@~0.5.20:
   version "0.5.21"
   resolved "https://r2.cnpmjs.org/source-map-support/-/source-map-support-0.5.21.tgz#04fe7c7f9e1ed2d662233c28cb2b35b9f63f6e4f"
   integrity sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==
