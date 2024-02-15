@@ -95,6 +95,20 @@
     />
     <span>{{ "SMOODLE" | translate }}</span>
   </a>
+
+  <a
+  [routerLink]="[env.patents]"
+  class="apps mat-caption"
+  matTooltip="{{ 'SCEIBA_PATENTES' | translate }}"
+>
+<img
+  src="/assets/icons/apps/patents.png"
+  [alt]="'SCEIBA_PATENTES' | translate"
+  style="width: 55px; height: 55px"
+/>
+<span>{{ "SCEIBA_PATENTES" | translate }}</span>
+</a>
+
   <a
     [routerLink]="[env.evaluations]"
     class="apps mat-caption"
@@ -107,4 +121,5 @@
     />
     <span>{{ "EVALUACION_APP" | translate }}</span>
   </a>
+
 </div>

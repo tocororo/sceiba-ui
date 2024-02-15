@@ -29,6 +29,7 @@ class EnvironmentImpl implements Environment {
   organizations = '/organizations';
   persons = '/persons';
   patents = '/patents';
+  projects = '/projects';
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://courses.sceiba.org/';
   evaluations = '/evaluations';

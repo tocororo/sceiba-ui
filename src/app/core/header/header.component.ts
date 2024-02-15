@@ -311,6 +311,17 @@ export class SceibaUIHeaderComponent implements OnInit {
         },
       },
       {
+        nameTranslate: 'SCEIBA_PATENTES',
+        // @ts-ignore
+        href: this._env.patents,
+        target: '_self',
+        useRouterLink: true,
+        img: {
+          src: '/assets/icons/apps/patents.png',
+          style: 'width: 55px; height: 55px',
+        },
+      },
+      {
         nameTranslate: 'EVALUACION_APP',
         // @ts-ignore
         href: this._env.evaluations,
