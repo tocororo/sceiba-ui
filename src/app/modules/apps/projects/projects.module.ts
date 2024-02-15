@@ -28,6 +28,7 @@ import { HeaderComponent } from '../../src/projects/header/header.component';
 import { HomeComponent } from '../../src/projects/home/home.component';
 import { ImportPeopleComponent } from '../../src/projects/import-project/import-people.component';
 import { JsonTableComponent } from '../../src/projects/import-project/json-table/json-table.component';
+import { MainlayoutComponent } from '../../src/projects/layout/mainlayout/mainlayout.component';
 import { MenuComponent } from '../../src/projects/header/menu/menu.component';
 import { MenuItemComponent } from '../../src/projects/header/menu-item/menu-item.component';
 import { NewProjectComponent } from '../../src/projects/new-project/new-dialog.component';
@@ -58,6 +59,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     HomeComponent,
     ImportPeopleComponent,
     JsonTableComponent,
+    MainlayoutComponent,
     MenuItemComponent,
     MenuComponent,
     OtherTabComponent,

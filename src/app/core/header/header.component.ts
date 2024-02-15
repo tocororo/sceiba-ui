@@ -322,6 +322,18 @@ export class SceibaUIHeaderComponent implements OnInit {
         },
       },
       {
+        nameTranslate: 'Proyectos',
+        // @ts-ignore
+        href: this._env.projects,
+        target: '_self',
+        useRouterLink: true,
+        img: {
+          src: '/assets/icons/apps/projects.svg',
+          style: 'width: 75px; height: 75px',
+        },
+        divider: true,
+      },
+      {
         nameTranslate: 'VOCABULARIOS',
         // @ts-ignore
         href: this._env.vocabularies,

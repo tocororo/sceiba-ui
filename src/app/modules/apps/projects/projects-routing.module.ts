@@ -16,7 +16,7 @@ import { PageNotFoundPeopleComponent } from '../../src/projects/page-not-found-p
 const routes: Routes = [
   {
     path: '',
-    component: MainlayoutComponent,
+    component: ProjectsComponent,
     children: [
       {
         path: "",
