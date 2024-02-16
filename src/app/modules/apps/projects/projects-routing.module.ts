@@ -33,47 +33,48 @@ const routes: Routes = [
           },
         ]
       },
+      {
+        path: "project/:uuid",
+        component: PeopleLayoutComponent,
+        resolve: {
+          project: PeopleActiveResolverService,
+        },
+        children: [
+          {
+            path: "view",
+            component: ProjectViewComponent,
+            // data: { layout: Layouts.People },
+          },
+        ],
+        canActivate: [AdminPermissionService],
+      },
+      {
+        path: "edit/:id",
+        component: MainlayoutComponent,
+        children: [
+          {
+            path: "",
+            component: UpdateProjectComponent,
+          },
+        ],
+      },
+      {
+        path: "new",
+        component: MainlayoutComponent,
+        children: [
+          {
+            path: "",
+            component: NewProjectComponent,
+          },
+        ],
+      },
+      {
+        path: "**",
+        component: PageNotFoundPeopleComponent,
+      },
     ]
   },
-  {
-    path: "project/:uuid",
-    component: PeopleLayoutComponent,
-    resolve: {
-      project: PeopleActiveResolverService,
-    },
-    children: [
-      {
-        path: "view",
-        component: ProjectViewComponent,
-        // data: { layout: Layouts.People },
-      },
-    ],
-    canActivate: [AdminPermissionService],
-  },
-  {
-    path: "edit/:id",
-    component: MainlayoutComponent,
-    children: [
-      {
-        path: "",
-        component: UpdateProjectComponent,
-      },
-    ],
-  },
-  {
-    path: "new",
-    component: MainlayoutComponent,
-    children: [
-      {
-        path: "",
-        component: NewProjectComponent,
-      },
-    ],
-  },
-  {
-    path: "**",
-    component: PageNotFoundPeopleComponent,
-  },
+
 ];
 
 @NgModule({
