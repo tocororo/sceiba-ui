@@ -329,7 +329,7 @@ export class SceibaUIHeaderComponent implements OnInit {
         target: '_self',
         useRouterLink: true,
         img: {
-          src: '/assets/icons/apps/projects.svg',
+          src: '/assets/icons/apps/projects.png',
           style: 'width: 100px; height: 100px',
         },
         divider: true,

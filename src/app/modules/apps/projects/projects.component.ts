@@ -44,7 +44,7 @@ export class ProjectsComponent implements OnInit{
     ];
 
     let data = {
-      icon: '/assets/icons/apps/projects.svg',
+      icon: '/assets/icons/apps/projects.png',
       iconLabel: 'SCEIBA_PROYECTOS',
       iconAlt: 'SCEIBA_PROYECTOS',
       iconRoute: this.environment.projects,
