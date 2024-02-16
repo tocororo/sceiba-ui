@@ -14,10 +14,13 @@ export class ProjectsComponent implements OnInit{
   // env: Environment;
   public _subMenus: MenuElement[];
   public extraUser: MenuElement[];
+  public env: Environment;
 
   constructor(private headerService: HeaderService,
               private environment: Environment,
-              private oauthStorage: OAuthStorage,){}
+              private oauthStorage: OAuthStorage,){
+                this.env = environment
+              }
 
   ngOnInit(){
 
@@ -27,7 +30,7 @@ export class ProjectsComponent implements OnInit{
         icon: 'publish',
         useRouterLink: true,
         hideLabel: true,
-        href: `${this.environment.projects}/import`,
+        href: `${this.env.projects}/import`,
         disabled: this.hasPermissionAdmin,
       },
     ];
