@@ -21,15 +21,17 @@ const routes: Routes = [
       {
         path: "",
         component: HomeComponent,
-      },
-      {
-        path: "search",
-        component: SearchComponent,
-      },
-      {
-        path: "import",
-        component: ImportPeopleComponent,
-        // data: { layout: Layouts.Main },
+        children: [
+          {
+            path: "search",
+            component: SearchComponent,
+          },
+          {
+            path: "import",
+            component: ImportPeopleComponent,
+            // data: { layout: Layouts.Main },
+          },
+        ]
       },
     ]
   },
