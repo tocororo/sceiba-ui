@@ -21,12 +21,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MainlayoutComponent,
+        component: HomeComponent,
         children: [
-          {
-            path: '',
-            component: HomeComponent,
-          },
           {
             path: 'search',
             component: SearchComponent,
