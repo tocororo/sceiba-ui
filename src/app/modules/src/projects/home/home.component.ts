@@ -26,11 +26,11 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit(): void {
     this._activatedRoute.url.subscribe(() => {
-      this._metadata.meta.updateTag({ name: "DC.title", content: "Personas" });
+      this._metadata.meta.updateTag({ name: "DC.title", content: "Proyectos" });
       this._metadata.meta.updateTag({
         name: "DC.description",
         content:
-          "Gestiona los perfiles de los investigadores así como de otras personas relacionados con la investigación científica, identificando a cada una de ellas de manera unívoca y promoviendo la desambiguación de perfiles",
+          "",
       });
     });
   }
