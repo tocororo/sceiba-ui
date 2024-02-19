@@ -28,8 +28,8 @@ class EnvironmentImpl implements Environment {
   revistasmes = '/revistasmes';
   organizations = '/organizations';
   persons = '/persons';
-  patents = '/patents';
   projects = '/projects';
+  patents = '/patents';
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://sceiba.reduniv.edu.cu/cursos/';c
   evaluations = '/evaluations';

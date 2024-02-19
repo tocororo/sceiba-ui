@@ -1,0 +1,71 @@
+<mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
+  <mat-toolbar-row
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    fxLayoutAlign.xs="space-between stretch"
+    style="height: auto !important; min-height: 80px"
+  >
+    <div style="width: 330px; display: flex; align-items: center">
+      <div *ngIf="isBeta" class="triangle">
+        <span
+          matTooltipClass="tooltip-beta-red"
+          matTooltip="{{ 'BETA_TOOLTIP' | translate }}"
+        >
+          <strong>{{ "BETA" | translate }}</strong>
+        </span>
+      </div>
+      <a
+        mat-button
+        [routerLink]="[env.projects]"
+        style="white-space: normal; display: flex; align-items: center"
+      >
+        <img
+          src="{{ icon }}"
+          [alt]="iconAlt | translate"
+          style="height: 50px; margin-right: 6px"
+        />
+        <span class="mat-h3">{{ iconLabel | translate }}</span>
+      </a>
+    </div>
+
+    <div
+      class="center-elements"
+      appearance="legacy"
+      aria-label="'MENU_INICIO' | translate"
+      fxLayout="row wrap"
+      fxLayoutAlign="center"
+      fxLayoutGap="15px"
+    >
+      <app-menu [menuItems]="_menuOptions"></app-menu>
+
+      <toco-authentication
+        *ngIf="!user"
+        [oauthInfo]="oauthInfo"
+        [isButtonLogin]="'true'"
+        [isButtonLoginIcon]="'true'"
+        [isButtonLoginText]="'AUTENTICARSE' | translate"
+      >
+      </toco-authentication>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #menuHeader="matMenu">
+  <ng-container *ngFor="let item of menuElements">
+    <a
+      mat-menu-item
+      [routerLink]="item.href"
+      *ngIf="item.useRouterLink; else useHrefMenu"
+    >
+      <!-- <mat-icon>dialpad</mat-icon> -->
+      <span>{{ item.nameTranslate | translate }}</span>
+    </a>
+    <ng-template #useHrefMenu>
+      <a mat-menu-item [href]="item.href" [target]="item.target">
+        <!-- <mat-icon>dialpad</mat-icon> -->
+        <span>{{ item.nameTranslate | translate }}</span>
+      </a>
+    </ng-template>
+  </ng-container>
+</mat-menu>

@@ -134,6 +134,7 @@ export class SceibaUIHeaderComponent implements OnInit {
     this.headerSubscription =
       this.headerService.headerDataObservable$.subscribe({
         next: (data) => {
+          console.log(data);
           this.icon = data.icon;
           this.iconLabel = data.iconLabel;
           this.iconAlt = data.iconAlt;
@@ -331,6 +332,18 @@ export class SceibaUIHeaderComponent implements OnInit {
           src: '/assets/icons/apps/evaluations.svg',
           style: 'width: 55px; height: 55px',
         },
+      },
+      {
+        nameTranslate: 'SCEIBA_PROYECTOS',
+        // @ts-ignore
+        href: this._env.projects,
+        target: '_self',
+        useRouterLink: true,
+        img: {
+          src: '/assets/icons/apps/projects.png',
+          style: 'width: 100px; height: 100px',
+        },
+        divider: true,
       },
       {
         nameTranslate: 'VOCABULARIOS',

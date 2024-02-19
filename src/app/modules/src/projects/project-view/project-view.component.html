@@ -1,0 +1,10 @@
+<toco-progress [loading]="!project"></toco-progress>
+<!-- <div style="background-color: gray; height: 15rem"></div> -->
+<mat-tab-group>
+  <mat-tab label="General">
+    <app-general-tab [project]="project"></app-general-tab>
+  </mat-tab>
+  <mat-tab label="Otros">
+    <app-other-tab [project]="project"></app-other-tab>
+  </mat-tab>
+</mat-tab-group>

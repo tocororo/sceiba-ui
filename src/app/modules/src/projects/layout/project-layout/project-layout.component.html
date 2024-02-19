@@ -1,0 +1,71 @@
+<div class="bg-primary-color wrapper">
+  <div class="header" fxLayout.xs="column">
+    <mat-icon class="principal-icon" style="color: rgb(255, 255, 255)"
+      >assignment</mat-icon
+    >
+    <div class="project-primary-info">
+      <p class="title">{{ project.title[0].title }}</p>
+      <p class="sub-title">
+        {{
+          project.creator[0].creatorName +
+            " " +
+            project.creator[0].givenName +
+            " " +
+            project.creator[0].familyName
+        }}
+      </p>
+
+      <p class="sub-title">
+        {{
+          project.identifiers[0].idtype + ": " + project.identifiers[0].value
+        }}
+      </p>
+    </div>
+    <div class="button-container">
+      <button
+        (click)="updateProject()"
+        mat-raised-button
+        color="primary"
+        style="
+          background-color: white;
+          color: #007e3e;
+          margin-right: 5px;
+          margin-bottom: 5px;
+        "
+      >
+        <mat-icon style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+          >settings</mat-icon
+        >
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        style="background-color: #dd2c00; margin-right: 5px; margin-bottom: 5px"
+        (click)="deleteProject()"
+      >
+        <mat-icon style="height: 80%; width: 100%; font-size: 25px; margin: 0"
+          >delete</mat-icon
+        >
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  style="border-radius: 40px 40px 0 0"
+>
+  <div
+    [ngStyle.xs]="{ width: '95%' }"
+    style="
+      margin-top: -50px;
+      width: 90%;
+      background-color: white;
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0px 5px 15px rgb(0, 0, 0, 0.088);
+    "
+  >
+    <router-outlet></router-outlet>
+  </div>
+</div>

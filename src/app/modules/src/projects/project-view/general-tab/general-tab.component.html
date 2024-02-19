@@ -1,0 +1,110 @@
+<mat-card class="general-card">
+  <mat-card-content>
+    <div class="container">
+      <div class="section">
+        <div *ngIf="project.creator">
+          <h4 class="section-title">Creadores</h4>
+          <div *ngFor="let creator of project.creator">
+            <label>
+              {{
+                creator.creatorName +
+                  " " +
+                  creator.givenName +
+                  " " +
+                  creator.familyName
+              }}
+            </label>
+          </div>
+        </div>
+        <div *ngIf="project.contributor">
+          <hr />
+          <h4 class="section-title">Contribuidores</h4>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 5px;
+            "
+            *ngFor="let contributor of project.contributor"
+          >
+            <label style="margin: 0">
+              {{ contributor.contributorName + " " + contributor.familyName }}
+            </label>
+            <hr
+              style="
+                border-style: dashed;
+                border-color: rgba(85, 85, 85, 0.616);
+                border-width: 1px;
+                margin: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                flex-grow: 1;
+              "
+            />
+            <p style="display: inline-block; margin: 0; margin-right: 2rem">
+              {{ contributor.contributorType }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div *ngIf="project.fundingReference">
+          <h4 class="section-title">Detalles de Financiamiento</h4>
+          <div>
+            <table
+              mat-table
+              [dataSource]="project.fundingReference"
+              class="mat-elevation-z4 table"
+            >
+              <!-- Name Column -->
+              <ng-container matColumnDef="Nombre">
+                <th class="table-name" mat-header-cell *matHeaderCellDef>
+                  Nombre Financiador
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  style="vertical-align: middle"
+                >
+                  {{ element.founderName }}
+                </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="Id Subvención">
+                <th class="table-name" mat-header-cell *matHeaderCellDef>
+                  Id Subvención
+                </th>
+                <td
+                  style="vertical-align: middle"
+                  mat-cell
+                  *matCellDef="let element"
+                >
+                  {{ element.awardNumber }}
+                </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="URI Subvención">
+                <th class="table-name" mat-header-cell *matHeaderCellDef>
+                  URI Sub
+                </th>
+                <td
+                  style="vertical-align: middle"
+                  mat-cell
+                  *matCellDef="let element"
+                >
+                  <a href="{{ element.awardURI }}">{{ element.awardURI }}</a>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
