@@ -1,0 +1,146 @@
+@import "../../../../../../styles.scss";
+
+.my-snackbar {
+  p{  font-size: xx-large; /* Cambia el tamaño de fuente */
+  }
+  background-color: #ff0000; /* Cambia el color de fondo */
+  color: #ffffff; /* Cambia el color del texto */
+  /* Agrega más reglas de estilo según tus necesidades */
+}
+
+
+.entity-container {
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    margin: 24px 10px 10px 10px;
+    transition: transform 0.3s ease;
+
+
+  }
+
+
+  .toadd-button {
+    background-color: white;
+    margin: 0px 16px;
+    border-radius: 10px;
+    border: 2px black dashed;
+    cursor: pointer;
+    opacity: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .entity-button {
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  }
+
+}
+
+
+/* Tamaño  para pantallas pequenas */
+@media screen and (max-width: 600px) {
+  .title {
+    text-align: center;
+    /* Centrar el texto */
+    font-size: $font-title-sm;
+    /* Tamaño de fuente inicial */
+    margin-top: 30px;
+  }
+
+  cdk-virtual-scroll-viewport {
+    height: 80%;
+    width: 100%;
+    margin-top: 10px;
+
+    .entity-container {
+      .button-container {
+        width: 30vw;
+        height: 20vh;
+        margin: 0px 8px;
+      }
+    }
+
+
+  }
+
+  .scroll-container {
+    display: flex;
+    margin: 10px;
+  }
+  }
+
+
+/* Tamaño  para pantallas medianas */
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+
+  .title {
+    text-align: center;
+    font-size: $font-title-md;
+    margin-top: 1px;
+  }
+  cdk-virtual-scroll-viewport {
+    height: 24vh;
+    width: 28vw;
+    ;
+
+    margin-top: 1em;
+    margin-bottom: 3em;
+  
+    .button-container {
+      width: 25vw;
+      height: 7vh;
+      margin: 0.5em 10px;
+    }
+  } .entity-label {
+    font-size: 1em;
+  }
+
+  }
+
+ 
+
+
+/* Tamaño  para pantallas grandes */
+
+@media screen and (min-width: 1201px) {
+
+  .title {
+    text-align: center !important;
+    /* Centrar el texto */
+    font-size: 2em;
+    /* Tamaño de fuente inicial */
+    margin-top: 30px;
+  }
+
+
+    cdk-virtual-scroll-viewport {
+      height: 50vh;
+      width: 28vw;
+      margin-top: 0px;
+      margin-bottom: 3em;
+      overflow-x: hidden;
+
+      .scroll-container {
+        margin: 1em;
+
+      .button-container {
+        width: 24vw;
+        height: 12vh;
+        margin: 24px 10px 10px 10px;
+
+      }
+      .button-container:hover {
+        transform: scale(1.05);
+      }
+    }
+    }
+  
+ 
+    
+  
+  }

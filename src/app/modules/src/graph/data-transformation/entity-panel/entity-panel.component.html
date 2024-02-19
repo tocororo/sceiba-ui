@@ -1,0 +1,21 @@
+<ng-container class="entity-panel-container">
+  <h1 class="title">{{ "PANEL_ENTIDADES"| translate }}</h1>
+
+  <cdk-virtual-scroll-viewport [itemSize]="getItemSize()" >
+    <div class="scroll-container">
+    <div *cdkVirtualFor="let item of items,let position=index" class="entity-container">
+
+
+      <div *ngIf="position > 0"  class="button-container entity-button" (click)="chargeProperties($event)"
+      [matBadge]="position" [matBadgeSize]="size"> <span  class="entity-label">{{ item }}</span>
+    </div>
+    <div  *ngIf="position === 0"  class="button-container toadd-button" >
+      <button mat-fab color="primary" aria-label="Example icon button with a home icon" (click)="openEditDialog('0ms', '0ms')">
+        <mat-icon>add</mat-icon>
+      </button>
+
+    </div>
+    </div>
+  </div>
+  </cdk-virtual-scroll-viewport>
+</ng-container>

@@ -257,6 +257,7 @@ export class SceibaUIHeaderComponent implements OnInit {
     }
 
     this._menuApps = [
+     
       {
         nameTranslate: 'SCEIBA',
         // @ts-ignore
@@ -378,6 +379,15 @@ export class SceibaUIHeaderComponent implements OnInit {
           src: '/assets/icons/apps/catalog.svg',
           style: 'width: 55px; height: 55px',
         },
+        divider: true,
+      },
+      {
+        nameTranslate: 'GRAPH',
+        // @ts-ignore
+        href: this._env.graph,
+        target: '_self',
+        useRouterLink: true,
+        img: { src: '/assets/icons/apps/organizaciones.svg', style: '' },
         divider: true,
       },
 

@@ -274,6 +274,23 @@
           </mat-card-content>
         </mat-card>
       </a>
+      <a [routerLink]="[env.graph]" class="pt-20">
+        <mat-card class="ligth-green-card" matRipple [matRippleCentered]="true">
+          <mat-card-header>
+            <mat-card-title>{{
+              "TRANSFORMACION_DATOS" | translate
+            }}</mat-card-title>
+            <img mat-card-sm-image src="/assets/icons/apps/graph.png" >
+          </mat-card-header>
+          <mat-card-content>
+            <div
+              class="p"
+              markdown
+              [src]="getPath('/assets/markdown/sceiba/home.orgs')"
+            ></div>
+          </mat-card-content>
+        </mat-card>
+      </a>
     </div>
   </div>
   <!-- <img src="assets/icons/sceiba.middle.top.svg" alt="" style="margin-bottom: -4px; width: 100%;"> -->

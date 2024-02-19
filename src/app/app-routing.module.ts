@@ -5,6 +5,10 @@ import { SceibaUiPageNotFoundComponent } from './core/sceiba-ui-page-not-found/s
 
 const routes: Routes = [
   {
+    path: "graph",
+    loadChildren: () =>
+      import("./modules/apps/graph/graph.module").then((mod) => mod.GraphModule)
+  },{
     path: "evaluations",
     loadChildren: () =>
       import("./modules/apps/evaluations/evaluations.module").then((mod) => mod.EvaluationsAppModule)

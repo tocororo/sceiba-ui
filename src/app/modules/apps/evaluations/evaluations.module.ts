@@ -58,6 +58,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   imports: [
     CommonModule,
     HttpClientModule,
+    
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

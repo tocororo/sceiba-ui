@@ -1,0 +1,65 @@
+main{
+    margin: 1em;
+    margin-top: 2em;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60% 10% 30%;
+  height: 95%; /* Ajusta la altura según tus necesidades */
+}
+.button-section{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta los valores según tu preferencia */
+
+    height: 90%;
+    margin: 1em;
+.button-container{
+    justify-content: center;
+    display: grid;
+    gap: 1em;
+    margin: 1em;}
+
+}
+.button-container button {
+    transition: all 0.3s ease-in-out; /* Agrega una transición suave de 0.3 segundos */
+  }
+  
+  .button-container button:hover {
+    transform: scale(1.1); /* Hace que el botón crezca un 10% */
+    background-color: #e0e0e0; /* Cambia el color según tus preferencias */
+    color: black;  }
+.response-section{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta los valores según tu preferencia */
+width: 90%;
+    height: 90%;
+    margin: 1em;
+
+
+}
+.label-response-container{
+    height: 100%;
+    width: 95%;
+    margin: 0.5em;
+}
+.default-label{
+    height: 100%;
+    width: 95%;
+    margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span{
+
+        color: #d3d3d3;
+        font-size: 2.5em;
+        font-family: 'Lato';
+        font-weight: 600;    }
+}
+.editor-section{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ajusta los valores según tu preferencia */
+    margin: 1em;
+    height: 90%;
+    max-width: 60vw;
+    .editor-section .ngx-monaco-editor {
+        height: 90%; /* Ajusta la altura del editor según tus necesidades */
+      }
+}

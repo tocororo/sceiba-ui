@@ -1,0 +1,34 @@
+.main-container{
+    margin: 1em;
+    width: 30vw;
+    mat-form-field{
+        width: 100%;
+    }
+    .button-section {
+        .button-container{
+          display: grid;
+          justify-content: center;
+          gap: 1em;
+          button{
+            margin: 1px;
+            width: 16vw;
+
+      
+          }
+      
+       button:hover {
+        background-color: #e0e0e0; /* Cambia el color según tus preferencias */
+        color: black;
+      
+      }
+      button {
+        transition: background-color 0.3s ease; /* Ajusta la duración y el tipo de animación según tus preferencias */
+      }
+      button:hover {
+        transform: scale(1.05); /* Ajusta el valor según tus preferencias */
+      }
+      
+        }
+       
+      }
+}

@@ -1,0 +1,130 @@
+@import '../../../../../styles.scss';
+
+.example-container {
+  width: 98%;
+  height: 95%;
+  margin: 10px;
+  border: 1px solid #555;
+
+  mat-list {
+    margin: 5px;
+    mat-list-item{
+      height: 10vh;
+      width: 6vw;
+      cursor: pointer;
+    
+    }
+  }
+  .item-container{
+    display: flex;
+   
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    margin: 5px;
+    align-items: center;
+  }
+}
+main{
+  height: 62vh;
+  overflow: hidden;
+  .query-input-section{
+    height: 24%;
+    width: 98%;
+    display: flex;
+    margin: 10px;
+    border: 1px solid #555;
+    .editor-container{
+      width: 95%;
+      
+    }
+    .button-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+   
+  }
+  .query-output-section{
+    height: 76%;
+    .results-section{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      app-graph{
+        height: 100%;
+        width: 100%;
+      } 
+      app-table-results{
+        height: 100%;
+        width: 100%;
+      } 
+    
+   }
+
+   .overview-drawer{
+    width: 15vw;
+  }}
+}
+
+
+.selected-item {
+  background-color:map-get($md-green, 50);
+  color: white !important;
+  border: 1px solid map-get($md-green, 100);
+}
+.hiden-overflow{
+  overflow: hidden;
+
+}
+
+@media screen and (max-width: 600px) {
+  app-query-output {
+    width: 100%;
+  }
+
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  /* Tamaño  para pantallas medianas */
+
+}
+
+@media screen and (min-width: 1201px) {
+
+  /* pantallas grandes */
+
+  mat-toolbar{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  app-query-output {
+    width: 100%;
+    margin: 1em;
+    height: 95%;
+  }
+  app-sparql-input{
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .query-output-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .card {
+    height: 99%;
+  }
+
+  .sparql-input-container {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+  }
+}

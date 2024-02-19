@@ -33,6 +33,8 @@ class EnvironmentImpl implements Environment {
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://sceiba.reduniv.edu.cu/cursos/';c
   evaluations = '/evaluations';
+  graph='/graph';
+
 
 
   oauthInfo = {

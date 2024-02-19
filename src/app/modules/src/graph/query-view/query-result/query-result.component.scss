@@ -1,0 +1,62 @@
+mat-tab-group {
+  max-height: 100%;
+  max-width: 100%;
+
+
+}
+.example-container {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+.editor-container{
+  height: 28vh;
+  width: 100%;
+
+}
+:host ::ng-deep .tab-group-container{
+  .mat-mdc-tab-body{
+    overflow: hidden;
+  }
+
+  .mat-mdc-tab-body-content{
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  /* Tamaño de fuente para pantallas pequeñas */
+
+  .tab-group-container {
+    height: 100%;
+    border: 1px grey solid;
+    padding: 2px;
+    margin: 2px;
+
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  /* Tamaño de fuente para pantallas grandes */
+  .tab-group-container {
+    height: 100%;
+    width: auto;
+
+  }
+
+
+}
+
+@media screen and (min-width: 1201px)  {
+
+  /* Tamaño de fuente para pantallas grandes */
+  .editor-container{
+    height: 28vh;
+    width: 100%;
+  
+  }
+}

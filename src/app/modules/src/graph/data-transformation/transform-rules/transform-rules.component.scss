@@ -1,0 +1,165 @@
+@import '../../../../../../styles.scss';
+.transform-rules-container{
+
+  width: 100%;
+  height: 90%;
+
+  cdk-virtual-scroll-viewport{
+    height: 80%;
+    margin-top: 3em;
+  }
+}
+.w-100-h-100{
+  width: 100%;
+  height: 100%;
+}
+.expansion-subpanel {
+  background-color:map-get($md-greylight, 100);
+  
+  
+
+}
+.expansion-panel-body-container{
+  padding: 0px;
+}
+
+
+  /* Media queries para ajustar el tamaño de fuente en diferentes tamaños de pantalla */
+  @media screen and (max-width: 600px) {
+    .title {
+      text-align: center; /* Centrar el texto */
+      font-size: 1.25em ; /* Tamaño de fuente para pantallas medianas */
+      margin-top: 54px !important;
+  }
+  cdk-virtual-scroll-viewport{
+    height: 80%;
+    margin-top: 3em;
+    .virtual-scroll-container{
+      width: 78%;
+    }
+    mat-expansion-panel-header{
+      padding: 0px;
+    }
+  
+.rule-description{
+  display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.rule-description p {
+  margin: 0px;
+width: 70%;
+}
+.rule-description .action-container {
+  order: 2;
+  width: 30%;
+}
+.action-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .delete-icon:hover{
+    color: crimson;
+    cursor: pointer;
+
+  }
+}
+
+  }
+  .add-value{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  
+  }
+  .add-button-container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+  }
+
+  
+
+  @media screen and (min-width: 601px) and (max-width: 1200px) {
+
+    .title {
+      text-align: center;
+      font-size: 1.8rem ;
+      margin-top: 54px ;
+  }
+  .transform-rules-container{
+
+    width: 100%;
+    height: 100%;
+  
+    cdk-virtual-scroll-viewport{
+      height: 80%;
+      margin-top: 3em;
+    }
+  }
+  .w-100-h-100{
+    width: 100%;
+    height: 100%;
+  }
+  
+  }
+  @media screen and (min-width: 1201px) {
+
+    .title {
+      text-align: center; /* Centrar el texto */
+      font-size: 2em; /* Tamaño de fuente inicial */
+      margin-top: 48px;
+  }
+  .rule-title{
+    font-size: 1.5em;
+  }
+  .rule-description{
+    font-size: 1.25em;
+  }
+  .transform-rules-container{
+
+    width: 100%;
+    height: 86%;
+  
+    cdk-virtual-scroll-viewport{
+      height: 80%;
+      margin-top: 3em;
+    
+  .rule-description{
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
+  .rule-description p {
+    margin: 0px;
+  }
+  .rule-description .action-container {
+    order: 2;
+  }
+  .action-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .delete-icon:hover{
+      color: crimson;
+      cursor: pointer;
+
+    }
+  }
+  
+    }
+    .add-value{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    
+    }
+    .add-button-container{
+      display: flex;
+      justify-content: end;
+      align-items: center;
+    }
+    }
+  }
+

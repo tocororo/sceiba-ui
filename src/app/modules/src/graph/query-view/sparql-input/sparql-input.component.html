@@ -1,0 +1,28 @@
+<main>
+   
+
+    <section class="editor-section">
+
+       <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    </section>
+    <section class="button-section">
+        <div class="button-container">
+            <button mat-fab color="primary" (click)="getQuery()"  aria-label="Example icon button with a heart icon">
+              <mat-icon>send</mat-icon>
+            </button>
+            <button mat-fab color="basic" (click)="deleteQuery()" aria-label="Example icon button with a delete icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+              
+          </div>
+    </section>
+    <section class="response-section">
+      <div class="label-response-container" >
+        <div *ngIf="!label_response" class="default-label">
+          <span>Respuesta del backend</span>
+        </div>
+        <ngx-monaco-editor *ngIf="label_response" [options]="editorOptionsjson" [(ngModel)]="label_response"></ngx-monaco-editor>
+      </div>
+      
+    </section>
+</main>
