@@ -132,7 +132,7 @@ export class AppComponent {
               label: 'PATENTES',
               // @ts-ignore
               href: this.environment.patents,
-              icon: '/assets/icons/apps/persons.svg',
+              icon: '/assets/icons/apps/patents.png',
             },
             {
               label: 'EVALUACION_APP',
