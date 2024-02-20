@@ -33,6 +33,14 @@ export class PatentsComponent {
         href: `${this.environment.patents}/import`,
         disabled: this.hasPermissionAdmin,
       },
+      {
+        nameTranslate: 'REGISTRO',
+        icon: 'publish',
+        useRouterLink: true,
+        hideLabel: true,
+        href: `${this.environment.patents}/register`,
+        disabled: this.hasPermissionAdmin,
+      },
     ];
     this._subMenus = [
       {

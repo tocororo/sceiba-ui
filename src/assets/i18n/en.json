@@ -93,6 +93,7 @@
   "PUBLICACION": "Publication",
   "PERSON": "Person",
   "ORGANIZATION": "Organization",
+  "REGISTRO": "Import registration",
   "TRANSFORMACION_DATOS":"Data Transformation",
   "CONSULTAS_SPARQL":" SPARQL Queries",
   "PANEL_ENTIDADES":"Entity Pane",
