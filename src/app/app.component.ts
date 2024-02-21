@@ -97,70 +97,6 @@ export class AppComponent {
     this.headerSubscription =
       this.headerService.headerDataObservable$.subscribe({
         next: (data) => {
-          this.menuApps = [
-            // {
-            //   label: 'SCEIBA',
-            //   // @ts-ignore
-            //   href: this.environment.sceiba,
-            //   icon: '/assets/icons/apps/sceiba.svg',
-            // },
-            {
-              label: 'BUSQUEDA',
-              // @ts-ignore
-              href: this.environment.discover,
-              icon: '/assets/icons/apps/discover.svg',
-            },
-            {
-              label: 'REVISTAS_MES',
-              // @ts-ignore
-              href: this.environment.revistasmes,
-              icon: '/assets/icons/apps/revistasmes.png',
-            },
-            {
-              label: 'ORGANIZACIONES',
-              // @ts-ignore
-              href: this.environment.organizations,
-              icon: '/assets/icons/apps/organizaciones.svg',
-            },
-            {
-              label: 'PERSONAS',
-              // @ts-ignore
-              href: this.environment.persons,
-              icon: '/assets/icons/apps/persons.svg',
-            },
-            {
-              label: 'PATENTES',
-              // @ts-ignore
-              href: this.environment.patents,
-              icon: '/assets/icons/apps/patents.png',
-            },
-            {
-              label: 'EVALUACION_APP',
-              // @ts-ignore
-              href: this.environment.evaluations,
-              icon: '/assets/icons/apps/evaluations.svg',
-            },
-            {
-              label: 'VOCABULARIOS',
-              // @ts-ignore
-              href: this.environment.vocabularies,
-              icon: '/assets/icons/apps/vocabs.svg',
-              useHrefLink:true
-            },
-            {
-              label: 'SMOODLE',
-              // @ts-ignore
-              href: this.environment.moodle,
-              icon: '/assets/icons/apps/scourses.svg',
-              useHrefLink:true
-            },
-            {
-              label: 'CATALOGO',
-              // @ts-ignore
-              href: this.environment.catalog,
-              icon: '/assets/icons/apps/catalog.svg',
-            },
-          ];
           const children = data?.secondaryMenuElements?.map((menu) => ({
             label: menu.nameTranslate,
             href: menu.href,
@@ -181,6 +117,72 @@ export class AppComponent {
   }
 
   public ngOnInit(): void {
+    this.menuApps = [
+      {
+        label: 'BUSQUEDA',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.discover,
+        icon: '/assets/icons/apps/discover.svg',
+      },
+      {
+        label: 'REVISTAS_MES',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.revistasmes,
+        icon: '/assets/icons/apps/revistasmes.png',
+      },
+      {
+        label: 'ORGANIZACIONES',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.organizations,
+        icon: '/assets/icons/apps/organizaciones.svg',
+      },
+      {
+        label: 'PERSONAS',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.persons,
+        icon: '/assets/icons/apps/persons.svg',
+      },
+      {
+        label: 'EVALUACION_APP',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.evaluations,
+        icon: '/assets/icons/apps/evaluations.svg',
+      },
+      {
+        label: 'VOCABULARIOS',
+        // @ts-ignore
+        target: '_self',
+        href: this.environment.vocabularies,
+        icon: '/assets/icons/apps/vocabs.svg',
+        useHrefLink:true
+      },
+      {
+        label: 'SMOODLE',
+        // @ts-ignore
+        target: '_self',
+        href: this.environment.moodle,
+        icon: '/assets/icons/apps/scourses.svg',
+        useHrefLink:true
+      },
+      {
+        label: 'CATALOGO',
+        // @ts-ignore
+        target: '_self',
+        useRouterLink: true,
+        href: this.environment.catalog,
+        icon: '/assets/icons/apps/catalog.svg',
+      },
+    ];
     console.log(isMobile());
     this.mode = isMobile() ? 'over' : 'side';
 

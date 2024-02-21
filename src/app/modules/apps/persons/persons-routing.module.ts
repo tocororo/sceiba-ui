@@ -18,13 +18,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: MainlayoutComponent,
+        component: HomeComponent,
         children: [
-          {
-            path: '',
-            component: HomeComponent,
-            // data: { layout: Layouts.Main },
-          },
           {
             path: 'search',
             component: SearchComponent,
