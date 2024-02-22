@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HeaderService } from 'src/app/core/header.service';
 import { MenuElement } from 'src/app/core/header/header.component';
-import { Environment } from 'toco-lib';
+import { Environment  } from 'toco-lib';
 
 @Component({
   selector: 'seiba-ui-patents',
   templateUrl: './patents.component.html',
-  styleUrls: ['./patents.component.scss']
+  styleUrls: ['./patents.component.scss'],
 })
 export class PatentsComponent {
 

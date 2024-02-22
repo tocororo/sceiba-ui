@@ -119,10 +119,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "sceiba-ui:build:production"
+              "buildTarget": "sceiba-ui:build:production"
             },
             "development": {
-              "browserTarget": "sceiba-ui:build:development"
+              "buildTarget": "sceiba-ui:build:development"
             }
           },
           "defaultConfiguration": "development"

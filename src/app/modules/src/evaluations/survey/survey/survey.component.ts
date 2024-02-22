@@ -210,8 +210,9 @@ export class SurveyComponent implements OnInit {
 
     if (event.selectedIndex == 2) {
       /* = 2 means the step of result and recommendations. */ if (
-        this._actionText == ActionText.add ||
-        this._actionText == `${ActionText.add}/77h`
+        this._actionText == ActionText.add 
+        /* ||
+        this._actionText == `${ActionText.add}/77h`  Error :The error "This comparison appears to be unintentional because the types 'X' and 'Y' have no overlap" occurs when a condition is guaranteed to have the same outcome 100% of the time. */
       ) {
         /* For viewing component, it does NOT need to do this. */ /* The component begins its updating task. */
         this.hasTaskInProgress = true;
