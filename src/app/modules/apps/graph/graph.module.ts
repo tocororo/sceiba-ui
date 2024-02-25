@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GraphRoutingModule } from './graph-routing.module';
 import { RouterModule } from '@angular/router';
 import { GraphComponent } from './graph.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { DataTransformationComponent } from '../../src/graph/data-transformation/data-transformation.component';
 import { ChangeMetadataConfigurationDialogComponent } from '../../src/graph/data-transformation/change-metadata-configuration-dialog/change-metadata-configuration-dialog.component';
 import { EditDialogComponent } from '../../src/graph/data-transformation/edit-dialog/edit-dialog.component';
