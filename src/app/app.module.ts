@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
@@ -58,6 +58,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     // OrganizationServiceNoAuth,
     // SourceServiceNoAuth,
     { provide: Environment, useValue: environment },
+    provideClientHydration(),
     // { provide: OAuthStorage, useFactory: storageFactory },
     // {
     //   provide: RecaptchaLoaderService,

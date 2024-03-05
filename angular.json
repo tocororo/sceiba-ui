@@ -21,7 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sceiba-ui",
+            "outputPath": "dist/sceiba-ui/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -152,6 +152,85 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/sceiba-ui/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "reduniv": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.reduniv.ts"
+                }
+              ]
+            },
+            "sceiba.cu": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.sceiba.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.reduniv.ts"
+                }
+              ],
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "sceiba-ui:build:development",
+              "serverTarget": "sceiba-ui:server:development"
+            },
+            "production": {
+              "browserTarget": "sceiba-ui:build:production",
+              "serverTarget": "sceiba-ui:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sceiba-ui:build:production",
+              "serverTarget": "sceiba-ui:server:production"
+            },
+            "development": {
+              "browserTarget": "sceiba-ui:build:development",
+              "serverTarget": "sceiba-ui:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
